@@ -11,7 +11,7 @@ import gioco.Handler;
 
 public class Sink extends Personaggio {
 	
-	public enum Movimento{ SOPRA, SOTTO, DESTRA, SINISTRA}
+	public enum Movimento{SOPRA, SOTTO, DESTRA, SINISTRA}
 	
 	private int tempo = 0;
 	
@@ -29,8 +29,7 @@ public class Sink extends Personaggio {
 	double delta = 0;
 	long ora;
 	long ultimoTempo = System.nanoTime();
-	long timer = 0;
-	
+		
 	public Sink(Handler h, float x, float y, int tempo) {
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO);
 		this.tempo = tempo;
@@ -57,7 +56,6 @@ public class Sink extends Personaggio {
 	
 	@Override
 	public void aggiorna() {
-		//gestione pausa
 		if(!h.getGioco().getPausa()){
 			//Animazioni
 			SinkSotto.aggiorna();
@@ -67,21 +65,23 @@ public class Sink extends Personaggio {
 			SinkSottoFermo.aggiorna();
 			SinkSinistraFermo.aggiorna();
 			SinkDestraFermo.aggiorna();
-			//Movement
+			
+			//Movimento
 			getInput();
 			muovi();
 			h.getCameraGioco().centra(this);
+			
 			ora = System.nanoTime();
 			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
-			timer += ora - ultimoTempo;
 			ultimoTempo = ora;
-			if(delta >= 50){
-				tempo--;
-				delta -= 50;
-			}
 		}
 		else{
 			ultimoTempo = System.nanoTime();
+		}
+		
+		if(delta >= 50){
+			tempo--;
+			delta -= 50;
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class Sink extends Personaggio {
 		if(h.getGestioneInput().right)
 			dx = velocita;
 	}
-
+	
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 

@@ -13,7 +13,6 @@ public class StatoMenu extends Stato{
 	
 	private Sfondo s;
 	private Handler h;
-	private Stato sg;
 	
 	private int sceltaCorrente = 0;
 	private String [] opzioni = { "NUOVA PARTITA","CARICA PARTITA","CLASSIFICA","OPZIONI","ESCI"};
@@ -45,7 +44,6 @@ public class StatoMenu extends Stato{
 		colore = new Color(0,128,128);
 		font = new Font ("Arial", Font.BOLD,32);
 		
-		sg = new StatoGioco(h);
 	}
 
 	@Override
@@ -82,7 +80,7 @@ public class StatoMenu extends Stato{
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
-			h.setStato(sg);
+			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){
 			//carica

@@ -14,10 +14,7 @@ public class Gioco implements Runnable {
 	private int larghezza,altezza;
 	public String titolo;
 	
-	//gestione stati
 	private boolean inCorso = false;
-	private boolean inPausa = false;
-
 	private Thread thread;
 	
 	private BufferStrategy bs;
@@ -25,6 +22,7 @@ public class Gioco implements Runnable {
 	
 	//Stati
 	private static Stato stato;
+	
 	//Input
 	private GestioneInput gi;
 	 
@@ -33,6 +31,8 @@ public class Gioco implements Runnable {
 	
 	//Handler
 	private Handler h;
+	
+	private boolean inPausa;
 	
 	public Gioco(String titolo, int larghezza,int altezza){
 		this.larghezza = larghezza;
@@ -100,7 +100,9 @@ public class Gioco implements Runnable {
 		inizializza();
 		
 		int fps = 60;
+		
 		double tempoDiAggiornamento = 1000000000 / fps;
+		
 		double delta = 0;
 		long ora;
 		long ultimoTempo = System.nanoTime();
@@ -112,11 +114,13 @@ public class Gioco implements Runnable {
 			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 			timer += ora - ultimoTempo;
 			ultimoTempo = ora;
+			
 			if(delta >= 1){
 				aggiorna();
 				disegna();
 				ticks++;
 				delta--;
+				
 			}
 			if (timer >= 1000000000){
 				System.out.println("Ticks: "+ ticks);

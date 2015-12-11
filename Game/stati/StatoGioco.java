@@ -13,7 +13,7 @@ public class StatoGioco extends Stato {
 	private int x;
 	private int y;
 	private int tempo;
-	
+		
 	public StatoGioco(Handler h){
 		super(h);
 		l = new Livello(h, "res/livelli/livello1.txt");
@@ -23,16 +23,26 @@ public class StatoGioco extends Stato {
 		tempo = l.tempo;
 		s = new Sink(h, x, y, tempo);
 	}
-
+	
+	//Carica partita
+	public StatoGioco(Handler h, StatoGioco stato){
+		super(h);
+		l = stato.l;
+		h.setLivello(l);
+		x = l.sinkX;
+		y = l.sinkY;
+		tempo = l.tempo;
+		s = new Sink(h, x, y, tempo);
+	}
+	
 	@Override
 	public void aggiorna() {
 		if(!(h.getGioco().getPausa())){
 			getInput();
 			l.aggiorna();
 			s.aggiorna();
-			if (s.getTempo()<0){
+			if(s.getTempo()<0)
 				h.setStato(new StatoMenu(h));
-		}
 		}
 	}
 
