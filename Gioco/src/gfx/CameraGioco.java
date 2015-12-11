@@ -1,7 +1,6 @@
 package gfx;
 
 import entita.Entita;
-import gioco.Gioco;
 import gioco.Handler;
 import tiles.Tile;
 
