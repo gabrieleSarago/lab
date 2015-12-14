@@ -23,6 +23,16 @@ public class StatoGioco extends Stato {
 		tempo = l.tempo;
 		s = new Sink(h, x, y, tempo);
 	}
+	
+	public StatoGioco(Handler h, String file){
+		super(h);
+		l = new Livello(h, file);
+		h.setLivello(l);
+		x = l.sinkX;
+		y = l.sinkY;
+		tempo = l.tempo;
+		s = new Sink(h, x, y, tempo);
+	}
 
 	@Override
 	public void aggiorna() {
@@ -32,7 +42,7 @@ public class StatoGioco extends Stato {
 			s.aggiorna();
 			if (s.getTempo()<0){
 				h.setStato(new StatoMenu(h));
-		}
+			}
 		}
 	}
 
@@ -43,7 +53,7 @@ public class StatoGioco extends Stato {
 	}
 	
 	private void getInput(){
-		if(h.getGestioneInput().space){
+		if(h.getGestioneInput().esc){
 			h.getGioco().setPausa(true);
 			h.getGioco().setStato(new StatoPausa(h, this));
 
@@ -53,5 +63,6 @@ public class StatoGioco extends Stato {
 	public Sink getSink(){
 		return s;
 	}
+	
 	
 }

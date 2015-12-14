@@ -1,6 +1,10 @@
 package livelli;
 
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import gioco.Handler;
 import tiles.Tile;
@@ -61,12 +65,40 @@ public class Livello {
 				tiles[x][y] = Utils.parseInt(tokens[(x + (y * larghezza)) + 5]);
 	}
 	
+	public void salva(String file, int x, int y, int tempo){
+		File f = new File(file);
+		f.delete();
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter(new FileWriter(file));
+			pw.write(tiles.length + " " + tiles[0].length + "\n"+x +" "+y +"\n"+ tempo+"\n");
+			for(int i = 0; i<tiles.length; i++){
+				pw.print("\n");
+				for(int j = 0; j<tiles[i].length; j++){
+					pw.write(tiles[j][i]+" ");
+				}
+			}
+			pw.close();
+		} catch (IOException e) {
+			System.out.println("m'hai cacatu a minchja");
+			e.printStackTrace();
+		}
+	}
+	
 	public int getLarghezza(){
 		return larghezza;
 	}
 	
 	public int getAltezza(){
 		return altezza;
+	}
+
+	public int getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(int tempo) {
+		this.tempo = tempo;
 	}
 	
 }

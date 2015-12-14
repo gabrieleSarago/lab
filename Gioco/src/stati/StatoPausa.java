@@ -12,7 +12,7 @@ public class StatoPausa extends Stato{
 	private Sfondo s;
 	
 	private int sceltaCorrente = 0;
-	private String[] opzioni = {"RIPRENDI","RIAVVIA PARTITA","ESCI"};
+	private String[] opzioni = {"RIPRENDI","RIAVVIA","SALVA", "ESCI"};
 	
 	private Color coloreTitolo;
 	private Font fontTitolo;
@@ -84,8 +84,11 @@ public class StatoPausa extends Stato{
 		if(sceltaCorrente == 1){
 			h.getGioco().setStato(new StatoGioco(h));
 		}
-		if(sceltaCorrente == 2)
-			System.exit(0);
+		if(sceltaCorrente == 2){
+			h.getLivello().salva("res/livelli/livelloS.txt", (int)precedente.getSink().getX(), (int) precedente.getSink().getY(), precedente.getSink().getTempo());
+		}
+		if(sceltaCorrente == 3)
+			h.getGioco().setStato(new StatoMenu(h));
 	}
 	
 	private void getInput(){

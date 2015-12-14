@@ -15,7 +15,7 @@ public class StatoMenu extends Stato{
 	private Handler h;
 	
 	private int sceltaCorrente = 0;
-	private String [] opzioni = { "NUOVA PARTITA","CARICA PARTITA","CLASSIFICA","OPZIONI","ESCI"};
+	private String [] opzioni = { "NUOVA PARTITA","CARICA PARTITA","CLASSIFICA","ESCI"};
 	
 	private Color coloreTitolo;
 	private Font fontTitolo;
@@ -23,7 +23,7 @@ public class StatoMenu extends Stato{
 	private Font font;
 	private Color colore;
 	
-	//per regolarizzare i movmenti
+	//per regolarizzare i movimenti
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
 	double delta = 0;
@@ -83,15 +83,12 @@ public class StatoMenu extends Stato{
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){
-			//carica
+			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
 		}
 		if (sceltaCorrente == 2){
 			//classifica
 		}
 		if (sceltaCorrente == 3){
-			//opzioni
-		}
-		if (sceltaCorrente == 4){
 			if(consensoUscita())
 				System.exit(0);
 		}
