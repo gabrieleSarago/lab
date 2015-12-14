@@ -104,11 +104,12 @@ public class Sink extends Personaggio {
 		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
 		g.setColor(Color.black);
-		g.setFont(new Font ("Arial", Font.BOLD,32));
+		g.setFont(new Font ("Arial", Font.BOLD,15));
 		//g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
 				//(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
 				//bounds.width, bounds.height);
-		g.drawString(tempo+"", 100, 100);
+		g.fillRect(0, 0, tempo, 10);
+		g.drawString(tempo+"", tempo+2, 11);
 	}
 	private BufferedImage getFrameAnimazioneCorrente(){
 		if (dx < 0){
