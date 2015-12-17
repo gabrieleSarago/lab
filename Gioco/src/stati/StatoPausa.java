@@ -14,7 +14,7 @@ public class StatoPausa extends Stato{
 	private Sfondo s;
 	
 	private int sceltaCorrente = 0;
-	private String[] opzioni = {"RIPRENDI","RIAVVIA","SALVA", "ESCI"};
+	private String[] opzioni = {"RIPRENDI","RIAVVIA","SALVA", "TORNA AL MENU"};
 	
 	private Color coloreTitolo;
 	private Font fontTitolo;
@@ -36,7 +36,7 @@ public class StatoPausa extends Stato{
 		
 		s = new Sfondo("res/img/pausa.png", h);
 		
-		s.setVector(-0.3, 0);
+		s.setVector(-0.2, 0);
 		coloreTitolo = Color.BLACK;
 		fontTitolo = new Font("Arial", Font.BOLD, 40);
 		font = new Font("Arial", Font.BOLD, 30);
@@ -64,7 +64,7 @@ public class StatoPausa extends Stato{
 		s.disegna(g);
 		
 		//disegna sink nella pausa
-		g.drawImage(sinkDestra.getFrameCorrente(),100, h.getGioco().getAltezza()-100, 
+		g.drawImage(sinkDestra.getFrameCorrente(),100, h.getGioco().getAltezza()-117, 
 				precedente.getSink().getLarghezza(), precedente.getSink().getAltezza(), null);
 				
 		//disegna titolo
