@@ -95,12 +95,10 @@ public class StatoMenu extends Stato{
 	}
 	
 	private boolean consensoUscita(){
-		int i=-1;
-		i=JOptionPane.showConfirmDialog(null,"Sei sicuro di voler uscire?");
+		int i=JOptionPane.showConfirmDialog(null,"Sei sicuro di voler uscire?");
 		if(i==JOptionPane.YES_OPTION)
 			return true;
-		if(i==JOptionPane.NO_OPTION)
-			return false;
+		h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		return false;
 	}
 	

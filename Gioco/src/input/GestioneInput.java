@@ -7,6 +7,7 @@ public class GestioneInput implements KeyListener {
 	
 	private boolean[] tasti;
 	public boolean up, down, left, right, enter, esc;
+	private KeyEvent c;
 	
 	public GestioneInput(){
 		tasti = new boolean[256];
@@ -24,8 +25,11 @@ public class GestioneInput implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent k) {
 		tasti[k.getKeyCode()] = true;
+		c = k;
 		//System.out.println("Pressed!");
 	}
+	
+	public KeyEvent getKeyEvent(){return c;}
 
 	@Override
 	public void keyReleased(KeyEvent k) {

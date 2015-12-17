@@ -73,14 +73,13 @@ public class Livello {
 			pw = new PrintWriter(new FileWriter(file));
 			pw.write(tiles.length + " " + tiles[0].length + "\n"+x +" "+y +"\n"+ tempo+"\n");
 			for(int i = 0; i<tiles.length; i++){
-				pw.print("\n");
+				pw.write("\n");
 				for(int j = 0; j<tiles[i].length; j++){
 					pw.write(tiles[j][i]+" ");
 				}
 			}
 			pw.close();
 		} catch (IOException e) {
-			System.out.println("m'hai cacatu a minchja");
 			e.printStackTrace();
 		}
 	}

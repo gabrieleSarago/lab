@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import gfx.Animazione;
+import gfx.Risorse;
 import gioco.Handler;
 import pannelli.Sfondo;
 
@@ -26,6 +28,7 @@ public class StatoPausa extends Stato{
 	long timer = 0;
 	
 	private StatoGioco precedente;
+	private Animazione sinkDestra;
 	
 	public StatoPausa(Handler h, StatoGioco precedente) {
 		super(h);
@@ -37,10 +40,12 @@ public class StatoPausa extends Stato{
 		coloreTitolo = Color.BLACK;
 		fontTitolo = new Font("Arial", Font.BOLD, 40);
 		font = new Font("Arial", Font.BOLD, 30);
+		sinkDestra = new Animazione(100, Risorse.sink_destra);
 	}
 
 	@Override
 	public void aggiorna() {
+		sinkDestra.aggiorna();
 		precedente.getSink().aggiorna();
 		s.aggiorna();
 		ora = System.nanoTime();
@@ -57,6 +62,10 @@ public class StatoPausa extends Stato{
 	public void disegna(Graphics g) {
 		//disegna sfondo
 		s.disegna(g);
+		
+		//disegna sink nella pausa
+		g.drawImage(sinkDestra.getFrameCorrente(),100, h.getGioco().getAltezza()-100, 
+				precedente.getSink().getLarghezza(), precedente.getSink().getAltezza(), null);
 				
 		//disegna titolo
 		g.setColor(coloreTitolo);

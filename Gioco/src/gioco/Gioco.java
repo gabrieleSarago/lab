@@ -3,6 +3,8 @@ package gioco;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JFrame;
+
 import finestra.Finestra;
 import gfx.*;
 import input.GestioneInput;
@@ -133,11 +135,11 @@ public class Gioco implements Runnable {
 		return gi;
 	}
 	
+	public Thread getThread(){return thread;}
+	
 	public CameraGioco getCameraGioco(){
 		return cg;
 	}
-	
-	
 	
 	public int getLarghezza() {
 		return larghezza;
@@ -166,6 +168,8 @@ public class Gioco implements Runnable {
 		}
 	}	
 	
-	
+	public JFrame getFrame(){
+		return f.getFrame();
+	}
 	
 }
