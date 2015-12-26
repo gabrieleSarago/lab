@@ -54,9 +54,9 @@ public class StatoMenu extends Stato{
 		delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 		timer += ora - ultimoTempo;
 		ultimoTempo = ora;
-		if(delta >= 5){
+		if(delta >= 6){
 			getInput();
-			delta -= 5;
+			delta -= 6;
 		}	
 	}
 
@@ -95,25 +95,31 @@ public class StatoMenu extends Stato{
 	}
 	
 	private boolean consensoUscita(){
-		int i=JOptionPane.showConfirmDialog(null,"Sei sicuro di voler uscire?");
+		int i=-1;
+		i=JOptionPane.showConfirmDialog(null,"Sei sicuro di voler uscire?");
 		if(i==JOptionPane.YES_OPTION)
 			return true;
-		h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+		if(i==JOptionPane.NO_OPTION)
+			return false;
 		return false;
 	}
 	
 	private void getInput() {
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == -1)
 				sceltaCorrente = opzioni.length -1;
 			}
 		if(h.getGestioneInput().down){
 			sceltaCorrente++;
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == opzioni.length)
 				sceltaCorrente = 0;	
 		}
-		if(h.getGestioneInput().enter)
+		if(h.getGestioneInput().enter){
 			seleziona();
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+		}
 	}		
 }

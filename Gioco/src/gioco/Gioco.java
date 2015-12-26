@@ -101,7 +101,7 @@ public class Gioco implements Runnable {
 		
 		inizializza();
 		
-		int fps = 60;
+		int fps = 55;
 		double tempoDiAggiornamento = 1000000000 / fps;
 		double delta = 0;
 		long ora;
