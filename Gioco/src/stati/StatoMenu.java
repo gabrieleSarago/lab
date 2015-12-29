@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JOptionPane;
 
+import gfx.CaricatoreImmagini;
 import gioco.Handler;
 import pannelli.Sfondo;
 
@@ -34,9 +35,9 @@ public class StatoMenu extends Stato{
 	public StatoMenu(Handler h) {
 		super(h);
 		this.h = h;
-		s = new Sfondo("res/img/d.jpg",h);
+		s = new Sfondo("res/img/menu.jpg",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
-		s.setVector(-0.1, 0);
+		//s.setVector(-0.1, 0);
 		
 		coloreTitolo = new Color(150,0,24);
 		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
@@ -66,7 +67,7 @@ public class StatoMenu extends Stato{
 		
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
-		g.drawString("Labirinto", 400, 70);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titolo.png"),300, 100, null);
 		
 		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){

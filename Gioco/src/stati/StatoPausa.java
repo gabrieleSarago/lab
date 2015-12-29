@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import gfx.Animazione;
+import gfx.CaricatoreImmagini;
 import gfx.Risorse;
 import gioco.Handler;
 import pannelli.Sfondo;
@@ -61,11 +62,15 @@ public class StatoPausa extends Stato{
 	public void disegna(Graphics g) {
 		//disegna sfondo
 		s.disegna(g);
-				
+		
+		//disegna sink nella pausa
+		g.drawImage(sinkDestra.getFrameCorrente(),100, h.getGioco().getAltezza()-121, 
+				precedente.getSink().getLarghezza(), precedente.getSink().getAltezza(), null);
+		
 		//disegna titolo
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
-		g.drawString("PAUSA", 420, 100);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoloPausa.png"),400,70,null);
 		
 		//disegna menu
 		g.setFont(font);
