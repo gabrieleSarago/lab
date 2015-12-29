@@ -16,7 +16,7 @@ public class Sink extends Personaggio {
 	private int tempo = 0;
 	
 	//Animazione
-	private Animazione SinkSotto, SinkSopra, SinkSinistra, SinkDestra;
+	private Animazione SinkSotto, SinkSopra, SinkSinistra, SinkDestra, vita;
 	
 	//AnimazioneFermo
 	private Animazione SinkSottoFermo, SinkSinistraFermo, SinkDestraFermo;
@@ -52,6 +52,8 @@ public class Sink extends Personaggio {
 		SinkSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		SinkDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
 		
+		//Animazione barra vita
+		vita = new Animazione(75, Risorse.tempo);
 	}
 
 	
@@ -77,6 +79,8 @@ public class Sink extends Personaggio {
 			ultimoTempo = ora;
 			if(delta >= 50){
 				tempo--;
+				if(tempo%10 == 0)
+					vita.aggiorna();
 				delta -= 50;
 			}
 		}
@@ -108,8 +112,9 @@ public class Sink extends Personaggio {
 		//g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
 				//(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
 				//bounds.width, bounds.height);
-		g.fillRect(0, 0, tempo, 10);
-		g.drawString(tempo+"", tempo+2, 11);
+		//g.fillRect(0, 0, tempo, 10);
+		//g.drawString(tempo+"", tempo+2, 11);
+		g.drawImage(vita.getFrameCorrente(), 70, 40, null);
 	}
 	private BufferedImage getFrameAnimazioneCorrente(){
 		if (dx < 0){
