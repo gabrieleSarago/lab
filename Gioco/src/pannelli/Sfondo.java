@@ -18,6 +18,7 @@ public class Sfondo {
 	private double dx;
 	private double dy;
 	
+	
 	public Sfondo (String s, Handler h){
 		try {
 			sfondo = ImageIO.read(new File(s));
@@ -40,13 +41,18 @@ public class Sfondo {
 	public void aggiorna () {
 		x += dx;
 		y += dy;
+		if(x <0 && Math.abs(x) >= sfondo.getWidth()+h.getLarghezza())
+			x += sfondo.getWidth();
+		if(x > 0 && Math.abs(x) >= sfondo.getWidth())
+			x -= sfondo.getWidth();
 	}
 	
 	public void disegna (Graphics g) {
 		g.drawImage(sfondo, (int) x, (int) y, null);
-		if(x < 0)
-			g.drawImage(sfondo, (int) x + h.getLarghezza(), (int) y, null);
+		if(x <0 && Math.abs(x)>=h.getLarghezza()){
+			g.drawImage(sfondo, (int) x + sfondo.getWidth(), (int) y, null);
+		}
 		if (x > 0)
-			g.drawImage(sfondo, (int) x - h.getAltezza(), (int) y, null);
+			g.drawImage(sfondo, (int) x - sfondo.getWidth(), (int) y, null);
 	}
 }
