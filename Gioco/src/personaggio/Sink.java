@@ -113,7 +113,7 @@ public class Sink extends Personaggio {
 				//(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
 				//bounds.width, bounds.height);
 		//g.fillRect(0, 0, tempo, 10);
-		//g.drawString(tempo+"", tempo+2, 11);
+		g.drawString(tempo+"", 170, 53);
 		g.drawImage(vita.getFrameCorrente(), 70, 40, null);
 	}
 	private BufferedImage getFrameAnimazioneCorrente(){
