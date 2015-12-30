@@ -1,7 +1,9 @@
 package stati;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
+import entita_statiche.Caramella;
 import gioco.Handler;
 import livelli.Livello;
 import personaggio.Sink;
@@ -13,6 +15,8 @@ public class StatoGioco extends Stato {
 	private int x;
 	private int y;
 	private int tempo;
+	private ArrayList<Caramella> caramelle;
+	
 	
 	public StatoGioco(Handler h){
 		super(h);
@@ -21,6 +25,7 @@ public class StatoGioco extends Stato {
 		x = l.sinkX;
 		y = l.sinkY;
 		tempo = l.tempo;
+		caramelle = l.caramelle;
 		s = new Sink(h, x, y, tempo);
 	}
 	
@@ -31,6 +36,7 @@ public class StatoGioco extends Stato {
 		x = l.sinkX;
 		y = l.sinkY;
 		tempo = l.tempo;
+		caramelle = l.caramelle;
 		s = new Sink(h, x, y, tempo);
 	}
 
@@ -40,6 +46,10 @@ public class StatoGioco extends Stato {
 			getInput();
 			l.aggiorna();
 			s.aggiorna();
+			for(int i = 0; i < caramelle.size(); i++){
+				Caramella c = caramelle.get(i);
+				c.aggiorna();
+			}
 			if (s.getTempo()<0){
 				h.setStato(new StatoMenu(h));
 			}
@@ -49,7 +59,11 @@ public class StatoGioco extends Stato {
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
-		s.disegna(g);		
+		s.disegna(g);
+		for(int i = 0; i < caramelle.size(); i++){
+			Caramella c = caramelle.get(i);
+			c.disegna(g);
+		}
 	}
 	
 	private void getInput(){

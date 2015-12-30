@@ -6,7 +6,7 @@ public class Risorse {
 	
 	private static final int size = 38;
 	private static final int lifeh = 15, lifew = 96;
-	public static BufferedImage strada, muro, sink_sopra_fermo;
+	public static BufferedImage strada, muro, sink_sopra_fermo, caramella;
 	public static BufferedImage [] voci_pausa, voci_pausa_off, tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
@@ -89,6 +89,9 @@ public class Risorse {
 		
 		strada = s.prendiSprite(116, 7, 32, 32);
 		muro = s.prendiSprite(116+32, 7, 32, 32);
+		
+		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/caramella.png"));
+		caramella = c.prendiSprite(0, 0, 40, 29);
 		
 	}
 
