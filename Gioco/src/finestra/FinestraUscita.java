@@ -64,6 +64,8 @@ public class FinestraUscita implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		//gestione dell'input del gioco nel momento in cui compare la finestra.
+		//Con questo comando si evita il bug di aggiornamento continuo dell'input.
 		h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 	}
 
