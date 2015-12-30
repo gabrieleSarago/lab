@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import javax.swing.JOptionPane;
-
+import finestra.FinestraUscita;
 import gfx.CaricatoreImmagini;
 import gioco.Handler;
 import pannelli.Sfondo;
@@ -90,37 +89,26 @@ public class StatoMenu extends Stato{
 			//classifica
 		}
 		if (sceltaCorrente == 3){
-			if(consensoUscita())
-				System.exit(0);
+			new FinestraUscita(h);
 		}
-	}
-	
-	private boolean consensoUscita(){
-		int i=-1;
-		i=JOptionPane.showConfirmDialog(null,"Sei sicuro di voler uscire?");
-		if(i==JOptionPane.YES_OPTION)
-			return true;
-		if(i==JOptionPane.NO_OPTION)
-			return false;
-		return false;
 	}
 	
 	private void getInput() {
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == -1)
 				sceltaCorrente = opzioni.length -1;
 			}
 		if(h.getGestioneInput().down){
 			sceltaCorrente++;
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == opzioni.length)
-				sceltaCorrente = 0;	
+				sceltaCorrente = 0;
 		}
 		if(h.getGestioneInput().enter){
 			seleziona();
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
 	}		
 }
