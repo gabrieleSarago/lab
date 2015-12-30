@@ -24,6 +24,7 @@ public abstract class Personaggio extends Entita {
 		dy = 0;
 	}
 	
+	
 	public void muovi(){
 		muoviX();
 		muoviY();

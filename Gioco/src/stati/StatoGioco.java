@@ -1,9 +1,13 @@
 package stati;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import entita.Entita;
 import entita_statiche.Caramella;
+import entita_statiche.EntitaStatica;
 import entita_statiche.Trofeo;
 import gioco.Handler;
 import livelli.Livello;
@@ -16,8 +20,8 @@ public class StatoGioco extends Stato {
 	private int x;
 	private int y;
 	private int tempo;
-	private ArrayList<Caramella> caramelle;
-	private Trofeo trofeo;	
+	private ArrayList<EntitaStatica> entitaStatiche;	
+	private boolean vittoria = false;
 	
 	public StatoGioco(Handler h){
 		super(h);
@@ -26,8 +30,7 @@ public class StatoGioco extends Stato {
 		x = l.sinkX;
 		y = l.sinkY;
 		tempo = l.tempo;
-		caramelle = l.caramelle;
-		trofeo= new Trofeo(h, 1000, 140);
+		entitaStatiche = l.entitaStatiche;
 		s = new Sink(h, x, y, tempo);
 	}
 	
@@ -38,8 +41,7 @@ public class StatoGioco extends Stato {
 		x = l.sinkX;
 		y = l.sinkY;
 		tempo = l.tempo;
-		caramelle = l.caramelle;
-		trofeo= new Trofeo(h, 1000, 140);
+		entitaStatiche = l.entitaStatiche;
 		s = new Sink(h, x, y, tempo);
 	}
 
@@ -47,12 +49,12 @@ public class StatoGioco extends Stato {
 	public void aggiorna() {
 		if(!(h.getGioco().getPausa())){
 			getInput();
+			controlla();
 			l.aggiorna();
-			for(int i = 0; i < caramelle.size(); i++){
-				Caramella c = caramelle.get(i);
+			for(int i = 0; i < entitaStatiche.size(); i++){
+				EntitaStatica c = entitaStatiche.get(i);
 				c.aggiorna();
 			}
-			trofeo.aggiorna();
 			s.aggiorna();
 			if (s.getTempo()<0){
 				h.setStato(new StatoMenu(h));
@@ -63,19 +65,22 @@ public class StatoGioco extends Stato {
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
-		for(int i = 0; i < caramelle.size(); i++){
-			Caramella c = caramelle.get(i);
+		for(int i = 0; i < entitaStatiche.size(); i++){
+			EntitaStatica c = entitaStatiche.get(i);
 			c.disegna(g);
 		}
-		trofeo.disegna(g);
 		s.disegna(g);
+		if (vittoria){
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Arial", Font.BOLD,125));
+			g.drawString("YOU WIN", 200, 300);
+		}
 	}
 	
 	private void getInput(){
 		if(h.getGestioneInput().esc){
 			h.getGioco().setPausa(true);
 			h.getGioco().setStato(new StatoPausa(h, this));
-
 		}
 	}
 	
@@ -83,5 +88,20 @@ public class StatoGioco extends Stato {
 		return s;
 	}
 	
+	public void controlla(){
+		for (int i = 0; i < entitaStatiche.size(); i++){
+			Entita e = entitaStatiche.get(i);
+			if ((e instanceof Caramella) && s.getX()<e.getX() && s.getX()>(e.getX()-(e.getLarghezza()/2)) &&
+					s.getY()<e.getY() && s.getY()>(e.getY()-(e.getAltezza()/2))){
+				s.setTempo(s.getTempo()+5);
+				entitaStatiche.remove(e);
+				}
+			if ((e instanceof Trofeo) && s.getX()<e.getX() && s.getX()>(e.getX()-(e.getLarghezza()/2)) &&
+					s.getY()<e.getY() && s.getY()>(e.getY()-(e.getAltezza()/2))){
+				vittoria =true;
+			}
+	    }
+	
+    }
 	
 }

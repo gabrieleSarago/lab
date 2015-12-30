@@ -22,6 +22,18 @@ public abstract class Entita {
 		bounds = new Rectangle(0, 0, larghezza, altezza);
 	}
 	
+/*	public Rectangle getCollisionBounds(float xOffset, float yOffset){
+		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
+	}
+	
+	public EntitaStatica controllaCollisioni(float xOffset, float yOffset){
+		for (EntitaStatica e : h.getLivello().entitaStatiche){
+			if(e.getCollisionBounds(0f, 0f).intersects(new Rectangle((int) xOffset, (int) yOffset, (int) xOffset+32, (int) yOffset+32)))
+			return e;
+		}
+		return null;
+	}
+*/	
 	public abstract void aggiorna();
 	
 	public abstract void disegna(Graphics g);

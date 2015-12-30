@@ -11,7 +11,7 @@ public class Trofeo extends EntitaStatica {
 	public Trofeo(Handler h, float x, float y) {
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA);
 	}
-
+	
 	@Override
 	public void aggiorna() {		
 	}

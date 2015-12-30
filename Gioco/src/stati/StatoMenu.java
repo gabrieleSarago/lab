@@ -96,19 +96,19 @@ public class StatoMenu extends Stato{
 	private void getInput() {
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
-			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == -1)
 				sceltaCorrente = opzioni.length -1;
 			}
 		if(h.getGestioneInput().down){
 			sceltaCorrente++;
-			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == opzioni.length)
 				sceltaCorrente = 0;
 		}
 		if(h.getGestioneInput().enter){
 			seleziona();
-			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
 	}		
 }
