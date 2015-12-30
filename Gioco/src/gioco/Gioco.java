@@ -101,30 +101,35 @@ public class Gioco implements Runnable {
 		
 		inizializza();
 		
-		int fps = 55;
+		int fps = 60;
 		double tempoDiAggiornamento = 1000000000 / fps;
+		double tempoDiAggiornamentoMenu = 1000000000 / 55;
 		double delta = 0;
 		long ora;
 		long ultimoTempo = System.nanoTime();
-		//long timer = 0;
-		//int ticks = 0;
+		long timer = 0;
+		int ticks = 0;
 		
 		while(inCorso){
 			ora = System.nanoTime();
-			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
-			//timer += ora - ultimoTempo;
+			//frame dinamico
+			if(h.getGioco().getStato() instanceof StatoGioco)
+				delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
+			else
+				delta +=(ora - ultimoTempo) / tempoDiAggiornamentoMenu;
+			timer += ora - ultimoTempo;
 			ultimoTempo = ora;
 			if(delta >= 1){
 				aggiorna();
 				disegna();
-				//ticks++;
+				ticks++;
 				delta--;
 			}
-			//if (timer >= 1000000000){
-				//System.out.println("Ticks: "+ ticks);
-				//ticks = 0;
-				//timer = 0;
-			//}
+			if (timer >= 1000000000){
+				System.out.println("Ticks: "+ ticks);
+				ticks = 0;
+				timer = 0;
+			}
 		}
 		
 		stop();

@@ -1,4 +1,5 @@
 /entita/
+/entita_statiche/
 /finestra/
 /gfx/
 /gioco/
@@ -10,4 +11,3 @@
 /stati/
 /tiles/
 /utils/
-/entita_statiche/
