@@ -1,6 +1,8 @@
 package finestra;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -11,7 +13,7 @@ import javax.swing.JPanel;
 
 import gioco.Handler;
 
-public class FinestraUscita implements KeyListener{
+public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
 	
 	private JLabel q = new JLabel("Sei sicuro di voler uscire?");
@@ -72,6 +74,14 @@ public class FinestraUscita implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getSource() == si)
+			System.exit(0);
+		if(evt.getSource() == no)
+			f.dispose();
 	}
 
 }
