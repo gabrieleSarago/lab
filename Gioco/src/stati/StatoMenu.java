@@ -94,6 +94,7 @@ public class StatoMenu extends Stato{
 	}
 	
 	private void getInput() {
+		
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());

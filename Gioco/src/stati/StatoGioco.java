@@ -47,6 +47,9 @@ public class StatoGioco extends Stato {
 
 	@Override
 	public void aggiorna() {
+		if(tempo > 100)
+			tempo = 100;
+		
 		if(!(h.getGioco().getPausa())){
 			getInput();
 			controlla();
@@ -65,6 +68,7 @@ public class StatoGioco extends Stato {
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
+		
 		for(int i = 0; i < entitaStatiche.size(); i++){
 			EntitaStatica c = entitaStatiche.get(i);
 			c.disegna(g);

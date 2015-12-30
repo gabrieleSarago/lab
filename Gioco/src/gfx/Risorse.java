@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 public class Risorse {
 	
 	private static final int size = 38;
-	private static final int lifeh = 15, lifew = 96;
+	//private static final int lifeh = 15, lifew = 96;
 	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo;
-	public static BufferedImage [] voci_pausa, voci_pausa_off, tempo;
+	public static BufferedImage [] voci_pausa, voci_pausa_off;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
 	
@@ -79,13 +79,14 @@ public class Risorse {
 		voci_pausa_off[2] = s2.prendiSprite(0, 128, 175, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
 		
+		/*
 		Sprite t = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/life.png"));
 		
 		tempo = new BufferedImage[11];
 		
 		for(int i = 0; i<11; i++)
 			tempo[i] =  t.prendiSprite(0, lifeh*i, lifew, lifeh);
-
+		*/
 		
 		strada = s.prendiSprite(116, 7, 32, 32);
 		muro = s.prendiSprite(116+32, 7, 32, 32);

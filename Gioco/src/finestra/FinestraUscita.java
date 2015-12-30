@@ -27,11 +27,14 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	private Handler h;
 	
 	public FinestraUscita(Handler h){
+		
+		//creazione della finestra
 		f = new JFrame();
 		f.setSize(200, 100);
 		f.setLocation(500, 500);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//aggiunta dei pannelli e dei pulsanti
 		p.add(q);
 		c.add(si); c.add(no);
 		
@@ -40,14 +43,19 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		
 		f.setVisible(true);
 		
+		//aggiunta degli ascoltatori
 		si.addKeyListener(this);
 		no.addKeyListener(this);
+		
+		si.addActionListener(this);
+		no.addActionListener(this);
 		
 		this.h = h;
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent k) {
+		//Gestione del focus dei pulsanti
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner())
 			System.exit(0);
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner())
@@ -72,9 +80,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
