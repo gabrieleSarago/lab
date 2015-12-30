@@ -9,4 +9,5 @@ public abstract class EntitaStatica extends Entita{
 		super(h, x, y, larghezza, altezza);
 	}
 	
+	
 }
