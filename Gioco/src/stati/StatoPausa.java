@@ -1,7 +1,6 @@
 package stati;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import gfx.Animazione;
@@ -15,10 +14,6 @@ public class StatoPausa extends Stato{
 	private Sfondo s;
 	
 	private int sceltaCorrente = 0;
-	
-	private Color coloreTitolo;
-	private Font fontTitolo;
-	private Font font;
 	
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
@@ -37,9 +32,6 @@ public class StatoPausa extends Stato{
 		s = new Sfondo("res/img/pausa.png", h);
 		
 		s.setVector(-0.3, 0);
-		coloreTitolo = Color.BLACK;
-		fontTitolo = new Font("Arial", Font.BOLD, 40);
-		font = new Font("Arial", Font.BOLD, 30);
 		sinkDestra = new Animazione(100, Risorse.sink_destra);
 	}
 
@@ -63,17 +55,19 @@ public class StatoPausa extends Stato{
 		//disegna sfondo
 		s.disegna(g);
 		
+		//disegna la miniatura del gioco.
+		g.setColor(Color.black);
+		g.drawRect(848, 48, 304, 204);
+		g.drawImage(precedente.getUltimoScreen(), 850, 50, 300, 200, null);
+		
 		//disegna sink nella pausa
 		g.drawImage(sinkDestra.getFrameCorrente(),100, h.getGioco().getAltezza()-121, 
 				precedente.getSink().getLarghezza(), precedente.getSink().getAltezza(), null);
 		
 		//disegna titolo
-		g.setColor(coloreTitolo);
-		g.setFont(fontTitolo);
 		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoloPausa.png"),400,70,null);
 		
 		//disegna menu
-		g.setFont(font);
 		for(int i = 0; i<Risorse.voci_pausa.length; i++){
 			if(i == sceltaCorrente){
 				g.drawImage(Risorse.voci_pausa[i], 400, 170 + i*60, null);
@@ -112,8 +106,9 @@ public class StatoPausa extends Stato{
 				sceltaCorrente = 0;
 		}
 		if(h.getGestioneInput().enter){
-			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			seleziona();
+			
 		}
 	}
 

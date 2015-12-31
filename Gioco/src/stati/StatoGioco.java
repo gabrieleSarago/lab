@@ -3,6 +3,7 @@ package stati;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import entita.Entita;
@@ -22,6 +23,7 @@ public class StatoGioco extends Stato {
 	private int tempo;
 	private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
+	private Graphics g;
 	
 	public StatoGioco(Handler h){
 		super(h);
@@ -68,7 +70,6 @@ public class StatoGioco extends Stato {
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
-		
 		for(int i = 0; i < entitaStatiche.size(); i++){
 			EntitaStatica c = entitaStatiche.get(i);
 			c.disegna(g);
@@ -90,6 +91,17 @@ public class StatoGioco extends Stato {
 	
 	public Sink getSink(){
 		return s;
+	}
+	
+	
+	//Converte l'oggetto Graphics in un BufferedImage,
+	//in modo da poter essere stampato su schermo.
+	public BufferedImage getUltimoScreen(){
+		BufferedImage img = new BufferedImage(1200, 700, BufferedImage.TYPE_INT_RGB);
+		g = img.createGraphics();
+		disegna(g);
+		g.dispose();
+		return img;
 	}
 	
 	public void controlla(){

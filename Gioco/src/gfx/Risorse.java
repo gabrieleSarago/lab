@@ -6,7 +6,7 @@ public class Risorse {
 	
 	private static final int size = 38;
 	//private static final int lifeh = 15, lifew = 96;
-	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo;
+	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok;
 	public static BufferedImage [] voci_pausa, voci_pausa_off;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
@@ -77,6 +77,7 @@ public class Risorse {
 		voci_pausa_off[0] = s2.prendiSprite(0, 0, 250, 40);
 		voci_pausa_off[1] = s2.prendiSprite(0, 63, 215, 40);
 		voci_pausa_off[2] = s2.prendiSprite(0, 128, 175, 40);
+		ok = s1.prendiSprite(0, 128, 290, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
 		
 		/*
