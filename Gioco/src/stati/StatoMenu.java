@@ -80,6 +80,7 @@ public class StatoMenu extends Stato{
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
+			h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){

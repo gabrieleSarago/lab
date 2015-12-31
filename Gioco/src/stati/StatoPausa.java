@@ -78,17 +78,20 @@ public class StatoPausa extends Stato{
 	}
 	
 	private void seleziona(){
-		h.getGioco().setPausa(false);
 		if(sceltaCorrente == 0){
+			h.getGioco().setPausa(false);
 			h.getGioco().setStato(precedente);
 		}
 		if(sceltaCorrente == 1){
+			h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if(sceltaCorrente == 2){
 			h.getLivello().salva("res/livelli/livelloS.txt", (int)precedente.getSink().getX(), (int) precedente.getSink().getY(), precedente.getSink().getTempo());
+			Risorse.voci_pausa[2] = Risorse.ok;
 		}
 		if(sceltaCorrente == 3)
+			//h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoMenu(h));
 	}
 	

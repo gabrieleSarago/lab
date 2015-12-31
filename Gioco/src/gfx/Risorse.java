@@ -71,13 +71,13 @@ public class Risorse {
 
 		voci_pausa[0] = s1.prendiSprite(0, 0, 250, 40);
 		voci_pausa[1] = s1.prendiSprite(0, 63, 215, 40);
-		voci_pausa[2] = s1.prendiSprite(0, 128, 175, 40);
+		voci_pausa[2] = s1.prendiSprite(0, 128, 177, 40);
 		voci_pausa[3] = s1.prendiSprite(0, 190, 404, 40);
-		
+		ok = s1.prendiSprite(0, 128, 290, 40);
+
 		voci_pausa_off[0] = s2.prendiSprite(0, 0, 250, 40);
 		voci_pausa_off[1] = s2.prendiSprite(0, 63, 215, 40);
-		voci_pausa_off[2] = s2.prendiSprite(0, 128, 175, 40);
-		ok = s1.prendiSprite(0, 128, 290, 40);
+		voci_pausa_off[2] = s2.prendiSprite(0, 128, 177, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
 		
 		/*
