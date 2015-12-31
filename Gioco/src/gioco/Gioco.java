@@ -176,5 +176,5 @@ public class Gioco implements Runnable {
 	public JFrame getFrame(){
 		return f.getFrame();
 	}
-	
+		
 }

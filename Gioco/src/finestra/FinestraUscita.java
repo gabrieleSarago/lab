@@ -31,7 +31,8 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		//creazione della finestra
 		f = new JFrame();
 		f.setSize(200, 100);
-		f.setLocation(500, 500);
+		f.setResizable(false);
+		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//aggiunta dei pannelli e dei pulsanti
