@@ -101,10 +101,14 @@ public class StatoPausa extends Stato{
 	}
 	
 	private void getInput(){
+		
+		//Accellera la traslazione dello sfondo alla pressione di freccia destra
 		if(h.getGestioneInput().right)
 			dx+=2;
 			s.setVector(-0.3-dx, 0);
+		//se la freccia viene rilasciata la velocità torna normale. 
 		dx = 0;
+		
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
