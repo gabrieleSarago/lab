@@ -26,7 +26,6 @@ public class GestioneInput implements KeyListener {
 	public void keyPressed(KeyEvent k) {
 		tasti[k.getKeyCode()] = true;
 		c = k;
-		//System.out.println("Pressed!");
 	}
 	
 	public KeyEvent getKeyEvent(){return c;}

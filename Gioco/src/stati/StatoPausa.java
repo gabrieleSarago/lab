@@ -24,7 +24,10 @@ public class StatoPausa extends Stato{
 	
 	private StatoGioco precedente;
 	private Animazione sinkDestra;
-
+	
+	private boolean salvato = false;
+	int dx = 2;
+	
 	public StatoPausa(Handler h, StatoGioco precedente) {
 		super(h);
 		this.precedente = precedente;
@@ -69,9 +72,13 @@ public class StatoPausa extends Stato{
 		
 		//disegna menu
 		for(int i = 0; i<Risorse.voci_pausa.length; i++){
-			if(i == sceltaCorrente){
-				g.drawImage(Risorse.voci_pausa[i], 400, 170 + i*60, null);
-			}
+			if(i == sceltaCorrente)
+				if(i == 2 && (h.getGestioneInput().enter || salvato)){
+					g.drawImage(Risorse.ok, 400, 170 + i*60, null);
+					salvato = true;
+				}
+				else
+					g.drawImage(Risorse.voci_pausa[i], 400, 170 + i*60, null);
 			else
 				g.drawImage(Risorse.voci_pausa_off[i], 400, 170 + i*60, null);
 		}
@@ -88,14 +95,16 @@ public class StatoPausa extends Stato{
 		}
 		if(sceltaCorrente == 2){
 			h.getLivello().salva("res/livelli/livelloS.txt", (int)precedente.getSink().getX(), (int) precedente.getSink().getY(), precedente.getSink().getTempo());
-			Risorse.voci_pausa[2] = Risorse.ok;
 		}
 		if(sceltaCorrente == 3)
-			//h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoMenu(h));
 	}
 	
 	private void getInput(){
+		if(h.getGestioneInput().right)
+			dx+=2;
+			s.setVector(-0.3-dx, 0);
+		dx = 0;
 		if(h.getGestioneInput().up){
 			sceltaCorrente--;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
