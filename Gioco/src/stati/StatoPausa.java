@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import gfx.Animazione;
-import gfx.CaricatoreImmagini;
 import gfx.Risorse;
 import gioco.Handler;
 import pannelli.Sfondo;
@@ -68,8 +67,7 @@ public class StatoPausa extends Stato{
 				precedente.getSink().getLarghezza(), precedente.getSink().getAltezza(), null);
 		
 		//disegna titolo
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoloPausa.png"),400,70,null);
-		
+		g.drawImage(Risorse.titoloPausa, 400, 70, null);
 		//disegna menu
 		for(int i = 0; i<Risorse.voci_pausa.length; i++){
 			if(i == sceltaCorrente)

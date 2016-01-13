@@ -2,6 +2,7 @@ package gioco;
 
 import gfx.CameraGioco;
 import input.GestioneInput;
+import lingue.Lingua;
 import livelli.Livello;
 import stati.Stato;
 
@@ -34,6 +35,10 @@ public class Handler {
 	
 	public Gioco getGioco() {
 		return gioco;
+	}
+	
+	public Lingua getLingua(){
+		return gioco.getLingua();
 	}
 
 	public void setGioco(Gioco gioco) {

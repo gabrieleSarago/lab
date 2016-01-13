@@ -4,18 +4,26 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import finestra.FinestraUscita;
 import gfx.CaricatoreImmagini;
+import gfx.Risorse;
 import gioco.Handler;
+import lingue.Lingua;
 import pannelli.Sfondo;
 
-public class StatoMenu extends Stato{
+public class StatoOpzioni extends Stato{
 	
 	private Sfondo s;
 	private Handler h;
 	
 	private int sceltaCorrente = 0;
-	private String [] opzioni = { "NUOVA PARTITA","CARICA PARTITA","CLASSIFICA","OPZIONI", "INFO", "ESCI"};
+	private int linguaCorrente = 0;
+	
+	private String [] opzioni = {"LINGUA", "MUSICA", "TORNA AL MENU"};
+	private String [] opzioniENG = {"LANGUAGE", "MUSIC", "MAIN MENU"};
+	private String [] opzioniITA =  {"LINGUA", "MUSICA", "TORNA AL MENU"};
+	
+	private Lingua lingua;
+	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"}; 
 	
 	private Color coloreTitolo;
 	private Font fontTitolo;
@@ -31,7 +39,7 @@ public class StatoMenu extends Stato{
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
-	public StatoMenu(Handler h) {
+	public StatoOpzioni(Handler h) {
 		super(h);
 		this.h = h;
 		s = new Sfondo("res/img/menu.jpg",h);
@@ -44,6 +52,18 @@ public class StatoMenu extends Stato{
 		colore = new Color(0,128,128);
 		font = new Font ("Arial", Font.BOLD,32);
 		
+		lingua = h.getLingua();
+		for(int i = 0; i<lingue.length; i++){
+			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i])){
+				linguaCorrente = i;
+				if(i == 0)
+					opzioni = opzioniITA;
+				if(i == 1)
+					opzioni = opzioniENG;
+			}
+			if(lingua.getLingua() == null)
+				opzioni = opzioniENG;
+		}
 	}
 
 	@Override
@@ -58,6 +78,7 @@ public class StatoMenu extends Stato{
 			getInput();
 			delta -= 6;
 		}	
+		
 	}
 
 	@Override
@@ -74,28 +95,42 @@ public class StatoMenu extends Stato{
 				g.setColor(new Color(47,47,47));
 			else
 				g.setColor(colore);
-			g.drawString(opzioni[i], 500, 275 + i * 50);
+			if(i == 0)
+				g.drawString(lingue[linguaCorrente], 500, 275 + i * 50);
+			else
+				g.drawString(opzioni[i], 500, 275 + i * 50);
 		}
+		
 	}
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
-			h.getGioco().setPausa(false);
-			h.getGioco().setStato(new StatoGioco(h));
+			switch(linguaCorrente){
+			case 0:{ 
+				lingua.setLingua("ITALIANO"); 
+				Risorse.inizializzaITA();
+				opzioni = opzioniITA;
+				break;
+			}
+			case 1:{
+				lingua.setLingua("ENGLISH"); 
+				Risorse.inizializzaENG();
+				opzioni = opzioniENG;
+				break;
+			}
+			case 2:{
+				lingua.setLingua("DEUTSCH");
+				Risorse.inizializzaDEU();
+				break;
+			}
+			}
 		}
+		
 		if (sceltaCorrente == 1){
-			h.getGioco().setPausa(false);
-			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
+			//musica
 		}
-		if (sceltaCorrente == 2){
-			//classifica
-		}
-		if(sceltaCorrente == 3){
-			h.getGioco().setStato(new StatoOpzioni(h));
-		}
-		if (sceltaCorrente == 5){
-			new FinestraUscita(h);
-		}
+		if (sceltaCorrente == 2)
+			h.getGioco().setStato(new StatoMenu(h));
 	}
 	
 	private void getInput() {
@@ -116,5 +151,18 @@ public class StatoMenu extends Stato{
 			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
+		
+		if(sceltaCorrente == 0 && h.getGestioneInput().right){
+			linguaCorrente++;
+			if(linguaCorrente > lingue.length-1)
+				linguaCorrente = 0;
+		}
+		
+		if(sceltaCorrente == 0 && h.getGestioneInput().left){
+			linguaCorrente--;
+			if(linguaCorrente < 0)
+				linguaCorrente = lingue.length-1;
+		}
 	}		
+
 }

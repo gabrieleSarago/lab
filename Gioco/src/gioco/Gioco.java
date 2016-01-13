@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import finestra.Finestra;
 import gfx.*;
 import input.GestioneInput;
+import lingue.Lingua;
 import stati.*;
 
 public class Gioco implements Runnable {
@@ -25,6 +26,10 @@ public class Gioco implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	//lingua
+	private Lingua lingua;
+	private String linea;
+	
 	//Stati
 	private static Stato stato;
 	//Input
@@ -40,18 +45,36 @@ public class Gioco implements Runnable {
 		this.larghezza = larghezza;
 		this.altezza = altezza;
 		this.titolo = titolo;
-		gi = new GestioneInput(); 
-	} 
+		gi = new GestioneInput();
+	}
 	
 	private void inizializza(){
 		f = new Finestra(titolo, larghezza, altezza);
 		f.getFrame().addKeyListener(gi);
+		
+		lingua = new Lingua();
+		linea = lingua.getLingua();
+		
 		Risorse.inizializza();
+		if(linea == null)
+			Risorse.inizializzaENG();
+		
+		else{
+			switch(linea){
+			case "ITALIANO" : Risorse.inizializzaITA(); break;
+			case "DEUTSCH" : Risorse.inizializzaDEU(); break;
+			default : Risorse.inizializzaENG(); break;
+			}
+		}
 		
 		h = new Handler(this);
 		cg = new CameraGioco(h, 0, 0);
 		
-		stato= new StatoMenu(h);
+		if(linea == null)
+			stato = new StatoOpzioni(h);//StatoInfo
+		else
+			stato = new StatoMenu(h);
+		
 		Stato.setStato(stato);
 	}
 	
@@ -176,5 +199,7 @@ public class Gioco implements Runnable {
 	public JFrame getFrame(){
 		return f.getFrame();
 	}
-		
+	
+	public Lingua getLingua(){return lingua;}
+
 }
