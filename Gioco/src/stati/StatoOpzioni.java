@@ -1,7 +1,5 @@
 package stati;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import gfx.CaricatoreImmagini;
@@ -19,18 +17,10 @@ public class StatoOpzioni extends Stato{
 	private int linguaCorrente = 0;
 	
 	private String [] opzioni = {"LINGUA", "MUSICA", "TORNA AL MENU"};
-	private String [] opzioniENG = {"LANGUAGE", "MUSIC", "MAIN MENU"};
-	private String [] opzioniITA =  {"LINGUA", "MUSICA", "TORNA AL MENU"};
 	
 	private Lingua lingua;
 	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"}; 
-	
-	private Color coloreTitolo;
-	private Font fontTitolo;
-	
-	private Font font;
-	private Color colore;
-	
+		
 	//per regolarizzare i movimenti
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
@@ -44,25 +34,11 @@ public class StatoOpzioni extends Stato{
 		this.h = h;
 		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
-		//s.setVector(-0.1, 0);
-		
-		coloreTitolo = new Color(150,0,24);
-		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
-		
-		colore = new Color(0,128,128);
-		font = new Font ("Arial", Font.BOLD,32);
-		
-		lingua = h.getGioco().getLingua();
+
+		lingua = h.getLingua();
 		for(int i = 0; i<lingue.length; i++){
-			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i])){
+			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i]))
 				linguaCorrente = i;
-				if(i == 0)
-					opzioni = opzioniITA;
-				if(i == 1)
-					opzioni = opzioniENG;
-			}
-			if(lingua.getLingua() == null)
-				opzioni = opzioniENG;
 		}
 	}
 
@@ -84,21 +60,18 @@ public class StatoOpzioni extends Stato{
 	@Override
 	public void disegna(Graphics g) {
 		s.disegna(g);
-		
-		g.setColor(coloreTitolo);
-		g.setFont(fontTitolo);
+
 		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),300, 100, null);
 		
-		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){
-			if (i == sceltaCorrente) 
-				g.setColor(new Color(47,47,47));
+			if (i == sceltaCorrente){
+				if(i == 0)
+					g.drawImage(Risorse.lingue[linguaCorrente], 500, 275 + i * 50, null);
+				else
+					g.drawImage(Risorse.voci_opzioni[i], 500, 275 + i * 50, null);
+			}
 			else
-				g.setColor(colore);
-			if(i == 0 && i == sceltaCorrente)
-				g.drawString(lingue[linguaCorrente], 500, 275 + i * 50);
-			else
-				g.drawString(opzioni[i], 500, 275 + i * 50);
+				g.drawImage(Risorse.voci_opzioni_off[i], 500, 275 + i * 50, null);
 		}
 		
 	}
@@ -109,13 +82,11 @@ public class StatoOpzioni extends Stato{
 			case 0:{
 				lingua.setLingua("ITALIANO");
 				Risorse.inizializzaITA();
-				opzioni = opzioniITA;
 				break;
 			}
 			case 1:{
 				lingua.setLingua("ENGLISH"); 
 				Risorse.inizializzaENG();
-				opzioni = opzioniENG;
 				break;
 			}
 			case 2:{
