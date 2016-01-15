@@ -34,7 +34,7 @@ public class StatoMenu extends Stato{
 	public StatoMenu(Handler h) {
 		super(h);
 		this.h = h;
-		s = new Sfondo("res/img/menu1.png",h);
+		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		//s.setVector(-0.1, 0);
 		
@@ -64,7 +64,7 @@ public class StatoMenu extends Stato{
 		
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titolo.png"),300, 100, null);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),300, 100, null);
 		BufferedImage voce;
 		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){
@@ -72,13 +72,23 @@ public class StatoMenu extends Stato{
 				voce = Risorse.voci_menu[i];
 			else
 				voce = Risorse.voci_menu_off[i];
-			switch(i){
-			case 0: g.drawImage(voce, 405, 275 + i * 50, null); break;
-			case 1: g.drawImage(voce, 400, 275 + i * 50, null); break;
-			case 2: g.drawImage(voce, 450, 275 + i * 50, null); break;
-			case 3: g.drawImage(voce, 500, 275 + i * 50, null); break;
-			case 4: g.drawImage(voce, 545, 275 + i * 50, null); break;
-			case 5: g.drawImage(voce, 545, 275 + i * 50, null); break;
+			switch(h.getLingua().getLingua()){
+			case "ITALIANO" : switch(i){
+				case 0: g.drawImage(voce, 405, 275 + i * 50, null); break;
+				case 1: g.drawImage(voce, 400, 275 + i * 50, null); break;
+				case 2: g.drawImage(voce, 450, 275 + i * 50, null); break;
+				case 3: g.drawImage(voce, 500, 275 + i * 50, null); break;
+				case 4: g.drawImage(voce, 545, 275 + i * 50, null); break;
+				case 5: g.drawImage(voce, 545, 275 + i * 50, null); break;
+				} break;
+			case "ENGLISH" :  switch(i){
+				case 0: g.drawImage(voce, 490, 275 + i * 50, null); break;
+				case 1: g.drawImage(voce, 475, 275 + i * 50, null); break;
+				case 2: g.drawImage(voce, 515, 275 + i * 50, null); break;
+				case 3: g.drawImage(voce, 495, 275 + i * 50, null); break;
+				case 4: g.drawImage(voce, 560, 275 + i * 50, null); break;
+				case 5: g.drawImage(voce, 562, 275 + i * 50, null); break;
+				} break;
 			}
 		}
 	}

@@ -42,7 +42,7 @@ public class StatoOpzioni extends Stato{
 	public StatoOpzioni(Handler h) {
 		super(h);
 		this.h = h;
-		s = new Sfondo("res/img/menu1.png",h);
+		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		//s.setVector(-0.1, 0);
 		
@@ -87,7 +87,7 @@ public class StatoOpzioni extends Stato{
 		
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titolo.png"),300, 100, null);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),300, 100, null);
 		
 		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){

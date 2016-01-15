@@ -31,7 +31,7 @@ public class StatoPausa extends Stato{
 		super(h);
 		this.precedente = precedente;
 		
-		s = new Sfondo("res/img/pausa.png", h);
+		s = new Sfondo("res/img/sfondi/pausa.png", h);
 		
 		s.setVector(-0.3, 0);
 		sinkDestra = new Animazione(100, Risorse.sink_destra);

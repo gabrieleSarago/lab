@@ -12,7 +12,7 @@ public class Risorse {
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
 	
 	public static void inizializza(){
-		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sink.png"));
+		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
 		
 		sink_sotto = new BufferedImage[10];
 		sink_sopra = new BufferedImage[10];
@@ -68,7 +68,7 @@ public class Risorse {
 		
 		voci_menu = new BufferedImage[6];
 		voci_menu_off = new BufferedImage[6];
-
+		
 		/*Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa.png"));
 		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_off.png"));
 
@@ -95,18 +95,18 @@ public class Risorse {
 		strada = s.prendiSprite(116, 7, 32, 32);
 		muro = s.prendiSprite(116+32, 7, 32, 32);
 		
-		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/caramella.png"));
+		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/caramella.png"));
 		caramella = c.prendiSprite(0, 0, 40, 29);
 		
-		Sprite d = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/Trofeo_d'oro.png"));
+		Sprite d = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/Trofeo_d'oro.png"));
 		trofeo = d.prendiSprite(0, 0, 40, 40);
 		
 	}
 	
 	public static void inizializzaITA(){
 		
-		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu.png"));
-		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu_off.png"));
+		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu.png"));
+		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_off.png"));
 		
 		voci_menu[0] = s.prendiSprite(0, 3, 410, 40);
 		voci_menu[1] = s.prendiSprite(0, 47, 424, 40);
@@ -122,11 +122,11 @@ public class Risorse {
 		voci_menu_off[4] = s0.prendiSprite(0, 179, 127, 40);
 		voci_menu_off[5] = s0.prendiSprite(0, 222, 122, 40);
 		
-		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoloPausa.png");
+		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/titoloPausa.png");
 
 		
-		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa.png"));
-		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_off.png"));
+		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa.png"));
+		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa_off.png"));
 		
 		voci_pausa[0] = s1.prendiSprite(0, 0, 250, 40);
 		voci_pausa[1] = s1.prendiSprite(0, 63, 215, 40);
@@ -142,10 +142,28 @@ public class Risorse {
 	
 	public static void inizializzaENG(){		
 		
-		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/pause.png");
+		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng.png"));
+		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng_off.png"));
 		
-		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_eng.png"));
-		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_eng_off.png"));
+		voci_menu[0] = s.prendiSprite(0, 3, 264, 40);
+		voci_menu[1] = s.prendiSprite(0, 47, 291, 40);
+		voci_menu[2] = s.prendiSprite(0, 91, 217, 40);
+		voci_menu[3] = s.prendiSprite(0, 136, 260, 40);
+		voci_menu[4] = s.prendiSprite(0, 179, 129, 40);
+		voci_menu[5] = s.prendiSprite(0, 222, 126, 40);
+		
+		voci_menu_off[0] = s0.prendiSprite(0, 3, 264, 40);
+		voci_menu_off[1] = s0.prendiSprite(0, 47, 291, 40);
+		voci_menu_off[2] = s0.prendiSprite(0, 91, 217, 40);
+		voci_menu_off[3] = s0.prendiSprite(0, 136, 260, 40);
+		voci_menu_off[4] = s0.prendiSprite(0, 179, 129, 40);
+		voci_menu_off[5] = s0.prendiSprite(0, 222, 126, 40);
+		
+		
+		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/pause.png");
+		
+		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa_eng.png"));
+		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa_eng_off.png"));
 		
 		voci_pausa[0] = s1.prendiSprite(0, 3, 264, 40);
 		voci_pausa[1] = s1.prendiSprite(0, 48, 243, 40);
@@ -161,11 +179,11 @@ public class Risorse {
 	
 	public static void inizializzaDEU(){
 		
-		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/pause.png");
+		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/pause.png");
 
 		
-		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_deu.png"));
-		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_deu_off.png"));
+		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa_deu.png"));
+		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_pausa_deu_off.png"));
 		
 		voci_pausa[0] = s1.prendiSprite(0, 3, 414, 40);
 		voci_pausa[1] = s1.prendiSprite(0, 48, 292, 40);
