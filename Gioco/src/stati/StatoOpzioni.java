@@ -136,6 +136,8 @@ public class StatoOpzioni extends Stato{
 				linguaCorrente = lingue.length-1;
 			seleziona();
 		}
+		if(h.getGestioneInput().esc)
+			h.getGioco().setStato(new StatoMenu(h));
 	}		
 
 }
