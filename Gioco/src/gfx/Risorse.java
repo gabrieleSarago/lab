@@ -7,7 +7,7 @@ public class Risorse {
 	private static final int size = 38;
 	//private static final int lifeh = 15, lifew = 96;
 	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
-	public static BufferedImage [] voci_pausa, voci_pausa_off;// tempo;
+	public static BufferedImage [] voci_pausa, voci_pausa_off, voci_menu, voci_menu_off;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
 	
@@ -65,6 +65,9 @@ public class Risorse {
 		
 		voci_pausa = new BufferedImage[4];
 		voci_pausa_off = new BufferedImage[4];
+		
+		voci_menu = new BufferedImage[6];
+		voci_menu_off = new BufferedImage[6];
 
 		/*Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa.png"));
 		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_off.png"));
@@ -102,6 +105,23 @@ public class Risorse {
 	
 	public static void inizializzaITA(){
 		
+		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu.png"));
+		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu_off.png"));
+		
+		voci_menu[0] = s.prendiSprite(0, 3, 410, 40);
+		voci_menu[1] = s.prendiSprite(0, 47, 424, 40);
+		voci_menu[2] = s.prendiSprite(0, 91, 315, 40);
+		voci_menu[3] = s.prendiSprite(0, 136, 212, 40);
+		voci_menu[4] = s.prendiSprite(0, 179, 127, 40);
+		voci_menu[5] = s.prendiSprite(0, 222, 122, 40);
+		
+		voci_menu_off[0] = s0.prendiSprite(0, 3, 410, 40);
+		voci_menu_off[1] = s0.prendiSprite(0, 47, 424, 40);
+		voci_menu_off[2] = s0.prendiSprite(0, 91, 315, 40);
+		voci_menu_off[3] = s0.prendiSprite(0, 136, 212, 40);
+		voci_menu_off[4] = s0.prendiSprite(0, 179, 127, 40);
+		voci_menu_off[5] = s0.prendiSprite(0, 222, 122, 40);
+		
 		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoloPausa.png");
 
 		
@@ -120,7 +140,7 @@ public class Risorse {
 		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
 	}
 	
-	public static void inizializzaENG(){
+	public static void inizializzaENG(){		
 		
 		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/pause.png");
 		

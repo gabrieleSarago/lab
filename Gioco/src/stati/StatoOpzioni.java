@@ -42,7 +42,7 @@ public class StatoOpzioni extends Stato{
 	public StatoOpzioni(Handler h) {
 		super(h);
 		this.h = h;
-		s = new Sfondo("res/img/menu.jpg",h);
+		s = new Sfondo("res/img/menu1.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		//s.setVector(-0.1, 0);
 		
@@ -52,7 +52,7 @@ public class StatoOpzioni extends Stato{
 		colore = new Color(0,128,128);
 		font = new Font ("Arial", Font.BOLD,32);
 		
-		lingua = h.getLingua();
+		lingua = h.getGioco().getLingua();
 		for(int i = 0; i<lingue.length; i++){
 			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i])){
 				linguaCorrente = i;
@@ -95,7 +95,7 @@ public class StatoOpzioni extends Stato{
 				g.setColor(new Color(47,47,47));
 			else
 				g.setColor(colore);
-			if(i == 0)
+			if(i == 0 && i == sceltaCorrente)
 				g.drawString(lingue[linguaCorrente], 500, 275 + i * 50);
 			else
 				g.drawString(opzioni[i], 500, 275 + i * 50);
@@ -106,8 +106,8 @@ public class StatoOpzioni extends Stato{
 	private void seleziona (){
 		if (sceltaCorrente == 0){
 			switch(linguaCorrente){
-			case 0:{ 
-				lingua.setLingua("ITALIANO"); 
+			case 0:{
+				lingua.setLingua("ITALIANO");
 				Risorse.inizializzaITA();
 				opzioni = opzioniITA;
 				break;
@@ -156,12 +156,14 @@ public class StatoOpzioni extends Stato{
 			linguaCorrente++;
 			if(linguaCorrente > lingue.length-1)
 				linguaCorrente = 0;
+			seleziona();
 		}
 		
 		if(sceltaCorrente == 0 && h.getGestioneInput().left){
 			linguaCorrente--;
 			if(linguaCorrente < 0)
 				linguaCorrente = lingue.length-1;
+			seleziona();
 		}
 	}		
 

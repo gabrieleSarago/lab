@@ -3,9 +3,11 @@ package stati;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import finestra.FinestraUscita;
 import gfx.CaricatoreImmagini;
+import gfx.Risorse;
 import gioco.Handler;
 import pannelli.Sfondo;
 
@@ -20,9 +22,7 @@ public class StatoMenu extends Stato{
 	private Color coloreTitolo;
 	private Font fontTitolo;
 	
-	private Font font;
-	private Color colore;
-	
+	private Font font;	
 	//per regolarizzare i movimenti
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
@@ -34,14 +34,12 @@ public class StatoMenu extends Stato{
 	public StatoMenu(Handler h) {
 		super(h);
 		this.h = h;
-		s = new Sfondo("res/img/menu.jpg",h);
+		s = new Sfondo("res/img/menu1.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		//s.setVector(-0.1, 0);
 		
 		coloreTitolo = new Color(150,0,24);
 		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
-		
-		colore = new Color(0,128,128);
 		font = new Font ("Arial", Font.BOLD,32);
 		
 	}
@@ -67,14 +65,21 @@ public class StatoMenu extends Stato{
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
 		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titolo.png"),300, 100, null);
-		
+		BufferedImage voce;
 		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){
-			if (i == sceltaCorrente) 
-				g.setColor(new Color(47,47,47));
+			if (i == sceltaCorrente)
+				voce = Risorse.voci_menu[i];
 			else
-				g.setColor(colore);
-			g.drawString(opzioni[i], 500, 275 + i * 50);
+				voce = Risorse.voci_menu_off[i];
+			switch(i){
+			case 0: g.drawImage(voce, 405, 275 + i * 50, null); break;
+			case 1: g.drawImage(voce, 400, 275 + i * 50, null); break;
+			case 2: g.drawImage(voce, 450, 275 + i * 50, null); break;
+			case 3: g.drawImage(voce, 500, 275 + i * 50, null); break;
+			case 4: g.drawImage(voce, 545, 275 + i * 50, null); break;
+			case 5: g.drawImage(voce, 545, 275 + i * 50, null); break;
+			}
 		}
 	}
 	

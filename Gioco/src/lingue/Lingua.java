@@ -5,18 +5,15 @@ import java.io.*;
 public class Lingua {
 	
 	private String linea;
-	public enum lingua {ITALIANO, ENGLISH, DEUTCH, FRANCAIS};
 	
-	public Lingua(){
+	public String getLingua(){
 		try{
-			BufferedReader br = new BufferedReader(new FileReader("res/lingue/lingua.txt"));
-			linea = br.readLine();
-			br.close();
+		BufferedReader br = new BufferedReader(new FileReader("res/lingue/lingua.txt"));
+		linea = br.readLine();
+		br.close();
 		}catch(IOException e){e.printStackTrace();}
+		return linea;
 	}
-	
-	//TODO gestire primo avvio in Gioco tramite linea == null
-	public String getLingua(){return linea;}
 	
 	public void setLingua(String s){
 		try{

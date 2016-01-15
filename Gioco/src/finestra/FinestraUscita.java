@@ -16,7 +16,7 @@ import gioco.Handler;
 public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
 	
-	private JLabel q = new JLabel("Sei sicuro di voler uscire?");
+	private JLabel q  = new JLabel("Are you sure to exit?");
 	
 	private JButton si = new JButton("Si");
 	private JButton no = new JButton("No");
@@ -27,6 +27,11 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	private Handler h;
 	
 	public FinestraUscita(Handler h){
+		
+		switch(h.getLingua().getLingua()){
+		case "ENGLISH" : q.setText("Are you sure to exit?"); break;
+		case "ITALIANO" : q.setText("Sei sicuro di voler uscire?"); break;
+		}
 		
 		//creazione della finestra
 		f = new JFrame();
