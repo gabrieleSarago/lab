@@ -89,6 +89,14 @@ public class StatoMenu extends Stato{
 				case 4: g.drawImage(voce, 560, 275 + i * 50, null); break;
 				case 5: g.drawImage(voce, 562, 275 + i * 50, null); break;
 				} break;
+			case "DEUTSCH" : switch(i){
+				case 0: g.drawImage(voce, 450, 275 + i * 50, null); break;
+				case 1: g.drawImage(voce, 470, 275 + i * 50, null); break;
+				case 2: g.drawImage(voce, 475, 275 + i * 50, null); break;
+				case 3: g.drawImage(voce, 490, 275 + i * 50, null); break;
+				case 4: g.drawImage(voce, 480, 275 + i * 50, null); break;
+				case 5: g.drawImage(voce, 500, 275 + i * 50, null); break;
+				} break;
 			}
 		}
 	}
