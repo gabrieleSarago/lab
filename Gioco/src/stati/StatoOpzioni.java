@@ -61,7 +61,7 @@ public class StatoOpzioni extends Stato{
 	public void disegna(Graphics g) {
 		s.disegna(g);
 
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),300, 100, null);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),230, 50, null);
 		
 		for (int i = 0; i < opzioni.length; i++){
 			if (i == sceltaCorrente){

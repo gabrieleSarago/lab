@@ -1,5 +1,5 @@
-package finestra;
 
+package finestra;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +29,19 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	public FinestraUscita(Handler h){
 		
 		switch(h.getLingua().getLingua()){
-		case "ENGLISH" : q.setText("Are you sure to exit?"); break;
+		case "ENGLISH" :{
+			q.setText("Are you sure to exit?");
+			si.setText("Yes");
+			no.setText("No");
+			break;
+		}
 		case "ITALIANO" : q.setText("Sei sicuro di voler uscire?"); break;
+		case "DEUTSCH" :{
+			q.setText("Willst du sicher zurück gehen?");
+			si.setText("Ja");
+			no.setText("Nein");
+			break;
+		}
 		}
 		
 		//creazione della finestra

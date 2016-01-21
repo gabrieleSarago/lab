@@ -64,7 +64,7 @@ public class StatoMenu extends Stato{
 		
 		g.setColor(coloreTitolo);
 		g.setFont(fontTitolo);
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),300, 100, null);
+		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),230, 50, null);
 		BufferedImage voce;
 		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){
