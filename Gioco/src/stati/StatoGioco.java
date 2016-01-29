@@ -4,24 +4,24 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+// import java.util.ArrayList; ora c è gestioneEntita
 
-import entita.Entita;
-import entita_statiche.Caramella;
-import entita_statiche.EntitaStatica;
-import entita_statiche.Trofeo;
+// import entita.Entita; ora c è gestioneEntita
+//import entita_statiche.Caramella;
+//import entita_statiche.EntitaStatica;
+//import entita_statiche.Trofeo;
 import gioco.Handler;
 import livelli.Livello;
 import personaggio.Sink;
 
 public class StatoGioco extends Stato {
 	
-	private Sink s;
+	//----private Sink s;
 	private Livello l;
-	private int x;
-	private int y;
+	// ---private int x;
+	//----private int y;
 	private int tempo;
-	private ArrayList<EntitaStatica> entitaStatiche;	
+	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
 	private Graphics g;
 	
@@ -29,22 +29,22 @@ public class StatoGioco extends Stato {
 		super(h);
 		l = new Livello(h, "res/livelli/livello1.txt");
 		h.setLivello(l);
-		x = l.sinkX;
-		y = l.sinkY;
+		//----x = l.sinkX;
+		//----y = l.sinkY;
 		tempo = l.tempo;
-		entitaStatiche = l.entitaStatiche;
-		s = new Sink(h, x, y, tempo);
+		// ---- entitaStatiche = l.entitaStatiche;
+		//----s = new Sink(h, x, y, tempo);
 	}
 	
 	public StatoGioco(Handler h, String file){
 		super(h);
 		l = new Livello(h, file);
 		h.setLivello(l);
-		x = l.sinkX;
-		y = l.sinkY;
+		//----x = l.sinkX;
+		//----y = l.sinkY;
 		tempo = l.tempo;
-		entitaStatiche = l.entitaStatiche;
-		s = new Sink(h, x, y, tempo);
+		//----entitaStatiche = l.entitaStatiche;
+		//----s = new Sink(h, x, y, tempo);
 	}
 
 	@Override
@@ -54,8 +54,9 @@ public class StatoGioco extends Stato {
 		
 		if(!(h.getGioco().getPausa())){
 			getInput();
-			controlla();
+			//controlla();
 			l.aggiorna();
+			/* ---- eliminato se ne occupa gestioneEntita in livello
 			for(int i = 0; i < entitaStatiche.size(); i++){
 				EntitaStatica c = entitaStatiche.get(i);
 				c.aggiorna();
@@ -63,18 +64,19 @@ public class StatoGioco extends Stato {
 			s.aggiorna();
 			if (s.getTempo()<0){
 				h.setStato(new StatoMenu(h));
-			}
+			}*/
 		}
 	}
 
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
+		/* ---- eliminato
 		for(int i = 0; i < entitaStatiche.size(); i++){
 			EntitaStatica c = entitaStatiche.get(i);
 			c.disegna(g);
 		}
-		s.disegna(g);
+		s.disegna(g); */
 		if (vittoria){
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.BOLD,125));
@@ -90,7 +92,9 @@ public class StatoGioco extends Stato {
 	}
 	
 	public Sink getSink(){
-		return s;
+		//----return s;
+		return l.getSink();
+		
 	}
 	
 	
@@ -103,7 +107,7 @@ public class StatoGioco extends Stato {
 		g.dispose();
 		return img;
 	}
-	
+	/*---- probabilmente in gestione
 	public void controlla(){
 		for (int i = 0; i < entitaStatiche.size(); i++){
 			Entita e = entitaStatiche.get(i);
@@ -118,6 +122,11 @@ public class StatoGioco extends Stato {
 			}
 	    }
 	
-    }
+    }*/
+	// aggiunto
+	public void setVittoria(boolean vittoria)
+	{
+		this.vittoria = vittoria;
+	}
 	
 }

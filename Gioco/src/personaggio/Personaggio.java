@@ -14,7 +14,8 @@ public abstract class Personaggio extends Entita {
 	protected int vita;
 	protected float velocita;
 	protected float dx, dy;
-	
+	//---- per gestire le collisioni. Dice l' ultima entita con cui la creatura è andata a collidere
+	protected Entita ultimaEntita;
 	
 	public Personaggio(Handler h, float x, float y, int larghezza, int altezza) {
 		super(h, x, y, larghezza, altezza);
@@ -22,12 +23,32 @@ public abstract class Personaggio extends Entita {
 		velocita = DEFAULT_VELOCITA;
 		dx = 0;
 		dy = 0;
+		//----
+		ultimaEntita = null;
 	}
 	
 	
 	public void muovi(){
-		muoviX();
-		muoviY();
+		Entita temp; // entita solo temporanea
+		// se temp è null significa che non c è nessuna collisione
+		temp = controllaCollisioni(dx, 0f);
+		if(temp == null)
+			muoviX();
+		else
+		{
+			ultimaEntita = temp;
+			if(temp.eAttraversabile())
+				muoviX();
+		}
+		temp = controllaCollisioni(0f, dy);
+		if(temp == null)
+			muoviY();
+		else
+		{
+			ultimaEntita = temp;
+			if(temp.eAttraversabile())
+				muoviY();
+		}
 	}
 	
 	public void muoviX(){
@@ -114,6 +135,16 @@ public abstract class Personaggio extends Entita {
 		this.velocita = velocita;
 	}
 	
+	//---- aggiunto
+	public Entita getUltimaEntita()
+	{
+		return ultimaEntita;
+	}
+	
+	public void setUltimaEntita(Entita ultimaEntita)
+	{
+		this.ultimaEntita = ultimaEntita;
+	}
 	
 	
 }

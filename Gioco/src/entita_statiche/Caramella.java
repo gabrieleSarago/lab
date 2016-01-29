@@ -22,5 +22,7 @@ public class Caramella  extends EntitaStatica {
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
 		
 	}
+	
+	
 
 }

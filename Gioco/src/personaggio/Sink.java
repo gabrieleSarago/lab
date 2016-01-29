@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import stati.StatoMenu; //---- aggiunto
 import gfx.Animazione;
 import gfx.Risorse;
 import gioco.Handler;
@@ -31,6 +32,7 @@ public class Sink extends Personaggio {
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
+	
 	public Sink(Handler h, float x, float y, int tempo) {
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO);
 		this.tempo = tempo;
@@ -51,6 +53,7 @@ public class Sink extends Personaggio {
 		SinkSopraFermo = Risorse.sink_sopra_fermo;
 		SinkSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		SinkDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
+		
 	}
 
 	
@@ -89,6 +92,10 @@ public class Sink extends Personaggio {
 		else{
 			ultimoTempo = System.nanoTime();
 		}
+		
+			//----
+			if (tempo<0)
+				h.setStato(new StatoMenu(h));
 	}
 	
 	private void getInput() {
@@ -161,4 +168,6 @@ public class Sink extends Personaggio {
 	public void setTempo(int tempo) {
 		this.tempo = tempo;
 	}
+	
+	
 }

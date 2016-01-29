@@ -11,7 +11,11 @@ public abstract class Entita {
 	protected float x, y;
 	protected int larghezza,altezza;
 	protected Rectangle bounds;
+	//------------
+	protected boolean attraversabile;
 	
+	
+
 	public Entita(Handler h, float x, float y, int larghezza, int altezza){
 		this.h = h;
 		this.x = x;
@@ -20,6 +24,8 @@ public abstract class Entita {
 		this.altezza = altezza;
 		
 		bounds = new Rectangle(0, 0, larghezza, altezza);
+		//---------
+		attraversabile = true;
 	}
 	
 /*	public Rectangle getCollisionBounds(float xOffset, float yOffset){
@@ -34,6 +40,21 @@ public abstract class Entita {
 		return null;
 	}
 */	
+	//---- gestisce le collisioni
+	public Rectangle getCollisionBounds(float xOffset, float yOffset){
+		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
+	}
+	// ---- gestisce le collisioni
+	public Entita controllaCollisioni(float xOffset, float yOffset){
+		for (Entita e : h.getLivello().getGestoreEntita().getEntita()){
+			if(!e.equals(this))
+			{
+				if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
+					return e;
+			}
+		}
+		return null;
+	}
 	public abstract void aggiorna();
 	
 	public abstract void disegna(Graphics g);
@@ -68,6 +89,15 @@ public abstract class Entita {
 
 	public void setAltezza(int altezza) {
 		this.altezza = altezza;
+	}
+	
+	//------ gestire le collisioni
+	public boolean eAttraversabile() {
+		return attraversabile;
+	}
+
+	public void setAttraversabile(boolean attraversabile) {
+		this.attraversabile = attraversabile;
 	}
 	
 }

@@ -10,6 +10,10 @@ public class Risorse {
 	public static BufferedImage [] voci_pausa, voci_pausa_off, voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
+	// ----
+	public static BufferedImage sbarra_aperta, sbarra_chiusa;
+	public static BufferedImage interruttore_acceso, interruttore_spento;
+	public static BufferedImage teletrasporto_attivo, teletrasporto_inattivo;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -111,6 +115,19 @@ public class Risorse {
 		
 		Sprite d = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/Trofeo_d'oro.png"));
 		trofeo = d.prendiSprite(0, 0, 40, 40);
+		
+		//----
+		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestTeletrasporto.png"));
+		teletrasporto_attivo = teletrasporto.prendiSprite(588, 449, 76, 60);
+		teletrasporto_inattivo = teletrasporto.prendiSprite(588, 259, 76, 60);
+		
+		Sprite sbarra = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestSbarra.png"));
+		sbarra_aperta = sbarra.prendiSprite(192, 192, 32, 32);
+		sbarra_chiusa = sbarra.prendiSprite(192, 128, 32, 32);
+		
+		Sprite interruttore = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestInterruttore.png"));
+		interruttore_acceso = interruttore.prendiSprite(8, 15, 138, 140);
+		interruttore_spento = interruttore.prendiSprite(151, 15, 138, 140);
 		
 	}
 	
