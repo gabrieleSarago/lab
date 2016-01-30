@@ -17,7 +17,6 @@ import personaggio.Sink;
 import entita.Entita;
 import entita.GestoreEntita;
 import entita_statiche.Caramella;
-import entita_statiche.EntitaStatica;
 import entita_statiche.InterruttorePressione;
 import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;
@@ -179,13 +178,13 @@ public class Livello {
 		gestoreEntita.aggiungiEntita(new Sbarra(h, 256, 448, false)); // indice 1
 		gestoreEntita.aggiungiEntita(new Sbarra(h, 600, 128, true)); // indice 2
 		gestoreEntita.aggiungiEntita(new InterruttorePressione(h, 1000, 150, 
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(1), Funzionalita.CAMBIA_SBARRA),
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(1), Funzionalita.CAMBIA_SBARRA),
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(2), Funzionalita.CAMBIA_SBARRA)
+				new Funzione(gestoreEntita, 1, Funzionalita.CAMBIA_SBARRA),
+				new Funzione(gestoreEntita, 1, Funzionalita.CAMBIA_SBARRA),
+				new Funzione(gestoreEntita, 2, Funzionalita.CAMBIA_SBARRA)
 				));
 		
 		((InterruttorePressione)gestoreEntita.getEntita().get(3)).getFunzione()[0].setFunzione(
-			new Funzione((EntitaStatica)gestoreEntita.getEntita().get(3), Funzionalita.DISATTIVA_INTERRUTTORE));
+			new Funzione(gestoreEntita, 3, Funzionalita.DISATTIVA_INTERRUTTORE));
 		
 		gestoreEntita.aggiungiEntita(new Teletrasporto(h, 1220, 500, 50,70));
 		gestoreEntita.aggiungiEntita(new Sbarra(h, 704, 448+Tile.TILE_ALTEZZA, false)); //5
@@ -197,18 +196,18 @@ public class Livello {
 		gestoreEntita.aggiungiEntita(new Sbarra(h, Tile.TILE_LARGHEZZA*23, Tile.TILE_ALTEZZA*10, true));//10
 		
 		gestoreEntita.aggiungiEntita(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*14, 
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(9), Funzionalita.CAMBIA_SBARRA),
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(7), Funzionalita.CAMBIA_SBARRA)
+				new Funzione(gestoreEntita, 9, Funzionalita.CAMBIA_SBARRA),
+				new Funzione(gestoreEntita, 7, Funzionalita.CAMBIA_SBARRA)
 				));
 		gestoreEntita.aggiungiEntita(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*3, Tile.TILE_ALTEZZA*22,
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(8), Funzionalita.CHIUDI_SBARRA)
+				new Funzione(gestoreEntita, 8, Funzionalita.CHIUDI_SBARRA)
 				));
 		gestoreEntita.aggiungiEntita(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*26, 
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(6), Funzionalita.APRI_SBARRA)
+				new Funzione(gestoreEntita, 6, Funzionalita.APRI_SBARRA)
 				));
 		gestoreEntita.aggiungiEntita(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*26, 
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(8), Funzionalita.CAMBIA_SBARRA),
-				new Funzione((EntitaStatica)gestoreEntita.getEntita().get(10), Funzionalita.CAMBIA_SBARRA)
+				new Funzione(gestoreEntita, 8, Funzionalita.CAMBIA_SBARRA),
+				new Funzione(gestoreEntita, 10, Funzionalita.CAMBIA_SBARRA)
 				));
 		gestoreEntita.aggiungiEntita(new Sbarra(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*13, false));
 		gestoreEntita.aggiungiEntita(new Caramella(h, Tile.TILE_LARGHEZZA*25, Tile.TILE_ALTEZZA*25));

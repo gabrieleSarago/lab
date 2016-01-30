@@ -1,5 +1,6 @@
 package entita_statiche.funzione;
 
+import entita.GestoreEntita;
 import entita_statiche.EntitaStatica;
 import entita_statiche.Interruttore;
 import entita_statiche.Sbarra;
@@ -11,11 +12,11 @@ public class Funzione {
 	private EntitaStatica collegamento;	
 	private Funzionalita funzione;
 	
-	public Funzione(EntitaStatica collegamento, Funzionalita funzione)
+	public Funzione(GestoreEntita gestoreEntita, int index, Funzionalita funzione)
 	{
-		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
-		this.collegamento = collegamento;
 		this.funzione = funzione;
+		this.collegamento = (EntitaStatica)gestoreEntita.getEntita().get(index);
+		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
 	}
 	
 	public Funzione(Funzione f)
@@ -72,7 +73,7 @@ public class Funzione {
 	}
 
 	public Funzione getFunzioni() {
-		return new Funzione(collegamento, funzione);
+		return this;
 	}
 
 	public void setFunzione(Funzione funzione) {
