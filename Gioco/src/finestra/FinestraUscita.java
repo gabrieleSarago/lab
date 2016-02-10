@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gioco.Handler;
+import stati.StatoGioco;
+import stati.StatoMenu;
 
 public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
@@ -27,6 +29,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	private Handler h;
 	
 	public FinestraUscita(Handler h){
+		
 		
 		switch(h.getLingua().getLingua()){
 		case "ENGLISH" :{
@@ -68,6 +71,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		no.addActionListener(this);
 		
 		this.h = h;
+	
 	}
 	
 	@Override

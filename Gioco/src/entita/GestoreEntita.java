@@ -99,6 +99,7 @@ public class GestoreEntita {
 		}
 		if(s.getUltimaEntita() instanceof Trofeo) {
 			((StatoGioco)h.getGioco().getStato()).setVittoria(true);
+			
 		}
 		
 		if(s.getUltimaEntita() instanceof InterruttorePressione)

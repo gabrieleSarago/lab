@@ -6,6 +6,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
 
+import javax.swing.JOptionPane;
+
+import classifica.Classifica;
+import classifica.Nominativo;
+import finestra.FinestraUscita;
 // import entita.Entita; ora c è gestioneEntita
 //import entita_statiche.Caramella;
 //import entita_statiche.EntitaStatica;
@@ -23,6 +28,7 @@ public class StatoGioco extends Stato {
 	private int tempo;
 	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
+	private Classifica classifica = new Classifica();;
 	private Graphics g;
 	
 	public StatoGioco(Handler h){
@@ -51,11 +57,15 @@ public class StatoGioco extends Stato {
 	public void aggiorna() {
 		if(tempo > 100)
 			tempo = 100;
-		
+		if(!vittoria){
 		if(!(h.getGioco().getPausa())){
 			getInput();
 			//controlla();
 			l.aggiorna();
+			if (vittoria){
+				h.getGioco().setStato(new StatoVittoria(h,this.getUltimoScreen(),this.tempo));
+			}	
+		}
 			/* ---- eliminato se ne occupa gestioneEntita in livello
 			for(int i = 0; i < entitaStatiche.size(); i++){
 				EntitaStatica c = entitaStatiche.get(i);
@@ -65,6 +75,28 @@ public class StatoGioco extends Stato {
 			if (s.getTempo()<0){
 				h.setStato(new StatoMenu(h));
 			}*/
+	
+		
+			/*h.getGioco().setPausa(true);
+			String input;
+			int i = JOptionPane.showConfirmDialog(null, "Vuoi salvare il tuo punteggio?");
+			if(i==JOptionPane.NO_OPTION) {
+				h.getGioco().setStato(new StatoMenu(h));			}
+			else if (i==JOptionPane.CANCEL_OPTION)
+				JOptionPane.showMessageDialog(null, "Devi rispondere SI o NO.");
+			else{
+				try{
+					input = JOptionPane.showInputDialog("Inserisci il tuo nominativo: ");
+					classifica.add(new Nominativo(String.valueOf(tempo).toString(),input));
+					classifica.salva("classificaPunteggio.txt");
+					JOptionPane.showMessageDialog(null, "Punteggio salvato!");
+					h.getGioco().setStato(new StatoMenu(h));
+					h.getStato().aggiorna();
+				}catch(Exception e){
+					input = null;
+				}
+			}*/
+			
 		}
 	}
 
@@ -77,15 +109,12 @@ public class StatoGioco extends Stato {
 			c.disegna(g);
 		}
 		s.disegna(g); */
-		if (vittoria){
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("Arial", Font.BOLD,125));
-			g.drawString("YOU WIN", 200, 300);
-		}
+		
 	}
 	
 	private void getInput(){
 		if(h.getGestioneInput().esc){
+			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			h.getGioco().setPausa(true);
 			h.getGioco().setStato(new StatoPausa(h, this));
 		}

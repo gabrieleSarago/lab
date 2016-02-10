@@ -116,6 +116,11 @@ public class StatoMenu extends Stato{
 		if(sceltaCorrente == 3){
 			h.getGioco().setStato(new StatoOpzioni(h));
 		}
+		
+		if(sceltaCorrente == 4){
+		
+		}
+		
 		if (sceltaCorrente == 5){
 			new FinestraUscita(h);
 		}

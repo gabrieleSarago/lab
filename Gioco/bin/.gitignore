@@ -1,14 +1,4 @@
-/entita/
-/entita_statiche/
-/finestra/
-/gfx/
-/gioco/
-/input/
-/lingue/
-/livelli/
-/pannelli/
-/personaggio/
+/classifica/
 /stati/
-/tiles/
-/utils/
-/img/
+/finestra/
+/entita/
