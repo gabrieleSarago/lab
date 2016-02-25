@@ -33,7 +33,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		
 		switch(h.getLingua().getLingua()){
 		case "ENGLISH" :{
-			q.setText("Are you sure to exit?");
+			//q.setText("Are you sure to exit?");
 			si.setText("Yes");
 			no.setText("No");
 			break;

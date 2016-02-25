@@ -3,6 +3,7 @@ package stati;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import finestra.FinestraSalvataggio;
 import finestra.FinestraUscita;
 import gioco.Handler;
 
@@ -15,7 +16,7 @@ public class StatoVittoria extends Stato{
 		super(h);
 		this.img=img;
 		this.tempo=tempo;
-		new FinestraUscita(h);
+		new FinestraSalvataggio(h,tempo);
 	}
 
 	@Override
