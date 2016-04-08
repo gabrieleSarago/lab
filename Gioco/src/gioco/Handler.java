@@ -1,6 +1,7 @@
 package gioco;
 
 import gfx.CameraGioco;
+import gfx.Suono;
 import input.GestioneInput;
 import lingue.Lingua;
 import livelli.Livello;
@@ -24,7 +25,9 @@ public class Handler {
 		return gioco.getGestioneInput();
 	}
 	
-	
+	public Suono getSuono(){
+		return gioco.getSuono();
+	}
 	public int getLarghezza(){
 		return gioco.getLarghezza();
 	}

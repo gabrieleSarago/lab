@@ -30,6 +30,9 @@ public class Gioco implements Runnable {
 	private Lingua lingua;
 	private String linea;
 	
+	//Suoni
+	private Suono suono;
+	
 	//Stati
 	private static Stato stato;
 	//Input
@@ -52,10 +55,13 @@ public class Gioco implements Runnable {
 		f = new Finestra(titolo, larghezza, altezza);
 		f.getFrame().addKeyListener(gi);
 		
+		suono = new Suono();
 		lingua = new Lingua();
 		linea = lingua.getLingua();
 		
 		Risorse.inizializza();
+		//suono.inizializza();
+		
 		if(linea == null)
 			Risorse.inizializzaENG();
 		
@@ -201,5 +207,8 @@ public class Gioco implements Runnable {
 	}
 	
 	public Lingua getLingua(){return lingua;}
-
+	
+	public Suono getSuono(){
+		return suono;
+	}
 }

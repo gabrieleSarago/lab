@@ -15,10 +15,10 @@ public abstract class Interruttore extends EntitaStatica{
 		this.funzione = funzione;
 	}
 	// dice cosa fa l' interruttore
-	public void funzione(){
+	public void funzione(Handler h){
 		if(!attivo) return;
 		for(int i=0; i < funzione.length; i++)
-			funzione[i].eseguiFunzione();
+			funzione[i].eseguiFunzione(h);
 	}
 	
 	public boolean eAttivo() {

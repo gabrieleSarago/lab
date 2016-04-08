@@ -1,16 +1,13 @@
 package stati;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
 
-import javax.swing.JOptionPane;
-
 import classifica.Classifica;
 import classifica.Nominativo;
 import finestra.FinestraUscita;
+import gfx.Suono;
 // import entita.Entita; ora c è gestioneEntita
 //import entita_statiche.Caramella;
 //import entita_statiche.EntitaStatica;
@@ -28,8 +25,10 @@ public class StatoGioco extends Stato {
 	private int tempo;
 	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
-	private Classifica classifica = new Classifica();;
+	private Classifica classifica = new Classifica();
 	private Graphics g;
+	private boolean riproduzione = true;
+	private Suono suono;
 	
 	public StatoGioco(Handler h){
 		super(h);
@@ -38,6 +37,7 @@ public class StatoGioco extends Stato {
 		//----x = l.sinkX;
 		//----y = l.sinkY;
 		tempo = l.tempo;
+		suono = h.getSuono();
 		// ---- entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
 	}
@@ -55,6 +55,10 @@ public class StatoGioco extends Stato {
 
 	@Override
 	public void aggiorna() {
+		if(riproduzione){
+			suono.riproduci(Suono.suoni.GIOCO);
+			riproduzione = false;
+		}
 		if(tempo > 100)
 			tempo = 100;
 		if(!vittoria){
@@ -115,8 +119,16 @@ public class StatoGioco extends Stato {
 	private void getInput(){
 		if(h.getGestioneInput().esc){
 			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+						
 			h.getGioco().setPausa(true);
 			h.getGioco().setStato(new StatoPausa(h, this));
+			
+			//Se si entra in pausa la musica del gioco si ferma e le risorse dei clip vengono liberate.
+			//Tale operazione viene eseguita in seguito alla chiamata di StatoPausa per evitare il
+			//ritardo nel momento in cui si entra in pausa.
+			
+			suono.getClipGioco().stop();
+			suono.ferma();
 		}
 	}
 	
@@ -156,6 +168,10 @@ public class StatoGioco extends Stato {
 	public void setVittoria(boolean vittoria)
 	{
 		this.vittoria = vittoria;
+	}
+	
+	public Suono getSuono(){
+		return suono;
 	}
 	
 }

@@ -7,6 +7,7 @@ import entita_statiche.Caramella;
 import entita_statiche.InterruttorePressione;
 import entita_statiche.Teletrasporto;
 import entita_statiche.Trofeo;
+import gfx.Suono;
 import personaggio.Personaggio;
 import personaggio.Sink;
 import stati.StatoGioco; // aggiunto
@@ -96,6 +97,10 @@ public class GestoreEntita {
 		if(s.getUltimaEntita() instanceof Caramella){
 			s.setTempo(s.getTempo()+5);
 			rimuoviEntita(s.getUltimaEntita());
+			try {
+				h.getSuono().riproduci(Suono.suoni.CARAMELLA);
+			} catch (Exception e) {
+				e.printStackTrace();}
 		}
 		if(s.getUltimaEntita() instanceof Trofeo) {
 			((StatoGioco)h.getGioco().getStato()).setVittoria(true);
@@ -105,7 +110,7 @@ public class GestoreEntita {
 		if(s.getUltimaEntita() instanceof InterruttorePressione)
 			if(!(ultimaCollisione_sink instanceof InterruttorePressione) || 
 					!(ultimaCollisione_sink.equals(s.getUltimaEntita()))) 
-				((InterruttorePressione)s.getUltimaEntita()).funzione();
+				((InterruttorePressione)s.getUltimaEntita()).funzione(h);
 		
 		if(s.getUltimaEntita() instanceof Teletrasporto){
 				s.setX(((Teletrasporto)s.getUltimaEntita()).getDestinazioneX());

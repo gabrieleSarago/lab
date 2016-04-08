@@ -5,6 +5,8 @@ import entita_statiche.EntitaStatica;
 import entita_statiche.Interruttore;
 import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;
+import gfx.Suono;
+import gioco.Handler;
 //implementa tutte le possibili funzioni di un iterruttore
 
 public class Funzione {
@@ -25,23 +27,27 @@ public class Funzione {
 		this.funzione = f.funzione;
 	}
 	
-
-	public void eseguiFunzione()
+	public void eseguiFunzione(Handler h)
 	{
 		//TO-DO aggiungere tutte le possibili azioni
 		switch(funzione) {
-			case APRI_SBARRA:
+			case APRI_SBARRA:{
 				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
 					((Sbarra) collegamento).apri();
 				break;
+			}
 			case CHIUDI_SBARRA:
 				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
 					((Sbarra)collegamento).chiudi();
 				break;
-			case CAMBIA_SBARRA:
+			case CAMBIA_SBARRA:{
 				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
 					((Sbarra)collegamento).cambia();
+				try{
+					h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
+				}catch(Exception e){e.printStackTrace();}
 				break;
+			}
 			case ATTIVA_INTERRUTTORE:
 				if(!(collegamento instanceof Interruttore)) throw new IllegalArgumentException("aspettato Interruttore");
 					((Interruttore)collegamento).setAttivo(true);

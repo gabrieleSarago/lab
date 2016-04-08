@@ -103,11 +103,12 @@ public class StatoMenu extends Stato{
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
-			h.getGioco().setPausa(false);
+			//h.getGioco().setPausa(false);
+			//h.getGioco().getSuono().riproduci(Suono.suoni.GIOCO);
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){
-			h.getGioco().setPausa(false);
+			//h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
 		}
 		if (sceltaCorrente == 2){
@@ -144,5 +145,6 @@ public class StatoMenu extends Stato{
 			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
-	}		
+	}
+	
 }

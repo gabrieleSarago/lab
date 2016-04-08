@@ -30,7 +30,7 @@ public class StatoPausa extends Stato{
 	public StatoPausa(Handler h, StatoGioco precedente) {
 		super(h);
 		this.precedente = precedente;
-		
+				
 		s = new Sfondo("res/img/sfondi/pausa.png", h);
 		
 		s.setVector(-0.3, 0);
@@ -85,6 +85,9 @@ public class StatoPausa extends Stato{
 	private void seleziona(){
 		if(sceltaCorrente == 0){
 			h.getGioco().setPausa(false);
+			//Riprende il suono da dove era stato interrotto.
+			h.getSuono().getClipGioco().start();
+			
 			h.getGioco().setStato(precedente);
 		}
 		if(sceltaCorrente == 1){
@@ -94,8 +97,11 @@ public class StatoPausa extends Stato{
 		if(sceltaCorrente == 2){
 			h.getLivello().salva("res/livelli/livelloS.txt", (int)precedente.getSink().getX(), (int) precedente.getSink().getY(), precedente.getSink().getTempo());
 		}
-		if(sceltaCorrente == 3)
+		if(sceltaCorrente == 3){
+			h.getGioco().setPausa(false);
+			h.getSuono().getClipGioco().close();
 			h.getGioco().setStato(new StatoMenu(h));
+		}
 	}
 	
 	private void getInput(){
