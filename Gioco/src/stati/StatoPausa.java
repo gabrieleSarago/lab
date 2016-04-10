@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import gfx.Animazione;
 import gfx.Risorse;
+import gfx.Suono;
 import gioco.Handler;
 import pannelli.Sfondo;
 
@@ -23,6 +24,7 @@ public class StatoPausa extends Stato{
 	
 	private StatoGioco precedente;
 	private Animazione sinkDestra;
+	private Suono suono;
 	
 	private boolean salvato = false;
 	int dx = 2;
@@ -35,6 +37,7 @@ public class StatoPausa extends Stato{
 		
 		s.setVector(-0.3, 0);
 		sinkDestra = new Animazione(100, Risorse.sink_destra);
+		suono = h.getSuono();
 	}
 
 	@Override
@@ -114,12 +117,14 @@ public class StatoPausa extends Stato{
 		dx = 0;
 		
 		if(h.getGestioneInput().up){
+			suono.riproduci(Suono.suoni.SCORRI);
 			sceltaCorrente--;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente<0){
 				sceltaCorrente = Risorse.voci_pausa.length-1;			}
 		}
 		if(h.getGestioneInput().down){
+			suono.riproduci(Suono.suoni.SCORRI);
 			sceltaCorrente++;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente > Risorse.voci_pausa.length-1)
@@ -128,7 +133,7 @@ public class StatoPausa extends Stato{
 		if(h.getGestioneInput().enter){
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			seleziona();
-			
+			suono.riproduci(Suono.suoni.CONFERMA);
 		}
 	}
 

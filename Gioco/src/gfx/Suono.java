@@ -11,11 +11,11 @@ public class Suono extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public enum suoni{GIOCO,CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO};
+	public enum suoni{GIOCO,CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA};
 	//A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
 	//precedente continua e non può essere fermata.
 	private Clip clip_StatoGioco, clip;
-	private AudioInputStream audioCaramella;
+	private AudioInputStream audioCaramella,audioScorri,audioConferma;
 	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco;
 	
 	public void riproduci(suoni s){
@@ -49,6 +49,18 @@ public class Suono extends JFrame{
 			clip.open(audioInterruttore2);
 			break;
 		}
+		case SCORRI:{
+			File scorri=new File("res/suoni/LOZ_LowHealth.wav");
+			audioScorri = AudioSystem.getAudioInputStream(scorri);
+			clip.open(audioScorri);
+			break;
+		}
+		case CONFERMA:{
+			File conferma=new File("res/suoni/LOZ_Get_Heart.wav");
+			audioConferma= AudioSystem.getAudioInputStream(conferma);
+			clip.open(audioConferma);
+			break;
+		}
 		}
 		} catch (Exception e) {e.printStackTrace();}
 		
@@ -69,4 +81,5 @@ public class Suono extends JFrame{
 	public Clip getClipGioco(){
 		return clip_StatoGioco;
 	}
+	
 }

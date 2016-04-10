@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import finestra.FinestraUscita;
 import gfx.CaricatoreImmagini;
 import gfx.Risorse;
+import gfx.Suono;
 import gioco.Handler;
 import pannelli.Sfondo;
 
@@ -23,6 +24,7 @@ public class StatoMenu extends Stato{
 	private Font fontTitolo;
 	
 	private Font font;	
+	private Suono suono;
 	//per regolarizzare i movimenti
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
@@ -30,6 +32,7 @@ public class StatoMenu extends Stato{
 	long ora;
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
+	
 	
 	public StatoMenu(Handler h) {
 		super(h);
@@ -41,6 +44,7 @@ public class StatoMenu extends Stato{
 		coloreTitolo = new Color(150,0,24);
 		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
 		font = new Font ("Arial", Font.BOLD,32);
+		suono = h.getSuono();
 		
 	}
 
@@ -134,17 +138,21 @@ public class StatoMenu extends Stato{
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == -1)
 				sceltaCorrente = opzioni.length -1;
+			suono.riproduci(Suono.suoni.SCORRI);
 			}
 		if(h.getGestioneInput().down){
 			sceltaCorrente++;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == opzioni.length)
 				sceltaCorrente = 0;
+			suono.riproduci(Suono.suoni.SCORRI);
 		}
 		if(h.getGestioneInput().enter){
+			suono.riproduci(Suono.suoni.CONFERMA);
 			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
+		
 	}
 	
 }
