@@ -1,5 +1,6 @@
 package entita_statiche;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -13,9 +14,10 @@ import tiles.Tile;
 
 public class InterruttorePressione extends Interruttore{
 
-	public InterruttorePressione() {}
+	public InterruttorePressione() {}// necessario per esternalizzazione
 	public InterruttorePressione(Handler h, float x, float y, Funzione... funzione) {
-		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA, funzione);
+		super(h, x, y, Tile.TILE_LARGHEZZA/2, Tile.TILE_ALTEZZA/2, funzione);
+		
 	}
 
 	@Override
@@ -26,12 +28,19 @@ public class InterruttorePressione extends Interruttore{
 	public void disegna(Graphics g) {
 		g.drawImage(getAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
+		/*g.setColor(Color.RED);
+		g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
+				(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
+				bounds.width, bounds.height);*/
 		
 	}
 	
 	private BufferedImage getAnimazioneCorrente(){
-		if(attivo)
-			return Risorse.interruttore_acceso;
+		if(attivo){
+			if(cambiaPosizione)
+				return Risorse.interruttore_acceso_destra; 
+			else return Risorse.interruttore_acceso_sinistra;
+		}
 		else
 			return Risorse.interruttore_spento;
 		
@@ -40,12 +49,11 @@ public class InterruttorePressione extends Interruttore{
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
-		System.out.println("salvato");
 	}
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
-		super.readExternal(in);		
+		super.readExternal(in);
 	}
 	
 

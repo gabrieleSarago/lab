@@ -45,6 +45,7 @@ public class StatoMenu extends Stato{
 		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
 		font = new Font ("Arial", Font.BOLD,32);
 		suono = h.getSuono();
+		if(h.getSuono().getClipGioco()!=null)h.getSuono().getClipGioco().close(); //per fermare la musica quando si muore
 		
 	}
 

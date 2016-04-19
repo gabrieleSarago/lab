@@ -12,16 +12,19 @@ public abstract class Interruttore extends EntitaStatica{
 	protected boolean attivo; // dice se l' interruttore funziona o no
 	protected EntitaStatica collegamento; // collega l' interruttore a un entita statica
 	protected Funzione[] funzione;
+	protected boolean cambiaPosizione; //cambia da true a false, da false a true ogni volta che si esegue funzione
 	
 	public Interruttore() {}// per esternalizzazione
 	public Interruttore(Handler h, float x, float y, int larghezza, int altezza, Funzione... funzione) {
 		super(h, x, y, larghezza, altezza);
 		attivo = true;
 		this.funzione = funzione;
+		cambiaPosizione = false;
 	}
 	// dice cosa fa l' interruttore
 	public void funzione(Handler h){
 		if(!attivo) return;
+		cambiaPosizione = !cambiaPosizione;
 		for(int i=0; i < funzione.length; i++)
 			funzione[i].eseguiFunzione(h);
 	}
@@ -65,6 +68,7 @@ public abstract class Interruttore extends EntitaStatica{
 		super.readExternal(in);
 		attivo = in.readBoolean();
 		funzione = (Funzione[])in.readObject();
+		cambiaPosizione = false;
 		
 	}
 	

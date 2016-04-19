@@ -36,7 +36,7 @@ public class StatoGioco extends Stato {
 		h.setLivello(l);
 		//----x = l.sinkX;
 		//----y = l.sinkY;
-		tempo = l.tempo;
+		tempo = l.getTempo();
 		suono = h.getSuono();
 		// ---- entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
@@ -49,7 +49,7 @@ public class StatoGioco extends Stato {
 		suono = h.getSuono();
 		//----x = l.sinkX;
 		//----y = l.sinkY;
-		tempo = l.tempo;
+		tempo = l.getTempo();
 		//----entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
 	}

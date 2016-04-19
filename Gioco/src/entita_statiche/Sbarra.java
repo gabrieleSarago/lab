@@ -57,14 +57,12 @@ public class Sbarra extends EntitaStatica{
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 		out.writeBoolean(attraversabile);
-		System.out.println("salvataggio sbarra ->"+attraversabile);
 	}
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
 		super.readExternal(in);	
 		attraversabile= in.readBoolean();
-		System.out.println("caricamento sbarra ->"+attraversabile);
 	}
 	
 }

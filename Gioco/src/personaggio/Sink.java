@@ -135,6 +135,10 @@ public class Sink extends Personaggio {
 			g.fillRect(70, 40, 100, 10);
 		else
 			g.fillRect(70, 40, tempo, 10);
+		/*g.setColor(Color.RED);
+		g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
+				(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
+				bounds.width, bounds.height);*/
 	}
 	private BufferedImage getFrameAnimazioneCorrente(){
 		if (dx < 0){
