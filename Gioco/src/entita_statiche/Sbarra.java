@@ -5,11 +5,15 @@ import gioco.Handler;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 import tiles.Tile;
 
 public class Sbarra extends EntitaStatica{
 
+	public Sbarra(){} // per esternalizzazione
 	public Sbarra(Handler h, float x, float y, boolean aperta) {
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA);
 		this.attraversabile = aperta;
@@ -47,6 +51,20 @@ public class Sbarra extends EntitaStatica{
 	public void cambia()
 	{
 		setAttraversabile(!attraversabile);
+	}
+	
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		super.writeExternal(out);
+		out.writeBoolean(attraversabile);
+		System.out.println("salvataggio sbarra ->"+attraversabile);
+	}
+	@Override
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		super.readExternal(in);	
+		attraversabile= in.readBoolean();
+		System.out.println("caricamento sbarra ->"+attraversabile);
 	}
 	
 }

@@ -46,6 +46,7 @@ public class StatoGioco extends Stato {
 		super(h);
 		l = new Livello(h, file);
 		h.setLivello(l);
+		suono = h.getSuono();
 		//----x = l.sinkX;
 		//----y = l.sinkY;
 		tempo = l.tempo;

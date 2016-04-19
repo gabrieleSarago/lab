@@ -5,6 +5,9 @@ import gioco.Handler;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 import tiles.Tile;
 
@@ -12,6 +15,8 @@ public class Teletrasporto extends EntitaStatica{
 
 	private float destinazioneX, destinazioneY;
 	private boolean attivo;
+	
+	public Teletrasporto(){}
 	public Teletrasporto(Handler h, float x, float y, float destinazioneX, float destinazioneY) {
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_LARGHEZZA);
 		attivo = true;
@@ -64,6 +69,23 @@ public class Teletrasporto extends EntitaStatica{
 	
 	public void cambiaAttivo() {
 		this.attivo = !attivo;
+	}
+	
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		super.writeExternal(out);
+		out.writeBoolean(attivo);
+		out.writeFloat(destinazioneX);
+		out.writeFloat(destinazioneY);
+		
+	}
+	@Override
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		super.readExternal(in);	
+		attivo= in.readBoolean();
+		destinazioneX = in.readFloat();
+		destinazioneY = in.readFloat();
 	}
 	
 }

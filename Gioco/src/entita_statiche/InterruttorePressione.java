@@ -2,6 +2,9 @@ package entita_statiche;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 import entita_statiche.funzione.Funzione;
 import gfx.Risorse;
@@ -10,6 +13,7 @@ import tiles.Tile;
 
 public class InterruttorePressione extends Interruttore{
 
+	public InterruttorePressione() {}
 	public InterruttorePressione(Handler h, float x, float y, Funzione... funzione) {
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA, funzione);
 	}
@@ -32,5 +36,17 @@ public class InterruttorePressione extends Interruttore{
 			return Risorse.interruttore_spento;
 		
 	}
+	
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		super.writeExternal(out);
+		System.out.println("salvato");
+	}
+	@Override
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		super.readExternal(in);		
+	}
+	
 
 }

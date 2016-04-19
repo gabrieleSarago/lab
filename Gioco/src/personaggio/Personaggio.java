@@ -1,5 +1,9 @@
 package personaggio;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 import entita.Entita;
 import gioco.Handler;
 import tiles.Tile;
@@ -16,6 +20,8 @@ public abstract class Personaggio extends Entita {
 	protected float dx, dy;
 	//---- per gestire le collisioni. Dice l' ultima entita con cui la creatura è andata a collidere
 	protected Entita ultimaEntita;
+	
+	public Personaggio(){} // necessario per esternzalizzazione
 	
 	public Personaggio(Handler h, float x, float y, int larghezza, int altezza) {
 		super(h, x, y, larghezza, altezza);
@@ -145,6 +151,23 @@ public abstract class Personaggio extends Entita {
 	{
 		this.ultimaEntita = ultimaEntita;
 	}
+	
+	//per esternalizzazione
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		super.writeExternal(out);
+	}
+	@Override
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		super.readExternal(in);
+		vita = DEFAULT_VITA;
+		velocita = DEFAULT_VELOCITA;
+		dx = 0;
+		dy = 0;
+		ultimaEntita = null;
+	}
+	
 	
 	
 }

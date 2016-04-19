@@ -1,6 +1,12 @@
 package entita_statiche.funzione;
 
-import entita.GestoreEntita;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.ArrayList;
+
+import entita.Entita;
 import entita_statiche.EntitaStatica;
 import entita_statiche.Interruttore;
 import entita_statiche.Sbarra;
@@ -9,15 +15,16 @@ import gfx.Suono;
 import gioco.Handler;
 //implementa tutte le possibili funzioni di un iterruttore
 
-public class Funzione {
+public class Funzione implements Externalizable{
 	
 	private EntitaStatica collegamento;	
 	private Funzionalita funzione;
 	
-	public Funzione(GestoreEntita gestoreEntita, int index, Funzionalita funzione)
+	public Funzione(){}
+	public Funzione(ArrayList<Entita> array_entita, int index, Funzionalita funzione)
 	{
 		this.funzione = funzione;
-		this.collegamento = (EntitaStatica)gestoreEntita.getEntita().get(index);
+		this.collegamento = (EntitaStatica)array_entita.get(index);
 		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
 	}
 	
@@ -85,6 +92,18 @@ public class Funzione {
 	public void setFunzione(Funzione funzione) {
 		this.funzione = funzione.funzione;
 		this.collegamento = funzione.collegamento;
+	}
+	
+	public void writeExternal(ObjectOutput out) throws IOException {
+		out.writeObject(collegamento);
+		out.writeObject(funzione);
+		
+	}
+	
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		collegamento = (EntitaStatica)in.readObject();
+		funzione = (Funzionalita) in.readObject();
 	}
 	
 	

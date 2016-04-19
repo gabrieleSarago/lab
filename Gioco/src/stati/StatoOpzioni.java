@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import gfx.CaricatoreImmagini;
 import gfx.Risorse;
+import gfx.Suono;
 import gioco.Handler;
 import lingue.Lingua;
 import pannelli.Sfondo;
@@ -19,7 +20,8 @@ public class StatoOpzioni extends Stato{
 	private String [] opzioni = {"LINGUA", "MUSICA", "TORNA AL MENU"};
 	
 	private Lingua lingua;
-	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"}; 
+	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"};
+	private Suono suono;
 		
 	//per regolarizzare i movimenti
 	int fps = 60;
@@ -34,6 +36,7 @@ public class StatoOpzioni extends Stato{
 		this.h = h;
 		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
+		suono = h.getSuono();
 
 		lingua = h.getLingua();
 		for(int i = 0; i<lingue.length; i++){
@@ -111,20 +114,24 @@ public class StatoOpzioni extends Stato{
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == -1)
 				sceltaCorrente = opzioni.length -1;
+			suono.riproduci(Suono.suoni.SCORRI);
 			}
 		if(h.getGestioneInput().down){
 			sceltaCorrente++;
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente == opzioni.length)
 				sceltaCorrente = 0;
+			suono.riproduci(Suono.suoni.SCORRI);
 		}
 		if(h.getGestioneInput().enter){
 			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			suono.riproduci(Suono.suoni.CONFERMA);
 		}
 		
 		if(sceltaCorrente == 0 && h.getGestioneInput().right){
 			linguaCorrente++;
+			suono.riproduci(Suono.suoni.SCORRI);
 			if(linguaCorrente > lingue.length-1)
 				linguaCorrente = 0;
 			seleziona();
@@ -132,12 +139,16 @@ public class StatoOpzioni extends Stato{
 		
 		if(sceltaCorrente == 0 && h.getGestioneInput().left){
 			linguaCorrente--;
+			suono.riproduci(Suono.suoni.SCORRI);
 			if(linguaCorrente < 0)
 				linguaCorrente = lingue.length-1;
 			seleziona();
 		}
-		if(h.getGestioneInput().esc)
+		if(h.getGestioneInput().esc){
+			suono.riproduci(Suono.suoni.CONFERMA);
 			h.getGioco().setStato(new StatoMenu(h));
+		}
 	}		
+		
 
 }

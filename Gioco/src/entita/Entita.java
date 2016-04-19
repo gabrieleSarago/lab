@@ -2,10 +2,14 @@ package entita;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 import gioco.Handler;
 
-public abstract class Entita {
+public abstract class Entita implements Externalizable{
 	
 	protected Handler h;
 	protected float x, y;
@@ -14,7 +18,7 @@ public abstract class Entita {
 	//------------
 	protected boolean attraversabile;
 	
-	
+	public Entita(){}// necessario per esternalizzazione
 
 	public Entita(Handler h, float x, float y, int larghezza, int altezza){
 		this.h = h;
@@ -46,7 +50,7 @@ public abstract class Entita {
 	}
 	// ---- gestisce le collisioni
 	public Entita controllaCollisioni(float xOffset, float yOffset){
-		for (Entita e : h.getLivello().getGestoreEntita().getEntita()){
+		for (Entita e : h.getLivello().getArray_entita()){
 			if(!e.equals(this))
 			{
 				if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
@@ -99,5 +103,37 @@ public abstract class Entita {
 	public void setAttraversabile(boolean attraversabile) {
 		this.attraversabile = attraversabile;
 	}
+	
+	public Handler getHandler()
+	{
+		return h;
+	}
+	
+	public void setHandler(Handler h)
+	{
+		this.h = h;
+	}
+	
+	//per esternalizzazione
+	public void writeExternal(ObjectOutput out) throws IOException {
+		out.writeFloat(x);
+		out.writeFloat(y);
+		out.writeInt(larghezza);
+		out.writeInt(altezza);
+		
+	}
+	
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		
+		this.x = in.readFloat();
+		this.y = in.readFloat();
+		this.larghezza = in.readInt();
+		this.altezza = in.readInt();
+		bounds = new Rectangle(0, 0, larghezza, altezza);
+		attraversabile = true;
+	}
+	
+	
 	
 }

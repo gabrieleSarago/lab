@@ -1,5 +1,9 @@
 package entita_statiche;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 import entita_statiche.funzione.Funzione;
 import gioco.Handler;
 
@@ -9,6 +13,7 @@ public abstract class Interruttore extends EntitaStatica{
 	protected EntitaStatica collegamento; // collega l' interruttore a un entita statica
 	protected Funzione[] funzione;
 	
+	public Interruttore() {}// per esternalizzazione
 	public Interruttore(Handler h, float x, float y, int larghezza, int altezza, Funzione... funzione) {
 		super(h, x, y, larghezza, altezza);
 		attivo = true;
@@ -46,6 +51,21 @@ public abstract class Interruttore extends EntitaStatica{
 	}
 	public void setFunzione(Funzione[] funzione) {
 		this.funzione = funzione;
+	}
+	
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		super.writeExternal(out);
+		out.writeBoolean(attivo);
+		out.writeObject(funzione);
+	}
+	@Override
+	public void readExternal(ObjectInput in) throws IOException,
+	ClassNotFoundException {
+		super.readExternal(in);
+		attivo = in.readBoolean();
+		funzione = (Funzione[])in.readObject();
+		
 	}
 	
 	
