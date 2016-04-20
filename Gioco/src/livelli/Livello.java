@@ -65,20 +65,7 @@ public class Livello {
 	
 	public Livello (Handler h, String path){
 		this.h = h;
-		array_entita = new  ArrayList<Entita>();
-		//array_entita.add(new Sink(h, 75,75,100));
-		//---- gestore
-		//array_entita = new array_entita(h, new Sink(h,  sinkX, sinkY, tempo));
-		//temporaneo
-		
-		//caricaEntita();
-		
 		carica(path);
-		array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
-		
-		//array_entita.get(0).setX(sinkX);
-		//array_entita.get(0).setY(sinkY);
-		//((Sink)array_entita.get(0)).setTempo(tempo);
 		
 	}
 	
@@ -108,12 +95,9 @@ public class Livello {
 				getTile(x,y).disegna(g, (int) (x * Tile.TILE_LARGHEZZA - h.getCameraGioco().getxOffset()),
 						(int) (y * Tile.TILE_ALTEZZA - h.getCameraGioco().getyOffset()));
 			}
-		//---- gestore
-		//array_entita.disegna(g);
 		
-		ArrayList<Entita>temporaneo= (ArrayList<Entita>) array_entita.clone();
-		temporaneo.sort(ordineDisegno);
-		for(Entita e : temporaneo)
+		array_entita.sort(ordineDisegno);
+		for(Entita e : array_entita)
 		{
 			e.disegna(g);
 		}
@@ -129,6 +113,9 @@ public class Livello {
 	}
 	
 	private void carica(String path){
+		
+		array_entita = new  ArrayList<Entita>();
+		
 		String file = Utils.caricaFileComeString(path);
 		String[] tokens = file.split("\\s+");
 		larghezza = Utils.parseInt(tokens[0]);
@@ -136,7 +123,6 @@ public class Livello {
 		//sinkX = Utils.parseInt(tokens[2]);
 		//sinkY = Utils.parseInt(tokens[3]);
 		//tempo = Utils.parseInt(tokens[4]);
-		
 		// ---- entitaStatiche = new ArrayList<>(); eliminato
 		int c = 3;// anzichè 5
 		/*while(Utils.parseInt(tokens[c])!= 0000){
@@ -155,9 +141,11 @@ public class Livello {
 		
 		// TO-DO: il percorso non deve esssere fisso
 		array_entita.clear(); //per sicurezza
+		
 		try{
 			supportoCarica(path);
 		}catch(Exception e){e.printStackTrace();}
+		array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
 		
 	}
 	private void supportoCarica(String path) throws FileNotFoundException, IOException 
@@ -249,8 +237,7 @@ public class Livello {
 	{
 		for(int i=0; i < array_entita.size(); i++)
 			if(array_entita.get(i) instanceof Sink)
-			{System.out.println("sink trovato");
-				return ((Sink)array_entita.get(i));}
+				return ((Sink)array_entita.get(i));
 		System.out.println("sink non trovato");
 		return null;
 	}
@@ -301,13 +288,11 @@ public class Livello {
 	
 	public void gestisciCollisioni(Personaggio p)
 	{
-		if(p.getUltimaEntita() == null) {
+		if(p instanceof Sink)
+			if(p.getUltimaEntita() == null) {
 			ultimaCollisione_sink = null;
 			return;
-		}
-		if(p instanceof Sink){
-			collisioniConSink((Sink) p);
-		}
+		} else	collisioniConSink((Sink) p);	
 		p.setUltimaEntita(null);
 		
 	}
@@ -347,7 +332,5 @@ public class Livello {
 	public ArrayList<Entita> getArray_entita(){
 		return array_entita;
 	}
-	
-	
-	
+		
 }
