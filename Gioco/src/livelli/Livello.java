@@ -66,7 +66,6 @@ public class Livello {
 	public Livello (Handler h, String path){
 		this.h = h;
 		carica(path);
-		
 	}
 	
 	public void aggiorna(){	
@@ -120,32 +119,18 @@ public class Livello {
 		String[] tokens = file.split("\\s+");
 		larghezza = Utils.parseInt(tokens[0]);
 		altezza = Utils.parseInt(tokens[1]);
-		//sinkX = Utils.parseInt(tokens[2]);
-		//sinkY = Utils.parseInt(tokens[3]);
-		//tempo = Utils.parseInt(tokens[4]);
-		// ---- entitaStatiche = new ArrayList<>(); eliminato
-		int c = 3;// anzichè 5
-		/*while(Utils.parseInt(tokens[c])!= 0000){
-			//----# entitaStatiche.add(new Caramella(h, Utils.parseInt(tokens[c]),Utils.parseInt(tokens[c+1])));
-			//array_entita.add(new Caramella(h, Utils.parseInt(tokens[c]),Utils.parseInt(tokens[c+1])));
-			
-			c += 2;
-		}
-		c++;*/
-		//array_entita.add(new Trofeo(h, 1750, 689));
-		
+		int c = 3;
 		tiles = new int[larghezza][altezza];
 		for (int y = 0; y < altezza; y++)
 			for (int x = 0; x < larghezza; x++)
 				tiles[x][y] = Utils.parseInt(tokens[(x + (y * larghezza)) + c]);
 		
-		// TO-DO: il percorso non deve esssere fisso
+		// TODO: il percorso non deve esssere fisso
 		array_entita.clear(); //per sicurezza
-		
 		try{
 			supportoCarica(path);
 		}catch(Exception e){e.printStackTrace();}
-		array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
+		//array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
 		
 	}
 	private void supportoCarica(String path) throws FileNotFoundException, IOException 
@@ -160,33 +145,24 @@ public class Livello {
 				array_entita.add(en);
 				}catch (ClassNotFoundException e1){
 				e1.printStackTrace();
+				in.close();
 				throw new IOException();
 				}catch(ClassCastException e2){
 				e2.printStackTrace();
+				in.close();
 				throw new IOException();
 				}catch(EOFException e3){break;}
 			}//fine for	
 			in.close();
 	}
-	public void salva(String file /*, int x, int y, int tempo*/){
+	public void salva(String file){
 		File f = new File(file);
 		f.delete();
 		PrintWriter pw;
 		try {
 			pw = new PrintWriter(new FileWriter(file));
 			pw.write(tiles.length + " " + tiles[0].length+"\n");
-			/*pw.write(tiles.length + " " + tiles[0].length + "\n"+x +" "+y +"\n"+ tempo+"\n");
-			pw.write("\n");
-			// ----#for(EntitaStatica c : entitaStatiche){
-			for(Entita c: array_entita){
-				
-				if (c instanceof Caramella){
-					x =(int) c.getX();
-     				y =(int) c.getY();
-				    pw.write(x + " " + y + "\n");
-				}
-			}
-			*/pw.write("0000" + "\n");
+			pw.write("0000" + "\n");
 			for(int i = 0; i<tiles.length; i++){
 				pw.write("\n");
 				for(int j = 0; j<tiles[i].length; j++){
@@ -222,8 +198,7 @@ public class Livello {
 	public int getTempo() {
 		//return tempo;
 		//da per scontato che Sink è il primo elemento dell' array
-		if(!(array_entita.get(0) instanceof Sink)) throw new RuntimeException("aspettato Sink");
-		return ((Sink)array_entita.get(0)).getTempo();
+		return getSink().getTempo();
 	}
 
 	public void setTempo(int tempo) {

@@ -24,6 +24,11 @@ public class Caramella  extends EntitaStatica {
 
 	@Override
 	public void disegna(Graphics g) {
+		
+		//g.fillRect((int)(x + bounds.x+5 - h.getCameraGioco().getxOffset()),
+								//(int)(y + bounds.y+10 - h.getCameraGioco().getyOffset()),
+				 				//bounds.width-10, bounds.height-20);
+		
 		g.drawImage(Risorse.caramella, (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
 		

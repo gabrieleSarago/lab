@@ -4,12 +4,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import finestra.FinestraSalvataggio;
-import finestra.FinestraUscita;
 import gioco.Handler;
 
 public class StatoVittoria extends Stato{
 	
 	private BufferedImage img;
+	@SuppressWarnings("unused")
 	private int tempo;
 	
 	public StatoVittoria(Handler h,BufferedImage img,int tempo){

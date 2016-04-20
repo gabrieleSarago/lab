@@ -1,12 +1,9 @@
 package stati;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import finestra.FinestraUscita;
-import gfx.CaricatoreImmagini;
 import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
@@ -20,11 +17,10 @@ public class StatoMenu extends Stato{
 	private int sceltaCorrente = 0;
 	private String [] opzioni = { "NUOVA PARTITA","CARICA PARTITA","CLASSIFICA","OPZIONI", "INFO", "ESCI"};
 	
-	private Color coloreTitolo;
-	private Font fontTitolo;
-	
-	private Font font;	
+	//Suono
 	private Suono suono;
+	private boolean riproduzione = true;
+	
 	//per regolarizzare i movimenti
 	int fps = 60;
 	double tempoDiAggiornamento = 1000000000 / fps;
@@ -39,18 +35,17 @@ public class StatoMenu extends Stato{
 		this.h = h;
 		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
-		//s.setVector(-0.1, 0);
 		
-		coloreTitolo = new Color(150,0,24);
-		fontTitolo = new Font ("Goudy Stout", Font.BOLD,42);
-		font = new Font ("Arial", Font.BOLD,32);
-		suono = h.getSuono();
-		if(h.getSuono().getClipGioco()!=null)h.getSuono().getClipGioco().close(); //per fermare la musica quando si muore
-		
+		suono = h.getSuono();		
 	}
 
 	@Override
 	public void aggiorna() {
+		if(riproduzione){
+			 suono.riproduci(Suono.suoni.MENU);
+			 riproduzione = false;
+		}
+		
 		s.aggiorna();
 		//ottimizzazione
 		ora = System.nanoTime();
@@ -66,12 +61,7 @@ public class StatoMenu extends Stato{
 	@Override
 	public void disegna(Graphics g) {
 		s.disegna(g);
-		
-		g.setColor(coloreTitolo);
-		g.setFont(fontTitolo);
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),230, 50, null);
 		BufferedImage voce;
-		g.setFont(font);
 		for (int i = 0; i < opzioni.length; i++){
 			if (i == sceltaCorrente)
 				voce = Risorse.voci_menu[i];
@@ -79,41 +69,38 @@ public class StatoMenu extends Stato{
 				voce = Risorse.voci_menu_off[i];
 			switch(h.getLingua().getLingua()){
 			case "ITALIANO" : switch(i){
-				case 0: g.drawImage(voce, 405, 275 + i * 50, null); break;
-				case 1: g.drawImage(voce, 400, 275 + i * 50, null); break;
-				case 2: g.drawImage(voce, 450, 275 + i * 50, null); break;
-				case 3: g.drawImage(voce, 500, 275 + i * 50, null); break;
-				case 4: g.drawImage(voce, 545, 275 + i * 50, null); break;
-				case 5: g.drawImage(voce, 545, 275 + i * 50, null); break;
-				} break;
-			case "ENGLISH" :  switch(i){
-				case 0: g.drawImage(voce, 490, 275 + i * 50, null); break;
-				case 1: g.drawImage(voce, 475, 275 + i * 50, null); break;
-				case 2: g.drawImage(voce, 515, 275 + i * 50, null); break;
-				case 3: g.drawImage(voce, 495, 275 + i * 50, null); break;
-				case 4: g.drawImage(voce, 560, 275 + i * 50, null); break;
-				case 5: g.drawImage(voce, 562, 275 + i * 50, null); break;
-				} break;
-			case "DEUTSCH" : switch(i){
-				case 0: g.drawImage(voce, 450, 275 + i * 50, null); break;
-				case 1: g.drawImage(voce, 470, 275 + i * 50, null); break;
-				case 2: g.drawImage(voce, 475, 275 + i * 50, null); break;
-				case 3: g.drawImage(voce, 490, 275 + i * 50, null); break;
-				case 4: g.drawImage(voce, 480, 275 + i * 50, null); break;
-				case 5: g.drawImage(voce, 500, 275 + i * 50, null); break;
-				} break;
-			}
+			case 0: g.drawImage(voce, 395, 290 + i * 50, null); break;
+			case 1: g.drawImage(voce, 388, 290 + i * 50, null); break;
+			case 2: g.drawImage(voce, 445, 290 + i * 50, null); break;
+			case 3: g.drawImage(voce, 495, 290 + i * 50, null); break;
+			case 4: g.drawImage(voce, 540, 290 + i * 50, null); break;
+			case 5: g.drawImage(voce, 540, 290 + i * 50, null); break;
+			} break;
+		case "ENGLISH" :  switch(i){
+			case 0: g.drawImage(voce, 480, 290 + i * 50, null); break;
+			case 1: g.drawImage(voce, 465, 290 + i * 50, null); break;
+			case 2: g.drawImage(voce, 505, 290 + i * 50, null); break;
+			case 3: g.drawImage(voce, 485, 290 + i * 50, null); break;
+			case 4: g.drawImage(voce, 550, 290 + i * 50, null); break;
+			case 5: g.drawImage(voce, 552, 290 + i * 50, null); break;
+			} break;
+		case "DEUTSCH" : switch(i){
+			case 0: g.drawImage(voce, 440, 290 + i * 50, null); break;
+			case 1: g.drawImage(voce, 460, 290 + i * 50, null); break;
+			case 2: g.drawImage(voce, 465, 290 + i * 50, null); break;
+			case 3: g.drawImage(voce, 480, 290 + i * 50, null); break;
+			case 4: g.drawImage(voce, 470, 290 + i * 50, null); break;
+			case 5: g.drawImage(voce, 490, 290 + i * 50, null); break;
+			} break;
+		}
 		}
 	}
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
-			//h.getGioco().setPausa(false);
-			//h.getGioco().getSuono().riproduci(Suono.suoni.GIOCO);
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){
-			//h.getGioco().setPausa(false);
 			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
 		}
 		if (sceltaCorrente == 2){
@@ -130,6 +117,8 @@ public class StatoMenu extends Stato{
 		if (sceltaCorrente == 5){
 			new FinestraUscita(h);
 		}
+		suono.getClipStatoMenu().close();
+		suono.ferma();
 	}
 	
 	private void getInput() {
@@ -149,9 +138,9 @@ public class StatoMenu extends Stato{
 			suono.riproduci(Suono.suoni.SCORRI);
 		}
 		if(h.getGestioneInput().enter){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.CONFERMA);
 			seleziona();
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 		}
 		
 	}

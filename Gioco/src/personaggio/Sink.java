@@ -1,14 +1,10 @@
 package personaggio;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import stati.StatoMenu; //---- aggiunto
 import gfx.Animazione;
 import gfx.Risorse;
 import gioco.Handler;
@@ -64,21 +60,26 @@ public class Sink extends Personaggio {
 	@Override
 	public void aggiorna() {
 		
-		//se si prende una caramella e il tempo è > 95 supera i 100 secondi.
-		if(tempo > 100)
-			tempo = 100; 
-		
 		//gestione pausa
 		if(!h.getGioco().getPausa()){
 			
-			//Animazioni
-			SinkSotto.aggiorna();
-			SinkSopra.aggiorna();
-			SinkSinistra.aggiorna();
-			SinkDestra.aggiorna();
-			SinkSottoFermo.aggiorna();
-			SinkSinistraFermo.aggiorna();
-			SinkDestraFermo.aggiorna();
+			//Miglioramenti aggiornamenti animazioni.
+			 if(dx<0)
+				 SinkSinistra.aggiorna();
+			 else if(dx > 0)
+				 SinkDestra.aggiorna();
+			 else if(dy < 0)
+				 SinkSopra.aggiorna();
+			 else if(dy > 0)
+				 SinkSotto.aggiorna();
+			 else{
+				 switch(ultimoMovimento){
+				 case SOTTO: SinkSottoFermo.aggiorna();break;
+				 case SINISTRA: SinkSinistraFermo.aggiorna(); break;
+				 case DESTRA: SinkDestraFermo.aggiorna();break;
+				 case SOPRA: break;
+				 }
+			 }
 			
 			//Movimento
 			getInput();
@@ -87,6 +88,14 @@ public class Sink extends Personaggio {
 			ora = System.nanoTime();
 			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 			timer += ora - ultimoTempo;
+			
+			//TODO
+			//Il tempo scala ogni secondo??
+			//if(timer > TimeUnit.SECONDS.toNanos(1)){
+				//tempo--;
+				//timer = 0;
+				//}
+			
 			ultimoTempo = ora;
 			if(delta >= 50){
 				tempo--;
@@ -96,10 +105,6 @@ public class Sink extends Personaggio {
 		else{
 			ultimoTempo = System.nanoTime();
 		}
-		
-			//----
-			if (tempo<0)
-				h.setStato(new StatoMenu(h));
 	}
 	
 	private void getInput() {
@@ -120,25 +125,11 @@ public class Sink extends Personaggio {
 	public void disegna(Graphics g) {
 		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
-		g.setColor(Color.black);
-		g.setFont(new Font ("Arial", Font.BOLD,15));
 		//Rettangolo collisioni
-		//g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
-				//(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
-				//bounds.width, bounds.height);
-		g.drawString(tempo+"", 180, 52);
-		g.fillRect(68, 38, 104 , 14);
-		g.setColor(Color.red);
-		g.fillRect(70, 40, 100 , 10);
-		g.setColor(Color.green);
-		if(tempo>100)
-			g.fillRect(70, 40, 100, 10);
-		else
-			g.fillRect(70, 40, tempo, 10);
-		/*g.setColor(Color.RED);
-		g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
-				(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
-				bounds.width, bounds.height);*/
+		//g.setColor(Color.RED);
+		//g.fillRect((int)(x + bounds.x +5 - h.getCameraGioco().getxOffset()),
+  				//(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
+				//bounds.width -15, bounds.height);
 	}
 	private BufferedImage getFrameAnimazioneCorrente(){
 		if (dx < 0){

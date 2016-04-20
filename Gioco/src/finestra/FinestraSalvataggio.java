@@ -5,15 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.jar.Attributes.Name;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import classifica.Classifica;
 import classifica.Nominativo;
@@ -170,9 +167,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			//ascoltatori
 			ok.addKeyListener(this);
 			cancel.addKeyListener(this);
-			;
 			ok.addActionListener(this);
 			cancel.addActionListener(this);
+			name.addKeyListener(this);
 			
 			this.h=h;
 		}
@@ -182,7 +179,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			player = name.getText();
 			if(evt.getSource()==ok){
 				w.setVisible(false);
-				if(player.length()!=0){new FinestraMessaggioOk(h);}
+				if(player!=null){new FinestraMessaggioOk(h);}
 				else{new FinestraReinserisci(h);}
 			}
 			if(evt.getSource() == cancel){
@@ -193,9 +190,15 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent k) {
+			if(k.getKeyCode() == KeyEvent.VK_DOWN && name.isFocusOwner()){
+				ok.requestFocus();
+			}
+			if(k.getKeyCode() == KeyEvent.VK_UP && (ok.isFocusOwner() || cancel.isFocusOwner())){
+				name.requestFocus();
+			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				w.setVisible(false);
-				if(player.length()!=0){new FinestraMessaggioOk(h);}
+				if(player!=null){new FinestraMessaggioOk(h);}
 				else{new FinestraReinserisci(h);}
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && cancel.isFocusOwner()){

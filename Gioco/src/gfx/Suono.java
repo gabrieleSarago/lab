@@ -11,12 +11,12 @@ public class Suono extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public enum suoni{GIOCO,CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA};
+	public enum suoni{GIOCO,CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA, MENU};
 	//A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
 	//precedente continua e non può essere fermata.
-	private Clip clip_StatoGioco, clip;
+	private Clip clip_StatoGioco, clip_StatoMenu, clip;
 	private AudioInputStream audioCaramella,audioScorri,audioConferma;
-	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco;
+	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco, audioMenu;
 	
 	public void riproduci(suoni s){
 		try {
@@ -61,6 +61,14 @@ public class Suono extends JFrame{
 			clip.open(audioConferma);
 			break;
 		}
+		case MENU:{
+			 clip_StatoMenu =  AudioSystem.getClip();
+			 File menu = new File("res/suoni/menu_intro.wav");
+			 audioMenu = AudioSystem.getAudioInputStream(menu);
+			 clip_StatoMenu.open(audioMenu);
+			 clip_StatoMenu.loop(Clip.LOOP_CONTINUOUSLY);
+			 break;
+		}
 		}
 		} catch (Exception e) {e.printStackTrace();}
 		
@@ -80,6 +88,10 @@ public class Suono extends JFrame{
 	
 	public Clip getClipGioco(){
 		return clip_StatoGioco;
+	}
+	
+	public Clip getClipStatoMenu(){
+		 return clip_StatoMenu;
 	}
 	
 }

@@ -1,8 +1,8 @@
 package stati;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
-import gfx.CaricatoreImmagini;
 import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
@@ -63,19 +63,46 @@ public class StatoOpzioni extends Stato{
 	@Override
 	public void disegna(Graphics g) {
 		s.disegna(g);
-
-		g.drawImage(CaricatoreImmagini.caricaImmagine("res/img/titoli/titolo.png"),230, 50, null);
-		
+		BufferedImage voce;
 		for (int i = 0; i < opzioni.length; i++){
-			if (i == sceltaCorrente){
-				if(i == 0)
-					g.drawImage(Risorse.lingue[linguaCorrente], 500, 275 + i * 50, null);
-				else
-					g.drawImage(Risorse.voci_opzioni[i], 500, 275 + i * 50, null);
-			}
+			if (i == sceltaCorrente)
+				voce = Risorse.voci_opzioni[i];
 			else
-				g.drawImage(Risorse.voci_opzioni_off[i], 500, 275 + i * 50, null);
-		}
+				voce = Risorse.voci_opzioni_off[i];
+			switch(i){
+			case 0:{
+				if(i == sceltaCorrente){
+					switch(linguaCorrente){
+					case 0: g.drawImage(Risorse.lingue[linguaCorrente], 485, 290 + i * 50, null); break;
+					case 1: g.drawImage(Risorse.lingue[linguaCorrente], 495, 290 + i * 50, null); break;
+					case 2: g.drawImage(Risorse.lingue[linguaCorrente], 480, 290 + i * 50, null); break;
+					}
+				}
+				else{
+					switch(linguaCorrente){
+					case 0: g.drawImage(voce, 505, 290 + i * 50, null); break;
+					case 1: g.drawImage(voce, 470, 290 + i * 50, null); break;
+					case 2: g.drawImage(voce, 465, 290 + i * 50, null); break;
+					}
+				}
+				break;
+			}
+			case 1:{
+				switch(linguaCorrente){
+				case 0: g.drawImage(voce, 505, 290 + i * 50, null); break;
+				case 1: g.drawImage(voce, 530, 290 + i * 50, null); break;
+				case 2: g.drawImage(voce, 525, 290 + i * 50, null); break;
+				}break;
+			}	
+			case 2:{
+				switch(linguaCorrente){
+				case 0: g.drawImage(voce, 415, 290 + i * 50, null); break;
+				case 1: g.drawImage(voce, 475, 290 + i * 50, null); break;
+				case 2: g.drawImage(voce, 485, 290 + i * 50, null); break;
+				}break;
+			}
+			}
+		}	
 		
 	}
 	
