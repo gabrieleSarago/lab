@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class Launcher {
 	
 	public static void main (String[]args){
-		Gioco gioco = new Gioco("Labirinto!",1200, 700);
+		Gioco gioco = new Gioco("The Labyrinth of Zelda",1200, 700);
 		Dimension schermo = Toolkit.getDefaultToolkit().getScreenSize();
 		int larghezza = (int) schermo.getWidth();
 		int altezza = (int) schermo.getHeight();
