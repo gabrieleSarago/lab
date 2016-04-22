@@ -2,13 +2,17 @@ package classifica;
 import java.util.*;
 import java.io.*;
 
-public class Classifica {
+public class Classifica implements Iterable<Nominativo>{
 	
-	private TreeSet<Nominativo> classifica;
+	private LinkedList<Nominativo> classifica=new LinkedList<Nominativo>();
 	
 	public Classifica(){
-		classifica = new TreeSet<Nominativo>();
 	}//costruttore
+	
+	public int size(){return classifica.size();}
+	
+	boolean isEmpty(){return classifica.isEmpty();}
+	
 	
 	public void azzeraClassifica(){
 		if(classifica.isEmpty()) return;
@@ -16,7 +20,17 @@ public class Classifica {
 	}//azzeraClassifica
 	
 	public void add(Nominativo n){
-		classifica.add(n);
+		ListIterator<Nominativo> lit = classifica.listIterator();
+		boolean flag = false;
+		while(lit.hasNext() && ! flag){
+			Nominativo x = lit.next();
+			if(x.compareTo(n)<0){
+				lit.previous();
+				lit.add(n);
+				flag=true;
+			}
+		}
+		if(!flag)lit.add(n);
 	}//add
 	
 	public void remove(Nominativo n){
@@ -52,4 +66,9 @@ public class Classifica {
 		return sb.toString();
 	}//toString
 
+
+	@Override
+	public Iterator<Nominativo> iterator() {
+		return classifica.iterator();
+	}
 }//classifica

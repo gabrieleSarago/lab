@@ -8,6 +8,9 @@ public class Nominativo implements Comparable<Nominativo>{
 		this.punteggio=punteggio; this.nomeGiocatore=nome;
 	}
 	
+	public String getPunteggio(){return punteggio;}
+	public String getNome(){return nomeGiocatore;}
+	
 	public boolean equals(Object o){
 		if(!(o instanceof Nominativo)) return false;
 		if(o==this)return true;

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -118,7 +119,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		
 		
 		private JFrame w;
-		private Classifica c;
+		private Classifica c = new Classifica();
 		
 		private JButton ok = new JButton("Ok");
 		private JButton cancel = new JButton("Cancel");
@@ -130,7 +131,11 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		
 		public FinestraInserimento(Handler h){
 			
-			
+			try {
+				c.carica("res/classifiche/classificaPunteggio.txt");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			switch(h.getLingua().getLingua()){
 			case "ITALIANO":{
 				x.add(new JLabel("Nome",JLabel.RIGHT));
@@ -177,9 +182,18 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			player = name.getText();
+			player.trim();
 			if(evt.getSource()==ok){
 				w.setVisible(false);
-				if(player!=null){new FinestraMessaggioOk(h);}
+				if(player!=null){
+					c.add(new Nominativo(String.valueOf(tempo),player));
+					try {
+						c.salva("res/classifiche/classificaPunteggio.txt");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					new FinestraMessaggioOk(h);
+					}
 				else{new FinestraReinserisci(h);}
 			}
 			if(evt.getSource() == cancel){
@@ -198,7 +212,15 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				w.setVisible(false);
-				if(player!=null){new FinestraMessaggioOk(h);}
+				if(player!=null){
+					c.add(new Nominativo(String.valueOf(tempo),player));
+					try {
+						c.salva("res/classifiche/classificaPunteggio.txt");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					new FinestraMessaggioOk(h);
+					}
 				else{new FinestraReinserisci(h);}
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && cancel.isFocusOwner()){
@@ -331,7 +353,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 			p.add(label);
-			c.add(confirm); c.add(cancel);
+			c.add(confirm); c.add(cancel); 
 			
 			f.add(p,BorderLayout.NORTH);
 			f.add(c,BorderLayout.SOUTH);

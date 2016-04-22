@@ -200,8 +200,8 @@ public class Risorse {
 	
 	public static void inizializzaENG(){		
 		
-		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica.png"));
-		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_off.png"));
+		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_eng.png"));
+		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_eng_off.png"));
 		
 		voci_classifica[0] = s5.prendiSprite(0, 3, 482, 40);
 		voci_classifica_off[0] = s6.prendiSprite(0, 3, 482, 40);
@@ -258,11 +258,11 @@ public class Risorse {
 	
 	public static void inizializzaDEU(){
 		
-		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica.png"));
-		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_off.png"));
+		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_deu.png"));
+		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_deu_off.png"));
 		
-		//voci_classifica[0] = s5.prendiSprite(0, 3, 579, 40);
-		//voci_classifica_off[0] = s6.prendiSprite(0, 3, 579, 40);
+		voci_classifica[0] = s5.prendiSprite(0, 3, 579, 40);
+		voci_classifica_off[0] = s6.prendiSprite(0, 3, 579, 40);
 		
 		Sprite s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_deu.png"));
 		Sprite s4 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_deu_off.png"));

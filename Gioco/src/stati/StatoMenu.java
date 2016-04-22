@@ -104,7 +104,7 @@ public class StatoMenu extends Stato{
 			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
 		}
 		if (sceltaCorrente == 2){
-			//classifica
+			h.getGioco().setStato(new StatoClassifica(h));
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setStato(new StatoOpzioni(h));
