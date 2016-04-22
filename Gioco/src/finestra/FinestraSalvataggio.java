@@ -185,7 +185,10 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			player.trim();
 			if(evt.getSource()==ok){
 				w.setVisible(false);
-				if(player!=null){
+				if(player.length()==0)
+					new FinestraReinserisci(h);
+				
+				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
 						c.salva("res/classifiche/classificaPunteggio.txt");
@@ -194,7 +197,6 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 					}
 					new FinestraMessaggioOk(h);
 					}
-				else{new FinestraReinserisci(h);}
 			}
 			if(evt.getSource() == cancel){
 				w.setVisible(false);
@@ -212,7 +214,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				w.setVisible(false);
-				if(player!=null){
+				if(player.length()==0)
+					new FinestraReinserisci(h);
+				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
 						c.salva("res/classifiche/classificaPunteggio.txt");
@@ -221,8 +225,6 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 					}
 					new FinestraMessaggioOk(h);
 					}
-				else{new FinestraReinserisci(h);}
-			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && cancel.isFocusOwner()){
 				w.setVisible(false);
 				new FinestraConfermaUscita(h);
@@ -234,7 +236,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				else{
 					ok.requestFocus();
 				}
-			
+			}
 			}
 		}
 
