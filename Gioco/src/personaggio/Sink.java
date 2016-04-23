@@ -105,6 +105,7 @@ public class Sink extends Personaggio {
 		else{
 			ultimoTempo = System.nanoTime();
 		}
+		
 	}
 	
 	private void getInput() {
