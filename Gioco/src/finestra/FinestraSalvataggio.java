@@ -213,8 +213,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				name.requestFocus();
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
+				player = name.getText();
 				w.setVisible(false);
-				if(player.length()==0)
+				if(player == null)
 					new FinestraReinserisci(h);
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
