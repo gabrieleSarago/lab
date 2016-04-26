@@ -73,6 +73,7 @@ public class StatoGioco extends Stato {
 			//controlla();
 			l.aggiorna();
 			if (vittoria){
+				h.getSuono().getClipGioco().close();
 				h.getGioco().setStato(new StatoVittoria(h,this.getUltimoScreen(),this.tempo));
 			}
 			if (tempo<=0){
