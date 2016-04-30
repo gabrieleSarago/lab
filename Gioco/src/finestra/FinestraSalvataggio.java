@@ -185,7 +185,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			player.trim();
 			if(evt.getSource()==ok){
 				w.setVisible(false);
-				if(player.length()==0)
+				if(player==null)
 					new FinestraReinserisci(h);
 				
 				else{
@@ -215,7 +215,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				player = name.getText();
 				w.setVisible(false);
-				if(player == null)
+				if(player.length()== 0 || player.contains(" "))
 					new FinestraReinserisci(h);
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
@@ -226,18 +226,16 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 					}
 					new FinestraMessaggioOk(h);
 					}
+			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && cancel.isFocusOwner()){
 				w.setVisible(false);
 				new FinestraConfermaUscita(h);
 			}
-			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
-				if(ok.isFocusOwner()){
+			if((k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT) && ok.isFocusOwner()){
 					cancel.requestFocus();
-				}
-				else{
-					ok.requestFocus();
-				}
 			}
+			if((k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT) && cancel.isFocusOwner()){
+					ok.requestFocus();
 			}
 		}
 

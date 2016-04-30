@@ -41,7 +41,7 @@ public class StatoClassifica extends Stato{
 	public StatoClassifica(Handler h) {
 		super(h);
 		this.h=h;
-		s = new Sfondo("res/img/sfondi/menu.png",h);
+		s = new Sfondo("res/img/sfondi/classifica.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		suono = h.getSuono();
 		try {
