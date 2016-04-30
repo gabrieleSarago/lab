@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ import gioco.Handler;
 public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
 	
-	private JLabel q  = new JLabel("Are you sure to exit?");
+	private JLabel q;
 	private JLabel sfondo;
 	private JButton si = new JButton("Si");
 	private JButton no = new JButton("No");
@@ -31,14 +32,12 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		
 		switch(h.getLingua().getLingua()){
 		case "ENGLISH" :{
-			//q.setText("Are you sure to exit?");
 			si.setText("Yes");
 			no.setText("No");
 			break;
 		}
-		case "ITALIANO" : q.setText("Sei sicuro di voler uscire?"); break;
+		case "ITALIANO" : break;
 		case "DEUTSCH" :{
-			q.setText("Willst du sicher zurück gehen?");
 			si.setText("Ja");
 			no.setText("Nein");
 			break;
@@ -46,6 +45,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		}
 		//Question
 		q = new JLabel(new ImageIcon(Risorse.voce_uscita));
+		//Impostazione della larghezza in base alla lunghezza della voce
 		int larghezza = Risorse.voce_uscita.getWidth()+10;
 		//creazione della finestra
 		f = new JFrame();
@@ -56,6 +56,8 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		
 		//Elimina la barra del titolo
 	    f.setUndecorated(true);
+	    //Per impostare la forma
+	    f.setShape(new RoundRectangle2D.Double(0, 0, larghezza, 80, 15, 15));
 	    
 		//Resizing dinamico dello sfondo
 		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 70, Image.SCALE_SMOOTH);
