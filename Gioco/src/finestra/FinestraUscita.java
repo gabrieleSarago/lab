@@ -1,30 +1,27 @@
 
 package finestra;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import gfx.Risorse;
 import gioco.Handler;
-import stati.StatoGioco;
-import stati.StatoMenu;
 
 public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
 	
 	private JLabel q  = new JLabel("Are you sure to exit?");
-	
+	private JLabel sfondo;
 	private JButton si = new JButton("Si");
 	private JButton no = new JButton("No");
-	
-	private JPanel p = new JPanel();
-	private JPanel c = new JPanel();
 	
 	private Handler h;
 	
@@ -53,13 +50,15 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		sfondo = new JLabel(new ImageIcon(Risorse.sfondo_popup));
+		f.setContentPane(sfondo);
+		f.setLayout(new FlowLayout());
+
 		//aggiunta dei pannelli e dei pulsanti
-		p.add(q);
-		c.add(si); c.add(no);
 		
-		f.add(p, BorderLayout.NORTH);
-		f.add(c, BorderLayout.SOUTH);
+		sfondo.add(q, BorderLayout.NORTH);
+		sfondo.add(si, BorderLayout.SOUTH);
+		sfondo.add(no, BorderLayout.SOUTH);
 		
 		f.setVisible(true);
 		

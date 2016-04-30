@@ -55,4 +55,8 @@ public class Sfondo {
 		if (x > 0)
 			g.drawImage(sfondo, (int) x - sfondo.getWidth(), (int) y, null);
 	}
+	
+	public BufferedImage getSfondo(){
+		return sfondo;
+	}
 }

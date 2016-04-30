@@ -13,7 +13,6 @@ import finestra.FinestraNessunPunteggio;
 import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
-import lingue.Lingua;
 import pannelli.Sfondo;
 
 public class StatoClassifica extends Stato{
@@ -25,7 +24,6 @@ public class StatoClassifica extends Stato{
 	
 	private int sceltaCorrente=0;
 	
-	private Lingua lingua;
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
 	
 	

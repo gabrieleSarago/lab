@@ -16,6 +16,7 @@ public class Risorse {
 	public static BufferedImage teletrasporto_attivo, teletrasporto_inattivo;
 	public static BufferedImage nemico;
 	
+	public static BufferedImage sfondo_popup;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -89,28 +90,7 @@ public class Risorse {
 		lingue[1] = s1.prendiSprite(0, 47, 229, 40);
 		lingue[2] = s1.prendiSprite(0, 91, 245, 40);
 		
-		/*Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa.png"));
-		Sprite s2 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_pausa_off.png"));
-
-		voci_pausa[0] = s1.prendiSprite(0, 0, 250, 40);
-		voci_pausa[1] = s1.prendiSprite(0, 63, 215, 40);
-		voci_pausa[2] = s1.prendiSprite(0, 128, 177, 40);
-		voci_pausa[3] = s1.prendiSprite(0, 190, 404, 40);
-		ok = s1.prendiSprite(0, 128, 290, 40);
-
-		voci_pausa_off[0] = s2.prendiSprite(0, 0, 250, 40);
-		voci_pausa_off[1] = s2.prendiSprite(0, 63, 215, 40);
-		voci_pausa_off[2] = s2.prendiSprite(0, 128, 177, 40);
-		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
-		*/
-		/*
-		Sprite t = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/life.png"));
-		
-		tempo = new BufferedImage[11];
-		
-		for(int i = 0; i<11; i++)
-			tempo[i] =  t.prendiSprite(0, lifeh*i, lifew, lifeh);
-		*/
+		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.jpg");
 		
 		strada = s.prendiSprite(116, 7, 32, 32);
 		muro = s.prendiSprite(116+32, 7, 32, 32);
