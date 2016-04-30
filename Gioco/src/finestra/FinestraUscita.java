@@ -2,6 +2,7 @@
 package finestra;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -50,11 +51,18 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		sfondo = new JLabel(new ImageIcon(Risorse.sfondo_popup));
+		
+		//Resizing dinamico dello sfondo
+		Image img = Risorse.sfondo_popup.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+		
+		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+		sfondo = new JLabel(new ImageIcon(img));
 		f.setContentPane(sfondo);
+		
+		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
 		f.setLayout(new FlowLayout());
 
-		//aggiunta dei pannelli e dei pulsanti
+		//aggiunta dei pannelli e dei pulsanti.
 		
 		sfondo.add(q, BorderLayout.NORTH);
 		sfondo.add(si, BorderLayout.SOUTH);
