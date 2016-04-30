@@ -7,7 +7,8 @@ public class Risorse {
 	private static final int size = 38;
 	//private static final int lifeh = 15, lifew = 96;
 	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
-	public static BufferedImage [] voci_pausa, voci_pausa_off, voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, lingue;// tempo;
+	public static BufferedImage [] voci_pausa, voci_pausa_off,
+	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
 	// ----
@@ -17,6 +18,7 @@ public class Risorse {
 	public static BufferedImage nemico;
 	
 	public static BufferedImage sfondo_popup;
+	public static BufferedImage voce_uscita;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -176,6 +178,11 @@ public class Risorse {
 		voci_pausa_off[1] = s2.prendiSprite(0, 63, 215, 40);
 		voci_pausa_off[2] = s2.prendiSprite(0, 128, 175, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 190, 404, 40);
+		
+		//Voci popup
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
+		voce_uscita = s1.prendiSprite(0, 0, 400, 22);
+		
 	}
 	
 	public static void inizializzaENG(){		
@@ -234,6 +241,10 @@ public class Risorse {
 		voci_pausa_off[1] = s2.prendiSprite(0, 48, 243, 40);
 		voci_pausa_off[2] = s2.prendiSprite(0, 92, 146, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 136, 276, 40);
+		
+		//Voci popup
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
+		voce_uscita = s1.prendiSprite(0, 22, 320, 22);
 	}
 	
 	public static void inizializzaDEU(){
@@ -292,6 +303,10 @@ public class Risorse {
 		voci_pausa_off[1] = s2.prendiSprite(0, 48, 292, 40);
 		voci_pausa_off[2] = s2.prendiSprite(0, 92, 302, 40);
 		voci_pausa_off[3] = s2.prendiSprite(0, 136, 276, 40);
+		
+		//Voci popup
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
+		voce_uscita = s1.prendiSprite(0, 44, 463, 22);
 	}
 
 }

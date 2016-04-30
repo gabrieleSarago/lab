@@ -44,16 +44,21 @@ public class FinestraUscita implements KeyListener, ActionListener{
 			break;
 		}
 		}
-		
+		//Question
+		q = new JLabel(new ImageIcon(Risorse.voce_uscita));
+		int larghezza = Risorse.voce_uscita.getWidth()+10;
 		//creazione della finestra
 		f = new JFrame();
-		f.setSize(200, 100);
+		f.setSize(larghezza, 70);
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Elimina la barra del titolo
+	    f.setUndecorated(true);
+	    
 		//Resizing dinamico dello sfondo
-		Image img = Risorse.sfondo_popup.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 70, Image.SCALE_SMOOTH);
 		
 		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
 		sfondo = new JLabel(new ImageIcon(img));
@@ -61,12 +66,11 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		
 		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
 		f.setLayout(new FlowLayout());
-
-		//aggiunta dei pannelli e dei pulsanti.
 		
-		sfondo.add(q, BorderLayout.NORTH);
-		sfondo.add(si, BorderLayout.SOUTH);
-		sfondo.add(no, BorderLayout.SOUTH);
+		//aggiunta dei pannelli e dei pulsanti.
+		f.add(q, BorderLayout.NORTH);
+		f.add(si, BorderLayout.SOUTH);
+		f.add(no, BorderLayout.SOUTH);
 		
 		f.setVisible(true);
 		
