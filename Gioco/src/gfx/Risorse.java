@@ -306,7 +306,7 @@ public class Risorse {
 		
 		//Voci popup
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
-		voce_uscita = s1.prendiSprite(0, 44, 463, 22);
+		voce_uscita = s1.prendiSprite(0, 44, 487, 22);
 	}
 
 }

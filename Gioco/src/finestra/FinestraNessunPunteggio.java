@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gioco.Handler;
-import stati.StatoMenu;
 
 public class FinestraNessunPunteggio implements KeyListener,ActionListener {
 	private JFrame f1;
