@@ -21,27 +21,22 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	
 	private JLabel q;
 	private JLabel sfondo;
-	private JButton si = new JButton("Si");
-	private JButton no = new JButton("No");
+	private JButton si = new JButton();
+	private JButton no = new JButton();
 	
 	private Handler h;
 	
 	public FinestraUscita(Handler h){
 		
+		si.setBorderPainted(false);
+		si.setFocusPainted(false);
+		si.setContentAreaFilled(false);
+		si.setIcon(new ImageIcon(Risorse.voce_si));
 		
-		switch(h.getLingua().getLingua()){
-		case "ENGLISH" :{
-			si.setText("Yes");
-			no.setText("No");
-			break;
-		}
-		case "ITALIANO" : break;
-		case "DEUTSCH" :{
-			si.setText("Ja");
-			no.setText("Nein");
-			break;
-		}
-		}
+		no.setBorderPainted(false);
+		no.setFocusPainted(false);
+		no.setContentAreaFilled(false);
+		no.setIcon(new ImageIcon(Risorse.voce_no));
 		//Question
 		q = new JLabel(new ImageIcon(Risorse.voce_uscita));
 		//Impostazione della larghezza in base alla lunghezza della voce
@@ -95,9 +90,14 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
 			if(si.isFocusOwner()){
 				no.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si_off));
+				no.setIcon(new ImageIcon(Risorse.voce_no));
 			}
 			else{
 				si.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si));
+				no.setIcon(new ImageIcon(Risorse.voce_no_off));
+				
 			}
 		
 		}

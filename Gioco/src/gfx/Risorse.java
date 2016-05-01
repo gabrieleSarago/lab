@@ -18,7 +18,7 @@ public class Risorse {
 	public static BufferedImage nemico;
 	
 	public static BufferedImage sfondo_popup;
-	public static BufferedImage voce_uscita;
+	public static BufferedImage voce_uscita, voce_si, voce_no, voce_si_off, voce_no_off;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -183,6 +183,14 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
 		voce_uscita = s1.prendiSprite(0, 0, 400, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
+		voce_si = s1.prendiSprite(0, 0, 30, 22);
+		voce_no = s1.prendiSprite(0, 22, 40, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
+		voce_si_off = s1.prendiSprite(0, 0, 30, 22);
+		voce_no_off = s1.prendiSprite(0, 22, 40, 22);
+		
 	}
 	
 	public static void inizializzaENG(){		
@@ -307,6 +315,7 @@ public class Risorse {
 		//Voci popup
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
 		voce_uscita = s1.prendiSprite(0, 44, 487, 22);
+		
 	}
 
 }
