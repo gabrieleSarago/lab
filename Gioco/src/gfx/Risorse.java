@@ -18,7 +18,9 @@ public class Risorse {
 	public static BufferedImage nemico;
 	
 	public static BufferedImage sfondo_popup;
-	public static BufferedImage voce_uscita, voce_si, voce_no, voce_si_off, voce_no_off;
+	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
+	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
+	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -92,7 +94,7 @@ public class Risorse {
 		lingue[1] = s1.prendiSprite(0, 47, 229, 40);
 		lingue[2] = s1.prendiSprite(0, 91, 245, 40);
 		
-		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.jpg");
+		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.png");
 		
 		strada = s.prendiSprite(116, 7, 32, 32);
 		muro = s.prendiSprite(116+32, 7, 32, 32);
@@ -120,7 +122,6 @@ public class Risorse {
 		interruttore_spento = interruttore.prendiSprite(99, 106, 26, 20);
 		Sprite enemy = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/nemico.png"));
 		nemico = enemy.prendiSprite(200, 20, 1000, 1100);
-		
 	}
 	
 	public static void inizializzaITA(){
@@ -186,10 +187,45 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
 		voce_si = s1.prendiSprite(0, 0, 30, 22);
 		voce_no = s1.prendiSprite(0, 22, 40, 22);
+		voce_ok = s1.prendiSprite(0, 110, 40, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
 		voce_si_off = s1.prendiSprite(0, 0, 30, 22);
 		voce_no_off = s1.prendiSprite(0, 22, 40, 22);
+		voce_ok_off = s1.prendiSprite(0, 110, 40, 22); 
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera.png"));
+		voce_azzera = s1.prendiSprite(0, 0, 557, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_vittoria.png"));
+		voce_vittoria = s1.prendiSprite(0, 0, 139, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_punteggio.png"));
+		voce_no_punteggio = s1.prendiSprite(0, 0, 277, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
+		voce_salva = s1.prendiSprite(0, 0, 601, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_sconfitta.png"));
+		voce_sconfitta = s1.prendiSprite(0, 0, 630, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla.png"));
+		voce_annulla = s1.prendiSprite(0, 0, 126, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla_off.png"));
+		voce_annulla_off = s1.prendiSprite(0, 0, 126, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_nome.png"));
+		voce_nome = s1.prendiSprite(0, 0, 74, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salvataggio.png"));
+		voce_salvataggio = s1.prendiSprite(0, 0, 374, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_salvataggio.png"));
+		voce_no_salvataggio = s1.prendiSprite(0, 0, 533, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
+		voce_no_nominativo = s1.prendiSprite(0, 0, 448, 22);
 		
 	}
 	
@@ -200,7 +236,6 @@ public class Risorse {
 		
 		voci_classifica[0] = s5.prendiSprite(0, 3, 482, 40);
 		voci_classifica_off[0] = s6.prendiSprite(0, 3, 482, 40);
-		
 		
 		Sprite s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_eng.png"));
 		Sprite s4 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_eng_off.png"));
@@ -253,6 +288,48 @@ public class Risorse {
 		//Voci popup
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
 		voce_uscita = s1.prendiSprite(0, 22, 320, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
+		voce_si = s1.prendiSprite(0, 44, 60, 22);
+		voce_no = s1.prendiSprite(0, 22, 40, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
+		voce_si_off = s1.prendiSprite(0, 44, 60, 22);
+		voce_no_off = s1.prendiSprite(0, 22, 40, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera.png"));
+		voce_azzera = s1.prendiSprite(0, 22, 502, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_vittoria.png"));
+		voce_vittoria = s1.prendiSprite(0, 22, 114, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_punteggio.png"));
+		voce_no_punteggio = s1.prendiSprite(0, 22, 372, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
+		voce_salva = s1.prendiSprite(0, 22, 601, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_sconfitta.png"));
+		voce_sconfitta = s1.prendiSprite(0, 22, 628, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla.png"));
+		voce_annulla = s1.prendiSprite(0, 22, 110, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla_off.png"));
+		voce_annulla_off = s1.prendiSprite(0, 22, 110, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_nome.png"));
+		voce_nome = s1.prendiSprite(0, 22, 74, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salvataggio.png"));
+		voce_salvataggio = s1.prendiSprite(0, 22, 250, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_salvataggio.png"));
+		voce_no_salvataggio = s1.prendiSprite(0, 22, 597, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
+		voce_no_nominativo = s1.prendiSprite(0, 22, 424, 22);
+		
 	}
 	
 	public static void inizializzaDEU(){
@@ -316,6 +393,43 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_uscita.png"));
 		voce_uscita = s1.prendiSprite(0, 44, 487, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
+		voce_si = s1.prendiSprite(0, 66, 40, 22);
+		voce_no = s1.prendiSprite(0, 88, 64, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
+		voce_si_off = s1.prendiSprite(0, 66, 40, 22);
+		voce_no_off = s1.prendiSprite(0, 88, 64, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera.png"));
+		voce_azzera = s1.prendiSprite(0, 44, 620, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_vittoria.png"));
+		voce_vittoria = s1.prendiSprite(0, 44, 154, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_punteggio.png"));
+		voce_no_punteggio = s1.prendiSprite(0, 44, 256, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
+		voce_salva = s1.prendiSprite(0, 44, 678, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla.png"));
+		voce_annulla = s1.prendiSprite(0, 44, 128, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla_off.png"));
+		voce_annulla_off = s1.prendiSprite(0, 44, 128, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_nome.png"));
+		voce_nome = s1.prendiSprite(0, 44, 74, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salvataggio.png"));
+		voce_salvataggio = s1.prendiSprite(0, 44, 360, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_salvataggio.png"));
+		voce_no_salvataggio = s1.prendiSprite(0, 44, 692, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
+		voce_no_nominativo = s1.prendiSprite(0, 44, 448, 22);
 	}
 
 }

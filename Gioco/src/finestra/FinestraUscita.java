@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,14 +37,17 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		no.setBorderPainted(false);
 		no.setFocusPainted(false);
 		no.setContentAreaFilled(false);
-		no.setIcon(new ImageIcon(Risorse.voce_no));
+		no.setIcon(new ImageIcon(Risorse.voce_no_off));
+		
 		//Question
 		q = new JLabel(new ImageIcon(Risorse.voce_uscita));
+		
 		//Impostazione della larghezza in base alla lunghezza della voce
 		int larghezza = Risorse.voce_uscita.getWidth()+16;
+		
 		//creazione della finestra
 		f = new JFrame();
-		f.setSize(larghezza, 70);
+		f.setSize(larghezza, 65);
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,15 +55,13 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		//Elimina la barra del titolo
 	    f.setUndecorated(true);
 	    //Per impostare la forma
-	    //f.setShape(new RoundRectangle2D.Double(0, 0, larghezza, 80, 15, 15));
-	    
+	    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
 		//Resizing dinamico dello sfondo
-		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 70, Image.SCALE_SMOOTH);
+		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 		
 		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
 		sfondo = new JLabel(new ImageIcon(img));
 		f.setContentPane(sfondo);
-		
 		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
 		f.setLayout(new FlowLayout());
 		

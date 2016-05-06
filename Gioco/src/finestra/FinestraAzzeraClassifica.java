@@ -1,29 +1,33 @@
 package finestra;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import classifica.Classifica;
+import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
 
 public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 	
 	private JFrame f;
-	private JLabel q = new JLabel("Sicuro di voler azzerare la classifica?");
-	private JButton si = new JButton("Si");
-	private JButton no = new JButton("No");
-	private JPanel p = new JPanel();
-	private JPanel c = new JPanel();
+	private JLabel q;
+	private JLabel sfondo;
+	private JButton si = new JButton();
+	private JButton no = new JButton();
 	
 	private Handler h;
 	private Classifica classifica = new Classifica();
@@ -34,32 +38,48 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		switch(h.getLingua().getLingua()){
-		case "ENGLISH":{
-			q.setText("Are you sure to clear highscore?");
-			si.setText("Yes");
-			break;
-		}
-		case "DEUTSCH":{
-			q.setText("Serve Daniele");
-			si.setText("Ja");
-			no.setText("Nein");
-			break;
-		}
-		}
+		si.setBorderPainted(false);
+		si.setFocusPainted(false);
+		si.setContentAreaFilled(false);
+		si.setIcon(new ImageIcon(Risorse.voce_si));
+		
+		no.setBorderPainted(false);
+		no.setFocusPainted(false);
+		no.setContentAreaFilled(false);
+		no.setIcon(new ImageIcon(Risorse.voce_no_off));
+		
+		//Question
+		q = new JLabel(new ImageIcon(Risorse.voce_azzera));
+		
+		//Impostazione della larghezza in base alla lunghezza della voce
+		int larghezza = Risorse.voce_azzera.getWidth()+16;
+		
 		//creazione finestra
 		f = new JFrame();
-		f.setSize(300, 100);
+		f.setSize(larghezza, 65);
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		p.add(q);
-		c.add(si); c.add(no);
+		//Elimina la barra del titolo
+	    f.setUndecorated(true);
+	    //Per impostare la forma
+	    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
+		//Resizing dinamico dello sfondo
+		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 		
-		f.add(p,BorderLayout.NORTH);
-		f.add(c,BorderLayout.SOUTH);
+		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+		sfondo = new JLabel(new ImageIcon(img));
+		f.setContentPane(sfondo);
+		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+		f.setLayout(new FlowLayout());
+		
+		//aggiunta dei pannelli e dei pulsanti.
+		f.add(q, BorderLayout.NORTH);
+		f.add(si, BorderLayout.SOUTH);
+		f.add(no, BorderLayout.SOUTH);
 		f.setVisible(true);
+		
 		si.addKeyListener(this);
 		no.addKeyListener(this);
 		
@@ -89,9 +109,13 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
 			if(si.isFocusOwner()){
 				no.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si_off));
+				no.setIcon(new ImageIcon(Risorse.voce_no));
 			}
 			else{
 				si.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si));
+				no.setIcon(new ImageIcon(Risorse.voce_no_off));
 			}
 		
 		}

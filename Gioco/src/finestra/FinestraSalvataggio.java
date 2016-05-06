@@ -1,71 +1,88 @@
 package finestra;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import classifica.Classifica;
 import classifica.Nominativo;
+import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
 
 public class FinestraSalvataggio implements KeyListener,ActionListener {
 	
 	private JFrame f;
-	private JLabel q = new JLabel("You win! Do you want to save your score?");
+	private JLabel q;
 	
-	private JButton yes = new JButton("Yes");
-	private JButton no = new JButton("No");
-	
-	private JPanel p = new JPanel();
-	private JPanel c = new JPanel();
-	
+	private JButton si = new JButton();
+	private JButton no = new JButton();
+	private JLabel sfondo;
+
 	private Handler h;
 	private int tempo;
 	
 	public FinestraSalvataggio(Handler h,int tempo){
 		
-		switch(h.getLingua().getLingua()){
-		case "ENGLISH": {break;}
-		case "ITALIANO":{
-			q.setText("Hai vinto! Vuoi salvare il tuo punteggio?");
-			yes.setText("Si");
-			no.setText("No");
-			break;
-		}
-		case "DEUTSCH":{
-			q.setText("Gewonnen! Willst du dein Ergebnis speichern?");
-			yes.setText("Ja");
-			no.setText("Nein");
-			break;
-		}
-		}
+		si.setBorderPainted(false);
+		si.setFocusPainted(false);
+		si.setContentAreaFilled(false);
+		si.setIcon(new ImageIcon(Risorse.voce_si));
+		
+		no.setBorderPainted(false);
+		no.setFocusPainted(false);
+		no.setContentAreaFilled(false);
+		no.setIcon(new ImageIcon(Risorse.voce_no_off));
+		
+		//Question
+		q = new JLabel(new ImageIcon(Risorse.voce_salva));
+				
+		//Impostazione della larghezza in base alla lunghezza della voce
+		int larghezza = Risorse.voce_salva.getWidth()+16;
+		
+		
 		//creazione finestra
 		f = new JFrame();
-		f.setSize(300, 100);
+		f.setSize(larghezza, 65);
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		p.add(q);
-		c.add(yes); c.add(no);
+		//Elimina la barra del titolo
+	    f.setUndecorated(true);
+	    //Per impostare la forma
+	    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
+		//Resizing dinamico dello sfondo
+		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 		
-		f.add(p,BorderLayout.NORTH);
-		f.add(c,BorderLayout.SOUTH);
+		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+		sfondo = new JLabel(new ImageIcon(img));
+		f.setContentPane(sfondo);
+		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+		f.setLayout(new FlowLayout());
+		
+		f.add(q,BorderLayout.NORTH);
+		f.add(si,BorderLayout.SOUTH);
+		f.add(no,BorderLayout.SOUTH);
 		f.setVisible(true);
-		yes.addKeyListener(this);
+		
+		si.addKeyListener(this);
 		no.addKeyListener(this);
 		
-		yes.addActionListener(this);
+		si.addActionListener(this);
 		no.addActionListener(this);
 		
 		this.h=h;
@@ -74,7 +91,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent k) {
-		if(k.getKeyCode() == KeyEvent.VK_ENTER && yes.isFocusOwner()){
+		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner()){
 			f.setVisible(false);
 			new FinestraInserimento(h);
 		}
@@ -83,11 +100,15 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			new FinestraConfermaUscita(h);
 		}
 		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
-			if(yes.isFocusOwner()){
+			if(si.isFocusOwner()){
 				no.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si_off));
+				no.setIcon(new ImageIcon(Risorse.voce_no));
 			}
 			else{
-				yes.requestFocus();
+				si.requestFocus();
+				si.setIcon(new ImageIcon(Risorse.voce_si));
+				no.setIcon(new ImageIcon(Risorse.voce_no_off));
 			}
 		
 		}
@@ -105,7 +126,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource()==yes){
+		if(evt.getSource()==si){
 			f.setVisible(false);
 			new FinestraInserimento(h);
 		}
@@ -118,14 +139,13 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 	private class FinestraInserimento implements KeyListener,ActionListener{
 		
 		
-		private JFrame w;
+		private JFrame f;
 		private Classifica c = new Classifica();
 		
-		private JButton ok = new JButton("Ok");
-		private JButton cancel = new JButton("Cancel");
+		private JButton ok = new JButton();
+		private JButton cancel = new JButton();
 		private JTextField name = new JTextField("",15);
-		private JPanel x = new JPanel();
-		private JPanel y = new JPanel();
+		private JLabel nome;
 		private String player;
 		private Handler h;
 		
@@ -136,37 +156,48 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			switch(h.getLingua().getLingua()){
-			case "ITALIANO":{
-				x.add(new JLabel("Nome",JLabel.RIGHT));
-				x.add(name);
-				cancel.setText("Annulla");
-				break;
-			}
-			case "DEUTSCH":{
-				x.add(new JLabel("Name",JLabel.RIGHT));
-				x.add(name);
-				cancel.setText("Zurück");
-				break;
-			}
-			case "ENGLISH":{
-				x.add(new JLabel("Name",JLabel.RIGHT));
-				x.add(name);
-				break;
-			}
-			}
 			
-			y.add(ok); y.add(cancel);
+			name.setBackground(Color.blue);
 			
-			w= new JFrame();
-			w.setSize(300, 100);
-			w.setResizable(false);
-			w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			w.setLocationRelativeTo(h.getGioco().getFrame());
-			w.add(x,BorderLayout.NORTH);
-			w.add(y,BorderLayout.SOUTH);
+			ok.setBorderPainted(false);
+			ok.setFocusPainted(false);
+			ok.setContentAreaFilled(false);
+			ok.setIcon(new ImageIcon(Risorse.voce_ok_off));
 			
-			w.setVisible(true);
+			cancel.setBorderPainted(false);
+			cancel.setFocusPainted(false);
+			cancel.setContentAreaFilled(false);
+			cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
+			
+			//Question
+			nome = new JLabel(new ImageIcon(Risorse.voce_nome));
+			
+			f= new JFrame();
+			f.setSize(300, 65);
+			f.setResizable(false);
+			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			f.setLocationRelativeTo(h.getGioco().getFrame());
+			
+			//Elimina la barra del titolo
+		    f.setUndecorated(true);
+		    //Per impostare la forma
+		    f.setShape(new RoundRectangle2D.Double.Double(0, 0, 300, 65, 15, 80));
+			//Resizing dinamico dello sfondo
+			Image img = Risorse.sfondo_popup.getScaledInstance(300, 65, Image.SCALE_SMOOTH);
+			
+			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			sfondo = new JLabel(new ImageIcon(img));
+			f.setContentPane(sfondo);
+			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+			f.setLayout(new FlowLayout());
+			
+			//aggiunta dei pannelli e dei pulsanti.
+			f.add(nome, BorderLayout.NORTH);
+			f.add(name, BorderLayout.NORTH);
+			f.add(ok, BorderLayout.SOUTH);
+			f.add(cancel, BorderLayout.SOUTH);
+			
+			f.setVisible(true);
 			
 			
 			//ascoltatori
@@ -184,7 +215,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			player = name.getText();
 			player.trim();
 			if(evt.getSource()==ok){
-				w.setVisible(false);
+				f.setVisible(false);
 				if(player==null)
 					new FinestraReinserisci(h);
 				
@@ -199,7 +230,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 					}
 			}
 			if(evt.getSource() == cancel){
-				w.setVisible(false);
+				f.setVisible(false);
 				new FinestraConfermaUscita(h);
 			}
 		}
@@ -208,13 +239,17 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		public void keyPressed(KeyEvent k) {
 			if(k.getKeyCode() == KeyEvent.VK_DOWN && name.isFocusOwner()){
 				ok.requestFocus();
+				ok.setIcon(new ImageIcon(Risorse.voce_ok));
+				cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
 			}
 			if(k.getKeyCode() == KeyEvent.VK_UP && (ok.isFocusOwner() || cancel.isFocusOwner())){
 				name.requestFocus();
+				ok.setIcon(new ImageIcon(Risorse.voce_ok_off));
+				cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				player = name.getText();
-				w.setVisible(false);
+				f.setVisible(false);
 				if(player.length()== 0 || player.contains(" "))
 					new FinestraReinserisci(h);
 				else{
@@ -228,14 +263,18 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 					}
 			}
 			if(k.getKeyCode() == KeyEvent.VK_ENTER && cancel.isFocusOwner()){
-				w.setVisible(false);
+				f.setVisible(false);
 				new FinestraConfermaUscita(h);
 			}
 			if((k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT) && ok.isFocusOwner()){
 					cancel.requestFocus();
+					ok.setIcon(new ImageIcon(Risorse.voce_ok_off));
+					cancel.setIcon(new ImageIcon(Risorse.voce_annulla));
 			}
 			if((k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT) && cancel.isFocusOwner()){
 					ok.requestFocus();
+					ok.setIcon(new ImageIcon(Risorse.voce_ok));
+					cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
 			}
 		}
 
@@ -249,56 +288,63 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 	}//FinestraInserimento
 	
 	private  class FinestraMessaggioOk implements KeyListener,ActionListener{
-		private JFrame f1;
-		private JLabel label;
-		private JButton confirm = new JButton("Ok");
+		private JFrame f;
+		private JLabel q;
+		private JLabel sfondo;
+		private JButton ok = new JButton();
 		private Handler h;
-		private JPanel p1 = new JPanel();
-		private JPanel c1 = new JPanel();
 		
 		public FinestraMessaggioOk(Handler h){
-			switch(h.getLingua().getLingua()){
-			case "ENGLISH":{
-				label = new JLabel("Save completed!");
-				break;
-			}
-			case "ITALIANO":{
-				label = new JLabel("Salvataggio completato!");
-				break;
-			}
-			case "DEUTSCH":{
-				label = new JLabel("Speichern erfolgreich!");
-				break;
-			}
-			}//switch
+			
+			ok.setBorderPainted(false);
+			ok.setFocusPainted(false);
+			ok.setContentAreaFilled(false);
+			ok.setIcon(new ImageIcon(Risorse.voce_ok));
+			
+			//Impostazione della larghezza in base alla lunghezza della voce
+			int larghezza = Risorse.voce_salvataggio.getWidth()+16;
 			
 			//finestra
-			f1 = new JFrame();
-			f1.setSize(300, 100);
-			f1.setResizable(false);
-			f1.setLocationRelativeTo(h.getGioco().getFrame());
-			f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			f = new JFrame();
+			f.setSize(larghezza, 65);
+			f.setResizable(false);
+			f.setLocationRelativeTo(h.getGioco().getFrame());
+			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			p1.add(label);
-			c1.add(confirm);
+			//Question
+			q = new JLabel(new ImageIcon(Risorse.voce_salvataggio));
 			
-			f1.add(p1,BorderLayout.NORTH);
-			f1.add(c1,BorderLayout.SOUTH);
+			//Elimina la barra del titolo
+		    f.setUndecorated(true);
+		    //Per impostare la forma
+		    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
+			//Resizing dinamico dello sfondo
+			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 			
-			f1.setVisible(true);
+			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			sfondo = new JLabel(new ImageIcon(img));
+			f.setContentPane(sfondo);
+			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+			f.setLayout(new FlowLayout());
+			
+			//aggiunta dei pannelli e dei pulsanti.
+			f.add(q, BorderLayout.NORTH);
+			f.add(ok, BorderLayout.SOUTH);
+			
+			f.setVisible(true);
 			
 			//ascoltatori
-			confirm.addActionListener(this);
-			confirm.addKeyListener(this);
+			ok.addActionListener(this);
+			ok.addKeyListener(this);
 			
 			this.h=h;
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			if(evt.getSource()==confirm){
+			if(evt.getSource()==ok){
 				h.getGioco().setStato(new StatoMenu(h));
-				f1.setVisible(false);
+				f.setVisible(false);
 			}
 		}
 		
@@ -306,7 +352,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		public void keyPressed(KeyEvent k){
 			if(k.getKeyCode()== KeyEvent.VK_ENTER){
 				h.getGioco().setStato(new StatoMenu(h));
-				f1.setVisible(false);
+				f.setVisible(false);
 			}
 			
 		}
@@ -320,52 +366,62 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 	
 	private  class FinestraConfermaUscita implements KeyListener,ActionListener{
 		private JFrame f;
-		private JLabel label;
-		private JButton confirm = new JButton("Ok");
-		private JButton  cancel = new JButton("Cancel");
+		private JLabel q;
+		private JLabel sfondo;
+		private JButton ok = new JButton();
+		private JButton cancel = new JButton();
 		private Handler h;
-		private JPanel p = new JPanel();
-		private JPanel c = new JPanel();
-
 		
 		public FinestraConfermaUscita(Handler h){
-			switch(h.getLingua().getLingua()){
-			case "ITALIANO":{
-				label = new JLabel("Sei sicuro di uscire senza salvare?");
-				cancel.setText("Annulla");
-				break;
-			}
-			case "ENGLISH":{
-				label = new JLabel("Are you sure to exit and do not to save?");
-				break;
-			}
-			case "DEUTSCH":{
-				label = new JLabel("Willst du wirklich zurück ohne zu speichern?");
-				cancel.setText("Zurück");
-				break;
-			}
-			}//switch
+			
+			ok.setBorderPainted(false);
+			ok.setFocusPainted(false);
+			ok.setContentAreaFilled(false);
+			ok.setIcon(new ImageIcon(Risorse.voce_ok));
+			
+			cancel.setBorderPainted(false);
+			cancel.setFocusPainted(false);
+			cancel.setContentAreaFilled(false);
+			cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
+			
+			//Impostazione della larghezza in base alla lunghezza della voce
+			int larghezza = Risorse.voce_no_salvataggio.getWidth()+16;
 			
 			//finestra
 			f = new JFrame();
-			f.setSize(300, 100);
+			f.setSize(larghezza, 65);
 			f.setResizable(false);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			p.add(label);
-			c.add(confirm); c.add(cancel); 
+			//Question
+			q = new JLabel(new ImageIcon(Risorse.voce_no_salvataggio));
 			
-			f.add(p,BorderLayout.NORTH);
-			f.add(c,BorderLayout.SOUTH);
+			//Elimina la barra del titolo
+		    f.setUndecorated(true);
+		    //Per impostare la forma
+		    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
+			//Resizing dinamico dello sfondo
+			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
+			
+			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			sfondo = new JLabel(new ImageIcon(img));
+			f.setContentPane(sfondo);
+			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+			f.setLayout(new FlowLayout());
+			
+			//aggiunta dei pannelli e dei pulsanti.
+			f.add(q, BorderLayout.NORTH);
+			f.add(ok, BorderLayout.SOUTH);
+			f.add(cancel, BorderLayout.SOUTH);
 			
 			f.setVisible(true);
 			
 			//ascoltatori
-			confirm.addActionListener(this);
+			ok.addActionListener(this);
 			cancel.addActionListener(this);
 			
-			confirm.addKeyListener(this);
+			ok.addKeyListener(this);
 			cancel.addKeyListener(this);
 			
 			this.h=h;
@@ -376,7 +432,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			if(evt.getSource()==confirm){
+			if(evt.getSource()==ok){
 				f.setVisible(false);
 				h.getGioco().setStato(new StatoMenu(h));
 			}
@@ -387,7 +443,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		}
 		@Override
 		public void keyPressed(KeyEvent k) {
-			if(k.getKeyCode() == KeyEvent.VK_ENTER && confirm.isFocusOwner()){
+			if(k.getKeyCode() == KeyEvent.VK_ENTER && ok.isFocusOwner()){
 				f.setVisible(false);
 				h.getGioco().setStato(new StatoMenu(h));
 			}
@@ -396,11 +452,15 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				new FinestraInserimento(h);
 			}
 			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
-				if(confirm.isFocusOwner()){
+				if(ok.isFocusOwner()){
 					cancel.requestFocus();
+					ok.setIcon(new ImageIcon(Risorse.voce_ok_off));
+					cancel.setIcon(new ImageIcon(Risorse.voce_annulla));
 				}
 				else{
-					confirm.requestFocus();
+					ok.requestFocus();
+					ok.setIcon(new ImageIcon(Risorse.voce_ok));
+					cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
 				}
 			}
 			
@@ -415,40 +475,46 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 	
 	private class FinestraReinserisci implements KeyListener,ActionListener{
 		
-		private JLabel label = new JLabel();
+		private JLabel q;
 		private JFrame f;
-		private JPanel p = new JPanel();
-		private JPanel c = new JPanel();
-		private JButton ok = new JButton("Ok");
+		private JButton ok = new JButton();
 		private Handler h;
 		
 		public FinestraReinserisci(Handler h){
-			switch(h.getLingua().getLingua()){
-			case "ENGLISH":{
-				label.setText("There isn't any name. Repete.");
-				break;
-			}
-			case "ITALIANO":{
-				label.setText("Nessun nominativo. Reinserire.");
-				break;
-			}
-			case "DEUTSCH":{
-				label.setText("Kein Name! Setze ihn wieder ein.");
-				break;
-			}
-			}//switch
+			
+			ok.setBorderPainted(false);
+			ok.setFocusPainted(false);
+			ok.setContentAreaFilled(false);
+			ok.setIcon(new ImageIcon(Risorse.voce_ok));
+			
+			//Impostazione della larghezza in base alla lunghezza della voce
+			int larghezza = Risorse.voce_no_nominativo.getWidth()+16;
 			
 			f = new JFrame();
-			f.setSize(300, 100);
+			f.setSize(larghezza, 65);
 			f.setResizable(false);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			p.add(label);
-			c.add(ok);
+			//Question
+			q = new JLabel(new ImageIcon(Risorse.voce_no_nominativo));
 			
-			f.add(p,BorderLayout.NORTH);
-			f.add(c,BorderLayout.SOUTH);
+			//Elimina la barra del titolo
+		    f.setUndecorated(true);
+		    //Per impostare la forma
+		    f.setShape(new RoundRectangle2D.Double.Double(0, 0, larghezza, 65, 15, 80));
+			//Resizing dinamico dello sfondo
+			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
+			
+			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			sfondo = new JLabel(new ImageIcon(img));
+			f.setContentPane(sfondo);
+			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
+			f.setLayout(new FlowLayout());
+			
+			//aggiunta dei pannelli e dei pulsanti.
+			f.add(q, BorderLayout.NORTH);
+			f.add(ok, BorderLayout.SOUTH);
 			
 			f.setVisible(true);
 			
