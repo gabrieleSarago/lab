@@ -3,6 +3,7 @@ package finestra;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -157,7 +158,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				e.printStackTrace();
 			}
 			
-			name.setBackground(Color.blue);
+			name.setBackground(new Color(128, 206, 251));
+			name.setFont(new Font("Arial", Font.BOLD, 14));
+			name.setForeground(Color.black);
 			
 			ok.setBorderPainted(false);
 			ok.setFocusPainted(false);

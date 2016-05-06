@@ -20,7 +20,7 @@ public class Risorse {
 	public static BufferedImage sfondo_popup;
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
-	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo;
+	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
@@ -227,6 +227,9 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
 		voce_no_nominativo = s1.prendiSprite(0, 0, 448, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
+		voce_azzera_classifica = s1.prendiSprite(0, 0, 316, 22);
+		
 	}
 	
 	public static void inizializzaENG(){		
@@ -330,6 +333,9 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
 		voce_no_nominativo = s1.prendiSprite(0, 22, 424, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
+		voce_azzera_classifica = s1.prendiSprite(0, 22, 296, 22);
+		
 	}
 	
 	public static void inizializzaDEU(){
@@ -430,6 +436,9 @@ public class Risorse {
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
 		voce_no_nominativo = s1.prendiSprite(0, 44, 448, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
+		voce_azzera_classifica = s1.prendiSprite(0, 44, 296, 22);
 	}
 
 }

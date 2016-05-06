@@ -54,6 +54,7 @@ public class Gioco implements Runnable {
 	private void inizializza(){
 		f = new Finestra(titolo, larghezza, altezza);
 		f.getFrame().addKeyListener(gi);
+		f.getFrame().setIconImage(CaricatoreImmagini.caricaImmagine("res/img/Sprite/icon_link.png"));
 		
 		suono = new Suono();
 		lingua = new Lingua();
