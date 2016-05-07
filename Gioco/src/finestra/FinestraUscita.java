@@ -87,8 +87,10 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		//Gestione del focus dei pulsanti
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner())
 			System.exit(0);
-		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner())
+		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner()){
+			h.getSuono().getClipStatoMenu().start();
 			f.dispose();
+		}
 		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
 			if(si.isFocusOwner()){
 				no.requestFocus();

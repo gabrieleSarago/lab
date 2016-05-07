@@ -19,13 +19,14 @@ public class StatoClassifica extends Stato{
 	
 	private Handler h;
 	private Sfondo s;
+	
 	private Suono suono;
+	
 	private Classifica c = new Classifica();
 	
 	private int sceltaCorrente=0;
 	
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
-	
 	
 	//per regolarizzare gli aggiornamenti
 	private int fps=60;
@@ -36,12 +37,14 @@ public class StatoClassifica extends Stato{
 	long timer=0;
 	
 
-	public StatoClassifica(Handler h) {
+	public StatoClassifica(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
 		s = new Sfondo("res/img/sfondi/classifica.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
-		suono = h.getSuono();
+		
+		this.suono = suono;
+		
 		try {
 			c.carica("res/classifiche/classificaPunteggio.txt");
 		} catch (IOException e) {
@@ -52,7 +55,6 @@ public class StatoClassifica extends Stato{
 
 	@Override
 	public void aggiorna(){
-		s.aggiorna();
 		//ottimizzazione
 		ora=System.nanoTime();
 		delta += (ora-ultimoTempo)/tempoDiAggiornamento;
@@ -97,7 +99,10 @@ public class StatoClassifica extends Stato{
 			}
 			else new FinestraNessunPunteggio(h);
 		}
-		else h.getGioco().setStato(new StatoMenu(h));
+		else{
+			h.getSuono().getClipStatoMenu().close();
+			h.getGioco().setStato(new StatoMenu(h));
+		}
 	}
 	
 	private void getInput() {

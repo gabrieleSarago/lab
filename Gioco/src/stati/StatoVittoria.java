@@ -13,7 +13,7 @@ import gioco.Handler;
 public class StatoVittoria extends Stato {
 
 	private BufferedImage img;
-	@SuppressWarnings("unused")
+	
 	private int tempo;
 	private Classifica classifica = new Classifica();
 

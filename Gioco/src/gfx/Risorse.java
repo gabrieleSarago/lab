@@ -426,7 +426,7 @@ public class Risorse {
 		voce_annulla_off = s1.prendiSprite(0, 44, 128, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_nome.png"));
-		voce_nome = s1.prendiSprite(0, 44, 74, 22);
+		voce_nome = s1.prendiSprite(0, 22, 74, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salvataggio.png"));
 		voce_salvataggio = s1.prendiSprite(0, 44, 360, 22);

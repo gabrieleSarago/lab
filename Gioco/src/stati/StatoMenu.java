@@ -45,8 +45,6 @@ public class StatoMenu extends Stato{
 			 suono.riproduci(Suono.suoni.MENU);
 			 riproduzione = false;
 		}
-		
-		s.aggiorna();
 		//ottimizzazione
 		ora = System.nanoTime();
 		delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
@@ -98,16 +96,18 @@ public class StatoMenu extends Stato{
 	
 	private void seleziona (){
 		if (sceltaCorrente == 0){
+			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == 1){
+			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
 		}
 		if (sceltaCorrente == 2){
-			h.getGioco().setStato(new StatoClassifica(h));
+			h.getGioco().setStato(new StatoClassifica(h, suono));
 		}
 		if(sceltaCorrente == 3){
-			h.getGioco().setStato(new StatoOpzioni(h));
+			h.getGioco().setStato(new StatoOpzioni(h, suono));
 		}
 		
 		if(sceltaCorrente == 4){
@@ -115,9 +115,10 @@ public class StatoMenu extends Stato{
 		}
 		
 		if (sceltaCorrente == 5){
+			suono.getClipStatoMenu().stop();
 			new FinestraUscita(h);
 		}
-		suono.getClipStatoMenu().close();
+		
 		suono.ferma();
 	}
 	

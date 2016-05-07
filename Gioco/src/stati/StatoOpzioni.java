@@ -21,23 +21,24 @@ public class StatoOpzioni extends Stato{
 	
 	private Lingua lingua;
 	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"};
+	
 	private Suono suono;
-		
+	
 	//per regolarizzare i movimenti
-	int fps = 60;
+	int fps = 55;
 	double tempoDiAggiornamento = 1000000000 / fps;
 	double delta = 0;
 	long ora;
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
-	public StatoOpzioni(Handler h) {
+	public StatoOpzioni(Handler h, Suono suono) {
 		super(h);
 		this.h = h;
 		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
-		suono = h.getSuono();
-
+		this.suono = suono;
+		
 		lingua = h.getLingua();
 		for(int i = 0; i<lingue.length; i++){
 			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i]))
@@ -47,7 +48,7 @@ public class StatoOpzioni extends Stato{
 
 	@Override
 	public void aggiorna() {
-		s.aggiorna();
+		
 		//ottimizzazione
 		ora = System.nanoTime();
 		delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
@@ -131,6 +132,7 @@ public class StatoOpzioni extends Stato{
 			//musica
 		}
 		if (sceltaCorrente == 2)
+			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoMenu(h));
 	}
 	

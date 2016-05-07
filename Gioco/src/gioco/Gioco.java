@@ -78,7 +78,7 @@ public class Gioco implements Runnable {
 		cg = new CameraGioco(h, 0, 0);
 		
 		if(linea == null)
-			stato = new StatoOpzioni(h);//StatoInfo
+			stato = new StatoOpzioni(h, suono);//StatoInfo
 		else
 			stato = new StatoMenu(h);
 		
