@@ -131,9 +131,13 @@ public class StatoOpzioni extends Stato{
 		if (sceltaCorrente == 1){
 			//musica
 		}
-		if (sceltaCorrente == 2)
+		if (sceltaCorrente == 2){
 			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoMenu(h));
+		}
+		
+		System.out.println("attivo");
+		
 	}
 	
 	private void getInput() {
