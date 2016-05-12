@@ -61,10 +61,11 @@ public class Gioco implements Runnable {
 		linea = lingua.getLingua();
 		
 		Risorse.inizializza();
-		//suono.inizializza();
 		
-		if(linea == null)
+		if(linea == null){
+			lingua.setLingua("ENGLISH");
 			Risorse.inizializzaENG();
+		}
 		
 		else{
 			switch(linea){
@@ -78,7 +79,7 @@ public class Gioco implements Runnable {
 		cg = new CameraGioco(h, 0, 0);
 		
 		if(linea == null)
-			stato = new StatoOpzioni(h, suono);//StatoInfo
+			stato = new StatoOpzioni(h, suono);
 		else
 			stato = new StatoMenu(h);
 		

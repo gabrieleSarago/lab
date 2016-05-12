@@ -60,7 +60,9 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 		f.setResizable(false);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setIconImage(CaricatoreImmagini.caricaImmagine("res/img/Sprite/pop-up.png"));
+		
+		//Nasconde la finestra dalla taskbar del sistema
+		f.setType(javax.swing.JFrame.Type.UTILITY);
 
 		//Elimina la barra del titolo
 	    f.setUndecorated(true);
@@ -172,6 +174,9 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 			f.setResizable(false);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			//Nasconde la finestra dalla taskbar del sistema
+			f.setType(javax.swing.JFrame.Type.UTILITY);
 			
 			//Elimina la barra del titolo
 		    f.setUndecorated(true);

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
 
 import classifica.Classifica;
-import finestra.FinestraSconfitta;
+
 import gfx.Suono;
 // import entita.Entita; ora c è gestioneEntita
 //import entita_statiche.Caramella;
@@ -78,7 +78,7 @@ public class StatoGioco extends Stato {
 			}
 			if (tempo<=0){
 				h.getSuono().getClipGioco().close();
-				h.getGioco().setStato(new StatoMenu(h));
+				h.getGioco().setStato(new StatoSconfitta(h, this.getUltimoScreen()));
 			}
 		}
 		}

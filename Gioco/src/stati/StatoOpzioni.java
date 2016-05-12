@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import gfx.Risorse;
 import gfx.Suono;
+import gfx.Suono.suoni;
 import gioco.Handler;
 import lingue.Lingua;
 import pannelli.Sfondo;
@@ -38,7 +39,9 @@ public class StatoOpzioni extends Stato{
 		s = new Sfondo("res/img/sfondi/menu.png",h);
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		this.suono = suono;
-		
+		if(suono.getClipStatoMenu() == null){
+			suono.riproduci(suoni.MENU);
+		}
 		lingua = h.getLingua();
 		for(int i = 0; i<lingue.length; i++){
 			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i]))
@@ -83,7 +86,7 @@ public class StatoOpzioni extends Stato{
 					switch(linguaCorrente){
 					case 0: g.drawImage(voce, 505, 290 + i * 50, null); break;
 					case 1: g.drawImage(voce, 470, 290 + i * 50, null); break;
-					case 2: g.drawImage(voce, 465, 290 + i * 50, null); break;
+					case 2: g.drawImage(voce, 480, 290 + i * 50, null); break;
 					}
 				}
 				break;
@@ -132,12 +135,8 @@ public class StatoOpzioni extends Stato{
 			//musica
 		}
 		if (sceltaCorrente == 2){
-			suono.getClipStatoMenu().close();
-			h.getGioco().setStato(new StatoMenu(h));
-		}
-		
-		System.out.println("attivo");
-		
+			h.getGioco().setStato(new StatoMenu(h, suono));
+		}		
 	}
 	
 	private void getInput() {
@@ -179,7 +178,7 @@ public class StatoOpzioni extends Stato{
 		}
 		if(h.getGestioneInput().esc){
 			suono.riproduci(Suono.suoni.CONFERMA);
-			h.getGioco().setStato(new StatoMenu(h));
+			h.getGioco().setStato(new StatoMenu(h, suono));
 		}
 	}		
 		

@@ -2,8 +2,12 @@ package stati;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import classifica.Classifica;
@@ -18,7 +22,6 @@ import pannelli.Sfondo;
 public class StatoClassifica extends Stato{
 	
 	private Handler h;
-	private Sfondo s;
 	
 	private Suono suono;
 	
@@ -29,7 +32,7 @@ public class StatoClassifica extends Stato{
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
 	
 	//per regolarizzare gli aggiornamenti
-	private int fps=60;
+	private int fps = 55;
 	double tempoDiAggiornamento=1000000000/fps;
 	double delta=0;
 	long ora;
@@ -40,8 +43,6 @@ public class StatoClassifica extends Stato{
 	public StatoClassifica(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
-		s = new Sfondo("res/img/sfondi/classifica.png",h);
-		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		
 		this.suono = suono;
 		
@@ -68,25 +69,41 @@ public class StatoClassifica extends Stato{
 
 	@Override
 	public void disegna(Graphics g) {
-		s.disegna(g);
+		g.setColor(Color.black);
+		g.fillRect(0, 0, h.getLarghezza(), h.getAltezza());
 		BufferedImage voce;
 		for(int i=0;i<opzioni.length;i++){
 			if(i==sceltaCorrente)
 				voce = Risorse.voci_classifica[i];
 			else
 				voce = Risorse.voci_classifica_off[i];
-			g.drawImage(voce, 450,500+i*50,null);
+			g.drawImage(voce, 350,500+i*50,null);
 		}
-		g.setColor(Color.black);
-		Font myFont = new Font("Areal",1,40);
-		g.setFont(myFont);
-		g.drawString("1.", 400, 250);
-		g.drawString("2.",400,350);
-		g.drawString("3.", 400, 450);
+		g.setColor(Color.white);
+		Font customFont;
+		try {
+		    //Crea un font da file
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/classifiche/old_game.ttf")).deriveFont(60f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    
+		    //registra il font
+		    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/classifiche/old_game.ttf")));
+		    g.setFont(customFont);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+
+		g.drawString("1.", 200, 250);
+		g.drawString("2.", 200,350);
+		g.drawString("3.", 200, 450);
 		int j = 250,cont=0; //cont serve per non stampare più di 3 nominativi
 		for(Nominativo n: c){
-			g.drawString(n.getPunteggio(), 500, j);
-			g.drawString(n.getNome(),600,j);
+			g.setColor(Color.RED);
+			g.drawString(n.getPunteggio(), 1000, j);
+			g.setColor(Color.white);
+			g.drawString(n.getNome(),300,j);
 			j+=100;cont++;
 			if(cont>=3)break;
 		}
@@ -100,8 +117,7 @@ public class StatoClassifica extends Stato{
 			else new FinestraNessunPunteggio(h);
 		}
 		else{
-			h.getSuono().getClipStatoMenu().close();
-			h.getGioco().setStato(new StatoMenu(h));
+			h.getGioco().setStato(new StatoMenu(h, suono));
 		}
 	}
 	
@@ -113,7 +129,7 @@ public class StatoClassifica extends Stato{
 				if(sceltaCorrente == -1)
 					sceltaCorrente = opzioni.length -1;
 				suono.riproduci(Suono.suoni.SCORRI);
-				}
+			}
 			if(h.getGestioneInput().down){
 				sceltaCorrente++;
 				h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
@@ -128,7 +144,7 @@ public class StatoClassifica extends Stato{
 			}
 			if(h.getGestioneInput().esc){
 				suono.riproduci(Suono.suoni.CONFERMA);
-				h.getGioco().setStato(new StatoMenu(h));
+				h.getGioco().setStato(new StatoMenu(h, suono));
 			}
 	}
 

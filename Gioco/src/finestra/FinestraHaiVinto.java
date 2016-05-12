@@ -43,6 +43,9 @@ public class FinestraHaiVinto implements KeyListener,ActionListener {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		
+		//Nasconde la finestra dalla taskbar del sistema
+		f.setType(javax.swing.JFrame.Type.UTILITY);
+		
 		//Question
 		q = new JLabel(new ImageIcon(Risorse.voce_vittoria));
 		

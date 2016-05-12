@@ -29,7 +29,6 @@ public class StatoMenu extends Stato{
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
-	
 	public StatoMenu(Handler h) {
 		super(h);
 		this.h = h;
@@ -37,6 +36,15 @@ public class StatoMenu extends Stato{
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		
 		suono = h.getSuono();		
+	}
+	
+	public StatoMenu(Handler h, Suono suono) {
+		super(h);
+		this.h = h;
+		s = new Sfondo("res/img/sfondi/menu.png",h);
+		s.setPosizione(h.getLarghezza(), h.getAltezza());
+		riproduzione = false;
+		this.suono = suono;
 	}
 
 	@Override
@@ -98,25 +106,29 @@ public class StatoMenu extends Stato{
 		if (sceltaCorrente == 0){
 			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoGioco(h));
+			
 		}
 		if (sceltaCorrente == 1){
 			suono.getClipStatoMenu().close();
 			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
+			
 		}
 		if (sceltaCorrente == 2){
 			h.getGioco().setStato(new StatoClassifica(h, suono));
+			
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setStato(new StatoOpzioni(h, suono));
 		}
 		
 		if(sceltaCorrente == 4){
-		
+			h.getGioco().setStato(new StatoInfo(h, suono));
 		}
 		
 		if (sceltaCorrente == 5){
 			suono.getClipStatoMenu().stop();
 			new FinestraUscita(h);
+			
 		}
 		
 		suono.ferma();

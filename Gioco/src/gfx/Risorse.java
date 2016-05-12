@@ -17,7 +17,7 @@ public class Risorse {
 	public static BufferedImage teletrasporto_attivo, teletrasporto_inattivo;
 	public static BufferedImage nemico;
 	
-	public static BufferedImage sfondo_popup;
+	public static BufferedImage sfondo_popup, stato_info;
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
@@ -105,6 +105,12 @@ public class Risorse {
 		Sprite d = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/Trofeo_d'oro.png"));
 		trofeo = d.prendiSprite(0, 0, 40, 40);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
+		voce_ok = s1.prendiSprite(0, 110, 40, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
+		voce_ok_off = s1.prendiSprite(0, 110, 40, 22);
+		
 		//----
 		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestTeletrasporto.png"));
 		teletrasporto_attivo = teletrasporto.prendiSprite(588, 449, 76, 60);
@@ -187,12 +193,10 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma.png"));
 		voce_si = s1.prendiSprite(0, 0, 30, 22);
 		voce_no = s1.prendiSprite(0, 22, 40, 22);
-		voce_ok = s1.prendiSprite(0, 110, 40, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
 		voce_si_off = s1.prendiSprite(0, 0, 30, 22);
 		voce_no_off = s1.prendiSprite(0, 22, 40, 22);
-		voce_ok_off = s1.prendiSprite(0, 110, 40, 22); 
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera.png"));
 		voce_azzera = s1.prendiSprite(0, 0, 557, 22);
@@ -229,6 +233,8 @@ public class Risorse {
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
 		voce_azzera_classifica = s1.prendiSprite(0, 0, 316, 22);
+		
+		stato_info = CaricatoreImmagini.caricaImmagine("res/img/sfondi/stato_info_ita.png");
 		
 	}
 	
@@ -336,6 +342,8 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
 		voce_azzera_classifica = s1.prendiSprite(0, 22, 296, 22);
 		
+		stato_info = CaricatoreImmagini.caricaImmagine("res/img/sfondi/stato_info_eng.png");
+		
 	}
 	
 	public static void inizializzaDEU(){
@@ -419,6 +427,9 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
 		voce_salva = s1.prendiSprite(0, 44, 678, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_sconfitta.png"));
+		voce_sconfitta = s1.prendiSprite(0, 44, 787, 22);
+		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_annulla.png"));
 		voce_annulla = s1.prendiSprite(0, 44, 128, 22);
 		
@@ -439,6 +450,8 @@ public class Risorse {
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_azzera_classifica.png"));
 		voce_azzera_classifica = s1.prendiSprite(0, 44, 296, 22);
+		
+		stato_info = CaricatoreImmagini.caricaImmagine("res/img/sfondi/stato_info_deu.png");
 	}
 
 }

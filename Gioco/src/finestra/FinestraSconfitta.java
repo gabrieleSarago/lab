@@ -54,6 +54,9 @@ public class FinestraSconfitta implements ActionListener,KeyListener {
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Nasconde la finestra dalla taskbar del sistema
+		f.setType(javax.swing.JFrame.Type.UTILITY);
+		
 		//Elimina la barra del titolo
 	    f.setUndecorated(true);
 	    //Per impostare la forma

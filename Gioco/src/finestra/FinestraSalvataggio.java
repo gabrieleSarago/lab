@@ -62,6 +62,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		f.setLocationRelativeTo(h.getGioco().getFrame());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Nasconde la finestra dalla taskbar del sistema
+		f.setType(javax.swing.JFrame.Type.UTILITY);
+		
 		//Elimina la barra del titolo
 	    f.setUndecorated(true);
 	    //Per impostare la forma
@@ -150,6 +153,8 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		private String player;
 		private Handler h;
 		
+		private int numCaratteri = 0;
+		
 		public FinestraInserimento(Handler h){
 			
 			try {
@@ -180,6 +185,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			f.setResizable(false);
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
+			
+			//Nasconde la finestra dalla taskbar del sistema
+			f.setType(javax.swing.JFrame.Type.UTILITY);
 			
 			//Elimina la barra del titolo
 		    f.setUndecorated(true);
@@ -240,6 +248,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent k) {
+			if(name.getText().length()>20){
+				name.setText(name.getText().substring(0, 20));
+			}
 			if(k.getKeyCode() == KeyEvent.VK_DOWN && name.isFocusOwner()){
 				ok.requestFocus();
 				ok.setIcon(new ImageIcon(Risorse.voce_ok));
@@ -314,6 +325,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
+			//Nasconde la finestra dalla taskbar del sistema
+			f.setType(javax.swing.JFrame.Type.UTILITY);
+			
 			//Question
 			q = new JLabel(new ImageIcon(Risorse.voce_salvataggio));
 			
@@ -380,12 +394,12 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			ok.setBorderPainted(false);
 			ok.setFocusPainted(false);
 			ok.setContentAreaFilled(false);
-			ok.setIcon(new ImageIcon(Risorse.voce_ok));
+			ok.setIcon(new ImageIcon(Risorse.voce_si));
 			
 			cancel.setBorderPainted(false);
 			cancel.setFocusPainted(false);
 			cancel.setContentAreaFilled(false);
-			cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
+			cancel.setIcon(new ImageIcon(Risorse.voce_no_off));
 			
 			//Impostazione della larghezza in base alla lunghezza della voce
 			int larghezza = Risorse.voce_no_salvataggio.getWidth()+16;
@@ -396,6 +410,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			f.setResizable(false);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			//Nasconde la finestra dalla taskbar del sistema
+			f.setType(javax.swing.JFrame.Type.UTILITY);
 			
 			//Question
 			q = new JLabel(new ImageIcon(Risorse.voce_no_salvataggio));
@@ -457,13 +474,13 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){
 				if(ok.isFocusOwner()){
 					cancel.requestFocus();
-					ok.setIcon(new ImageIcon(Risorse.voce_ok_off));
-					cancel.setIcon(new ImageIcon(Risorse.voce_annulla));
+					ok.setIcon(new ImageIcon(Risorse.voce_si_off));
+					cancel.setIcon(new ImageIcon(Risorse.voce_no));
 				}
 				else{
 					ok.requestFocus();
-					ok.setIcon(new ImageIcon(Risorse.voce_ok));
-					cancel.setIcon(new ImageIcon(Risorse.voce_annulla_off));
+					ok.setIcon(new ImageIcon(Risorse.voce_si));
+					cancel.setIcon(new ImageIcon(Risorse.voce_no_off));
 				}
 			}
 			
@@ -498,6 +515,9 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			f.setResizable(false);
 			f.setLocationRelativeTo(h.getGioco().getFrame());
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			//Nasconde la finestra dalla taskbar del sistema
+			f.setType(javax.swing.JFrame.Type.UTILITY);
 			
 			//Question
 			q = new JLabel(new ImageIcon(Risorse.voce_no_nominativo));
