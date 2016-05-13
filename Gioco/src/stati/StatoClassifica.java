@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +16,6 @@ import finestra.FinestraNessunPunteggio;
 import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
-import pannelli.Sfondo;
 
 public class StatoClassifica extends Stato{
 	
@@ -77,7 +75,9 @@ public class StatoClassifica extends Stato{
 				voce = Risorse.voci_classifica[i];
 			else
 				voce = Risorse.voci_classifica_off[i];
-			g.drawImage(voce, 350,500+i*50,null);
+			
+			//Per impostare le voci centrate
+			g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 500+i*50, null);
 		}
 		g.setColor(Color.white);
 		Font customFont;

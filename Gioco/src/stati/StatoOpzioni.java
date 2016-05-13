@@ -73,40 +73,12 @@ public class StatoOpzioni extends Stato{
 				voce = Risorse.voci_opzioni[i];
 			else
 				voce = Risorse.voci_opzioni_off[i];
-			switch(i){
-			case 0:{
-				if(i == sceltaCorrente){
-					switch(linguaCorrente){
-					case 0: g.drawImage(Risorse.lingue[linguaCorrente], 485, 290 + i * 50, null); break;
-					case 1: g.drawImage(Risorse.lingue[linguaCorrente], 495, 290 + i * 50, null); break;
-					case 2: g.drawImage(Risorse.lingue[linguaCorrente], 480, 290 + i * 50, null); break;
-					}
-				}
-				else{
-					switch(linguaCorrente){
-					case 0: g.drawImage(voce, 505, 290 + i * 50, null); break;
-					case 1: g.drawImage(voce, 470, 290 + i * 50, null); break;
-					case 2: g.drawImage(voce, 480, 290 + i * 50, null); break;
-					}
-				}
-				break;
-			}
-			case 1:{
-				switch(linguaCorrente){
-				case 0: g.drawImage(voce, 505, 290 + i * 50, null); break;
-				case 1: g.drawImage(voce, 530, 290 + i * 50, null); break;
-				case 2: g.drawImage(voce, 525, 290 + i * 50, null); break;
-				}break;
-			}	
-			case 2:{
-				switch(linguaCorrente){
-				case 0: g.drawImage(voce, 415, 290 + i * 50, null); break;
-				case 1: g.drawImage(voce, 475, 290 + i * 50, null); break;
-				case 2: g.drawImage(voce, 485, 290 + i * 50, null); break;
-				}break;
-			}
-			}
-		}	
+			if(sceltaCorrente == 0 && i == 0)
+				//Per impostare le voci centrate
+				g.drawImage(Risorse.lingue[linguaCorrente], h.getLarghezza()/2 - Risorse.lingue[linguaCorrente].getWidth()/2, 290 + i * 50, null);
+			else
+				g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 290 + i * 50, null);
+		}
 		
 	}
 	

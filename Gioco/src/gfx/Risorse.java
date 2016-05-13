@@ -90,8 +90,8 @@ public class Risorse {
 		
 		Sprite s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/lingue.png"));
 		
-		lingue[0] = s1.prendiSprite(0, 3, 242, 40);
-		lingue[1] = s1.prendiSprite(0, 47, 229, 40);
+		lingue[0] = s1.prendiSprite(0, 3, 239, 40);
+		lingue[1] = s1.prendiSprite(0, 47, 227, 40);
 		lingue[2] = s1.prendiSprite(0, 91, 245, 40);
 		
 		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.png");
@@ -135,39 +135,39 @@ public class Risorse {
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica.png"));
 		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_off.png"));
 		
-		voci_classifica[0] = s5.prendiSprite(0, 3, 533, 40);
-		voci_classifica_off[0] = s6.prendiSprite(0, 3, 533, 40);
+		voci_classifica[0] = s5.prendiSprite(0, 0, 533, 44);
+		voci_classifica[1] = s5.prendiSprite(0, 44, 403, 44);
+		
+		voci_classifica_off[0] = s6.prendiSprite(0, 0, 533, 44);
+		voci_classifica_off[1] = s6.prendiSprite(0, 44, 403, 44);
 		
 		Sprite s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni.png"));
 		Sprite s4 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_off.png"));
 		
-		voci_opzioni[0] = s3.prendiSprite(0, 3, 196, 40);
-		voci_opzioni[1] = s3.prendiSprite(0, 47, 199, 40);
+		voci_opzioni[0] = s3.prendiSprite(0, 3, 191, 40);
+		voci_opzioni[1] = s3.prendiSprite(0, 47, 196, 40);
 		voci_opzioni[2] = s3.prendiSprite(0, 91, 403, 40);
 		
-		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 196, 40);
-		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 199, 40);
+		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 191, 40);
+		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 196, 40);
 		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 403, 40);
-		
-		voci_classifica[1] = voci_opzioni[2];
-		voci_classifica_off[1] = voci_opzioni_off[2];
 		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_off.png"));
 		
-		voci_menu[0] = s.prendiSprite(0, 3, 410, 40);
+		voci_menu[0] = s.prendiSprite(0, 3, 408, 40);
 		voci_menu[1] = s.prendiSprite(0, 47, 424, 40);
-		voci_menu[2] = s.prendiSprite(0, 91, 315, 40);
+		voci_menu[2] = s.prendiSprite(0, 91, 313, 40);
 		voci_menu[3] = s.prendiSprite(0, 136, 212, 40);
-		voci_menu[4] = s.prendiSprite(0, 179, 127, 40);
-		voci_menu[5] = s.prendiSprite(0, 222, 122, 40);
+		voci_menu[4] = s.prendiSprite(0, 179, 126, 40);
+		voci_menu[5] = s.prendiSprite(0, 222, 126, 40);
 		
-		voci_menu_off[0] = s0.prendiSprite(0, 3, 410, 40);
+		voci_menu_off[0] = s0.prendiSprite(0, 3, 408, 40);
 		voci_menu_off[1] = s0.prendiSprite(0, 47, 424, 40);
-		voci_menu_off[2] = s0.prendiSprite(0, 91, 315, 40);
+		voci_menu_off[2] = s0.prendiSprite(0, 91, 313, 40);
 		voci_menu_off[3] = s0.prendiSprite(0, 136, 212, 40);
-		voci_menu_off[4] = s0.prendiSprite(0, 179, 127, 40);
-		voci_menu_off[5] = s0.prendiSprite(0, 222, 122, 40);
+		voci_menu_off[4] = s0.prendiSprite(0, 179, 126, 40);
+		voci_menu_off[5] = s0.prendiSprite(0, 222, 126, 40);
 		
 		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/titoloPausa.png");
 
@@ -243,39 +243,39 @@ public class Risorse {
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_eng.png"));
 		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_eng_off.png"));
 		
-		voci_classifica[0] = s5.prendiSprite(0, 3, 482, 40);
-		voci_classifica_off[0] = s6.prendiSprite(0, 3, 482, 40);
+		voci_classifica[0] = s5.prendiSprite(0, 0, 482, 44);
+		voci_classifica[1] = s5.prendiSprite(0, 44, 277, 44);
+		
+		voci_classifica_off[0] = s6.prendiSprite(0, 0, 482, 44);
+		voci_classifica_off[1] = s6.prendiSprite(0, 44, 277, 44);
 		
 		Sprite s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_eng.png"));
 		Sprite s4 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_eng_off.png"));
 		
 		voci_opzioni[0] = s3.prendiSprite(0, 3, 280, 40);
-		voci_opzioni[1] = s3.prendiSprite(0, 47, 165, 40);
-		voci_opzioni[2] = s3.prendiSprite(0, 91, 280, 40);
+		voci_opzioni[1] = s3.prendiSprite(0, 47, 161, 40);
+		voci_opzioni[2] = s3.prendiSprite(0, 91, 277, 40);
 		
 		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 280, 40);
-		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 165, 40);
-		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 280, 40);
-		
-		voci_classifica[1] = voci_opzioni[2];
-		voci_classifica_off[1] = voci_opzioni_off[2];
+		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 161, 40);
+		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 277, 40);
 		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng_off.png"));
 		
-		voci_menu[0] = s.prendiSprite(0, 3, 264, 40);
+		voci_menu[0] = s.prendiSprite(0, 3, 261, 40);
 		voci_menu[1] = s.prendiSprite(0, 47, 291, 40);
-		voci_menu[2] = s.prendiSprite(0, 91, 217, 40);
-		voci_menu[3] = s.prendiSprite(0, 136, 260, 40);
-		voci_menu[4] = s.prendiSprite(0, 179, 129, 40);
-		voci_menu[5] = s.prendiSprite(0, 222, 126, 40);
+		voci_menu[2] = s.prendiSprite(0, 91, 215, 40);
+		voci_menu[3] = s.prendiSprite(0, 136, 258, 40);
+		voci_menu[4] = s.prendiSprite(0, 179, 126, 40);
+		voci_menu[5] = s.prendiSprite(0, 222, 121, 40);
 		
-		voci_menu_off[0] = s0.prendiSprite(0, 3, 264, 40);
+		voci_menu_off[0] = s0.prendiSprite(0, 3, 261, 40);
 		voci_menu_off[1] = s0.prendiSprite(0, 47, 291, 40);
-		voci_menu_off[2] = s0.prendiSprite(0, 91, 217, 40);
-		voci_menu_off[3] = s0.prendiSprite(0, 136, 260, 40);
-		voci_menu_off[4] = s0.prendiSprite(0, 179, 129, 40);
-		voci_menu_off[5] = s0.prendiSprite(0, 222, 126, 40);
+		voci_menu_off[2] = s0.prendiSprite(0, 91, 215, 40);
+		voci_menu_off[3] = s0.prendiSprite(0, 136, 258, 40);
+		voci_menu_off[4] = s0.prendiSprite(0, 179, 126, 40);
+		voci_menu_off[5] = s0.prendiSprite(0, 222, 121, 40);
 		
 		
 		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/pause.png");
@@ -351,40 +351,39 @@ public class Risorse {
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_deu.png"));
 		Sprite s6 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_deu_off.png"));
 		
-		voci_classifica[0] = s5.prendiSprite(0, 3, 579, 40);
-		voci_classifica_off[0] = s6.prendiSprite(0, 3, 579, 40);
+		voci_classifica[0] = s5.prendiSprite(0, 0, 579, 44);
+		voci_classifica[1] = s5.prendiSprite(0, 44, 250, 44);
+		
+		voci_classifica_off[0] = s6.prendiSprite(0, 0, 579, 44);
+		voci_classifica_off[1] = s6.prendiSprite(0, 44, 250, 44);
 		
 		Sprite s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_deu.png"));
 		Sprite s4 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_opzioni_deu_off.png"));
 		
-		voci_opzioni[0] = s3.prendiSprite(0, 3, 284, 40);
-		voci_opzioni[1] = s3.prendiSprite(0, 47, 165, 40);
+		voci_opzioni[0] = s3.prendiSprite(0, 3, 250, 40);
+		voci_opzioni[1] = s3.prendiSprite(0, 47, 160, 40);
 		voci_opzioni[2] = s3.prendiSprite(0, 91, 250, 40);
 		
-		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 284, 40);
-		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 165, 40);
+		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 250, 40);
+		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 160, 40);
 		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 250, 40);
-		
-		voci_classifica[1] = voci_opzioni[2];
-		voci_classifica_off[1] = voci_opzioni_off[2];
 		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_deu.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_deu_off.png"));
 		
 		voci_menu[0] = s.prendiSprite(0, 3, 342, 40);
-		voci_menu[1] = s.prendiSprite(0, 47, 320, 40);
-		voci_menu[2] = s.prendiSprite(0, 91, 320, 40);
-		voci_menu[3] = s.prendiSprite(0, 136, 266, 40);
-		voci_menu[4] = s.prendiSprite(0, 179, 295, 40);
+		voci_menu[1] = s.prendiSprite(0, 47, 305, 40);
+		voci_menu[2] = s.prendiSprite(0, 91, 293, 40);
+		voci_menu[3] = s.prendiSprite(0, 136, 263, 40);
+		voci_menu[4] = s.prendiSprite(0, 179, 290, 40);
 		voci_menu[5] = s.prendiSprite(0, 222, 250, 40);
 		
 		voci_menu_off[0] = s0.prendiSprite(0, 3, 342, 40);
-		voci_menu_off[1] = s0.prendiSprite(0, 47, 320, 40);
-		voci_menu_off[2] = s0.prendiSprite(0, 91, 320, 40);
-		voci_menu_off[3] = s0.prendiSprite(0, 136, 266, 40);
-		voci_menu_off[4] = s0.prendiSprite(0, 179, 295, 40);
+		voci_menu_off[1] = s0.prendiSprite(0, 47, 305, 40);
+		voci_menu_off[2] = s0.prendiSprite(0, 91, 293, 40);
+		voci_menu_off[3] = s0.prendiSprite(0, 136, 263, 40);
+		voci_menu_off[4] = s0.prendiSprite(0, 179, 290, 40);
 		voci_menu_off[5] = s0.prendiSprite(0, 222, 250, 40);
-		
 		
 		titoloPausa = CaricatoreImmagini.caricaImmagine("res/img/titoli/pause.png");
 

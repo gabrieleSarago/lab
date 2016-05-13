@@ -73,32 +73,8 @@ public class StatoMenu extends Stato{
 				voce = Risorse.voci_menu[i];
 			else
 				voce = Risorse.voci_menu_off[i];
-			switch(h.getLingua().getLingua()){
-			case "ITALIANO" : switch(i){
-			case 0: g.drawImage(voce, 395, 290 + i * 50, null); break;
-			case 1: g.drawImage(voce, 388, 290 + i * 50, null); break;
-			case 2: g.drawImage(voce, 445, 290 + i * 50, null); break;
-			case 3: g.drawImage(voce, 495, 290 + i * 50, null); break;
-			case 4: g.drawImage(voce, 540, 290 + i * 50, null); break;
-			case 5: g.drawImage(voce, 540, 290 + i * 50, null); break;
-			} break;
-		case "ENGLISH" :  switch(i){
-			case 0: g.drawImage(voce, 480, 290 + i * 50, null); break;
-			case 1: g.drawImage(voce, 465, 290 + i * 50, null); break;
-			case 2: g.drawImage(voce, 505, 290 + i * 50, null); break;
-			case 3: g.drawImage(voce, 485, 290 + i * 50, null); break;
-			case 4: g.drawImage(voce, 550, 290 + i * 50, null); break;
-			case 5: g.drawImage(voce, 552, 290 + i * 50, null); break;
-			} break;
-		case "DEUTSCH" : switch(i){
-			case 0: g.drawImage(voce, 440, 290 + i * 50, null); break;
-			case 1: g.drawImage(voce, 460, 290 + i * 50, null); break;
-			case 2: g.drawImage(voce, 465, 290 + i * 50, null); break;
-			case 3: g.drawImage(voce, 480, 290 + i * 50, null); break;
-			case 4: g.drawImage(voce, 470, 290 + i * 50, null); break;
-			case 5: g.drawImage(voce, 490, 290 + i * 50, null); break;
-			} break;
-		}
+			//Per impostare le voci centrate
+			g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 290 + i * 50, null);
 		}
 	}
 	
