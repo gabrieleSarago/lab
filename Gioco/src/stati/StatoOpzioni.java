@@ -17,11 +17,13 @@ public class StatoOpzioni extends Stato{
 	
 	private int sceltaCorrente = 0;
 	private int linguaCorrente = 0;
+	private int musicaCorrente = 0;
 	
 	private String [] opzioni = {"LINGUA", "MUSICA", "TORNA AL MENU"};
 	
 	private Lingua lingua;
 	private String [] lingue = {"ITALIANO", "ENGLISH", "DEUTSCH"};
+	private String [] musica = {"ON", "OFF"};
 	
 	private Suono suono;
 	
@@ -47,6 +49,7 @@ public class StatoOpzioni extends Stato{
 			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i]))
 				linguaCorrente = i;
 		}
+		//TODO impostare musica on/off da file
 	}
 
 	@Override
@@ -76,6 +79,9 @@ public class StatoOpzioni extends Stato{
 			if(sceltaCorrente == 0 && i == 0)
 				//Per impostare le voci centrate
 				g.drawImage(Risorse.lingue[linguaCorrente], h.getLarghezza()/2 - Risorse.lingue[linguaCorrente].getWidth()/2, 290 + i * 50, null);
+			else if(sceltaCorrente == 1 && i == 1){
+				g.drawImage(Risorse.voci_musica[musicaCorrente], h.getLarghezza()/2 - Risorse.voci_musica[musicaCorrente].getWidth()/2, 290 + i * 50, null);
+			}
 			else
 				g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 290 + i * 50, null);
 		}
@@ -104,7 +110,12 @@ public class StatoOpzioni extends Stato{
 		}
 		
 		if (sceltaCorrente == 1){
-			//musica
+			if(musicaCorrente == 0){
+				suono.setMuto(false);
+			}
+			else{
+				suono.setMuto(true);
+			}
 		}
 		if (sceltaCorrente == 2){
 			h.getGioco().setStato(new StatoMenu(h, suono));
@@ -148,6 +159,23 @@ public class StatoOpzioni extends Stato{
 				linguaCorrente = lingue.length-1;
 			seleziona();
 		}
+		
+		if(sceltaCorrente == 1 && h.getGestioneInput().right){
+			suono.riproduci(Suono.suoni.SCORRI);
+			musicaCorrente++;
+			if(musicaCorrente > musica.length-1)
+				musicaCorrente = 0;
+			seleziona();
+		}
+		
+		if(sceltaCorrente == 1 && h.getGestioneInput().left){
+			suono.riproduci(Suono.suoni.SCORRI);
+			musicaCorrente--;
+			if(musicaCorrente < 0)
+				musicaCorrente = musica.length-1;
+			seleziona();
+		}
+		
 		if(h.getGestioneInput().esc){
 			suono.riproduci(Suono.suoni.CONFERMA);
 			h.getGioco().setStato(new StatoMenu(h, suono));

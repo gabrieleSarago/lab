@@ -18,7 +18,10 @@ public class Suono extends JFrame{
 	private AudioInputStream audioCaramella,audioScorri,audioConferma;
 	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco, audioMenu;
 	
+	private boolean muto;
+	
 	public void riproduci(suoni s){
+		if(!muto){
 		try {
 			clip = AudioSystem.getClip();
 			
@@ -71,7 +74,6 @@ public class Suono extends JFrame{
 		}
 		}
 		} catch (Exception e) {e.printStackTrace();}
-		
 		//Se clip è già attivo lo blocca e ne libera le risorse per poterlo riusare.
 		if(clip.isRunning()){
 			clip.stop();
@@ -79,6 +81,23 @@ public class Suono extends JFrame{
 		}
 		
 		clip.start();
+		}
+	}
+	
+	public void setMuto(boolean muto){
+		this.muto = muto;
+		if(muto){
+			clip_StatoMenu.stop();
+			clip.stop();
+		}
+		else{
+			clip_StatoMenu.start();
+			clip.start();
+		}
+	}
+	
+	public boolean getMuto(){
+		return muto;
 	}
 	
 	public void ferma(){

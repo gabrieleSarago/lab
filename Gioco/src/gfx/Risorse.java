@@ -8,7 +8,7 @@ public class Risorse {
 	//private static final int lifeh = 15, lifew = 96;
 	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
 	public static BufferedImage [] voci_pausa, voci_pausa_off,
-	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, lingue;// tempo;
+	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, voci_musica, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
 	// ----
@@ -83,6 +83,8 @@ public class Risorse {
 		voci_opzioni = new BufferedImage[3];
 		voci_opzioni_off = new BufferedImage[3];
 		
+		voci_musica = new BufferedImage[2];
+		
 		voci_classifica = new BufferedImage[2];
 		voci_classifica_off = new BufferedImage[2];
 		
@@ -151,6 +153,11 @@ public class Risorse {
 		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 191, 40);
 		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 196, 40);
 		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 403, 40);
+		
+		s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_musica.png"));
+	
+		voci_musica[0] = s3.prendiSprite(0, 3, 74, 40);
+		voci_musica[1] = s3.prendiSprite(0, 47, 109, 40);
 		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_off.png"));
@@ -259,6 +266,11 @@ public class Risorse {
 		voci_opzioni_off[0] = s4.prendiSprite(0, 3, 280, 40);
 		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 161, 40);
 		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 277, 40);
+		
+		s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_musica.png"));
+		
+		voci_musica[0] = s3.prendiSprite(0, 3, 74, 40);
+		voci_musica[1] = s3.prendiSprite(0, 47, 109, 40);
 		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_eng_off.png"));
