@@ -139,12 +139,13 @@ public class StatoOpzioni extends Stato{
 			suono.riproduci(Suono.suoni.SCORRI);
 		}
 		if(h.getGestioneInput().enter){
-			seleziona();
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			seleziona();
 			suono.riproduci(Suono.suoni.CONFERMA);
 		}
 		
 		if(sceltaCorrente == 0 && h.getGestioneInput().right){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			linguaCorrente++;
 			suono.riproduci(Suono.suoni.SCORRI);
 			if(linguaCorrente > lingue.length-1)
@@ -153,6 +154,7 @@ public class StatoOpzioni extends Stato{
 		}
 		
 		if(sceltaCorrente == 0 && h.getGestioneInput().left){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			linguaCorrente--;
 			suono.riproduci(Suono.suoni.SCORRI);
 			if(linguaCorrente < 0)
@@ -161,6 +163,7 @@ public class StatoOpzioni extends Stato{
 		}
 		
 		if(sceltaCorrente == 1 && h.getGestioneInput().right){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.SCORRI);
 			musicaCorrente++;
 			if(musicaCorrente > musica.length-1)
@@ -169,6 +172,7 @@ public class StatoOpzioni extends Stato{
 		}
 		
 		if(sceltaCorrente == 1 && h.getGestioneInput().left){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.SCORRI);
 			musicaCorrente--;
 			if(musicaCorrente < 0)
@@ -177,6 +181,7 @@ public class StatoOpzioni extends Stato{
 		}
 		
 		if(h.getGestioneInput().esc){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.CONFERMA);
 			h.getGioco().setStato(new StatoMenu(h, suono));
 		}

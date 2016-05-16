@@ -20,6 +20,8 @@ public class StatoInfo extends Stato{
 	@Override
 	public void aggiorna() {
 		if(h.getGestioneInput().esc || h.getGestioneInput().enter){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			
 			h.setStato(new StatoMenu(h, suono));
 		}
 	}

@@ -137,7 +137,7 @@ public class StatoGioco extends Stato {
 	
 	private void getInput(){
 		if(h.getGestioneInput().esc){
-			//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 						
 			h.getGioco().setPausa(true);
 			h.getGioco().setStato(new StatoPausa(h, this));
@@ -145,9 +145,10 @@ public class StatoGioco extends Stato {
 			//Se si entra in pausa la musica del gioco si ferma e le risorse dei clip vengono liberate.
 			//Tale operazione viene eseguita in seguito alla chiamata di StatoPausa per evitare il
 			//ritardo nel momento in cui si entra in pausa.
-			
-			suono.getClipGioco().stop();
-			suono.ferma();
+			if(!suono.getMuto()){
+				suono.getClipGioco().stop();
+				suono.ferma();
+			}
 		}
 	}
 	

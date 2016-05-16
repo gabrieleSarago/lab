@@ -138,11 +138,12 @@ public class StatoClassifica extends Stato{
 				suono.riproduci(Suono.suoni.SCORRI);
 			}
 			if(h.getGestioneInput().enter){
-				seleziona();
 				h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+				seleziona();
 				suono.riproduci(Suono.suoni.CONFERMA);
 			}
 			if(h.getGestioneInput().esc){
+				h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 				suono.riproduci(Suono.suoni.CONFERMA);
 				h.getGioco().setStato(new StatoMenu(h, suono));
 			}

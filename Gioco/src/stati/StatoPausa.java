@@ -102,7 +102,8 @@ public class StatoPausa extends Stato{
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setPausa(false);
-			h.getSuono().getClipGioco().close();
+			if(!suono.getMuto())
+				h.getSuono().getClipGioco().close();
 			h.getGioco().setStato(new StatoMenu(h));
 		}
 	}
@@ -112,21 +113,21 @@ public class StatoPausa extends Stato{
 		//Accellera la traslazione dello sfondo alla pressione di freccia destra
 		if(h.getGestioneInput().right)
 			dx+=2;
-			s.setVector(-0.3-dx, 0);
+		s.setVector(-0.3-dx, 0);
 		//se la freccia viene rilasciata la velocità torna normale. 
 		dx = 0;
 		
 		if(h.getGestioneInput().up){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.SCORRI);
 			sceltaCorrente--;
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente<0){
 				sceltaCorrente = Risorse.voci_pausa.length-1;			}
 		}
 		if(h.getGestioneInput().down){
+			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			suono.riproduci(Suono.suoni.SCORRI);
 			sceltaCorrente++;
-			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			if(sceltaCorrente > Risorse.voci_pausa.length-1)
 				sceltaCorrente = 0;
 		}

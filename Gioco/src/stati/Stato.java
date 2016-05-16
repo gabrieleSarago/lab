@@ -22,6 +22,9 @@ public abstract class Stato {
 	
 	public Stato (Handler h){
 		this.h = h;
+		
+		//Ripristina l'input al passaggio di stato
+		h.getGestioneInput().azzera();
 	}
 	public abstract void aggiorna();
 	
