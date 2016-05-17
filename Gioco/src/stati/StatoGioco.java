@@ -6,8 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
 
-import classifica.Classifica;
-
 import gfx.Suono;
 // import entita.Entita; ora c è gestioneEntita
 //import entita_statiche.Caramella;
@@ -26,7 +24,6 @@ public class StatoGioco extends Stato {
 	private int tempo;
 	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
-	private Classifica classifica = new Classifica();
 	private Graphics g;
 	private boolean riproduzione = true;
 	private Suono suono;

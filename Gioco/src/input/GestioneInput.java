@@ -30,12 +30,9 @@ public class GestioneInput implements KeyListener {
 		enter = false;
 		esc = false;
 		
-		tasti[KeyEvent.VK_UP-35] = false;
-		tasti[KeyEvent.VK_DOWN-35] = false;
-		tasti[KeyEvent.VK_LEFT-35] = false;
-		tasti[KeyEvent.VK_RIGHT-35] = false;
-		tasti[KeyEvent.VK_ENTER-10] = false;
-		tasti[KeyEvent.VK_ESCAPE-26] = false;
+		for(int i = 0; i< tasti.length; i++){
+			tasti[i] = false;
+		}
 	}
 	
 	@Override

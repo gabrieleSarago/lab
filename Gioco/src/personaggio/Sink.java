@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.concurrent.TimeUnit;
+
 import gfx.Animazione;
 import gfx.Risorse;
 import gioco.Handler;
@@ -88,18 +90,11 @@ public class Sink extends Personaggio {
 			ora = System.nanoTime();
 			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 			timer += ora - ultimoTempo;
-			
-			//TODO
-			//Il tempo scala ogni secondo??
-			//if(timer > TimeUnit.SECONDS.toNanos(1)){
-				//tempo--;
-				//timer = 0;
-				//}
-			
 			ultimoTempo = ora;
-			if(delta >= 50){
+			
+			if(timer > TimeUnit.SECONDS.toNanos(1)){
 				tempo--;
-				delta -= 50;
+				timer = 0;
 			}
 		}
 		else{
