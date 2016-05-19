@@ -98,7 +98,8 @@ public class StatoMenu extends Stato{
 		}
 		
 		if(sceltaCorrente == 4){
-			h.getGioco().setStato(new StatoInfo(h, suono));
+			suono.getClipStatoMenu().stop();
+			h.getGioco().setStato(new StatoInfo(h));
 		}
 		
 		if (sceltaCorrente == 5){

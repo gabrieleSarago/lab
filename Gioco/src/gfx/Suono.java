@@ -1,24 +1,40 @@
 package gfx;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JFrame;
 
 public class Suono extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public enum suoni{GIOCO,CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA, MENU};
+	public enum suoni{GIOCO, INFO, CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA, MENU};
 	//A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
 	//precedente continua e non può essere fermata.
-	private Clip clip_StatoGioco, clip_StatoMenu, clip;
-	private AudioInputStream audioCaramella,audioScorri,audioConferma;
+	private Clip clip_StatoGioco, clip_StatoMenu, clip_StatoInfo , clip;
+	private AudioInputStream audioCaramella,audioScorri,audioConferma, audioInfo;
 	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco, audioMenu;
 	
 	private boolean muto;
+	private String linea;
+	
+	public Suono() {
+		try {
+			clip_StatoMenu = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void riproduci(suoni s){
 		if(!muto){
@@ -34,6 +50,13 @@ public class Suono extends JFrame{
 			clip_StatoGioco.loop(Clip.LOOP_CONTINUOUSLY);
 			break;
 		}
+		case INFO:
+			clip_StatoInfo =  AudioSystem.getClip();
+			File info =  new File("res/suoni/info.wav");
+			audioInfo = AudioSystem.getAudioInputStream(info);
+			clip_StatoInfo.open(audioInfo);
+			clip_StatoInfo.loop(Clip.LOOP_CONTINUOUSLY);
+			break;
 		case CARAMELLA:{
 			File caramella = new File("res/suoni/LOZ_Get_Item.wav");
 			audioCaramella = AudioSystem.getAudioInputStream(caramella);
@@ -84,8 +107,36 @@ public class Suono extends JFrame{
 		}
 	}
 	
+	public void carica(){
+		linea = null;
+		try{
+			BufferedReader br = new BufferedReader(new FileReader("res/suoni/suono.txt"));
+			linea = br.readLine();
+			br.close();
+		}catch(IOException e){
+		}
+		if(linea.equals("OFF")){
+			setMuto(true);
+		}
+		else{
+			setMuto(false);
+		}
+	}
+	
 	public void setMuto(boolean muto){
 		this.muto = muto;
+		
+		try{
+			PrintWriter pw = new PrintWriter(new FileWriter("res/suoni/suono.txt"));
+			if(muto){
+				pw.write("OFF");
+			}
+			else{
+				pw.write("ON");
+			}
+			pw.close();
+		}catch(IOException e){}
+		
 		if(muto){
 			clip_StatoMenu.stop();
 			clip.stop();
@@ -111,6 +162,10 @@ public class Suono extends JFrame{
 	
 	public Clip getClipStatoMenu(){
 		 return clip_StatoMenu;
+	}
+	
+	public Clip getClipStatoInfo(){
+		return clip_StatoInfo;
 	}
 	
 }

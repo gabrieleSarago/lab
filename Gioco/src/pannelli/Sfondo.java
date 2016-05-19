@@ -28,6 +28,11 @@ public class Sfondo {
 		this.h = h;
 	}
 	
+	public Sfondo(BufferedImage img, Handler h){
+		this.h = h;
+		sfondo = img;
+	}
+	
 	public void setPosizione(double x,double y){
 		this.x = (x) % h.getLarghezza();
 		this.y = (y) % h.getAltezza();
@@ -59,4 +64,13 @@ public class Sfondo {
 	public BufferedImage getSfondo(){
 		return sfondo;
 	}
+	
+	public double getY(){
+		return y;
+	}
+	
+	public double getX(){
+		return x;
+	}
+	
 }

@@ -91,7 +91,9 @@ public class FinestraUscita implements KeyListener, ActionListener{
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner())
 			System.exit(0);
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner()){
-			h.getSuono().getClipStatoMenu().start();
+			if(!h.getSuono().getMuto()){
+				h.getSuono().getClipStatoMenu().start();
+			}
 			f.dispose();
 		}
 		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_RIGHT){

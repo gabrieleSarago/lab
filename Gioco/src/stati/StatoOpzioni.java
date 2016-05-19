@@ -49,7 +49,11 @@ public class StatoOpzioni extends Stato{
 			if(lingua.getLingua() != null && lingua.getLingua().equals(lingue[i]))
 				linguaCorrente = i;
 		}
-		//TODO impostare musica on/off da file
+		if(suono.getMuto())
+			musicaCorrente = 1;
+		else
+			musicaCorrente = 0;
+		
 	}
 
 	@Override
@@ -112,6 +116,8 @@ public class StatoOpzioni extends Stato{
 		if (sceltaCorrente == 1){
 			if(musicaCorrente == 0){
 				suono.setMuto(false);
+				if(!suono.getClipStatoMenu().isRunning())
+					suono.riproduci(suoni.MENU);
 			}
 			else{
 				suono.setMuto(true);

@@ -52,15 +52,18 @@ public class Gioco implements Runnable {
 	}
 	
 	private void inizializza(){
-		f = new Finestra(titolo, larghezza, altezza);
+		
+		Risorse.inizializza();
+		
+		h = new Handler(this);
+		f = new Finestra(titolo, larghezza, altezza, h);
 		f.getFrame().addKeyListener(gi);
 		f.getFrame().setIconImage(CaricatoreImmagini.caricaImmagine("res/img/Sprite/icon_link.png"));
 		
 		suono = new Suono();
+		
 		lingua = new Lingua();
 		linea = lingua.getLingua();
-		
-		Risorse.inizializza();
 		
 		if(linea == null){
 			lingua.setLingua("ENGLISH");
@@ -75,8 +78,9 @@ public class Gioco implements Runnable {
 			}
 		}
 		
-		h = new Handler(this);
 		cg = new CameraGioco(h, 0, 0);
+		
+		suono.carica();
 		
 		if(linea == null)
 			stato = new StatoOpzioni(h, suono);
@@ -84,6 +88,7 @@ public class Gioco implements Runnable {
 			stato = new StatoMenu(h);
 		
 		Stato.setStato(stato);
+
 	}
 	
 	public void setStato(Stato stati){

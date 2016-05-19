@@ -1,34 +1,59 @@
 package stati;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import gfx.Risorse;
 import gfx.Suono;
+import gfx.Suono.suoni;
 import gioco.Handler;
+import pannelli.Sfondo;
 
 public class StatoInfo extends Stato{
 	
 	private Handler h;
 	private Suono suono;
+	private Sfondo s;
 	
-	public StatoInfo(Handler h, Suono suono) {
+	private boolean  riproduzione = true;
+	
+	public StatoInfo(Handler h) {
 		super(h);
 		this.h = h;
-		this.suono = suono;
+		s = new Sfondo(Risorse.stato_info, h);
+		s.setPosizione(0, 680);
+		s.setVector(0, -0.3);
+		
+		suono = h.getSuono();
 	}
 
 	@Override
 	public void aggiorna() {
+		
+		if(riproduzione){
+			suono.riproduci(suoni.INFO);
+			riproduzione = false;
+		}
+		
+		if(s.getY() >= 0){
+			s.aggiorna();
+		}
+		
 		if(h.getGestioneInput().esc || h.getGestioneInput().enter){
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			
-			h.setStato(new StatoMenu(h, suono));
+			h.setStato(new StatoMenu(h));
+			
+			if(suono.getClipStatoInfo() != null)
+				suono.getClipStatoInfo().stop();
 		}
 	}
 
 	@Override
 	public void disegna(Graphics g) {
-		g.drawImage(Risorse.stato_info, 0, 0, null);
+		g.setColor(Color.black);
+		g.fillRect(0, 0, h.getLarghezza(), h.getAltezza());
+		s.disegna(g);
 	}
 
 }
