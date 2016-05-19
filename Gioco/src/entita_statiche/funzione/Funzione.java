@@ -6,6 +6,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
 
+import personaggio.Nemico;
 import entita.Entita;
 import entita_statiche.EntitaStatica;
 import entita_statiche.Interruttore;
@@ -17,14 +18,14 @@ import gioco.Handler;
 
 public class Funzione implements Externalizable{
 	
-	private EntitaStatica collegamento;	
+	private Entita collegamento;	//TODO
 	private Funzionalita funzione;
 	
 	public Funzione(){}
 	public Funzione(ArrayList<Entita> array_entita, int index, Funzionalita funzione)
 	{
 		this.funzione = funzione;
-		this.collegamento = (EntitaStatica)array_entita.get(index);
+		this.collegamento = array_entita.get(index); //TODO
 		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
 	}
 	
@@ -78,6 +79,15 @@ public class Funzione implements Externalizable{
 			case CAMBIA_TELETRASPORTO:
 				if(!(collegamento instanceof Teletrasporto)) throw new IllegalArgumentException("aspettato Teletrasporto");
 					((Teletrasporto)collegamento).cambiaAttivo();
+				break;
+			//TODO
+			case ATTIVA_NEMICO:
+				if(!(collegamento instanceof Nemico)) throw new IllegalArgumentException("aspettato Nemico");
+					((Nemico)collegamento).setVivo(true);
+				break;
+			case DISATTIVA_NEMICO:
+				if(!(collegamento instanceof Nemico)) throw new IllegalArgumentException("aspettato Nemico");
+					((Nemico)collegamento).setVivo(false);
 				break;
 			default:
 				throw new IllegalArgumentException("funzione non gestita");

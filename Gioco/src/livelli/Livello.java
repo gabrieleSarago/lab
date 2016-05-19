@@ -12,18 +12,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList; //eliminato per il gestore entita
-
-
-
-
 import java.util.Comparator;
 
-import personaggio.Nemico;
-import personaggio.Personaggio;
-import personaggio.Sink;
 import entita.Entita;
 //import entita.array_entita;
 import entita_statiche.Caramella;
+import entita_statiche.InterruttoreInvisibile;
 import entita_statiche.InterruttorePressione;
 import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;
@@ -33,6 +27,9 @@ import entita_statiche.funzione.Funzionalita;
 import entita_statiche.funzione.Funzione;
 import gfx.Suono;
 import gioco.Handler;
+import personaggio.Nemico;
+import personaggio.Personaggio;
+import personaggio.Sink;
 import stati.StatoGioco;
 import tiles.Tile;
 import utils.Utils;
@@ -127,9 +124,10 @@ public class Livello {
 		
 		// TODO: il percorso non deve esssere fisso
 		array_entita.clear(); //per sicurezza
-		try{
+		/*try{
 			supportoCarica(path);
-		}catch(Exception e){e.printStackTrace();}
+		}catch(Exception e){e.printStackTrace();}*/
+		array_entita.add(new Sink(h, 75, 75, 200));
 		//array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
 		
 	}
@@ -219,46 +217,58 @@ public class Livello {
 
 	//utile per aggiungere/modificare/eliminare entita
 	//eliminare a prodotto finito
-	private void caricaEntita()
-	{	
-		array_entita.add(new Sbarra(h, 256, 448, false)); // indice 0
-		array_entita.add(new Sbarra(h, 600, 128, true)); // indice 1
-		array_entita.add(new InterruttorePressione(h, 1000, 150, 
+	private void caricaEntita(){
+		// primo quadrante
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*6, Tile.TILE_ALTEZZA*4, true)); //false
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*3, true));
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*15, Tile.TILE_ALTEZZA*3, true));
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*4, true));//false
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*10, Tile.TILE_ALTEZZA*2, 
 				new Funzione(array_entita, 1, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 1, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 2, Funzionalita.CAMBIA_SBARRA)
+				new Funzione(array_entita, 3, Funzionalita.CAMBIA_SBARRA)
 				));
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*6, 
+				new Funzione(array_entita, 2, Funzionalita.CAMBIA_SBARRA),
+				new Funzione(array_entita, 4, Funzionalita.CAMBIA_SBARRA)
+		));
 		
-		((InterruttorePressione)array_entita.get(3)).getFunzione()[0].setFunzione(
-			new Funzione(array_entita, 3, Funzionalita.DISATTIVA_INTERRUTTORE));
+		// secondo quadrante
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*18, Tile.TILE_ALTEZZA*18, false)); //7 false
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*20, Tile.TILE_ALTEZZA*18, false));// false
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*22, Tile.TILE_ALTEZZA*18, false));// false
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*18, false));// false
+		array_entita.add(new Teletrasporto(h, Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*2,
+				Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*24, false));
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*21, Tile.TILE_ALTEZZA*4, 
+				new Funzione(array_entita, 10, Funzionalita.APRI_SBARRA),
+				new Funzione(array_entita, 11, Funzionalita.ATTIVA_TELETRASPORTO)
+				));
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*10, 
+				new Funzione(array_entita, 9, Funzionalita.CAMBIA_SBARRA)
+		));
 		
-		array_entita.add(new Teletrasporto(h, 1220, 500, 50,70));
-		array_entita.add(new Sbarra(h, 704, 448+Tile.TILE_ALTEZZA, false)); //5
+		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 22*Tile.TILE_ALTEZZA, false)); //14
+		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 24*Tile.TILE_ALTEZZA, false));
+		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 27*Tile.TILE_ALTEZZA, false));//16
+		array_entita.add(new InterruttoreInvisibile(h, Tile.TILE_LARGHEZZA*21, Tile.TILE_ALTEZZA*21,
+				Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*8,
+				new Funzione(array_entita, 14, Funzionalita.ATTIVA_NEMICO),
+				new Funzione(array_entita, 15, Funzionalita.ATTIVA_NEMICO),
+				new Funzione(array_entita, 16, Funzionalita.ATTIVA_NEMICO)
+				));
+		array_entita.add(new Teletrasporto(h, Tile.TILE_LARGHEZZA*12, Tile.TILE_ALTEZZA*25, //18
+				Tile.TILE_LARGHEZZA*11, Tile.TILE_ALTEZZA*15, false));
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*23, 
+				new Funzione(array_entita, 18, Funzionalita.ATTIVA_TELETRASPORTO)
+		));
 		
-		array_entita.add(new Sbarra(h, 320, 1023, false));
-		array_entita.add(new Sbarra(h, 768, 1540, true));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*25, Tile.TILE_ALTEZZA*10, false));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*20, Tile.TILE_ALTEZZA*28, false));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*23, Tile.TILE_ALTEZZA*10, true));//10
+		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*15, true)); // false
+		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*17, Tile.TILE_ALTEZZA*15, 
+				new Funzione(array_entita, 20, Funzionalita.APRI_SBARRA),
+				new Funzione(array_entita, 7, Funzionalita.APRI_SBARRA),
+				new Funzione(array_entita, 8, Funzionalita.APRI_SBARRA)
+		));
 		
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*14, 
-				new Funzione(array_entita, 9, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 7, Funzionalita.CAMBIA_SBARRA)
-				));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*3, Tile.TILE_ALTEZZA*22,
-				new Funzione(array_entita, 8, Funzionalita.CHIUDI_SBARRA)
-				));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*26, 
-				new Funzione(array_entita, 6, Funzionalita.APRI_SBARRA)
-				));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*26, 
-				new Funzione(array_entita, 8, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 10, Funzionalita.CAMBIA_SBARRA)
-				));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*13, false));
-		array_entita.add(new Caramella(h, Tile.TILE_LARGHEZZA*25, Tile.TILE_ALTEZZA*25));
-		array_entita.add(new Caramella(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*10));
-		array_entita.add(new Trofeo(h, 1750, 689));
 	}
 	
 	public void gestisciCollisioni(Personaggio p)
@@ -292,15 +302,19 @@ public class Livello {
 					!(ultimaCollisione_sink.equals(s.getUltimaEntita()))) 
 				((InterruttorePressione)s.getUltimaEntita()).funzione(h);
 		
-		if(s.getUltimaEntita() instanceof Teletrasporto){
-				s.setX(((Teletrasporto)s.getUltimaEntita()).getDestinazioneX());
-				s.setY(((Teletrasporto)s.getUltimaEntita()).getDestinazioneY());
+		if(s.getUltimaEntita() instanceof Teletrasporto && ((Teletrasporto)s.getUltimaEntita()).eAttivo()){
+			s.setX(((Teletrasporto)s.getUltimaEntita()).getDestinazioneX());
+			s.setY(((Teletrasporto)s.getUltimaEntita()).getDestinazioneY());
 		}
 		
-		if(s.getUltimaEntita() instanceof Nemico){
+		if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo())
 			s.setTempo(s.getTempo()-1);
-	}
 		
+		if(s.getUltimaEntita() instanceof InterruttoreInvisibile)
+			if(!(ultimaCollisione_sink instanceof InterruttoreInvisibile) || 
+						!(ultimaCollisione_sink.equals(s.getUltimaEntita())))
+					((InterruttoreInvisibile)s.getUltimaEntita()).funzione(h);
+	
 		ultimaCollisione_sink = s.getUltimaEntita();
 	}
 	

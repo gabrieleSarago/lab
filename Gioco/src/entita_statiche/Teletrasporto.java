@@ -23,7 +23,17 @@ public class Teletrasporto extends EntitaStatica{
 		this.destinazioneX = destinazioneX;
 		this.destinazioneY = destinazioneY;
 	}
+	
+	
+	public Teletrasporto(Handler h, float x, float y, float destinazioneX, float destinazioneY, boolean attivo) {
+		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_LARGHEZZA);
+		this.attivo = attivo;
+		this.attraversabile = attivo;
+		this.destinazioneX = destinazioneX;
+		this.destinazioneY = destinazioneY;
+	}
 
+	
 	@Override
 	public void aggiorna() {		
 	}

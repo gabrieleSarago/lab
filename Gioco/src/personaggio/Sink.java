@@ -1,5 +1,7 @@
 package personaggio;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,6 +18,8 @@ public class Sink extends Personaggio {
 	public enum Movimento{ SOPRA, SOTTO, DESTRA, SINISTRA}
 	
 	private int tempo = 0;
+	private int maxTempo;
+	private boolean sconfitta = false;
 	
 	//Animazione
 	private Animazione SinkSotto, SinkSopra, SinkSinistra, SinkDestra;
@@ -38,6 +42,8 @@ public class Sink extends Personaggio {
 	public Sink(Handler h, float x, float y, int tempo) {
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO);
 		this.tempo = tempo;
+		
+		maxTempo = tempo;
 		
 		bounds.x = 8;
 		bounds.y = 30;
@@ -81,7 +87,14 @@ public class Sink extends Personaggio {
 				 case DESTRA: SinkDestraFermo.aggiorna();break;
 				 case SOPRA: break;
 				 }
-			 }
+			}
+			//se si prende una caramella e il tempo è > 95 supera i 100 secondi.
+			if(tempo > maxTempo)
+				tempo = maxTempo;
+			
+			if(tempo<0){
+				sconfitta = true;
+			}
 			
 			//Movimento
 			getInput();
@@ -121,6 +134,19 @@ public class Sink extends Personaggio {
 	public void disegna(Graphics g) {
 		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
+		//Disegna la barra del tempo.
+		g.setColor(Color.black);
+		g.setFont(new Font ("Arial", Font.BOLD,15));
+		g.drawString(tempo+"", 180, 52);
+		g.fillRect(68, 38, 104 , 14);
+		g.setColor(Color.red);
+		g.fillRect(70, 40, 100 , 10);
+		g.setColor(Color.green);
+		if(tempo>maxTempo)
+			g.fillRect(70, 40, 100, 10);
+		else
+			g.fillRect(70, 40, (int)((float)tempo/(float)maxTempo*100), 10);
+		
 		//Rettangolo collisioni
 		//g.setColor(Color.RED);
 		//g.fillRect((int)(x + bounds.x +5 - h.getCameraGioco().getxOffset()),
@@ -160,6 +186,10 @@ public class Sink extends Personaggio {
 
 	public void setTempo(int tempo) {
 		this.tempo = tempo;
+	}
+	
+	public boolean getSconfitta(){
+		return sconfitta;
 	}
 	
 	//per il processo di esternalizzazione

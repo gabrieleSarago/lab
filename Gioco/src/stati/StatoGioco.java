@@ -1,7 +1,5 @@
 package stati;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
@@ -21,7 +19,6 @@ public class StatoGioco extends Stato {
 	private Livello l;
 	// ---private int x;
 	//----private int y;
-	private int tempo;
 	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
 	private Graphics g;
@@ -34,7 +31,6 @@ public class StatoGioco extends Stato {
 		h.setLivello(l);
 		//----x = l.sinkX;
 		//----y = l.sinkY;
-		tempo = l.getTempo();
 		suono = h.getSuono();
 		// ---- entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
@@ -47,7 +43,6 @@ public class StatoGioco extends Stato {
 		suono = h.getSuono();
 		//----x = l.sinkX;
 		//----y = l.sinkY;
-		tempo = l.getTempo();
 		//----entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
 	}
@@ -55,15 +50,17 @@ public class StatoGioco extends Stato {
 	@Override
 	public void aggiorna() {
 		
-		tempo = l.getTempo();
 		
 		if(riproduzione){
 			suono.riproduci(Suono.suoni.GIOCO);
 			riproduzione = false;
 		}
-		//se si prende una caramella e il tempo è > 95 supera i 100 secondi.
-		if(tempo > 100)
-			tempo = 100; 
+		
+		if (h.getLivello().getSink().getSconfitta()){
+			h.getSuono().getClipGioco().close();
+			h.getGioco().setStato(new StatoSconfitta(h, this.getUltimoScreen()));
+		}
+		
 		if(!vittoria){
 		if(!(h.getGioco().getPausa())){
 			getInput();
@@ -71,11 +68,7 @@ public class StatoGioco extends Stato {
 			l.aggiorna();
 			if (vittoria){
 				h.getSuono().getClipGioco().close();
-				h.getGioco().setStato(new StatoVittoria(h, this.getUltimoScreen(), this.tempo));
-			}
-			if (tempo<=0){
-				h.getSuono().getClipGioco().close();
-				h.getGioco().setStato(new StatoSconfitta(h, this.getUltimoScreen()));
+				h.getGioco().setStato(new StatoVittoria(h, this.getUltimoScreen(), h.getLivello().getSink().getTempo()));
 			}
 		}
 		}
@@ -115,20 +108,6 @@ public class StatoGioco extends Stato {
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);
-		
-		//Disegna la barra del tempo.
-		g.setColor(Color.black);
-		g.setFont(new Font ("Arial", Font.BOLD,15));
-		g.drawString(tempo+"", 180, 52);
-		g.fillRect(68, 38, 104 , 14);
-		g.setColor(Color.red);
-		g.fillRect(70, 40, 100 , 10);
-		g.setColor(Color.green);
-		if(tempo>100)
-			g.fillRect(70, 40, 100, 10);
-		else
-			g.fillRect(70, 40, tempo, 10);
-		
 		
 	}
 	
