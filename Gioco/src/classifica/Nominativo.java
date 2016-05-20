@@ -1,9 +1,20 @@
 package classifica;
 
+/**
+ * Costruisce l'oggetto Nominativo,caraterizzato da due oggetti String:
+ * punteggio del giocatore e nome del giocatore.
+ *
+ */
+
 public class Nominativo implements Comparable<Nominativo>{
 
 	String punteggio,nomeGiocatore;
 	
+	/**
+	 * Costruttore dell'oggetto Nominativo
+	 * @param punteggio il punteggio del giocatore.
+	 * @param nome il nome del giocatore.
+	 */
 	public Nominativo(String punteggio,String nome){
 		this.punteggio=punteggio; this.nomeGiocatore=nome;
 	}

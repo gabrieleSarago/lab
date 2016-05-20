@@ -2,6 +2,11 @@ package classifica;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Costruisce l'oggetto classifica utile per aggiornare lo StatoClassifica
+ *  appogiandosi ad una LinkedList di Java.
+ */
+
 public class Classifica implements Iterable<Nominativo>{
 	
 	private LinkedList<Nominativo> classifica=new LinkedList<Nominativo>();
@@ -13,12 +18,18 @@ public class Classifica implements Iterable<Nominativo>{
 	
 	boolean isEmpty(){return classifica.isEmpty();}
 	
-	
+	/**
+	 * Cancella dalla classifica tutti i Nominativi e relativi punteggi presenti.
+	 */
 	public void azzeraClassifica(){
 		if(classifica.isEmpty()) return;
 		classifica.clear();
 	}//azzeraClassifica
 	
+	/**
+	 * Aggiunge un nominativo alla classifica.
+	 * @param n l'oggetto Nominativo da aggiungere.
+	 */
 	public void add(Nominativo n){
 		ListIterator<Nominativo> lit = classifica.listIterator();
 		boolean flag = false;
@@ -33,10 +44,20 @@ public class Classifica implements Iterable<Nominativo>{
 		if(!flag)lit.add(n);
 	}//add
 	
+	/**
+	 * Rimuove un nominativo dalla classifica.
+	 * @param n L'oggetto Nominativo da rimuovere.
+	 */
 	public void remove(Nominativo n){
 		this.remove(n);
 	}//rimuovi
 	
+	/**
+	 * Salva il contenuto della classifica su file testuale.
+	 * Utile per memorizzare la classifica.
+	 * @param nomeFile il nome del file sul quale viene salvata la classifica.
+	 * @throws IOException
+	 */
 	public void salva(String nomeFile) throws IOException{
 		PrintWriter pw = new PrintWriter(new FileWriter(nomeFile));
 		for(Nominativo n: classifica)
@@ -44,6 +65,12 @@ public class Classifica implements Iterable<Nominativo>{
 		pw.close();
 	}//salva
 	
+	/**
+	 * Carica il contenuto della classifica presente su file.
+	 * Utile per mostrare l'attuale contenuto della classifica.
+	 * @param nomeFile il file da caricare
+	 * @throws IOException
+	 */
 	public void carica(String nomeFile) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(nomeFile));
 		String linea = null;
@@ -59,6 +86,7 @@ public class Classifica implements Iterable<Nominativo>{
 		br.close();
 	}//carica
 	
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder(10);
 		for(Nominativo n : classifica)
@@ -66,7 +94,9 @@ public class Classifica implements Iterable<Nominativo>{
 		return sb.toString();
 	}//toString
 
-
+	/**
+	 * Iteratore della classifica,necessario per scorrere il contenuto della classifica.
+	 */
 	@Override
 	public Iterator<Nominativo> iterator() {
 		return classifica.iterator();

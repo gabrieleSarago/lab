@@ -1,11 +1,17 @@
 package entita_statiche;
 
 import java.io.IOException;
+
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import entita_statiche.funzione.Funzione;
 import gioco.Handler;
+
+/**
+ * Costruisce l'oggetto statico Interruttore.
+ * Utile per aprire sbarre e accedere ai teletrasporti.
+ */
 
 public abstract class Interruttore extends EntitaStatica{
 
@@ -15,6 +21,15 @@ public abstract class Interruttore extends EntitaStatica{
 	protected boolean cambiaPosizione; //cambia da true a false, da false a true ogni volta che si esegue funzione
 	
 	public Interruttore() {}// per esternalizzazione
+	/**
+	 * Costruttore dell'oggetto Interruttore.
+	 * @param h oggetto Handler utile per curare la gestione con altre classi.
+	 * @param x coordinata X dell'oggetto Interruttore.
+	 * @param y coordinata Y dell'oggetto Interruttore.
+	 * @param larghezza la larghezza dell'oggetto Interruttore.
+	 * @param altezza l'altezza dell'oggetto interruttore.
+	 * @param funzione la funzione che svolge l'interruttore.
+	 */
 	public Interruttore(Handler h, float x, float y, int larghezza, int altezza, Funzione... funzione) {
 		super(h, x, y, larghezza, altezza);
 		attivo = true;
@@ -22,6 +37,10 @@ public abstract class Interruttore extends EntitaStatica{
 		cambiaPosizione = false;
 	}
 	// dice cosa fa l' interruttore
+	/**
+	 * Metodo che indica la funzione svolta dall'interruttore.
+	 * @param h oggetto Handler
+	 */
 	public void funzione(Handler h){
 		if(!attivo) return;
 		cambiaPosizione = !cambiaPosizione;
@@ -56,12 +75,18 @@ public abstract class Interruttore extends EntitaStatica{
 		this.funzione = funzione;
 	}
 	
+	/**
+	 * Salva la posizione dell'oggetto Interruttore.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 		out.writeBoolean(attivo);
 		out.writeObject(funzione);
 	}
+	/**
+	 * Carica l'oggetto Interruttore nella sua posizione.
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {

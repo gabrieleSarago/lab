@@ -10,9 +10,20 @@ import gfx.Risorse;
 import gioco.Handler;
 import tiles.Tile;
 
+/**
+ * Costruisce l'oggetto Caramella.
+ * Implementato all'interno del gioco aumenta il tempo/vita del giocatore.
+ */
+
 public class Caramella  extends EntitaStatica {
 
 	public Caramella(){}// per esternalizzazione
+	/**
+	 * Costruttore di Caramella.
+	 * @param h oggetto Handler per curare la gestione con le altre classi.
+	 * @param x cordinata X dell'oggetto Caramella nel gioco.
+	 * @param y corinata Y dell'oggetto Caramella nel gioco.
+	 */
 	public Caramella(Handler h, float x, float y) {
 		super(h, x, y,Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA);
 		bounds = new Rectangle(0, 14, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA/2+2);
@@ -22,6 +33,10 @@ public class Caramella  extends EntitaStatica {
 	public void aggiorna() {
 	}
 
+	/**
+	 * Disegna l'oggetto Caramella mediante un oggetto Graphics
+	 * sulla finestra di gioco.
+	 */
 	@Override
 	public void disegna(Graphics g) {
 		
@@ -34,10 +49,18 @@ public class Caramella  extends EntitaStatica {
 		
 	}
 	
+	/**
+	 * Metodo utile per il salvataggio delle posizioni degli oggetti Caramella.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 	}
+	
+	
+	/**
+	 * Metodo utile per il caricare gli oggetti Caramella nelle loro posizioni. 
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {

@@ -11,9 +11,20 @@ import gfx.Risorse;
 import gioco.Handler;
 import tiles.Tile;
 
+/**
+ * Crea l'oggetto InterruttorePressione.
+ *
+ */
 public class InterruttorePressione extends Interruttore{
 
 	public InterruttorePressione() {}// necessario per esternalizzazione
+	/**
+	 * Costruttore dell'oggetto InterruttorePressione.
+	 * @param h oggetto Handler utile per curare la gestione con le altre classi.
+	 * @param x coordinata X dell'oggetto InterruttorePressione.
+	 * @param y coordinata Y dell'oggetto InterruttorePressione.
+	 * @param funzione la funzione che svolge l'oggetto InterruttorePressione.
+	 */
 	public InterruttorePressione(Handler h, float x, float y, Funzione... funzione) {
 		super(h, x, y, Tile.TILE_LARGHEZZA/2, Tile.TILE_ALTEZZA/2, funzione);
 		
@@ -22,7 +33,10 @@ public class InterruttorePressione extends Interruttore{
 	@Override
 	public void aggiorna() {
 	}
-
+	
+	/**
+	 * Disegna l'oggetto InterrutorePressione mediante un oggetto Graphics.
+	 */
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(getAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
@@ -34,6 +48,11 @@ public class InterruttorePressione extends Interruttore{
 		
 	}
 	
+	/**
+	 * Restituisce l'animazione corrente dell'oggetto InterruttorePressione.
+	 * @return oggetto BufferedIamge che rappresenta
+	 *  l'attuale animazione dell'oggetto InterruttorePressione.
+	 */
 	private BufferedImage getAnimazioneCorrente(){
 		if(attivo){
 			if(cambiaPosizione)
@@ -45,10 +64,16 @@ public class InterruttorePressione extends Interruttore{
 		
 	}
 	
+	/**
+	 * Salva le posizioni dell'oggetto InterruttorePressione.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 	}
+	/**
+	 * Carica gli oggetti InterruttorePressione nelle loro posizioni.
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {

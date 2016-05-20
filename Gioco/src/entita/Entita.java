@@ -9,6 +9,11 @@ import java.io.ObjectOutput;
 
 import gioco.Handler;
 
+/**
+ * Crea l'oggetto Entità,necessario per implementare nel gioco
+ * eventuali oggetti statici o dinamici.
+ */
+
 public abstract class Entita implements Externalizable{
 	
 	protected Handler h;
@@ -20,6 +25,14 @@ public abstract class Entita implements Externalizable{
 	
 	public Entita(){}// necessario per esternalizzazione
 
+	/**
+	 * Costuttore dell'oggetto Entità
+	 * @param h oggetto Handler per curare la gestione con le altre classi.
+	 * @param x cordinata X dell'entità.
+	 * @param y cordianta Y dell'entità.
+	 * @param larghezza la larghezza dell'entità
+	 * @param altezza l'altezza dell'entità
+	 */
 	public Entita(Handler h, float x, float y, int larghezza, int altezza){
 		this.h = h;
 		this.x = x;
@@ -45,6 +58,12 @@ public abstract class Entita implements Externalizable{
 	}
 */	
 	//---- gestisce le collisioni
+	/**
+	 * Metodo accessore che ritorna il bounds di collisione dell'entità.
+	 * @param xOffset l'offset sulle ascisse.
+	 * @param yOffset l'offset sulle ordinate.
+	 * @return oggetto Rectangle che rappresenta il bounds di collisione con l'entità.
+	 */
 	public Rectangle getCollisionBounds(float xOffset, float yOffset){
 		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
 	}
@@ -114,7 +133,10 @@ public abstract class Entita implements Externalizable{
 		this.h = h;
 	}
 	
-	//per esternalizzazione
+	/**
+	 * Metodo utile per salvare le posizioni delle entità nel gioco.
+	 * Riceve come parametro uno stream di tipo a oggetti.
+	 */
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeFloat(x);
 		out.writeFloat(y);
@@ -123,6 +145,10 @@ public abstract class Entita implements Externalizable{
 		
 	}
 	
+	/**
+	 * Metodo utile per caricare le entità nelle loro posizioni.
+	 * Riceve come parametro uno stream di tipo a oggetti.
+	 */
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
 		

@@ -15,6 +15,10 @@ import entita_statiche.Teletrasporto;
 import gfx.Suono;
 import gioco.Handler;
 //implementa tutte le possibili funzioni di un iterruttore
+/**
+ * Crea l'oggetto Funzione che implementa tutte
+ * le possibili funzioni di un oggetto Interruttore.
+ */
 
 public class Funzione implements Externalizable{
 	
@@ -22,6 +26,12 @@ public class Funzione implements Externalizable{
 	private Funzionalita funzione;
 	
 	public Funzione(){}
+	/**
+	 * 
+	 * @param array_entita
+	 * @param index
+	 * @param funzione
+	 */
 	public Funzione(ArrayList<Entita> array_entita, int index, Funzionalita funzione)
 	{
 		this.funzione = funzione;

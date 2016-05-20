@@ -11,9 +11,20 @@ import java.io.ObjectOutput;
 
 import tiles.Tile;
 
+/**
+ * Crea l'oggetto Sbarra che è un entità statica.
+ *
+ */
 public class Sbarra extends EntitaStatica{
 
 	public Sbarra(){} // per esternalizzazione
+	/**
+	 * Costruttore dell'oggetto Sbarra.
+	 * @param h oggetto Handler utile per curare la gestione con le altre classi.
+	 * @param x coordinata X dell'oggetto Sbarra.
+	 * @param y coordinata Y dell'oggetto Sbarra.
+	 * @param aperta booleano che identifica l'apertura della sbarra.
+	 */
 	public Sbarra(Handler h, float x, float y, boolean aperta) {
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA);
 		this.attraversabile = aperta;
@@ -25,6 +36,9 @@ public class Sbarra extends EntitaStatica{
 		
 	}
 
+	/**
+	 * Disegna l'oggetto Sbarra mediante un oggetto Graphics.
+	 */
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(getAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
@@ -32,6 +46,11 @@ public class Sbarra extends EntitaStatica{
 		
 	}
 	
+	/**
+	 * Ritorna l'animazione corrente dell'oggetto Sbarra(aperta/chiusa).
+	 * @return oggetto BufferedImage che identifica
+	 * l'attuale animazione dell'oggetto Sbarra.
+	 */
 	private BufferedImage getAnimazioneCorrente(){
 		if(eAttraversabile())
 			return Risorse.sbarra_aperta;
@@ -39,25 +58,40 @@ public class Sbarra extends EntitaStatica{
 			return Risorse.sbarra_chiusa;
 		
 	}
+	/**
+	 * Apre la sbarra.
+	 */
 	public void apri()
 	{
 		setAttraversabile(true);
 	}
+	/**
+	 * Chiude la sbarra.
+	 */
 	public void chiudi()
 	{
 		setAttraversabile(false);
 	}
-	
+	/**
+	 * Cambia lo stato del valore booleano che
+	 * identifica l'apertura della sbarra.
+	 */
 	public void cambia()
 	{
 		setAttraversabile(!attraversabile);
 	}
 	
+	/**
+	 * Salva le posizioni degli oggetti Sbarra.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 		out.writeBoolean(attraversabile);
 	}
+	/**
+	 * Carica gli oggetti Sbarra nelle loro posizioni.
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
