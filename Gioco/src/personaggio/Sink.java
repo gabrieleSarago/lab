@@ -198,6 +198,7 @@ public class Sink extends Personaggio {
 			ClassNotFoundException {
 		super.readExternal(in);
 		tempo=in.readInt();
+		maxTempo = in.readInt();
 		
 		bounds.x = 8;
 		bounds.y = 30;
@@ -222,6 +223,7 @@ public class Sink extends Personaggio {
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
 		out.writeInt(tempo);
+		out.writeInt(maxTempo);
 	}
 	
 }

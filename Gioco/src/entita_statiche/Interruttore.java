@@ -19,6 +19,7 @@ public abstract class Interruttore extends EntitaStatica{
 	protected EntitaStatica collegamento; // collega l' interruttore a un entita statica
 	protected Funzione[] funzione;
 	protected boolean cambiaPosizione; //cambia da true a false, da false a true ogni volta che si esegue funzione
+	protected boolean autoDisattiva; //TODO dice se l' interruttore disattiva se stesso una volta usato
 	
 	public Interruttore() {}// per esternalizzazione
 	/**
@@ -35,6 +36,15 @@ public abstract class Interruttore extends EntitaStatica{
 		attivo = true;
 		this.funzione = funzione;
 		cambiaPosizione = false;
+		autoDisattiva = false;
+	}
+	public Interruttore(Handler h, float x, float y, int larghezza, int altezza,boolean autoDisattiva, Funzione... funzione) {
+		super(h, x, y, larghezza, altezza);
+		attivo = true;
+		this.funzione = funzione;
+		cambiaPosizione = false;
+		this.autoDisattiva = autoDisattiva;
+			
 	}
 	// dice cosa fa l' interruttore
 	/**
@@ -46,6 +56,7 @@ public abstract class Interruttore extends EntitaStatica{
 		cambiaPosizione = !cambiaPosizione;
 		for(int i=0; i < funzione.length; i++)
 			funzione[i].eseguiFunzione(h);
+		if(autoDisattiva) attivo = false;
 	}
 	
 	public boolean eAttivo() {
@@ -83,6 +94,7 @@ public abstract class Interruttore extends EntitaStatica{
 		super.writeExternal(out);
 		out.writeBoolean(attivo);
 		out.writeObject(funzione);
+		out.writeBoolean(autoDisattiva);
 	}
 	/**
 	 * Carica l'oggetto Interruttore nella sua posizione.
@@ -93,8 +105,8 @@ public abstract class Interruttore extends EntitaStatica{
 		super.readExternal(in);
 		attivo = in.readBoolean();
 		funzione = (Funzione[])in.readObject();
+		autoDisattiva = in.readBoolean();
 		cambiaPosizione = false;
-		
 	}
 	
 	

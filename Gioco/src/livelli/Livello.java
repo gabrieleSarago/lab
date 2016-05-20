@@ -108,7 +108,7 @@ public class Livello {
 		return t;
 	}
 	
-	private void carica(String path){
+private void carica(String path){
 		
 		array_entita = new  ArrayList<Entita>();
 		
@@ -124,17 +124,28 @@ public class Livello {
 		
 		// TODO: il percorso non deve esssere fisso
 		array_entita.clear(); //per sicurezza
-		/*try{
-			supportoCarica(path);
-		}catch(Exception e){e.printStackTrace();}*/
-		array_entita.add(new Sink(h, 75, 75, 200));
+		
+		try{ //TODO
+			ObjectInputStream in;		
+			in = new ObjectInputStream(new FileInputStream(path+"1"));
+			array_entita = (ArrayList<Entita>) in.readObject();
+			//handler cambia ogni volta che si avvia il gioco quindi bisogna
+			//settare ogni entita con l' handler corrente
+			for(int i=0; i < array_entita.size(); i++)
+				array_entita.get(i).setHandler(h);
+			in.close();
+		}catch(Exception e){e.printStackTrace();}
+		
+		//array_entita.add(new Sink(h, 75, 75, 200));
 		//array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
 		
 	}
-	private void supportoCarica(String path) throws FileNotFoundException, IOException 
+   /*
+	private void supportoCarica(String path) throws FileNotFoundException, IOException, ClassNotFoundException 
 	{
 			ObjectInputStream in;		
 			in = new ObjectInputStream(new FileInputStream(path+"1"));
+			
 			Entita en = null;
 			for(;;){
 			try {	
@@ -152,7 +163,7 @@ public class Livello {
 				}catch(EOFException e3){break;}
 			}//fine for	
 			in.close();
-	}
+	}*/
 	public void salva(String file){
 		File f = new File(file);
 		f.delete();
@@ -173,14 +184,15 @@ public class Livello {
 		}
 		// utile se si vuole aggiungere/modificare/eliminare entita
 		/*array_entita.clear();
-		array_entita.add(new Sink(h, 75, 75, 100));
+		array_entita.add(new Sink(h, 75, 75, 200));
 		caricaEntita();*/
 		try{
 			//"res/livelli/livello1.txt1"
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file+"1"));
-			for(Entita c: array_entita){
+			oos.writeObject(array_entita);
+			/*for(Entita c: array_entita){
 				oos.writeObject(c);
-			}
+			}*/
 			oos.close();
 			}catch(IOException e){e.printStackTrace();}
 	}

@@ -22,7 +22,7 @@ import gioco.Handler;
 
 public class Funzione implements Externalizable{
 	
-	private Entita collegamento;	//TODO
+	private Entita collegamento;
 	private Funzionalita funzione;
 	
 	public Funzione(){}
@@ -35,7 +35,7 @@ public class Funzione implements Externalizable{
 	public Funzione(ArrayList<Entita> array_entita, int index, Funzionalita funzione)
 	{
 		this.funzione = funzione;
-		this.collegamento = array_entita.get(index); //TODO
+		this.collegamento = array_entita.get(index); 
 		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
 	}
 	
@@ -90,7 +90,6 @@ public class Funzione implements Externalizable{
 				if(!(collegamento instanceof Teletrasporto)) throw new IllegalArgumentException("aspettato Teletrasporto");
 					((Teletrasporto)collegamento).cambiaAttivo();
 				break;
-			//TODO
 			case ATTIVA_NEMICO:
 				if(!(collegamento instanceof Nemico)) throw new IllegalArgumentException("aspettato Nemico");
 					((Nemico)collegamento).setVivo(true);
@@ -114,6 +113,10 @@ public class Funzione implements Externalizable{
 		this.collegamento = funzione.collegamento;
 	}
 	
+	public Funzionalita getFunzionalita() {
+		return funzione;
+	}
+	
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(collegamento);
 		out.writeObject(funzione);
@@ -122,7 +125,7 @@ public class Funzione implements Externalizable{
 	
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
-		collegamento = (EntitaStatica)in.readObject();
+		collegamento = (Entita)in.readObject();
 		funzione = (Funzionalita) in.readObject();
 	}
 	

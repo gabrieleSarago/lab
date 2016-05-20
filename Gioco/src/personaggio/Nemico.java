@@ -19,6 +19,7 @@ public class Nemico extends Personaggio{
 	private boolean vivo;
 	private Sink sink;
 	
+	public Nemico() {}
 	public Nemico(Handler h, float x, float y)
 	{
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO/2, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO/2);

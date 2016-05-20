@@ -28,6 +28,10 @@ public class InterruttoreInvisibile extends Interruttore{
 		super(h, x, y, larghezza, altezza, funzione);
 		
 	}
+	
+	public InterruttoreInvisibile(Handler h, float x, float y, int larghezza, int altezza, boolean autoDisattiva, Funzione... funzione) {
+		super(h, x, y, larghezza, altezza, autoDisattiva, funzione);
+	}
 
 	@Override
 	public void aggiorna() {
