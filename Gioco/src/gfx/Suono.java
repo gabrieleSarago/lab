@@ -12,7 +12,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JFrame;
-
+/**
+ * Crea l'oggetto suono del gioco.
+ */
 public class Suono extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +29,9 @@ public class Suono extends JFrame{
 	private boolean muto;
 	private String linea;
 	
+	/**
+	 * Costruisce il suono del gioco
+	 */
 	public Suono() {
 		try {
 			clip_StatoMenu = AudioSystem.getClip();
@@ -36,6 +41,10 @@ public class Suono extends JFrame{
 		}
 	}
 	
+	/**
+	 * Riproduce l'audio del suono specifico.
+	 * @param s il suono da riprodurre.
+	 */
 	public void riproduci(suoni s){
 		if(!muto){
 		try {
@@ -107,6 +116,9 @@ public class Suono extends JFrame{
 		}
 	}
 	
+	/**
+	 * Carica il suono da file.
+	 */
 	public void carica(){
 		linea = null;
 		try{
@@ -123,6 +135,10 @@ public class Suono extends JFrame{
 		}
 	}
 	
+	/**
+	 * Ferma il suono.
+	 * @param muto booleano che identifica lo stato di muto.
+	 */
 	public void setMuto(boolean muto){
 		this.muto = muto;
 		

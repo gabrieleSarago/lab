@@ -18,6 +18,10 @@ import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
 
+/**
+ * Crea l'oggetto FinestraHaiVinto necessaria per comunicare
+ * all'utente di aver vinto.
+ */
 public class FinestraHaiVinto implements KeyListener,ActionListener {
 	
 	private JFrame f;
@@ -27,6 +31,10 @@ public class FinestraHaiVinto implements KeyListener,ActionListener {
 	
 	private Handler h;
 	
+	/**
+	 * Costruttore dell'oggetto FinestraHaiVinto.
+	 * @param h oggetto Handler utile per la gestione con altre classi.
+	 */
 	public FinestraHaiVinto(Handler h){
 		
 		ok.setBorderPainted(false);

@@ -2,6 +2,10 @@ package gfx;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Oggetto che identifica le risorse del gioco.
+ */
+
 public class Risorse {
 	
 	private static final int size = 38;
@@ -22,6 +26,9 @@ public class Risorse {
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
+	/**
+	 * Inizializza le risorse del gameplay.
+	 */
 	public static void inizializza(){
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
 		
@@ -132,6 +139,10 @@ public class Risorse {
 		nemico = enemy.prendiSprite(200, 20, 1000, 1100);
 	}
 	
+	/**
+	 * Inizializza le voci di scorrimento per gli stati
+	 * di selezione in lingua italiana.
+	 */
 	public static void inizializzaITA(){
 		
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica.png"));
@@ -245,6 +256,11 @@ public class Risorse {
 		
 	}
 	
+	
+	/**
+	 * Inizializza le voci di scorrimento per gli stati
+	 * di selezione in lingua inglese.
+	 */
 	public static void inizializzaENG(){		
 		
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_eng.png"));
@@ -358,6 +374,10 @@ public class Risorse {
 		
 	}
 	
+	/**
+	 * Inizializza le voci di scorrimento per gli stati
+	 * di selezione in lingua tedesca.
+	 */
 	public static void inizializzaDEU(){
 		
 		Sprite s5 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voce_classifica_deu.png"));

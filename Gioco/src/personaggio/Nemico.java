@@ -11,7 +11,9 @@ import gfx.Risorse;
 import gioco.Handler;
 import tiles.Tile;
 
-
+/**
+ * Crea l'oggetto Nemico che è un entità del gioco.
+ */
 public class Nemico extends Personaggio{
 
 	int raggioVisione;
@@ -19,7 +21,16 @@ public class Nemico extends Personaggio{
 	private boolean vivo;
 	private Sink sink;
 	
+	/**
+	 * Costruttore di default utile per l'esternalizzazione.
+	 */
 	public Nemico() {}
+	/**
+	 * Costruisce l'oggetto Nemico.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param x la ccordinata x del nemico.
+	 * @param y la coordinata y del nemico.
+	 */
 	public Nemico(Handler h, float x, float y)
 	{
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO/2, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO/2);
@@ -65,7 +76,9 @@ public class Nemico extends Personaggio{
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
 		
 	}
-	
+	/**
+	 * Costruisce il percoso da compiere.
+	 */
 	private void elaborazionePercorso() {
 		dx = 0;
 		dy = 0;
@@ -86,7 +99,10 @@ public class Nemico extends Personaggio{
 			dx = 0;
 		
 	}
-	
+	/**
+	 * Utile per far "vedere" il nemico.
+	 * @return
+	 */
 	public Rectangle getVisionBounds(){
 		return new Rectangle((int) (x + visione.x), (int) (y + visione.y), visione.width, visione.height);
 	}
@@ -101,14 +117,19 @@ public class Nemico extends Personaggio{
 		}
 		return null;
 	}
-	
+	/**
+	 * Metodo che valuta la visione del giocatore da parte del nemico.
+	 * @return boolean identificativo.
+	 */
 	private boolean sinkAvvistato(){	
 		if(sink == null) sink = h.getLivello().getSink();
 		if(getVisionBounds().intersects(sink.getCollisionBounds(0f, 0f)))
 		return true;
 			return false;
 	}
-	
+	/**
+	 * Carica i nemici nel livello da file.
+	 */
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
 		super.readExternal(in);
@@ -119,7 +140,10 @@ public class Nemico extends Personaggio{
 		visione = (Rectangle) in.readObject();
 		
 	}
-		
+	
+	/**
+	 * Salva le posizioni dei nemici su file.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
@@ -129,7 +153,9 @@ public class Nemico extends Personaggio{
 		out.writeObject(bounds);
 		out.writeObject(visione);
 	}
-		
+	/**
+	 * Muove il nemico.
+	 */
 	@Override
 	public void muovi(){
 		Entita temp; // entita solo temporanea

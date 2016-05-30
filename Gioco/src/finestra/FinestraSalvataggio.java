@@ -24,6 +24,11 @@ import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
 
+
+/**
+ * Crea l'oggetto FinestraSalvataggio,utile per chiedere all'utente
+ * se vuole salvare il suo punteggio.
+ */
 public class FinestraSalvataggio implements KeyListener,ActionListener {
 	
 	private JFrame f;
@@ -36,6 +41,11 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 	private Handler h;
 	private int tempo;
 	
+	/**
+	 * Costruttore di FinestraSalvataggio.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param tempo il punteggio del giocatore.
+	 */
 	public FinestraSalvataggio(Handler h,int tempo){
 		
 		si.setBorderPainted(false);

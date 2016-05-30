@@ -12,7 +12,9 @@ import java.util.concurrent.TimeUnit;
 import gfx.Animazione;
 import gfx.Risorse;
 import gioco.Handler;
-
+/**
+ * Crea l'oggetto Sink (Giocatore) del gioco.
+ */
 public class Sink extends Personaggio {
 	
 	public enum Movimento{ SOPRA, SOTTO, DESTRA, SINISTRA}
@@ -38,7 +40,13 @@ public class Sink extends Personaggio {
 	long timer = 0;
 	
 	public Sink(){} // necessario per esternalizzazione
-	
+	/**
+	 * Costruisce l'oggetto Sink.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param x coordinata X del giocatore.
+	 * @param y coordinata Y del giocatore.
+	 * @param tempo tempo(vita) del giocatore.
+	 */
 	public Sink(Handler h, float x, float y, int tempo) {
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO);
 		this.tempo = tempo;
@@ -64,7 +72,9 @@ public class Sink extends Personaggio {
 		
 	}
 
-	
+	/**
+	 * Aggiorna le dinamiche del giocatore (vita/tempo,GestioneInput,etc.)
+	 */
 	@Override
 	public void aggiorna() {
 		
@@ -192,7 +202,9 @@ public class Sink extends Personaggio {
 		return sconfitta;
 	}
 	
-	//per il processo di esternalizzazione
+	/**
+	 * Carica l'oggetto Sink da file.
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
 			ClassNotFoundException {
@@ -218,7 +230,9 @@ public class Sink extends Personaggio {
 			
 		}
 
-
+	/**
+	 * Salva l'oggetto Sink su file.
+	 */
 		@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);

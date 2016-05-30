@@ -3,16 +3,25 @@ package input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Oggetto che serve a gestire l'input del gioco.
+ */
 public class GestioneInput implements KeyListener {
 	
 	private boolean[] tasti;
 	public boolean up, down, left, right, enter, esc;
 	private KeyEvent c;
 	
+	/**
+	 * Costruisce l'oggetto GestioneInput.
+	 */
 	public GestioneInput(){
 		tasti = new boolean[6];
 	}
 	
+	/**
+	 * Aggiorna gli eventi da tastiera.
+	 */
 	public void aggiorna(){
 		up = tasti[KeyEvent.VK_UP-35];
 		down = tasti[KeyEvent.VK_DOWN-35];
@@ -22,6 +31,9 @@ public class GestioneInput implements KeyListener {
 		esc = tasti[KeyEvent.VK_ESCAPE-26];
 	}
 	
+	/**
+	 * Vengono "disabilitati" i listener della tastiera.
+	 */
 	public void azzera(){
 		up = false;
 		down = false;

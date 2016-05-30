@@ -5,6 +5,9 @@ import java.awt.Toolkit;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Classe "main" del progetto.
+ */
 public class Launcher {
 	
 	public static void main (String[]args){

@@ -16,7 +16,9 @@ import finestra.FinestraNessunPunteggio;
 import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
-
+/**
+ * Crea l'oggetto StatoClassifica.
+ */
 public class StatoClassifica extends Stato{
 	
 	private Handler h;
@@ -37,7 +39,11 @@ public class StatoClassifica extends Stato{
 	long ultimoTempo = System.nanoTime();
 	long timer=0;
 	
-
+	/**
+	 * Crea l'oggetto StatoClassifica.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param suono suono di sottofondo per lo StatoClassifica
+	 */
 	public StatoClassifica(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
@@ -51,7 +57,9 @@ public class StatoClassifica extends Stato{
 		}
 		
 	}
-
+	/**
+	 * Aggiorna gli ascoltatori da tastiera in StatoClassifica.
+	 */
 	@Override
 	public void aggiorna(){
 		//ottimizzazione
@@ -108,7 +116,9 @@ public class StatoClassifica extends Stato{
 			if(cont>=3)break;
 		}
 	}
-	
+	/**
+	 * Aziona le scelte a dispozione dell'utente.
+	 */
 	private void seleziona(){
 		if(sceltaCorrente==0){
 			if(c.size()!=0){
@@ -120,7 +130,9 @@ public class StatoClassifica extends Stato{
 			h.getGioco().setStato(new StatoMenu(h, suono));
 		}
 	}
-	
+	/**
+	 * Gestisce gli ascoltatori da tastiera.
+	 */
 	private void getInput() {
 		
 			if(h.getGestioneInput().up){

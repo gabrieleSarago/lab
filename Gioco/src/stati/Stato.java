@@ -3,7 +3,9 @@ package stati;
 import java.awt.Graphics;
 
 import gioco.Handler;
-
+/**
+ * Crea l'oggetto Stato,utile a strutturare il gioco a strati.
+ */
 public abstract class Stato {
 	
 	private static Stato statoCorrente = null;
@@ -19,7 +21,10 @@ public abstract class Stato {
 	//CLASS
 	
 	protected Handler h;
-	
+	/**
+	 * Costruisce l'oggetto Stato.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 */
 	public Stato (Handler h){
 		this.h = h;
 		

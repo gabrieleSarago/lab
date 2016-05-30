@@ -7,6 +7,10 @@ import lingue.Lingua;
 import livelli.Livello;
 import stati.Stato;
 
+/**
+ * Oggetto "manipolatore" del gioco.
+ * Serve a gestire la comunicazione tra le diverse classi del progetto.
+ */
 public class Handler {
 	
 	private Gioco gioco;

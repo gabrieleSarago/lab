@@ -12,7 +12,9 @@ import gfx.Suono;
 import gioco.Handler;
 import livelli.Livello;
 import personaggio.Sink;
-
+/**
+ * Crea l'oggetto StatoGioco.
+ */
 public class StatoGioco extends Stato {
 	
 	//----private Sink s;
@@ -25,6 +27,10 @@ public class StatoGioco extends Stato {
 	private boolean riproduzione = true;
 	private Suono suono;
 	
+	/**
+	 * Costruisce l'oggetto StatoGioco.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 */
 	public StatoGioco(Handler h){
 		super(h);
 		l = new Livello(h, "res/livelli/livello1.txt");
@@ -36,6 +42,11 @@ public class StatoGioco extends Stato {
 		//----s = new Sink(h, x, y, tempo);
 	}
 	
+	/**
+	 * Costruisce l'oggetto StatoGioco.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param file file da cui viene caricato il livello del gioco.
+	 */
 	public StatoGioco(Handler h, String file){
 		super(h);
 		l = new Livello(h, file);
@@ -46,7 +57,10 @@ public class StatoGioco extends Stato {
 		//----entitaStatiche = l.entitaStatiche;
 		//----s = new Sink(h, x, y, tempo);
 	}
-
+	
+	/**
+	 * Aggiorna lo StatoGioco
+	 */
 	@Override
 	public void aggiorna() {
 		
@@ -111,6 +125,9 @@ public class StatoGioco extends Stato {
 		
 	}
 	
+	/**
+	 * Gestisce gli ascolatori da tastiera in StatoGioco. 
+	 */
 	private void getInput(){
 		if(h.getGestioneInput().esc){
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
@@ -135,8 +152,12 @@ public class StatoGioco extends Stato {
 	}
 	
 	
-	//Converte l'oggetto Graphics in un BufferedImage,
-	//in modo da poter essere stampato su schermo.
+
+	/**
+	 * Converte l'oggetto Graphics in BufferedImage
+	 * in modo da poter essere stamapto su schermo.
+	 * @return il BufferdImage della conversione
+	 */
 	public BufferedImage getUltimoScreen(){
 		BufferedImage img = new BufferedImage(1200, 700, BufferedImage.TYPE_INT_RGB);
 		g = img.createGraphics();
@@ -160,7 +181,11 @@ public class StatoGioco extends Stato {
 	    }
 	
     }*/
-	// aggiunto
+	
+	/**
+	 * Imposta lo stato di vittoria.
+	 * @param vittoria boolean identificativo
+	 */
 	public void setVittoria(boolean vittoria)
 	{
 		this.vittoria = vittoria;

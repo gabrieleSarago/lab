@@ -9,6 +9,9 @@ import gfx.Suono;
 import gioco.Handler;
 import pannelli.Sfondo;
 
+/**
+ * Crea l'oggetto StatoPausa.
+ */
 public class StatoPausa extends Stato{
 
 	private Sfondo s;
@@ -29,6 +32,11 @@ public class StatoPausa extends Stato{
 	private boolean salvato = false;
 	int dx = 2;
 	
+	/**
+	 * Costruisce l'oggetto StatoPausa.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param precedente oggetto StatoGioco che identifica lo stato di gioco precedente.
+	 */
 	public StatoPausa(Handler h, StatoGioco precedente) {
 		super(h);
 		this.precedente = precedente;
@@ -40,6 +48,9 @@ public class StatoPausa extends Stato{
 		suono = h.getSuono();
 	}
 
+	/**
+	 * Aggiorna lo StatoPausa.
+	 */
 	@Override
 	public void aggiorna() {
 		sinkDestra.aggiorna();
@@ -85,6 +96,9 @@ public class StatoPausa extends Stato{
 		}
 	}
 	
+	/**
+	 * Aziona le scelte a disposizione dell'utente in StatoPausa.
+	 */
 	private void seleziona(){
 		if(sceltaCorrente == 0){
 			h.getGioco().setPausa(false);
@@ -108,6 +122,9 @@ public class StatoPausa extends Stato{
 		}
 	}
 	
+	/**
+	 * Gestisce gli ascoltatori da tastiera in StatoPausa.
+	 */
 	private void getInput(){
 		
 		//Accellera la traslazione dello sfondo alla pressione di freccia destra

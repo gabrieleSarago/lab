@@ -7,7 +7,9 @@ import java.io.ObjectOutput;
 import entita.Entita;
 import gioco.Handler;
 import tiles.Tile;
-
+/**
+ * Crea l'oggetto Personaggio.
+ */
 public abstract class Personaggio extends Entita {
 	
 	public static final int DEFAULT_VITA = 100;
@@ -22,7 +24,14 @@ public abstract class Personaggio extends Entita {
 	protected Entita ultimaEntita;
 	
 	public Personaggio(){} // necessario per esternzalizzazione
-	
+	/**
+	 * Costruisce l'oggetto Personaggio.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param x coordinata X del personaggio.
+	 * @param y coordinata Y del personaggio.
+	 * @param larghezza larghezza del personaggio.
+	 * @param altezza altezza del personaggio.
+	 */
 	public Personaggio(Handler h, float x, float y, int larghezza, int altezza) {
 		super(h, x, y, larghezza, altezza);
 		vita = DEFAULT_VITA;
@@ -33,7 +42,9 @@ public abstract class Personaggio extends Entita {
 		ultimaEntita = null;
 	}
 	
-	
+	/**
+	 * Muove il personaggio.
+	 */
 	public void muovi(){
 		Entita temp; // entita solo temporanea
 		// se temp è null significa che non c è nessuna collisione

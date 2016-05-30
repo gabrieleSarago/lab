@@ -9,7 +9,9 @@ import gfx.Suono.suoni;
 import gioco.Handler;
 import lingue.Lingua;
 import pannelli.Sfondo;
-
+/**
+ * Crea l'oggetto StatoOpzioni
+ */
 public class StatoOpzioni extends Stato{
 	
 	private Sfondo s;
@@ -35,6 +37,11 @@ public class StatoOpzioni extends Stato{
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
+	/**
+	 * Costruisce l'oggetto StatoOpzioni
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param suono la musica di sottofondo in StatoOpzioni
+	 */
 	public StatoOpzioni(Handler h, Suono suono) {
 		super(h);
 		this.h = h;
@@ -56,6 +63,9 @@ public class StatoOpzioni extends Stato{
 		
 	}
 
+	/**
+	 * Aggiorna lo StatoOpzioni.
+	 */
 	@Override
 	public void aggiorna() {
 		
@@ -92,6 +102,9 @@ public class StatoOpzioni extends Stato{
 		
 	}
 	
+	/**
+	 * Aziona le scelte a disposizione dell'utente in StatoOpzioni.
+	 */
 	private void seleziona (){
 		if (sceltaCorrente == 0){
 			switch(linguaCorrente){
@@ -128,6 +141,9 @@ public class StatoOpzioni extends Stato{
 		}		
 	}
 	
+	/**
+	 * Gestisce gli ascoltatori da tastiera in StatoOpzioni.
+	 */
 	private void getInput() {
 		
 		if(h.getGestioneInput().up){

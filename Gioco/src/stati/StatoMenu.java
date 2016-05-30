@@ -8,7 +8,9 @@ import gfx.Risorse;
 import gfx.Suono;
 import gioco.Handler;
 import pannelli.Sfondo;
-
+/**
+ * Crea l'oggetto StatoMenu.
+ */
 public class StatoMenu extends Stato{
 	
 	private Sfondo s;
@@ -29,6 +31,10 @@ public class StatoMenu extends Stato{
 	long ultimoTempo = System.nanoTime();
 	long timer = 0;
 	
+	/**
+	 * Costruisce l'oggetto StatoMenu.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 */
 	public StatoMenu(Handler h) {
 		super(h);
 		this.h = h;
@@ -38,6 +44,11 @@ public class StatoMenu extends Stato{
 		suono = h.getSuono();		
 	}
 	
+	/**
+	 * Costruisce l'oggetto StatoMenu.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param suono la musica di sottofondo nel menù.
+	 */
 	public StatoMenu(Handler h, Suono suono) {
 		super(h);
 		this.h = h;
@@ -47,6 +58,9 @@ public class StatoMenu extends Stato{
 		this.suono = suono;
 	}
 
+	/**
+	 * Aggiorna lo StatoMenu.
+	 */
 	@Override
 	public void aggiorna() {
 		if(riproduzione){
@@ -78,6 +92,9 @@ public class StatoMenu extends Stato{
 		}
 	}
 	
+	/**
+	 * Aziona le scelte a dispozione dell'utente.
+	 */
 	private void seleziona (){
 		if (sceltaCorrente == 0){
 			suono.getClipStatoMenu().close();
@@ -111,6 +128,9 @@ public class StatoMenu extends Stato{
 		suono.ferma();
 	}
 	
+	/**
+	 * Gestisce gli ascoltatori da tastiera in StatoMenu.
+	 */
 	private void getInput() {
 		
 		if(h.getGestioneInput().up){

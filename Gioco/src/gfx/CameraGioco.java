@@ -4,17 +4,30 @@ import entita.Entita;
 import gioco.Handler;
 import tiles.Tile;
 
+/**
+ * Oggetto che crea la camera del gioco.
+ */
 public class CameraGioco {
 	
 	private Handler h;
 	private float xOffset, yOffset;
 	
+	/**
+	 * Costruttore dell'oggetto CameraGioco
+	 * @param h oggetto Handler utile per la gestione con altre classi.
+	 * @param xOffset offset dell'ascissa della camera di gioco.
+	 * @param yOffset offset dell'ordinata della camera di gioco,
+	 */
 	public CameraGioco(Handler h, float xOffset, float yOffset){
 		this.h = h;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
 	
+	/**
+	 * Serve a inquadrare la visuale quando le coordinate del giocatore
+	 * superano gli offset.
+	 */
 	public void inquadra(){
 		if (xOffset < 0){
 			xOffset = 0;
@@ -26,12 +39,21 @@ public class CameraGioco {
 			yOffset = h.getLivello().getAltezza() * Tile.TILE_ALTEZZA - h.getAltezza();
 	}
 	
+	/**
+	 * Centra la visuale del giocatore.
+	 * @param e Entità Sink.
+	 */
 	public void centra(Entita e){
 		xOffset = e.getX() - h.getLarghezza() / 2 + e.getLarghezza() / 2;
 		yOffset = e.getY() - h.getAltezza() / 2 + e.getAltezza() / 2;
 		inquadra();
 	}
 	
+	/**
+	 * Muove la visuale di gioco.
+	 * @param xAmt coordinata x.
+	 * @param yAmt coordinata y.
+	 */
 	public void muovi(float xAmt, float yAmt){
 		xOffset += xAmt;
 		yOffset += yAmt;

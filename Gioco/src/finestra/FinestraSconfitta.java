@@ -19,6 +19,10 @@ import gioco.Handler;
 import stati.StatoGioco;
 import stati.StatoMenu;
 
+/**
+ * Crea l'oggetto FienstraSconfitta,utile per comunicare all'utente
+ * di aver perso.
+ */
 public class FinestraSconfitta implements ActionListener,KeyListener {
 	
 	private JFrame f;
@@ -29,7 +33,10 @@ public class FinestraSconfitta implements ActionListener,KeyListener {
 	
 	private Handler h;
 	
-	
+	/**
+	 * Costruttore di FinestraSconfitta
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 */
 	public FinestraSconfitta(Handler h){
 		
 		si.setBorderPainted(false);

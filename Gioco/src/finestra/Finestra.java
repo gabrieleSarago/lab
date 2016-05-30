@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 
 import gioco.Handler;
 
+/**
+ * Costruisce l'oggetto Frame del gioco.
+ */
 public class Finestra {
 	
 	private JFrame f;
@@ -19,6 +22,13 @@ public class Finestra {
 	private String titolo;
 	private int larghezza,altezza;
 	
+	/**
+	 * Costruttore dell'oggetto Finestra
+	 * @param titolo titolo della finestra
+	 * @param larghezza larghezza della finestra
+	 * @param altezza altezza della finestra
+	 * @param h oggetto Handler utile nella gestione con altre classi.
+	 */
 	public Finestra(String titolo, int larghezza, int altezza, Handler h){
 		this.titolo = titolo;
 		this.larghezza = larghezza;
@@ -28,6 +38,9 @@ public class Finestra {
 		creaFinestra();
 	}
 	
+	/**
+	 * Crea una Finestra mediante un JFrame delle librerie di Java.
+	 */
 	private void creaFinestra(){
 		Dimension d = new Dimension(larghezza, altezza);
 		
@@ -57,10 +70,18 @@ public class Finestra {
 		f.pack();
 	}
 	
+	/**
+	 * Restituisce l'area canvas.
+	 * @return l'area canvas.
+	 */
 	public Canvas getCanvas(){
 		return canvas;
 	}	
 	
+	/**
+	 * Ritorna il frame del gioco.
+	 * @return il frame del gioco.
+	 */
 	public JFrame getFrame(){
 		return f;
 	}

@@ -34,6 +34,11 @@ import stati.StatoGioco;
 import tiles.Tile;
 import utils.Utils;
 
+/**
+ * Crea l'oggetto Livello.
+ * Vengono salvati mediante dei numeri id le entità da inserire.
+ * Il livello viene caricato da un file di interi.
+ */
 
 // TO-DO: permettere il salvataggio dell' entità in un file di testo
 public class Livello {
@@ -59,12 +64,19 @@ public class Livello {
 	//private array_entita array_entita;
 	
 	
-	
+	/**
+	 * Costruisce l'oggetto livello.
+	 * @param h oggetto handler utile per la gestione con le altre classi.
+	 * @param path nome del file da cui viene caricato il livello.
+	 */
 	public Livello (Handler h, String path){
 		this.h = h;
 		carica(path);
 	}
 	
+	/**
+	 * Aggiorna le dinamiche del livello.
+	 */
 	public void aggiorna(){	
 		
 		for(int i=0; i < array_entita.size(); i++)
@@ -107,7 +119,10 @@ public class Livello {
 			return Tile.muro;
 		return t;
 	}
-	
+	/**
+	 * Carica il ivello da file.
+	 * @param path il nome del file.
+	 */
 private void carica(String path){
 		
 		array_entita = new  ArrayList<Entita>();
@@ -164,6 +179,12 @@ private void carica(String path){
 			}//fine for	
 			in.close();
 	}*/
+
+	/**
+	 * Salva le dinamiche correnti del livello su un file.
+	 * Utile quando si vuole caricare una partita.
+	 * @param file file su cui salvare il livello.
+	 */
 	public void salva(String file){
 		File f = new File(file);
 		f.delete();
@@ -227,8 +248,9 @@ private void carica(String path){
 		return null;
 	}
 
-	//utile per aggiungere/modificare/eliminare entita
-	//eliminare a prodotto finito
+	/**
+	 * Carica/modifica/elimina entità all'interno del livello.
+	 */
 	private void caricaEntita(){
 		// primo quadrante
 		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*6, Tile.TILE_ALTEZZA*4, true)); //false

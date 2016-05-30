@@ -2,7 +2,9 @@ package tiles;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
+/**
+ * Crea l'oggetto Tile.
+ */
 public class Tile {
 	
 	//STATIC STUFF QUA
@@ -19,6 +21,11 @@ public class Tile {
 	protected BufferedImage img;
 	protected final int id;
 	
+	/**
+	 * Costruisce l'oggetto Tile.
+	 * @param img immagine del tile.
+	 * @param id intero identificativo (utile per l'implementazione di livello da file)
+	 */
 	public Tile(BufferedImage img, int id){
 		this.img = img;
 		this.id = id;

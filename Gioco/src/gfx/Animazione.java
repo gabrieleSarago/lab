@@ -1,6 +1,9 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
+/**
+ * Oggetto che crea l'animazione del gioco.
+ */
 
 public class Animazione {
 	
@@ -8,6 +11,11 @@ public class Animazione {
 	private long ultimoTempo, timer;
 	private BufferedImage[] frames;
 	
+	/**
+	 * Costruttore dell'oggetto Animazione.
+	 * @param velocita la velocità con cui viene eseguita l'animazione.
+	 * @param frames le immagini che costituiscono l'animazione.
+	 */
 	public Animazione(int velocita, BufferedImage[] frames){
 		this.velocita = velocita;
 		this.frames = frames;
@@ -16,6 +24,9 @@ public class Animazione {
 		ultimoTempo = System.currentTimeMillis();
 	}
 	
+	/**
+	 * Regolarizza i movimenti.
+	 */
 	public void aggiorna(){
 		timer += System.currentTimeMillis() - ultimoTempo;
 		ultimoTempo = System.currentTimeMillis();
@@ -26,6 +37,10 @@ public class Animazione {
 		}
 	}
 	
+	/**
+	 * Ritorna l'animazione corrente.
+	 * @return l'animazione corrente
+	 */
 	public BufferedImage getFrameCorrente(){
 		return frames[indice];
 	}

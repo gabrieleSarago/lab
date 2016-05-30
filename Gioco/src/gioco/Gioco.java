@@ -11,6 +11,10 @@ import input.GestioneInput;
 import lingue.Lingua;
 import stati.*;
 
+/**
+ * Crea l'oggetto Gioco.
+ * Classe principale del progetto.
+ */
 public class Gioco implements Runnable {
 	
 	private Finestra f;
@@ -44,6 +48,12 @@ public class Gioco implements Runnable {
 	//Handler
 	private Handler h;
 	
+	/**
+	 * Costruttore di Gioco.
+	 * @param titolo titolo della finestra del gioco.
+	 * @param larghezza larghezza della finestra del gioco.
+	 * @param altezza altezza della finestra del gioco.
+	 */
 	public Gioco(String titolo, int larghezza,int altezza){
 		this.larghezza = larghezza;
 		this.altezza = altezza;
@@ -51,6 +61,9 @@ public class Gioco implements Runnable {
 		gi = new GestioneInput();
 	}
 	
+	/**
+	 * Inizializza le risorse del gameplay e dei menu di scorrimento.
+	 */
 	private void inizializza(){
 		
 		Risorse.inizializza();
@@ -91,18 +104,35 @@ public class Gioco implements Runnable {
 
 	}
 	
+	/**
+	 * Modifica lo stato corrente.
+	 * @param stati il nuovo stato da creare.
+	 */
 	public void setStato(Stato stati){
 		stato = stati;
 	}
-	
+	/**
+	 * Ritorna lo stato corrente.
+	 * @return lo stato corrente.
+	 */
 	public Stato getStato(){return stato;}
 	
+	/**
+	 * Modifica lo stato pauusa.
+	 * @param pausa un valore boolean.
+	 */
 	public void setPausa(boolean pausa){
 		inPausa = pausa;
 	}
-	
+	/**
+	 * Ritorna true se si ci trova in pausa.
+	 * @return boolean.
+	 */
 	public boolean getPausa(){return inPausa;}
 	
+	/**
+	 * Aggiorna i listener e gli stati associati.
+	 */
 	private void aggiorna(){
 		
 		gi.aggiorna();
@@ -132,7 +162,10 @@ public class Gioco implements Runnable {
 		bs.show();
 		g.dispose();
 	}
-	
+	/**
+	 * L'oggetto gioco viene lanciato da un thread.
+	 * Run lancia il thread della classe Gioco.
+	 */
 	public void run(){
 		
 		inizializza();
@@ -182,7 +215,10 @@ public class Gioco implements Runnable {
 		stop();
 		
 	}
-	
+	/**
+	 * Metodo accessore necessario per la sincronizzazione dei listener.
+	 * @return
+	 */
 	public GestioneInput getGestioneInput(){
 		return gi;
 	}
@@ -201,6 +237,9 @@ public class Gioco implements Runnable {
 		return altezza;
 	}
 
+	/**
+	 * Fa partire l'esecuzione della classe Gioco.
+	 */
 	public synchronized void start(){
 		if(inCorso)
 			return;
@@ -209,6 +248,10 @@ public class Gioco implements Runnable {
 		thread.start();
 	}
 	
+	/**
+	 * Ferma l'esecuzione della classe gioco.
+	 *
+	 */
 	public synchronized void stop(){
 		if(!inCorso)
 			return;

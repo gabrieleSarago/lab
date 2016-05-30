@@ -8,7 +8,9 @@ import gfx.Suono;
 import gfx.Suono.suoni;
 import gioco.Handler;
 import pannelli.Sfondo;
-
+/**
+ * Crea l'oggetto StatoInfo.
+ */
 public class StatoInfo extends Stato{
 	
 	private Handler h;
@@ -17,6 +19,10 @@ public class StatoInfo extends Stato{
 	
 	private boolean  riproduzione = true;
 	
+	/**
+	 * Costruisce l'oggetto StatoInfo.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 */
 	public StatoInfo(Handler h) {
 		super(h);
 		this.h = h;
@@ -27,6 +33,9 @@ public class StatoInfo extends Stato{
 		suono = h.getSuono();
 	}
 
+	/**
+	 * Aggiorna lo StatoInfo
+	 */
 	@Override
 	public void aggiorna() {
 		

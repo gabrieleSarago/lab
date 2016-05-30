@@ -2,10 +2,17 @@ package gfx;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Crea l'oggetto Sprite,utile per disegnare le entità del gioco.
+ */
 public class Sprite {
 	
 	private BufferedImage sink;
 	
+	/**
+	 * Costruisce l'oggetto sprite.
+	 * @param sink lo sprite che rappresenta sink.
+	 */
 	public Sprite(BufferedImage sink){
 		this.sink = sink;
 	}

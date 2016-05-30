@@ -3,9 +3,16 @@ package utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**
+ * Classe di utilità.
+ */
 public class Utils {
 	
+	/**
+	 * Carica i file come stringhe.
+	 * @param path il file da caricare.
+	 * @return una stinga che identifica il file.
+	 */
 	public static String caricaFileComeString ( String path){
 		StringBuilder sb = new StringBuilder();
 		
@@ -21,6 +28,12 @@ public class Utils {
 		return sb.toString();
 	}
 	
+
+	/**
+	 * Trasforma una stringa (composta da soli numeri) in un intero.
+	 * @param numero Stringa da trasformare.
+	 * @return Stringa in veste di intero
+	 */
 	public static int parseInt(String numero){
 		try{
 			return Integer.parseInt(numero);

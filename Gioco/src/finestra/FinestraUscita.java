@@ -17,6 +17,10 @@ import javax.swing.JLabel;
 import gfx.Risorse;
 import gioco.Handler;
 
+/**
+ * Crea l'oggetto FinestraUscita necessaria per chiedere all'utende
+ * di voler uscire dal gioco.
+ */
 public class FinestraUscita implements KeyListener, ActionListener{
 	private JFrame f;
 	
@@ -27,6 +31,10 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	
 	private Handler h;
 	
+	/**
+	 * Costruttore oggetto FinestraUscita.
+	 * @param h oggetto Handler utile per la gestione con altre classi.
+	 */
 	public FinestraUscita(Handler h){
 		
 		si.setBorderPainted(false);

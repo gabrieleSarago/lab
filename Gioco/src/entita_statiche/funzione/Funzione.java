@@ -28,9 +28,9 @@ public class Funzione implements Externalizable{
 	public Funzione(){}
 	/**
 	 * 
-	 * @param array_entita
-	 * @param index
-	 * @param funzione
+	 * @param array_entita un ArrayList che contiene oggetti Entitò
+	 * @param index parametro che identifica la posizione dell'oggetto Entità nell'ArrayList.
+	 * @param funzione la funzione che svolge l'oggetto array_entita[index]
 	 */
 	public Funzione(ArrayList<Entita> array_entita, int index, Funzionalita funzione)
 	{
@@ -39,12 +39,20 @@ public class Funzione implements Externalizable{
 		if(collegamento == null || funzione == null) throw new IllegalArgumentException("parametri null");
 	}
 	
+	/**
+	 * Costruttore di copia.
+	 * @param f oggetto Funzione da copiare.
+	 */
 	public Funzione(Funzione f)
 	{
 		this.collegamento = f.collegamento;
 		this.funzione = f.funzione;
 	}
 	
+	/**
+	 * Metodo usato per eseguire la funzione scelta.
+	 * @param h oggetto Handler,utile nella gestione con le altre classi.
+	 */
 	public void eseguiFunzione(Handler h)
 	{
 		//TO-DO aggiungere tutte le possibili azioni
@@ -117,12 +125,18 @@ public class Funzione implements Externalizable{
 		return funzione;
 	}
 	
+	/**
+	 * Metodo per salvare le funzioni degli oggetti Entità.
+	 */
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(collegamento);
 		out.writeObject(funzione);
 		
 	}
 	
+	/**
+	 * Metodo per caricare le entità che implementano una data funzione.
+	 */
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
 		collegamento = (Entita)in.readObject();

@@ -21,6 +21,10 @@ import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
 
+/**
+ * Crea l'oggetto FinestraClassifica,utile per chiedere al giocatore di 
+ * voler azzerare l'attuale classifica presente in StatoClassifica.
+ */
 public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 	
 	private JFrame f;
@@ -32,6 +36,10 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 	private Handler h;
 	private Classifica classifica = new Classifica();
 	
+	/**
+	 * Costruttore di FinestraClassifica.
+	 * @param h oggetto Handler utile per la gestione con altre classi.
+	 */
 	public FinestraAzzeraClassifica(Handler h){
 		try {
 			classifica.carica("res/classifiche/classificaPunteggio.txt");

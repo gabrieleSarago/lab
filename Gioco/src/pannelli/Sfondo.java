@@ -7,9 +7,12 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import gioco.Handler;
-
+/**
+ * Crea l'oggetto Sfondo per gli stati.
+ */
 public class Sfondo {
 	
+
 	private BufferedImage sfondo;
 	private Handler h;
 	
@@ -18,7 +21,11 @@ public class Sfondo {
 	private double dx;
 	private double dy;
 	
-	
+	/**
+	 * Costruisce l'oggetto Sfondo.
+	 * @param s il nome del file che contiene lo Sfondo.
+	 * @param h oggetto Handler utile nella gestione con altre classi.
+	 */
 	public Sfondo (String s, Handler h){
 		try {
 			sfondo = ImageIO.read(new File(s));

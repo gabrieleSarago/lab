@@ -9,7 +9,9 @@ import classifica.Nominativo;
 import finestra.FinestraHaiVinto;
 import finestra.FinestraSalvataggio;
 import gioco.Handler;
-
+/**
+ * Costruisce l'oggetto StatoVittoria.
+ */
 public class StatoVittoria extends Stato {
 
 	private BufferedImage img;
@@ -17,6 +19,12 @@ public class StatoVittoria extends Stato {
 	private int tempo;
 	private Classifica classifica = new Classifica();
 
+	/**
+	 * Costruisce l'oggetto StatoVittoria.
+	 * @param h oggetto Handler utile per la gestione con le altre classi.
+	 * @param img sfondo dello StatoVittoria (ultimoScreen dello StatoGioco)
+	 * @param tempo tempo che rappresenta il punteggio del giocatore.
+	 */
 	public StatoVittoria(Handler h, BufferedImage img, int tempo) {
 		super(h);
 		this.img = img;
