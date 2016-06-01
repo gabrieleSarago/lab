@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 // import java.util.ArrayList; ora c è gestioneEntita
 
+import gfx.Risorse;
 import gfx.Suono;
 // import entita.Entita; ora c è gestioneEntita
 //import entita_statiche.Caramella;
@@ -49,6 +50,7 @@ public class StatoGioco extends Stato {
 	 */
 	public StatoGioco(Handler h, String file){
 		super(h);
+		
 		l = new Livello(h, file);
 		h.setLivello(l);
 		suono = h.getSuono();

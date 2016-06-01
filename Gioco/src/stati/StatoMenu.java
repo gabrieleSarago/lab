@@ -103,7 +103,7 @@ public class StatoMenu extends Stato{
 		}
 		if (sceltaCorrente == 1){
 			suono.getClipStatoMenu().close();
-			h.getGioco().setStato(new StatoGioco(h,"res/livelli/livelloS.txt"));
+			h.getGioco().setStato(new StatoGioco(h,Risorse.PATH + "\\livelloS.txt"));
 			
 		}
 		if (sceltaCorrente == 2){

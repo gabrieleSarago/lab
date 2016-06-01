@@ -1,10 +1,8 @@
 package livelli;
 
 import java.awt.Graphics;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -126,7 +124,16 @@ public class Livello {
 private void carica(String path){
 		
 		array_entita = new  ArrayList<Entita>();
-		
+		File f = new File(path);
+		if(!f.exists()){
+			//Se il file non esiste carica la partita come nuova
+			path = "res/livelli/livello1.txt";
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
 		String file = Utils.caricaFileComeString(path);
 		String[] tokens = file.split("\\s+");
 		larghezza = Utils.parseInt(tokens[0]);

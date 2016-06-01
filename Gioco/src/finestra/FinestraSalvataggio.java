@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -163,12 +164,16 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		private String player;
 		private Handler h;
 		
+		private File file = new File(Risorse.PATH+"\\classificaPunteggio.txt");
 		private int numCaratteri = 0;
 		
 		public FinestraInserimento(Handler h){
 			
 			try {
-				c.carica("res/classifiche/classificaPunteggio.txt");
+				if(!file.exists()){
+					file.createNewFile();
+				}
+				c.carica(Risorse.PATH+"\\classificaPunteggio.txt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -243,7 +248,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
-						c.salva("res/classifiche/classificaPunteggio.txt");
+						c.salva(Risorse.PATH+"\\classificaPunteggio.txt");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

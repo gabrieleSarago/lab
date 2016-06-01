@@ -29,6 +29,8 @@ public class Suono extends JFrame{
 	private boolean muto;
 	private String linea;
 	
+	private File f = new File(Risorse.PATH+"\\suono.txt");
+	
 	/**
 	 * Costruisce il suono del gioco
 	 */
@@ -120,18 +122,22 @@ public class Suono extends JFrame{
 	 * Carica il suono da file.
 	 */
 	public void carica(){
-		linea = null;
 		try{
-			BufferedReader br = new BufferedReader(new FileReader("res/suoni/suono.txt"));
+			if(!f.exists()){
+				f.createNewFile();
+			}
+			BufferedReader br = new BufferedReader(new FileReader(Risorse.PATH+"\\suono.txt"));
 			linea = br.readLine();
 			br.close();
 		}catch(IOException e){
 		}
-		if(linea.equals("OFF")){
-			setMuto(true);
+		if(linea == null){
+			linea = "ON";
 		}
-		else{
-			setMuto(false);
+		switch(linea){
+		case "OFF": setMuto(true); break;
+		case "ON": setMuto(false); break;
+		default : setMuto(false); break;
 		}
 	}
 	
@@ -143,7 +149,7 @@ public class Suono extends JFrame{
 		this.muto = muto;
 		
 		try{
-			PrintWriter pw = new PrintWriter(new FileWriter("res/suoni/suono.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter(Risorse.PATH+"\\suono.txt"));
 			if(muto){
 				pw.write("OFF");
 			}

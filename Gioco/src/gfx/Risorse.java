@@ -1,6 +1,7 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Oggetto che identifica le risorse del gioco.
@@ -25,6 +26,8 @@ public class Risorse {
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
+	
+	public static final String PATH = System.getProperty("user.home")+"\\Risorse";
 	
 	/**
 	 * Inizializza le risorse del gameplay.
@@ -137,6 +140,9 @@ public class Risorse {
 		interruttore_spento = interruttore.prendiSprite(99, 106, 26, 20);
 		Sprite enemy = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/nemico.png"));
 		nemico = enemy.prendiSprite(200, 20, 1000, 1100);
+		
+		File f = new File(PATH);
+		if(!f.exists()) f.mkdirs();
 	}
 	
 	/**

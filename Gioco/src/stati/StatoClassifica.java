@@ -30,6 +30,7 @@ public class StatoClassifica extends Stato{
 	private int sceltaCorrente=0;
 	
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
+	private File f = new File(Risorse.PATH+"\\classificaPunteggio.txt");
 	
 	//per regolarizzare gli aggiornamenti
 	private int fps = 55;
@@ -51,7 +52,10 @@ public class StatoClassifica extends Stato{
 		this.suono = suono;
 		
 		try {
-			c.carica("res/classifiche/classificaPunteggio.txt");
+			if(!f.exists()){
+				f.createNewFile();
+			}
+			c.carica(Risorse.PATH+"\\classificaPunteggio.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

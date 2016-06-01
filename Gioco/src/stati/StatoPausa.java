@@ -112,7 +112,7 @@ public class StatoPausa extends Stato{
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if(sceltaCorrente == 2){
-			h.getLivello().salva("res/livelli/livelloS.txt"/*, (int)precedente.getSink().getX(), (int) precedente.getSink().getY(), precedente.getSink().getTempo()*/);
+			h.getLivello().salva(Risorse.PATH+"//livelloS.txt");
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setPausa(false);
