@@ -1,9 +1,10 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -21,9 +22,16 @@ public class CaricatoreImmagini {
 	public static BufferedImage caricaImmagine(String path){
 		
 		try {
-			return ImageIO.read(new File(path));
+			File f = new File(path);
+			if(!f.exists()){
+				f = new File("/"+path);
+			}
+			InputStream input = new FileInputStream(f);
+			//return ImageIO.read(CaricatoreImmagini.class.getResourceAsStream(path));
+			return ImageIO.read(input);
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println(path);
 			System.out.println("errore");
 			System.exit(0);
 		}
