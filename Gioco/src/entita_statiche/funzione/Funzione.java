@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import personaggio.Nemico;
 import entita.Entita;
-import entita_statiche.EntitaStatica;
 import entita_statiche.Interruttore;
 import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;

@@ -107,7 +107,7 @@ public class Nemico extends Personaggio{
 		return new Rectangle((int) (x + visione.x), (int) (y + visione.y), visione.width, visione.height);
 	}
 	// metodo generale probabile uso in seguito
-	private Entita controllaCollisioniVisione(){
+	/*private Entita controllaCollisioniVisione(){
 		for (Entita e : h.getLivello().getArray_entita()){
 			if(!e.equals(this))
 			{
@@ -116,7 +116,7 @@ public class Nemico extends Personaggio{
 			}
 		}
 		return null;
-	}
+	}*/
 	/**
 	 * Metodo che valuta la visione del giocatore da parte del nemico.
 	 * @return boolean identificativo.

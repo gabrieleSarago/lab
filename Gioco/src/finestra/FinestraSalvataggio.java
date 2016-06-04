@@ -165,7 +165,6 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		private Handler h;
 		
 		private File file = new File(Risorse.PATH+"\\classificaPunteggio.txt");
-		private int numCaratteri = 0;
 		
 		public FinestraInserimento(Handler h){
 			

@@ -17,12 +17,9 @@ import entita.Entita;
 import entita_statiche.Caramella;
 import entita_statiche.InterruttoreInvisibile;
 import entita_statiche.InterruttorePressione;
-import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;
 //import entita_statiche.EntitaStatica; //eliminato per il gestore entita
 import entita_statiche.Trofeo;
-import entita_statiche.funzione.Funzionalita;
-import entita_statiche.funzione.Funzione;
 import gfx.Suono;
 import gioco.Handler;
 import personaggio.Nemico;
@@ -121,6 +118,7 @@ public class Livello {
 	 * Carica il ivello da file.
 	 * @param path il nome del file.
 	 */
+@SuppressWarnings("unchecked")
 private void carica(String path){
 		
 		array_entita = new  ArrayList<Entita>();
@@ -253,63 +251,6 @@ private void carica(String path){
 				return ((Sink)array_entita.get(i));
 		System.out.println("sink non trovato");
 		return null;
-	}
-
-	/**
-	 * Carica/modifica/elimina entità all'interno del livello.
-	 */
-	private void caricaEntita(){
-		// primo quadrante
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*6, Tile.TILE_ALTEZZA*4, true)); //false
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*3, true));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*15, Tile.TILE_ALTEZZA*3, true));
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*4, true));//false
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*10, Tile.TILE_ALTEZZA*2, 
-				new Funzione(array_entita, 1, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 3, Funzionalita.CAMBIA_SBARRA)
-				));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*6, 
-				new Funzione(array_entita, 2, Funzionalita.CAMBIA_SBARRA),
-				new Funzione(array_entita, 4, Funzionalita.CAMBIA_SBARRA)
-		));
-		
-		// secondo quadrante
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*18, Tile.TILE_ALTEZZA*18, false)); //7 false
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*20, Tile.TILE_ALTEZZA*18, false));// false
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*22, Tile.TILE_ALTEZZA*18, false));// false
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*18, false));// false
-		array_entita.add(new Teletrasporto(h, Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*2,
-				Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*24, false));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*21, Tile.TILE_ALTEZZA*4, 
-				new Funzione(array_entita, 10, Funzionalita.APRI_SBARRA),
-				new Funzione(array_entita, 11, Funzionalita.ATTIVA_TELETRASPORTO)
-				));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*24, Tile.TILE_ALTEZZA*10, 
-				new Funzione(array_entita, 9, Funzionalita.CAMBIA_SBARRA)
-		));
-		
-		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 22*Tile.TILE_ALTEZZA, false)); //14
-		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 24*Tile.TILE_ALTEZZA, false));
-		array_entita.add(new Nemico(h, 15*Tile.TILE_LARGHEZZA, 27*Tile.TILE_ALTEZZA, false));//16
-		array_entita.add(new InterruttoreInvisibile(h, Tile.TILE_LARGHEZZA*21, Tile.TILE_ALTEZZA*21,
-				Tile.TILE_LARGHEZZA*2, Tile.TILE_ALTEZZA*8,
-				new Funzione(array_entita, 14, Funzionalita.ATTIVA_NEMICO),
-				new Funzione(array_entita, 15, Funzionalita.ATTIVA_NEMICO),
-				new Funzione(array_entita, 16, Funzionalita.ATTIVA_NEMICO)
-				));
-		array_entita.add(new Teletrasporto(h, Tile.TILE_LARGHEZZA*12, Tile.TILE_ALTEZZA*25, //18
-				Tile.TILE_LARGHEZZA*11, Tile.TILE_ALTEZZA*15, false));
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*13, Tile.TILE_ALTEZZA*23, 
-				new Funzione(array_entita, 18, Funzionalita.ATTIVA_TELETRASPORTO)
-		));
-		
-		array_entita.add(new Sbarra(h, Tile.TILE_LARGHEZZA*26, Tile.TILE_ALTEZZA*15, true)); // false
-		array_entita.add(new InterruttorePressione(h, Tile.TILE_LARGHEZZA*17, Tile.TILE_ALTEZZA*15, 
-				new Funzione(array_entita, 20, Funzionalita.APRI_SBARRA),
-				new Funzione(array_entita, 7, Funzionalita.APRI_SBARRA),
-				new Funzione(array_entita, 8, Funzionalita.APRI_SBARRA)
-		));
-		
 	}
 	
 	public void gestisciCollisioni(Personaggio p)

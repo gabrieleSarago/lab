@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import classifica.Classifica;
-import gfx.CaricatoreImmagini;
 import gfx.Risorse;
 import gioco.Handler;
 import stati.StatoMenu;
