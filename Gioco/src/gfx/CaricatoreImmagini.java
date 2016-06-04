@@ -2,9 +2,7 @@ package gfx;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -22,13 +20,15 @@ public class CaricatoreImmagini {
 	public static BufferedImage caricaImmagine(String path){
 		
 		try {
-			File f = new File(path);
-			if(!f.exists()){
-				f = new File("/"+path);
-			}
-			InputStream input = new FileInputStream(f);
-			//return ImageIO.read(CaricatoreImmagini.class.getResourceAsStream(path));
-			return ImageIO.read(input);
+			/*Per convertire in jar bisogna creare una source folder, resource, che conterrà la cartella res
+			privata della build path. Questo perchè la cartella res non viene esportata nel jar s viene intesa
+			come source folder ma esporta solo le sue sottocartelle.
+			Si aggiunge "/" al path poichè altrimenti la ricerca del file inizierebbe
+			dalla classe in cui si chiama getResourceAsStream, ovvero CaricatoreImmagini.
+			In questo modo parte da res a cercare.
+			*/
+			//return ImageIO.read(CaricatoreImmagini.class.getResourceAsStream("/"+path));
+			return ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(path);
