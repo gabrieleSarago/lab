@@ -13,7 +13,6 @@ import entita_statiche.Sbarra;
 import entita_statiche.Teletrasporto;
 import gfx.Suono;
 import gioco.Handler;
-//implementa tutte le possibili funzioni di un iterruttore
 /**
  * Crea l'oggetto Funzione che implementa tutte
  * le possibili funzioni di un oggetto Interruttore.
@@ -54,61 +53,77 @@ public class Funzione implements Externalizable{
 	 */
 	public void eseguiFunzione(Handler h)
 	{
-		//TO-DO aggiungere tutte le possibili azioni
 		switch(funzione) {
 			case APRI_SBARRA:{
-				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
-					((Sbarra) collegamento).apri();
+				if(!(collegamento instanceof Sbarra)) 
+					throw new IllegalArgumentException("aspettata Sbarra");
+				((Sbarra) collegamento).apri();
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			}
 			case CHIUDI_SBARRA:
-				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
-					((Sbarra)collegamento).chiudi();
+				if(!(collegamento instanceof Sbarra))
+					throw new IllegalArgumentException("aspettata Sbarra");
+				((Sbarra)collegamento).chiudi();	
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_CHIUSO);
 				break;
 			case CAMBIA_SBARRA:{
-				if(!(collegamento instanceof Sbarra)) throw new IllegalArgumentException("aspettata Sbarra");
-					((Sbarra)collegamento).cambia();
-				try{
-					h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
-				}catch(Exception e){e.printStackTrace();}
+				if(!(collegamento instanceof Sbarra))
+					throw new IllegalArgumentException("aspettata Sbarra");
+				((Sbarra)collegamento).cambia();
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			}
 			case ATTIVA_INTERRUTTORE:
-				if(!(collegamento instanceof Interruttore)) throw new IllegalArgumentException("aspettato Interruttore");
-					((Interruttore)collegamento).setAttivo(true);
+				if(!(collegamento instanceof Interruttore))
+					throw new IllegalArgumentException("aspettato Interruttore");
+				((Interruttore)collegamento).setAttivo(true);
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			case DISATTIVA_INTERRUTTORE:
-				if(!(collegamento instanceof Interruttore)) throw new IllegalArgumentException("aspettato Interruttore");
-					((Interruttore)collegamento).setAttivo(false);
+				if(!(collegamento instanceof Interruttore)) 
+					throw new IllegalArgumentException("aspettato Interruttore");
+				((Interruttore)collegamento).setAttivo(false);
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_CHIUSO);
 				break;
 			case CAMBIA_INTERRUTTORE:
-				if(!(collegamento instanceof Interruttore)) throw new IllegalArgumentException("aspettato Interruttore");
-					((Interruttore)collegamento).cambiaAttivo();
+				if(!(collegamento instanceof Interruttore)) 
+					throw new IllegalArgumentException("aspettato Interruttore");
+				((Interruttore)collegamento).cambiaAttivo();
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			case ATTIVA_TELETRASPORTO:
-				if(!(collegamento instanceof Teletrasporto)) throw new IllegalArgumentException("aspettato Teletrasporto");
-					((Teletrasporto)collegamento).setAttivo(true);
+				if(!(collegamento instanceof Teletrasporto))
+					throw new IllegalArgumentException("aspettato Teletrasporto");
+				((Teletrasporto)collegamento).setAttivo(true);
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			case DISATTIVA_TELETRASPORTO:
-				if(!(collegamento instanceof Teletrasporto)) throw new IllegalArgumentException("aspettato Teletrasporto");
-					((Teletrasporto)collegamento).setAttivo(false);
+				if(!(collegamento instanceof Teletrasporto))
+					throw new IllegalArgumentException("aspettato Teletrasporto");
+				((Teletrasporto)collegamento).setAttivo(false);
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_CHIUSO);
 				break;
 			case CAMBIA_TELETRASPORTO:
-				if(!(collegamento instanceof Teletrasporto)) throw new IllegalArgumentException("aspettato Teletrasporto");
-					((Teletrasporto)collegamento).cambiaAttivo();
+				if(!(collegamento instanceof Teletrasporto)) 
+					throw new IllegalArgumentException("aspettato Teletrasporto");
+				((Teletrasporto)collegamento).cambiaAttivo();
+				h.getGioco().getSuono().riproduci(Suono.suoni.INTERRUTTORE_APERTO);
 				break;
 			case ATTIVA_NEMICO:
-				if(!(collegamento instanceof Nemico)) throw new IllegalArgumentException("aspettato Nemico");
-					((Nemico)collegamento).setVivo(true);
+				if(!(collegamento instanceof Nemico))
+					throw new IllegalArgumentException("aspettato Nemico");
+				((Nemico)collegamento).setVivo(true);
 				break;
 			case DISATTIVA_NEMICO:
-				if(!(collegamento instanceof Nemico)) throw new IllegalArgumentException("aspettato Nemico");
-					((Nemico)collegamento).setVivo(false);
+				if(!(collegamento instanceof Nemico))
+					throw new IllegalArgumentException("aspettato Nemico");
+				((Nemico)collegamento).setVivo(false);
 				break;
 			default:
 				throw new IllegalArgumentException("funzione non gestita");
 				
-			}//chiudo switch			
+			}			
 	}
 
 	public Funzione getFunzioni() {

@@ -283,7 +283,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
-						c.salva("res/classifiche/classificaPunteggio.txt");
+						c.salva(Risorse.PATH+"\\classificaPunteggio.txt");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

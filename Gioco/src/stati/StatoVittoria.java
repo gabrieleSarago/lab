@@ -8,6 +8,7 @@ import classifica.Classifica;
 import classifica.Nominativo;
 import finestra.FinestraHaiVinto;
 import finestra.FinestraSalvataggio;
+import gfx.Risorse;
 import gioco.Handler;
 /**
  * Costruisce l'oggetto StatoVittoria.
@@ -30,7 +31,7 @@ public class StatoVittoria extends Stato {
 		this.img = img;
 		this.tempo = tempo;
 		try {
-			classifica.carica("res/classifiche/classificaPunteggio.txt");
+			classifica.carica(Risorse.PATH+"\\classificaPunteggio.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

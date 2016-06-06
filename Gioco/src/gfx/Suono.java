@@ -18,10 +18,13 @@ import javax.swing.JFrame;
 public class Suono extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	* A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
+	* precedente continua e non può essere fermata.
+	*/
+	
 	public enum suoni{GIOCO, INFO, CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA, MENU};
-	//A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
-	//precedente continua e non può essere fermata.
 	private Clip clip_StatoGioco, clip_StatoMenu, clip_StatoInfo , clip;
 	private AudioInputStream audioCaramella,audioScorri,audioConferma, audioInfo;
 	private AudioInputStream audioInterruttore1, audioInterruttore2, audioGioco, audioMenu;

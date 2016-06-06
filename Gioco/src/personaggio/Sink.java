@@ -19,7 +19,7 @@ public class Sink extends Personaggio {
 	
 	public enum Movimento{ SOPRA, SOTTO, DESTRA, SINISTRA}
 	
-	private int tempo = 0;
+	private int tempo;
 	private int maxTempo;
 	private boolean sconfitta = false;
 	
@@ -49,9 +49,9 @@ public class Sink extends Personaggio {
 	 */
 	public Sink(Handler h, float x, float y, int tempo) {
 		super(h, x, y, Personaggio.DEFAULT_LARGHEZZA_PERSONAGGIO, Personaggio.DEFAULT_ALTEZZA_PERSONAGGIO);
-		this.tempo = tempo;
+		this.tempo = tempo - 100;
 		
-		maxTempo = tempo;
+		maxTempo = tempo - 100;
 		
 		bounds.x = 8;
 		bounds.y = 30;
@@ -209,8 +209,8 @@ public class Sink extends Personaggio {
 	public void readExternal(ObjectInput in) throws IOException,
 			ClassNotFoundException {
 		super.readExternal(in);
-		tempo=in.readInt();
-		maxTempo = in.readInt();
+		tempo=in.readInt() - 100;
+		maxTempo = in.readInt() - 100;
 		
 		bounds.x = 8;
 		bounds.y = 30;
@@ -236,8 +236,8 @@ public class Sink extends Personaggio {
 		@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
-		out.writeInt(tempo);
-		out.writeInt(maxTempo);
+		out.writeInt(tempo + 100);
+		out.writeInt(maxTempo + 100);
 	}
 	
 }

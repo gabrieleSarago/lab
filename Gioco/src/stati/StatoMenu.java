@@ -56,6 +56,9 @@ public class StatoMenu extends Stato{
 		s.setPosizione(h.getLarghezza(), h.getAltezza());
 		riproduzione = false;
 		this.suono = suono;
+		if(!suono.getClipStatoMenu().isRunning()){
+			riproduzione = true;
+		}
 	}
 
 	/**

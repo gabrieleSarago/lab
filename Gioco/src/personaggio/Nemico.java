@@ -106,21 +106,12 @@ public class Nemico extends Personaggio{
 	public Rectangle getVisionBounds(){
 		return new Rectangle((int) (x + visione.x), (int) (y + visione.y), visione.width, visione.height);
 	}
-	// metodo generale probabile uso in seguito
-	/*private Entita controllaCollisioniVisione(){
-		for (Entita e : h.getLivello().getArray_entita()){
-			if(!e.equals(this))
-			{
-				if(getVisionBounds().intersects(e.getCollisionBounds(0f, 0f)))
-					return e;
-			}
-		}
-		return null;
-	}*/
+	
 	/**
 	 * Metodo che valuta la visione del giocatore da parte del nemico.
 	 * @return boolean identificativo.
 	 */
+	
 	private boolean sinkAvvistato(){	
 		if(sink == null) sink = h.getLivello().getSink();
 		if(getVisionBounds().intersects(sink.getCollisionBounds(0f, 0f)))
@@ -159,7 +150,7 @@ public class Nemico extends Personaggio{
 	@Override
 	public void muovi(){
 		Entita temp; // entita solo temporanea
-		// se temp è null significa che non c è nessuna collisione
+		// se temp è null significa che non c'è nessuna collisione
 		temp = controllaCollisioni(dx, 0f);
 		if(temp == null)
 			muoviX();

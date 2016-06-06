@@ -10,13 +10,12 @@ import java.io.File;
 public class Risorse {
 	
 	private static final int size = 38;
-	//private static final int lifeh = 15, lifew = 96;
+	
 	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
 	public static BufferedImage [] voci_pausa, voci_pausa_off,
 	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, voci_musica, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
-	// ----
 	public static BufferedImage sbarra_aperta, sbarra_chiusa;
 	public static BufferedImage interruttore_acceso_destra, interruttore_acceso_sinistra, interruttore_spento;
 	public static BufferedImage teletrasporto_attivo, teletrasporto_inattivo;
@@ -133,8 +132,6 @@ public class Risorse {
 		sbarra_chiusa = sbarra.prendiSprite(192, 128, 32, 32);
 		
 		Sprite interruttore = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/lever1.png"));
-		//interruttore_acceso = interruttore.prendiSprite(8, 15, 138, 140);
-		//interruttore_spento = interruttore.prendiSprite(151, 15, 138, 140);
 		interruttore_acceso_sinistra = interruttore.prendiSprite(99, 10, 26, 20);
 		interruttore_acceso_destra = interruttore.prendiSprite(99, 74, 26, 20);
 		interruttore_spento = interruttore.prendiSprite(99, 106, 26, 20);

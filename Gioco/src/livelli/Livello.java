@@ -4,21 +4,17 @@ import java.awt.Graphics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList; //eliminato per il gestore entita
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import entita.Entita;
-//import entita.array_entita;
 import entita_statiche.Caramella;
 import entita_statiche.InterruttoreInvisibile;
 import entita_statiche.InterruttorePressione;
 import entita_statiche.Teletrasporto;
-//import entita_statiche.EntitaStatica; //eliminato per il gestore entita
 import entita_statiche.Trofeo;
 import gfx.Suono;
 import gioco.Handler;
@@ -35,14 +31,11 @@ import utils.Utils;
  * Il livello viene caricato da un file di interi.
  */
 
-// TO-DO: permettere il salvataggio dell' entità in un file di testo
 public class Livello {
 	
 	private Handler h;
 	private int larghezza, altezza;
-	//public int sinkX, sinkY;
 	private int [][] tiles;
-	//public int tempo;
 	private ArrayList<Entita> array_entita;
 	private Comparator<Entita> ordineDisegno = new Comparator<Entita>(){
 		@Override
@@ -53,10 +46,6 @@ public class Livello {
 		
 	};
 	private Entita ultimaCollisione_sink;
-	//private Sink sink;
-	
-	//----gestore entita 
-	//private array_entita array_entita;
 	
 	
 	/**
@@ -87,7 +76,6 @@ public class Livello {
 	
 	public void disegna (Graphics g){
 		
-		//ottimizzazione
 		int xStart = (int) Math.max(0, h.getCameraGioco().getxOffset() / Tile.TILE_LARGHEZZA);
 		int xEnd = (int) Math.min(larghezza, (h.getCameraGioco().getxOffset() + h.getLarghezza())/Tile.TILE_LARGHEZZA +1);
 		int yStart = (int) Math.max(0, h.getCameraGioco().getyOffset() / Tile.TILE_ALTEZZA);
@@ -114,25 +102,18 @@ public class Livello {
 			return Tile.muro;
 		return t;
 	}
+	
+	
 	/**
 	 * Carica il ivello da file.
 	 * @param path il nome del file.
 	 */
-@SuppressWarnings("unchecked")
-private void carica(String path){
+	
+	@SuppressWarnings("unchecked")
+	private void carica(String path){
 		
 		array_entita = new  ArrayList<Entita>();
-		File f = new File(path);
-		if(!f.exists()){
-			//Se il file non esiste carica la partita come nuova
-			path = "res/livelli/livello1.txt";
-			try {
-				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}		
-		String file = Utils.caricaFileComeString(path);
+		String file = Utils.caricaFileComeString("res/livelli/livello1.txt");
 		String[] tokens = file.split("\\s+");
 		larghezza = Utils.parseInt(tokens[0]);
 		altezza = Utils.parseInt(tokens[1]);
@@ -142,12 +123,14 @@ private void carica(String path){
 			for (int x = 0; x < larghezza; x++)
 				tiles[x][y] = Utils.parseInt(tokens[(x + (y * larghezza)) + c]);
 		
-		// TODO: il percorso non deve esssere fisso
 		array_entita.clear(); //per sicurezza
 		
-		try{ //TODO
-			ObjectInputStream in;		
-			in = new ObjectInputStream(new FileInputStream(path+"1"));
+		try{
+			File f = new File(path+"1");
+			if(!f.exists()){
+				path = "res/livelli/livello1.txt";
+			}
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(path+"1"));
 			array_entita = (ArrayList<Entita>) in.readObject();
 			//handler cambia ogni volta che si avvia il gioco quindi bisogna
 			//settare ogni entita con l' handler corrente
@@ -156,34 +139,7 @@ private void carica(String path){
 			in.close();
 		}catch(Exception e){e.printStackTrace();}
 		
-		//array_entita.add(new Sink(h, 75, 75, 200));
-		//array_entita.add(new Nemico(h, 9*Tile.TILE_LARGHEZZA, 2*Tile.TILE_ALTEZZA));
-		
 	}
-   /*
-	private void supportoCarica(String path) throws FileNotFoundException, IOException, ClassNotFoundException 
-	{
-			ObjectInputStream in;		
-			in = new ObjectInputStream(new FileInputStream(path+"1"));
-			
-			Entita en = null;
-			for(;;){
-			try {	
-				en = (Entita) in.readObject();
-				en.setHandler(h);
-				array_entita.add(en);
-				}catch (ClassNotFoundException e1){
-				e1.printStackTrace();
-				in.close();
-				throw new IOException();
-				}catch(ClassCastException e2){
-				e2.printStackTrace();
-				in.close();
-				throw new IOException();
-				}catch(EOFException e3){break;}
-			}//fine for	
-			in.close();
-	}*/
 
 	/**
 	 * Salva le dinamiche correnti del livello su un file.
@@ -193,32 +149,10 @@ private void carica(String path){
 	public void salva(String file){
 		File f = new File(file);
 		f.delete();
-		PrintWriter pw;
-		try {
-			pw = new PrintWriter(new FileWriter(file));
-			pw.write(tiles.length + " " + tiles[0].length+"\n");
-			pw.write("0000" + "\n");
-			for(int i = 0; i<tiles.length; i++){
-				pw.write("\n");
-				for(int j = 0; j<tiles[i].length; j++){
-					pw.write(tiles[j][i]+" ");
-				}
-			}
-			pw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// utile se si vuole aggiungere/modificare/eliminare entita
-		/*array_entita.clear();
-		array_entita.add(new Sink(h, 75, 75, 200));
-		caricaEntita();*/
+
 		try{
-			//"res/livelli/livello1.txt1"
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file+"1"));
 			oos.writeObject(array_entita);
-			/*for(Entita c: array_entita){
-				oos.writeObject(c);
-			}*/
 			oos.close();
 			}catch(IOException e){e.printStackTrace();}
 	}
@@ -232,14 +166,12 @@ private void carica(String path){
 	}
 
 	public int getTempo() {
-		//return tempo;
-		//da per scontato che Sink è il primo elemento dell' array
 		return getSink().getTempo();
 	}
 
 	public void setTempo(int tempo) {
-		//this.tempo = tempo;
-		if(!(array_entita.get(0) instanceof Sink)) throw new RuntimeException("aspettato Sink");
+		if(!(array_entita.get(0) instanceof Sink)) 
+			throw new RuntimeException("aspettato Sink");
 		((Sink)array_entita.get(0)).setTempo(tempo);
 		
 	}

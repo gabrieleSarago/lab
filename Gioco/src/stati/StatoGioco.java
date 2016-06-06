@@ -17,11 +17,7 @@ import personaggio.Sink;
  */
 public class StatoGioco extends Stato {
 	
-	//----private Sink s;
 	private Livello l;
-	// ---private int x;
-	//----private int y;
-	//private ArrayList<EntitaStatica> entitaStatiche;	
 	private boolean vittoria = false;
 	private Graphics g;
 	private boolean riproduzione = true;
@@ -35,11 +31,7 @@ public class StatoGioco extends Stato {
 		super(h);
 		l = new Livello(h, "res/livelli/livello1.txt");
 		h.setLivello(l);
-		//----x = l.sinkX;
-		//----y = l.sinkY;
 		suono = h.getSuono();
-		// ---- entitaStatiche = l.entitaStatiche;
-		//----s = new Sink(h, x, y, tempo);
 	}
 	
 	/**
@@ -53,10 +45,6 @@ public class StatoGioco extends Stato {
 		l = new Livello(h, file);
 		h.setLivello(l);
 		suono = h.getSuono();
-		//----x = l.sinkX;
-		//----y = l.sinkY;
-		//----entitaStatiche = l.entitaStatiche;
-		//----s = new Sink(h, x, y, tempo);
 	}
 	
 	/**
@@ -87,36 +75,6 @@ public class StatoGioco extends Stato {
 			}
 		}
 		}
-			/* ---- eliminato se ne occupa gestioneEntita in livello
-			for(int i = 0; i < entitaStatiche.size(); i++){
-				EntitaStatica c = entitaStatiche.get(i);
-				c.aggiorna();
-			}
-			s.aggiorna();
-			if (s.getTempo()<0){
-				h.setStato(new StatoMenu(h));
-			}*/
-	
-		
-			/*h.getGioco().setPausa(true);
-			String input;
-			int i = JOptionPane.showConfirmDialog(null, "Vuoi salvare il tuo punteggio?");
-			if(i==JOptionPane.NO_OPTION) {
-				h.getGioco().setStato(new StatoMenu(h));			}
-			else if (i==JOptionPane.CANCEL_OPTION)
-				JOptionPane.showMessageDialog(null, "Devi rispondere SI o NO.");
-			else{
-				try{
-					input = JOptionPane.showInputDialog("Inserisci il tuo nominativo: ");
-					classifica.add(new Nominativo(String.valueOf(tempo).toString(),input));
-					classifica.salva("classificaPunteggio.txt");
-					JOptionPane.showMessageDialog(null, "Punteggio salvato!");
-					h.getGioco().setStato(new StatoMenu(h));
-					h.getStato().aggiorna();
-				}catch(Exception e){
-					input = null;
-				}
-			}*/
 		
 	}
 
@@ -147,9 +105,7 @@ public class StatoGioco extends Stato {
 	}
 	
 	public Sink getSink(){
-		//----return s;
 		return l.getSink();
-		
 	}
 	
 	
@@ -166,22 +122,6 @@ public class StatoGioco extends Stato {
 		g.dispose();
 		return img;
 	}
-	/*---- probabilmente in gestione
-	public void controlla(){
-		for (int i = 0; i < entitaStatiche.size(); i++){
-			Entita e = entitaStatiche.get(i);
-			if ((e instanceof Caramella) && s.getX()<e.getX() && s.getX()>(e.getX()-(e.getLarghezza()/2)) &&
-					s.getY()<e.getY() && s.getY()>(e.getY()-(e.getAltezza()/2))){
-				s.setTempo(s.getTempo()+5);
-				entitaStatiche.remove(e);
-				}
-			if ((e instanceof Trofeo) && s.getX()<e.getX() && s.getX()>(e.getX()-(e.getLarghezza()/2)) &&
-					s.getY()<e.getY() && s.getY()>(e.getY()-(e.getAltezza()/2))){
-				vittoria =true;
-			}
-	    }
-	
-    }*/
 	
 	/**
 	 * Imposta lo stato di vittoria.
