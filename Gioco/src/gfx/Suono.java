@@ -1,10 +1,12 @@
 package gfx;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
 import javax.sound.sampled.AudioInputStream;
@@ -52,13 +54,16 @@ public class Suono extends JFrame{
 	 */
 	public void riproduci(suoni s){
 		if(!muto){
+		InputStream file;
 		try {
 			clip = AudioSystem.getClip();
 			
 		switch(s){
 		case GIOCO:{
 			clip_StatoGioco =  AudioSystem.getClip();
-			File gioco =  new File("res/suoni/game_sound.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/game_sound.wav");
+			BufferedInputStream gioco = new BufferedInputStream(file);
+			//File gioco =  new File("res/suoni/game_sound.wav");
 			audioGioco = AudioSystem.getAudioInputStream(gioco);
 			clip_StatoGioco.open(audioGioco);
 			clip_StatoGioco.loop(Clip.LOOP_CONTINUOUSLY);
@@ -66,44 +71,58 @@ public class Suono extends JFrame{
 		}
 		case INFO:
 			clip_StatoInfo =  AudioSystem.getClip();
-			File info =  new File("res/suoni/info.wav");
+			//File info =  new File("res/suoni/info.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/info.wav");
+			BufferedInputStream info = new BufferedInputStream(file);
 			audioInfo = AudioSystem.getAudioInputStream(info);
 			clip_StatoInfo.open(audioInfo);
 			clip_StatoInfo.loop(Clip.LOOP_CONTINUOUSLY);
 			break;
 		case CARAMELLA:{
-			File caramella = new File("res/suoni/LOZ_Get_Item.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/LOZ_Get_Item.wav");
+			BufferedInputStream caramella = new BufferedInputStream(file);
+			//File caramella = new File("res/suoni/LOZ_Get_Item.wav");
 			audioCaramella = AudioSystem.getAudioInputStream(caramella);
 			clip.open(audioCaramella);
 			break;
 		}
 		case INTERRUTTORE_APERTO:{
-			File interruttore_aperto =  new File("res/suoni/LOZ_Get_Heart.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/LOZ_Get_Heart.wav");
+			BufferedInputStream interruttore_aperto = new BufferedInputStream(file);
+			//File interruttore_aperto =  new File("res/suoni/LOZ_Get_Heart.wav");
 			audioInterruttore1 = AudioSystem.getAudioInputStream(interruttore_aperto);
 			clip.open(audioInterruttore1);
 			break;
 		}
 		case INTERRUTTORE_CHIUSO:{
-			File interruttore_chiuso = new File("res/suoni/LOZ_Arrow.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/LOZ_Arrow.wav");
+			BufferedInputStream interruttore_chiuso = new BufferedInputStream(file);
+			//File interruttore_chiuso = new File("res/suoni/LOZ_Arrow.wav");
 			audioInterruttore2 = AudioSystem.getAudioInputStream(interruttore_chiuso);
 			clip.open(audioInterruttore2);
 			break;
 		}
 		case SCORRI:{
-			File scorri=new File("res/suoni/LOZ_LowHealth.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/LOZ_LowHealth.wav");
+			BufferedInputStream scorri = new BufferedInputStream(file);
+			//File scorri=new File("res/suoni/LOZ_LowHealth.wav");
 			audioScorri = AudioSystem.getAudioInputStream(scorri);
 			clip.open(audioScorri);
 			break;
 		}
 		case CONFERMA:{
-			File conferma=new File("res/suoni/LOZ_Get_Heart.wav");
+			file = Suono.class.getResourceAsStream("/res/suoni/LOZ_Get_Heart.wav");
+			BufferedInputStream conferma = new BufferedInputStream(file);
+			//File conferma=new File("res/suoni/LOZ_Get_Heart.wav");
 			audioConferma= AudioSystem.getAudioInputStream(conferma);
 			clip.open(audioConferma);
 			break;
 		}
 		case MENU:{
 			 clip_StatoMenu =  AudioSystem.getClip();
-			 File menu = new File("res/suoni/menu_intro.wav");
+			 file = Suono.class.getResourceAsStream("/res/suoni/menu_intro.wav");
+			 BufferedInputStream menu = new BufferedInputStream(file);
+			 //File menu = new File("res/suoni/menu_intro.wav");
 			 audioMenu = AudioSystem.getAudioInputStream(menu);
 			 clip_StatoMenu.open(audioMenu);
 			 clip_StatoMenu.loop(Clip.LOOP_CONTINUOUSLY);

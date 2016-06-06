@@ -2,7 +2,7 @@ package pannelli;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -28,7 +28,8 @@ public class Sfondo {
 	 */
 	public Sfondo (String s, Handler h){
 		try {
-			sfondo = ImageIO.read(new File(s));
+			InputStream is = Sfondo.class.getResourceAsStream("/"+s);
+			sfondo = ImageIO.read(is);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

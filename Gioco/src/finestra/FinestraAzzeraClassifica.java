@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import classifica.Classifica;
 import gfx.Risorse;
 import gioco.Handler;
+import stati.StatoClassifica;
 import stati.StatoMenu;
 
 /**
@@ -222,8 +223,8 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 		@Override
 		public void keyPressed(KeyEvent k){
 			if(k.getKeyCode()== KeyEvent.VK_ENTER){
-				h.getGioco().setStato(new StatoMenu(h));
-				f.setVisible(false);
+				f.dispose();
+				h.getGioco().setStato(new StatoClassifica(h, h.getSuono()));
 			}
 			
 		}

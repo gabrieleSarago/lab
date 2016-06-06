@@ -8,6 +8,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import classifica.Classifica;
 import classifica.Nominativo;
@@ -95,11 +96,12 @@ public class StatoClassifica extends Stato{
 		Font customFont;
 		try {
 		    //Crea un font da file
-		    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/classifiche/old_game.ttf")).deriveFont(60f);
+			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/old_game.ttf");
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(60f);
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		    
 		    //registra il font
-		    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/classifiche/old_game.ttf")));
+		    ge.registerFont(customFont);
 		    g.setFont(customFont);
 		} catch (IOException e) {
 		    e.printStackTrace();

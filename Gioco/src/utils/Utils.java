@@ -1,8 +1,9 @@
 package utils;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 /**
  * Classe di utilità.
  */
@@ -13,11 +14,12 @@ public class Utils {
 	 * @param path il file da caricare.
 	 * @return una stinga che identifica il file.
 	 */
-	public static String caricaFileComeString ( String path){
+	public static String caricaFileComeString (String path){
 		StringBuilder sb = new StringBuilder();
 		
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(path));
+			InputStream is = Utils.class.getResourceAsStream("/"+path);
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String linea;
 			while((linea = br.readLine()) != null)
 				sb.append(linea + "\n");

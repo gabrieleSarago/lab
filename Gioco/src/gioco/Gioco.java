@@ -71,7 +71,7 @@ public class Gioco implements Runnable {
 		h = new Handler(this);
 		f = new Finestra(titolo, larghezza, altezza, h);
 		f.getFrame().addKeyListener(gi);
-		f.getFrame().setIconImage(CaricatoreImmagini.caricaImmagine("res/img/Sprite/icon_link.png"));
+		f.getFrame().setIconImage(CaricatoreImmagini.caricaImmagine("res/img/sprite/icon_link.png"));
 		
 		suono = new Suono();
 		

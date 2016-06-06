@@ -1,7 +1,6 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -27,8 +26,8 @@ public class CaricatoreImmagini {
 			dalla classe in cui si chiama getResourceAsStream, ovvero CaricatoreImmagini.
 			In questo modo parte da res a cercare.
 			*/
-			//return ImageIO.read(CaricatoreImmagini.class.getResourceAsStream("/"+path));
-			return ImageIO.read(new File(path));
+			return ImageIO.read(CaricatoreImmagini.class.getResourceAsStream("/"+path));
+			//return ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(path);

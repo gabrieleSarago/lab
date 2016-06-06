@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -125,13 +126,22 @@ public class Livello {
 		
 		array_entita.clear(); //per sicurezza
 		
+		ObjectInputStream in;
+		
 		try{
 			File f = new File(path+"1");
 			if(!f.exists()){
-				path = "res/livelli/livello1.txt";
+				path = "/res/livelli/livello1.txt";
+				InputStream is = this.getClass().getResourceAsStream(path+"1");
+				in = new ObjectInputStream(is);
+				array_entita = (ArrayList<Entita>) in.readObject();
 			}
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(path+"1"));
-			array_entita = (ArrayList<Entita>) in.readObject();
+			//InputStream is = Livello.class.getResourceAsStream(path+"1");
+			//System.out.println(is.toString());
+			else{
+				in = new ObjectInputStream(new FileInputStream(path+"1"));
+				array_entita = (ArrayList<Entita>) in.readObject();
+			}
 			//handler cambia ogni volta che si avvia il gioco quindi bisogna
 			//settare ogni entita con l' handler corrente
 			for(int i=0; i < array_entita.size(); i++)
