@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Classifica implements Iterable<Nominativo>{
 	
-	private LinkedList<Nominativo> classifica=new LinkedList<Nominativo>();
+	private LinkedList<Nominativo> classifica = new LinkedList<Nominativo>();
 	
 	public Classifica(){
 	}//costruttore
@@ -40,6 +40,9 @@ public class Classifica implements Iterable<Nominativo>{
 				lit.add(n);
 				flag=true;
 			}
+		}
+		if(classifica.size() > 3){
+			classifica.removeLast();
 		}
 		if(!flag)lit.add(n);
 	}//add

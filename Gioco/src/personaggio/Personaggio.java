@@ -20,7 +20,6 @@ public abstract class Personaggio extends Entita {
 	protected int vita;
 	protected float velocita;
 	protected float dx, dy;
-	//---- per gestire le collisioni. Dice l' ultima entita con cui la creatura è andata a collidere
 	protected Entita ultimaEntita;
 	
 	public Personaggio(){} // necessario per esternzalizzazione
@@ -152,7 +151,7 @@ public abstract class Personaggio extends Entita {
 		this.velocita = velocita;
 	}
 	
-	//---- aggiunto
+	
 	public Entita getUltimaEntita()
 	{
 		return ultimaEntita;

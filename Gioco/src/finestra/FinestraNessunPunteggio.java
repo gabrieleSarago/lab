@@ -25,7 +25,6 @@ public class FinestraNessunPunteggio implements KeyListener,ActionListener {
 	private JButton ok = new JButton();
 	
 	private Handler h;
-	
 	public FinestraNessunPunteggio(Handler h){
 		
 		ok.setBorderPainted(false);

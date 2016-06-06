@@ -14,12 +14,20 @@ import gioco.Handler;
  */
 
 public abstract class Interruttore extends EntitaStatica{
-
-	protected boolean attivo; // dice se l' interruttore funziona o no
-	protected EntitaStatica collegamento; // collega l' interruttore a un entita statica
+	
+	/**
+	 * @param attivo dice se l' interruttore funziona o no
+	 * @param collegamento collega l' interruttore a un entita statica
+	 * @param funzione cambia da true a false, da false a true ogni volta che si esegue funzione
+	 * @param cambiaPosizione cambia lo stato dell'interruttore
+	 * @param autoDisattiva dice se l' interruttore disattiva se stesso una volta usato
+	 */
+	
+	protected boolean attivo;
+	protected EntitaStatica collegamento;
 	protected Funzione[] funzione;
-	protected boolean cambiaPosizione; //cambia da true a false, da false a true ogni volta che si esegue funzione
-	protected boolean autoDisattiva; //TODO dice se l' interruttore disattiva se stesso una volta usato
+	protected boolean cambiaPosizione;
+	protected boolean autoDisattiva;
 	
 	public Interruttore() {}// per esternalizzazione
 	/**
@@ -46,7 +54,6 @@ public abstract class Interruttore extends EntitaStatica{
 		this.autoDisattiva = autoDisattiva;
 			
 	}
-	// dice cosa fa l' interruttore
 	/**
 	 * Metodo che indica la funzione svolta dall'interruttore.
 	 * @param h oggetto Handler

@@ -31,10 +31,7 @@ public class Sbarra extends EntitaStatica{
 	}
 
 	@Override
-	public void aggiorna() {
-		// TODO 
-		
-	}
+	public void aggiorna() {}
 
 	/**
 	 * Disegna l'oggetto Sbarra mediante un oggetto Graphics.

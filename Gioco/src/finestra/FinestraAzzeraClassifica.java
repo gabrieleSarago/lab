@@ -41,7 +41,7 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 	 */
 	public FinestraAzzeraClassifica(Handler h){
 		try {
-			classifica.carica("res/classifiche/classificaPunteggio.txt");
+			classifica.carica(Risorse.PATH+"\\classificaPunteggio.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +107,7 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 			f.setVisible(false);
 			classifica.azzeraClassifica();
 			try {
-				classifica.salva("res/classifiche/classificaPunteggio.txt");
+				classifica.salva(Risorse.PATH+"\\classificaPunteggio.txt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -145,7 +145,7 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 			f.setVisible(false);
 			classifica.azzeraClassifica();
 			try {
-				classifica.salva("res/classifiche/classificaPunteggio.txt");
+				classifica.salva(Risorse.PATH+"\\classificaPunteggio.txt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
