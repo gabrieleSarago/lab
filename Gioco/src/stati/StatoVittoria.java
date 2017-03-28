@@ -31,7 +31,7 @@ public class StatoVittoria extends Stato {
 		this.img = img;
 		this.tempo = tempo;
 		try {
-			classifica.carica(Risorse.PATH+"\\classificaPunteggio.txt");
+			classifica.carica(Risorse.CLASSIFICA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

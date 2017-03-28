@@ -26,12 +26,25 @@ public class Risorse {
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
-	public static final String PATH = System.getProperty("user.home")+"\\Risorse";
+	public static String PATH = System.getProperty("user.home")+"\\Risorse";
+	public static String LINGUA = PATH + "\\lingua.txt";
+	public static String SUONO = PATH + "\\suono.txt";
+	public static String CLASSIFICA = PATH + "\\classificaPunteggio.txt";
+	public static String LIVELLO = PATH + "\\livelloS.txt";
 	
 	/**
 	 * Inizializza le risorse del gameplay.
 	 */
 	public static void inizializza(){
+		
+		if(PATH.startsWith("/")){
+			PATH = System.getProperty("user.home") + "/Risorse";
+			LINGUA = PATH + "/lingua.txt";
+			SUONO = PATH + "/suono.txt";
+			CLASSIFICA = PATH + "/classificaPunteggio.txt";
+			LIVELLO = PATH + "/livelloS.txt";
+		}
+		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
 		
 		sink_sotto = new BufferedImage[10];

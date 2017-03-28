@@ -22,8 +22,8 @@ public class Suono extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	* A ogni clip è associata una riproduzione, se la clip viene sovrascritta la riproduzione
-	* precedente continua e non può essere fermata.
+	* A ogni clip ï¿½ associata una riproduzione, se la clip viene sovrascritta la riproduzione
+	* precedente continua e non puï¿½ essere fermata.
 	*/
 	
 	public enum suoni{GIOCO, INFO, CARAMELLA,INTERRUTTORE_APERTO, INTERRUTTORE_CHIUSO,SCORRI,CONFERMA, MENU};
@@ -34,7 +34,7 @@ public class Suono extends JFrame{
 	private boolean muto;
 	private String linea;
 	
-	private File f = new File(Risorse.PATH+"\\suono.txt");
+	private File f = new File(Risorse.SUONO);
 	
 	/**
 	 * Costruisce il suono del gioco
@@ -130,7 +130,7 @@ public class Suono extends JFrame{
 		}
 		}
 		} catch (Exception e) {e.printStackTrace();}
-		//Se clip è già attivo lo blocca e ne libera le risorse per poterlo riusare.
+		//Se clip ï¿½ giï¿½ attivo lo blocca e ne libera le risorse per poterlo riusare.
 		if(clip.isRunning()){
 			clip.stop();
 			clip.close();
@@ -148,7 +148,7 @@ public class Suono extends JFrame{
 			if(!f.exists()){
 				f.createNewFile();
 			}
-			BufferedReader br = new BufferedReader(new FileReader(Risorse.PATH+"\\suono.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(Risorse.SUONO));
 			linea = br.readLine();
 			br.close();
 		}catch(IOException e){
@@ -171,7 +171,7 @@ public class Suono extends JFrame{
 		this.muto = muto;
 		
 		try{
-			PrintWriter pw = new PrintWriter(new FileWriter(Risorse.PATH+"\\suono.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter(Risorse.SUONO));
 			if(muto){
 				pw.write("OFF");
 			}

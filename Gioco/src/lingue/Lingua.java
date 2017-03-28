@@ -10,14 +10,14 @@ import gfx.Risorse;
 public class Lingua {
 	
 	private String linea;
-	private File f = new File(Risorse.PATH+"\\lingua.txt");
+	private File f = new File(Risorse.LINGUA);
 	
 	public String getLingua(){
 		try{
 			if(!f.exists()){
 				f.createNewFile();
 			}
-			BufferedReader br = new BufferedReader(new FileReader(Risorse.PATH+"\\lingua.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(Risorse.LINGUA));
 			linea = br.readLine();
 			br.close();
 		}catch(IOException e){e.printStackTrace();}
@@ -32,7 +32,7 @@ public class Lingua {
 			if(!f.exists()){
 				f.createNewFile();
 			}
-			PrintWriter pw = new PrintWriter(new FileWriter(Risorse.PATH+"\\lingua.txt"));
+			PrintWriter pw = new PrintWriter(new FileWriter(Risorse.LINGUA));
 			switch(s){
 			case "ITALIANO" : pw.write("ITALIANO"); break;
 			case "ENGLISH" : pw.write("ENGLISH"); break;

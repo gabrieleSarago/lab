@@ -2,10 +2,10 @@ package stati;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-// import java.util.ArrayList; ora c è gestioneEntita
+// import java.util.ArrayList; ora c ï¿½ gestioneEntita
 
 import gfx.Suono;
-// import entita.Entita; ora c è gestioneEntita
+// import entita.Entita; ora c ï¿½ gestioneEntita
 //import entita_statiche.Caramella;
 //import entita_statiche.EntitaStatica;
 //import entita_statiche.Trofeo;
@@ -70,7 +70,9 @@ public class StatoGioco extends Stato {
 			//controlla();
 			l.aggiorna();
 			if (vittoria){
-				h.getSuono().getClipGioco().close();
+				if(!h.getSuono().getMuto()){
+					h.getSuono().getClipGioco().close();
+				}
 				h.getGioco().setStato(new StatoVittoria(h, this.getUltimoScreen(), h.getLivello().getSink().getTempo()));
 			}
 		}

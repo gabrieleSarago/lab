@@ -31,7 +31,7 @@ public class StatoClassifica extends Stato{
 	private int sceltaCorrente=0;
 	
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
-	private File f = new File(Risorse.PATH+"\\classificaPunteggio.txt");
+	private File f = new File(Risorse.CLASSIFICA);
 	
 	//per regolarizzare gli aggiornamenti
 	private int fps = 55;
@@ -56,7 +56,7 @@ public class StatoClassifica extends Stato{
 			if(!f.exists()){
 				f.createNewFile();
 			}
-			c.carica(Risorse.PATH+"\\classificaPunteggio.txt");
+			c.carica(Risorse.CLASSIFICA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,7 +112,7 @@ public class StatoClassifica extends Stato{
 		g.drawString("1.", 200, 250);
 		g.drawString("2.", 200,350);
 		g.drawString("3.", 200, 450);
-		int j = 250,cont=0; //cont serve per non stampare più di 3 nominativi
+		int j = 250,cont=0; //cont serve per non stampare piï¿½ di 3 nominativi
 		for(Nominativo n: c){
 			g.setColor(Color.RED);
 			g.drawString(n.getPunteggio(), 1000, j);

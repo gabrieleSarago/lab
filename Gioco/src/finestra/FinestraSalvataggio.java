@@ -83,7 +83,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		//Resizing dinamico dello sfondo
 		Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 		
-		//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+		//Lo sfondo ï¿½ inteso come un JLabel su cui viene stampata l'immagine.
 		sfondo = new JLabel(new ImageIcon(img));
 		f.setContentPane(sfondo);
 		//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
@@ -164,7 +164,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 		private String player;
 		private Handler h;
 		
-		private File file = new File(Risorse.PATH+"\\classificaPunteggio.txt");
+		private File file = new File(Risorse.CLASSIFICA);
 		
 		public FinestraInserimento(Handler h){
 			
@@ -172,7 +172,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				if(!file.exists()){
 					file.createNewFile();
 				}
-				c.carica(Risorse.PATH+"\\classificaPunteggio.txt");
+				c.carica(Risorse.CLASSIFICA);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -210,7 +210,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			//Resizing dinamico dello sfondo
 			Image img = Risorse.sfondo_popup.getScaledInstance(300, 65, Image.SCALE_SMOOTH);
 			
-			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			//Lo sfondo ï¿½ inteso come un JLabel su cui viene stampata l'immagine.
 			sfondo = new JLabel(new ImageIcon(img));
 			f.setContentPane(sfondo);
 			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
@@ -247,7 +247,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
-						c.salva(Risorse.PATH+"\\classificaPunteggio.txt");
+						c.salva(Risorse.CLASSIFICA);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -283,7 +283,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 				else{
 					c.add(new Nominativo(String.valueOf(tempo),player));
 					try {
-						c.salva(Risorse.PATH+"\\classificaPunteggio.txt");
+						c.salva(Risorse.CLASSIFICA);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -352,7 +352,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			//Resizing dinamico dello sfondo
 			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 			
-			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			//Lo sfondo ï¿½ inteso come un JLabel su cui viene stampata l'immagine.
 			sfondo = new JLabel(new ImageIcon(img));
 			f.setContentPane(sfondo);
 			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
@@ -438,7 +438,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			//Resizing dinamico dello sfondo
 			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 			
-			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			//Lo sfondo ï¿½ inteso come un JLabel su cui viene stampata l'immagine.
 			sfondo = new JLabel(new ImageIcon(img));
 			f.setContentPane(sfondo);
 			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.
@@ -543,7 +543,7 @@ public class FinestraSalvataggio implements KeyListener,ActionListener {
 			//Resizing dinamico dello sfondo
 			Image img = Risorse.sfondo_popup.getScaledInstance(larghezza, 65, Image.SCALE_SMOOTH);
 			
-			//Lo sfondo è inteso come un JLabel su cui viene stampata l'immagine.
+			//Lo sfondo ï¿½ inteso come un JLabel su cui viene stampata l'immagine.
 			sfondo = new JLabel(new ImageIcon(img));
 			f.setContentPane(sfondo);
 			//Si crea un nuovo livello su cui inserire gli altri oggetti grafici.

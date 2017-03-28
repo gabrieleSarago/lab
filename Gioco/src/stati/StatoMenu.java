@@ -47,7 +47,7 @@ public class StatoMenu extends Stato{
 	/**
 	 * Costruisce l'oggetto StatoMenu.
 	 * @param h oggetto Handler utile per la gestione con le altre classi.
-	 * @param suono la musica di sottofondo nel menù.
+	 * @param suono la musica di sottofondo nel menï¿½.
 	 */
 	public StatoMenu(Handler h, Suono suono) {
 		super(h);
@@ -106,7 +106,7 @@ public class StatoMenu extends Stato{
 		}
 		if (sceltaCorrente == 1){
 			suono.getClipStatoMenu().close();
-			h.getGioco().setStato(new StatoGioco(h,Risorse.PATH + "\\livelloS.txt"));
+			h.getGioco().setStato(new StatoGioco(h,Risorse.LIVELLO));
 			
 		}
 		if (sceltaCorrente == 2){

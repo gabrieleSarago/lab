@@ -103,7 +103,8 @@ public class StatoPausa extends Stato{
 		if(sceltaCorrente == 0){
 			h.getGioco().setPausa(false);
 			//Riprende il suono da dove era stato interrotto.
-			h.getSuono().getClipGioco().start();
+			if(!h.getSuono().getMuto())
+				h.getSuono().getClipGioco().start();
 			
 			h.getGioco().setStato(precedente);
 		}
@@ -112,7 +113,7 @@ public class StatoPausa extends Stato{
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if(sceltaCorrente == 2){
-			h.getLivello().salva(Risorse.PATH+"//livelloS.txt");
+			h.getLivello().salva(Risorse.LIVELLO);
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setPausa(false);
@@ -131,7 +132,7 @@ public class StatoPausa extends Stato{
 		if(h.getGestioneInput().right)
 			dx+=2;
 		s.setVector(-0.3-dx, 0);
-		//se la freccia viene rilasciata la velocità torna normale. 
+		//se la freccia viene rilasciata la velocitï¿½ torna normale. 
 		dx = 0;
 		
 		if(h.getGestioneInput().up){

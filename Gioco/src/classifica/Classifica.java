@@ -1,5 +1,8 @@
 package classifica;
 import java.util.*;
+
+import gfx.Risorse;
+
 import java.io.*;
 
 /**
@@ -15,7 +18,7 @@ public class Classifica implements Iterable<Nominativo>{
 	}//costruttore
 	
 	public int size(){return classifica.size();}
-	
+		
 	boolean isEmpty(){return classifica.isEmpty();}
 	
 	/**
@@ -75,6 +78,10 @@ public class Classifica implements Iterable<Nominativo>{
 	 * @throws IOException
 	 */
 	public void carica(String nomeFile) throws IOException{
+		File f = new File(nomeFile);
+		if(!f.exists()){
+			f.createNewFile();
+		}
 		BufferedReader br = new BufferedReader(new FileReader(nomeFile));
 		String linea = null;
 		StringTokenizer st = null;
