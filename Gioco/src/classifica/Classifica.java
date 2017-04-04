@@ -1,8 +1,6 @@
 package classifica;
 import java.util.*;
 
-import gfx.Risorse;
-
 import java.io.*;
 
 /**
