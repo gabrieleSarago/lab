@@ -154,9 +154,7 @@ public class Gioco implements Runnable {
 	 * Aggiorna i listener e gli stati associati.
 	 */
 	private void aggiorna(){
-		
-		gi.aggiorna();
-		
+				
 		if ( Stato.getStato() != null){
 			Stato.getStato().aggiorna();
 			Stato.setStato(stato);
