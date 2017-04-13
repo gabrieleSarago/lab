@@ -26,7 +26,7 @@ public class Risorse {
 	
 	public static BufferedImage sfondo_popup, stato_info;
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
-	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
+	voce_no_carica, voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
 	public static String JAR_PATH = System.getProperty("java.class.path"); //TODO
@@ -275,6 +275,9 @@ public class Risorse {
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_punteggio.png"));
 		voce_no_punteggio = s1.prendiSprite(0, 0, 277, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_carica_salvataggio.png"));
+		voce_no_carica = s1.prendiSprite(0, 0, 308, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
 		voce_salva = s1.prendiSprite(0, 0, 601, 22);

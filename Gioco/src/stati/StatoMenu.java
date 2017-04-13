@@ -2,7 +2,9 @@ package stati;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
+import finestra.FinestraNessunSalvataggio;
 import finestra.FinestraUscita;
 import gioco.Handler;
 import grafica.Risorse;
@@ -106,8 +108,17 @@ public class StatoMenu extends Stato{
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == opzioni.CARICA_PARTITA.ordinal()){//qua carichi il livello
-			suono.getClipStatoMenu().close();
-			h.getGioco().setStato(new StatoGioco(h, "livello1_S"));
+			String pathLivelloEntita = Risorse.PATH_ESTERNO_LIVELLI + Risorse.SEPARATORE + "livello1.salvataggio";
+			File f = new File(pathLivelloEntita);
+			if(!f.exists()){
+				suono.getClipStatoMenu().stop();
+				new FinestraNessunSalvataggio(h);
+			}
+			else{
+				suono.getClipStatoMenu().close();
+				h.getGioco().setStato(new StatoGioco(h, "livello1_S"));
+			}
+			
 		}
 		if (sceltaCorrente == opzioni.CLASSIFICA.ordinal()){
 			h.getGioco().setStato(new StatoClassifica(h, suono));

@@ -153,13 +153,6 @@ public class Livello{
 				String nextToken = st.nextToken();
 				pathLivelloTile = Risorse.PATH_INTERNO_LIVELLI + "/" + nextToken + ".txt";
 				pathLivelloEntita = Risorse.PATH_ESTERNO_LIVELLI + Risorse.SEPARATORE + nextToken + ".salvataggio";
-				File f = new File(pathLivelloEntita);
-				if(!f.exists()){//FIXME gestire meglio la finestra di errore
-					//quando entra qui il gioco va in errore
-					new JFrame("non esiste il salvataggio").setVisible(true);
-					h.getGioco().setStato(new StatoMenu(h));
-					return;
-				}
 				in = new ObjectInputStream(new FileInputStream(pathLivelloEntita));
 			}
 			supportoCarica(in);
