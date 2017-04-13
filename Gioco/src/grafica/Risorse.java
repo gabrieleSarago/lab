@@ -29,17 +29,18 @@ public class Risorse {
 	voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
-	public static String JAR_PATH = System.getProperty("java.class.path");
+	public static String JAR_PATH = System.getProperty("java.class.path"); //TODO
 	public static final String SEPARATORE = System.getProperty("file.separator");
 	public static final String PATH_INTERNO_LIVELLI = "res/livelli"; //il percorso e' interno al .jar
 	public static final String PATH_RISORSE = pathEsterno();
 	public static final String PATH_ESTERNO_LIVELLI = PATH_RISORSE + Risorse.SEPARATORE + "livelli";
 	//public static final String USER_DIR = System.getProperty("user.dir");
 	
-	public static final String LINGUA = PATH_RISORSE + Risorse.SEPARATORE + "lingua.txt";
+	//FIXME i seguenti percorsi dovranno esssere final
+	public static final String LINGUA = PATH_RISORSE+ Risorse.SEPARATORE + "lingua.txt";
 	public static final String SUONO = PATH_RISORSE + Risorse.SEPARATORE + "suono.txt";
 	public static final String CLASSIFICA = PATH_RISORSE + Risorse.SEPARATORE + "classificaPunteggio.txt";
-	
+	//public static String LIVELLO = PATH + "\\livelloS.txt"; eliminato
 	/**
 	 * il metodo restituisce il percorso (esterno al .jar) della cartelle risorse
 	 * @return una stringa con percorso assoluto dove si trovano i livelli
