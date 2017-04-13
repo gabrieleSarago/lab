@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-import javax.swing.JFrame;
-
 import entita.Caramella;
 import entita.Entita;
 import entita.Funzionalita;
@@ -33,7 +31,6 @@ import gioco.Handler;
 import grafica.Risorse;
 import grafica.Tile;
 import stati.StatoGioco;
-import stati.StatoMenu;
 import strumenti.Utils;
 import suoni.Suono;
 

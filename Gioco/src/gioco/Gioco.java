@@ -3,14 +3,19 @@ package gioco;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.image.BufferStrategy;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import finestra.Finestra;
-import grafica.*;
-import stati.*;
+import grafica.Risorse;
+import stati.Stato;
+import stati.StatoMenu;
+import stati.StatoOpzioni;
 import strumenti.CameraGioco;
 import strumenti.CaricatoreImmagini;
 import strumenti.GestioneInput;
@@ -33,8 +38,8 @@ public class Gioco implements Runnable {
 
 	private Thread thread;
 	
-	private BufferStrategy bs;
-	private Graphics g;
+	//private BufferStrategy bs;
+	//private Graphics g;
 	
 	//lingua
 	private Lingua lingua;
@@ -161,7 +166,7 @@ public class Gioco implements Runnable {
 		}
 	}
 	
-	private void disegna(){
+	/*private void disegna(){
 		bs = f.getCanvas().getBufferStrategy();
 		if(bs == null){
 			f.getCanvas().createBufferStrategy(3);
@@ -178,8 +183,8 @@ public class Gioco implements Runnable {
 		
 		// finisce a disegnare qua!
 		bs.show();
-		g.dispose();
-	}
+		g.dispose()
+	}*/
 	/**
 	 * L'oggetto gioco viene lanciato da un thread.
 	 * Run lancia il thread della classe Gioco.
@@ -188,7 +193,10 @@ public class Gioco implements Runnable {
 		
 		inizializza();
 		
-		int fps = 60;
+		f.getFrame().setContentPane(new Pane());
+		f.getFrame().setVisible(true);
+		
+		/*int fps = 60;
 		double tempoDiAggiornamento = 1000000000 / fps;
 		double tempoDiAggiornamentoMenu = 1000000000 / 55;
 		double delta = 0;
@@ -207,7 +215,7 @@ public class Gioco implements Runnable {
 			ultimoTempo = ora;
 			if(delta >= 1){
 				aggiorna();
-				disegna();
+				//disegna();
 				delta--;
 				
 				//Se l'errore accumulato si avvicina a 1 viene ribassato
@@ -218,7 +226,7 @@ public class Gioco implements Runnable {
 					 delta = ultimoCiclo;
 				
 			}
-		}
+		}*/
 		
 		stop();
 		
@@ -279,5 +287,37 @@ public class Gioco implements Runnable {
 	
 	public Suono getSuono(){
 		return suono;
+	}
+	
+	class Pane extends JPanel{
+		
+		
+		private static final long serialVersionUID = 1L;
+
+
+		public Pane(){
+			//Game-Loop
+			Timer timer = new Timer(1000/60, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e){
+					aggiorna();
+					repaint();
+				}
+			});
+		
+			timer.setRepeats(true);
+			timer.setCoalesce(true);
+			timer.start();
+		}
+
+		
+		@Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.clearRect(0, 0, larghezza, altezza);
+            if(Stato.getStato() != null)
+    			Stato.getStato().disegna(g);
+            g.dispose();
+        }
 	}
 }

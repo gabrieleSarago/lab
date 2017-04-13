@@ -1,6 +1,5 @@
 package finestra;
 
-import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -16,7 +15,7 @@ import gioco.Handler;
 public class Finestra {
 	
 	private JFrame f;
-	private Canvas canvas;
+	//private Canvas canvas;
 	private Handler h;
 	
 	private String titolo;
@@ -58,7 +57,7 @@ public class Finestra {
 		};
 		f.addWindowListener(exitListener);
 		
-		f.setVisible(true);
+		/*f.setVisible(true);
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(d);
@@ -67,16 +66,10 @@ public class Finestra {
 		canvas.setFocusable(false);
 		
 		f.add(canvas);
-		f.pack();
+		f.pack();*/
+		
+		
 	}
-	
-	/**
-	 * Restituisce l'area canvas.
-	 * @return l'area canvas.
-	 */
-	public Canvas getCanvas(){
-		return canvas;
-	}	
 	
 	/**
 	 * Ritorna il frame del gioco.
