@@ -397,6 +397,9 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_punteggio.png"));
 		voce_no_punteggio = s1.prendiSprite(0, 22, 372, 22);
 		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_carica_salvataggio.png"));
+		voce_no_carica = s1.prendiSprite(0, 22, 125, 22);
+		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_salva.png"));
 		voce_salva = s1.prendiSprite(0, 22, 601, 22);
 		
@@ -529,6 +532,9 @@ public class Risorse {
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_salvataggio.png"));
 		voce_no_salvataggio = s1.prendiSprite(0, 44, 692, 22);
+		
+		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_carica_salvataggio.png"));
+		voce_no_carica = s1.prendiSprite(0, 44, 318, 22);
 		
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_no_nominativo.png"));
 		voce_no_nominativo = s1.prendiSprite(0, 44, 448, 22);

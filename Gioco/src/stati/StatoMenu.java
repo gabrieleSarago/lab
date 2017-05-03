@@ -80,7 +80,7 @@ public class StatoMenu extends Stato{
 		if(delta >= 6){
 			getInput();
 			delta -= 6;
-		}	
+		}
 	}
 
 	@Override

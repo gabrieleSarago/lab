@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import finestra.Finestra;
 import grafica.Risorse;
@@ -26,7 +26,7 @@ import suoni.Suono;
  * Crea l'oggetto Gioco.
  * Classe principale del progetto.
  */
-public class Gioco implements Runnable {
+public class Gioco{
 	
 	private Finestra f;
 	private int larghezza,altezza;
@@ -70,20 +70,25 @@ public class Gioco implements Runnable {
 		this.altezza = altezza;
 		this.titolo = titolo;
 		gi = new GestioneInput();
+		
+		inizializza();
+		
+		f.getFrame().setContentPane(new Pane());
+		f.getFrame().setVisible(true);
 	}
 	
 	/**
 	 * Main del progetto.
 	 */
 	public static void main (String[]args){
-		Gioco gioco = new Gioco("The Labyrinth of Zelda",1200, 700);
+		//Gioco gioco = new Gioco("The Labyrinth of Zelda",1200, 700);
 		Dimension schermo = Toolkit.getDefaultToolkit().getScreenSize();
 		int larghezza = (int) schermo.getWidth();
 		int altezza = (int) schermo.getHeight();
 		if(larghezza < 1200 || altezza < 700)
 			JOptionPane.showMessageDialog(null, "La risoluzione dello schermo non supporta i requisiti minimi.");
 		else
-			gioco.start();
+			new Gioco("The Labyrinth of Zelda",1200, 700);
 	}
 	
 	/**
@@ -189,14 +194,9 @@ public class Gioco implements Runnable {
 	 * L'oggetto gioco viene lanciato da un thread.
 	 * Run lancia il thread della classe Gioco.
 	 */
-	public void run(){
+	/*public void run(){
 		
-		inizializza();
-		
-		f.getFrame().setContentPane(new Pane());
-		f.getFrame().setVisible(true);
-		
-		/*int fps = 60;
+		int fps = 60;
 		double tempoDiAggiornamento = 1000000000 / fps;
 		double tempoDiAggiornamentoMenu = 1000000000 / 55;
 		double delta = 0;
@@ -226,11 +226,12 @@ public class Gioco implements Runnable {
 					 delta = ultimoCiclo;
 				
 			}
-		}*/
+		}
 		
 		stop();
 		
-	}
+	}*/
+	
 	/**
 	 * Metodo accessore necessario per la sincronizzazione dei listener.
 	 * @return
@@ -256,13 +257,13 @@ public class Gioco implements Runnable {
 	/**
 	 * Fa partire l'esecuzione della classe Gioco.
 	 */
-	public synchronized void start(){
+	/*public synchronized void start(){
 		if(inCorso)
 			return;
 		inCorso = true;
 		thread = new Thread(this);
 		thread.start();
-	}
+	}*/
 	
 	/**
 	 * Ferma l'esecuzione della classe gioco.
@@ -291,20 +292,19 @@ public class Gioco implements Runnable {
 	
 	class Pane extends JPanel{
 		
-		
 		private static final long serialVersionUID = 1L;
 
 
 		public Pane(){
 			//Game-Loop
-			Timer timer = new Timer(1000/60, new ActionListener() {
+			Timer timer = new Timer(15, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e){
 					aggiorna();
 					repaint();
 				}
 			});
-		
+			
 			timer.setRepeats(true);
 			timer.setCoalesce(true);
 			timer.start();
@@ -320,4 +320,5 @@ public class Gioco implements Runnable {
             g.dispose();
         }
 	}
+
 }
