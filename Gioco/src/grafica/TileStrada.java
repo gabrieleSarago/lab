@@ -3,13 +3,13 @@ package grafica;
 /**
  * Crea l'oggetto TileStrada.
  */
-public class TilePrato extends Tile {
-
+public class TileStrada extends Tile {
+	
 	/**
 	 * Costruisce l'oggetto TileStrada.
 	 * @param id intero identificativo.
 	 */
-	public TilePrato(int id) {
+	public TileStrada(int id) {
 		super(Risorse.strada, id);
 	}
 

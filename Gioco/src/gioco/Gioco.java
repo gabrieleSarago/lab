@@ -33,10 +33,10 @@ public class Gioco{
 	public String titolo;
 	
 	//gestione stati
-	private boolean inCorso = false;
+	//private boolean inCorso = false;
 	private boolean inPausa = false;
 
-	private Thread thread;
+	//private Thread thread;
 	
 	//private BufferStrategy bs;
 	//private Graphics g;
@@ -240,7 +240,7 @@ public class Gioco{
 		return gi;
 	}
 	
-	public Thread getThread(){return thread;}
+	//public Thread getThread(){return thread;}
 	
 	public CameraGioco getCameraGioco(){
 		return cg;
@@ -269,7 +269,7 @@ public class Gioco{
 	 * Ferma l'esecuzione della classe gioco.
 	 *
 	 */
-	public synchronized void stop(){
+	/*public synchronized void stop(){
 		if(!inCorso)
 			return;
 		inCorso = false;
@@ -278,7 +278,7 @@ public class Gioco{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}	
+	}*/	
 	
 	public JFrame getFrame(){
 		return f.getFrame();

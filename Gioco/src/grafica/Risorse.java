@@ -12,9 +12,10 @@ import strumenti.CaricatoreImmagini;
 
 public class Risorse {
 	
-	private static final int size = 38;
+	private static final int larghezza = 24, altezza = 32;
 	
-	public static BufferedImage strada, muro, sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
+	public static BufferedImage sink_sopra_fermo, caramella, trofeo, ok, titoloPausa;
+	public static BufferedImage strada, muro;
 	public static BufferedImage [] voci_pausa, voci_pausa_off,
 	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, voci_musica, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
@@ -74,56 +75,64 @@ public class Risorse {
 			CLASSIFICA = PATH + "/classificaPunteggio.txt";
 			//LIVELLO = PATH + "/livelloS.txt"; eliminato
 		}*/
+		Sprite t = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/tiles1.png"));
+		//Sprite t1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/tiles.png"));
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/sink.png"));
 		
-		sink_sotto = new BufferedImage[10];
-		sink_sopra = new BufferedImage[10];
-		sink_sinistra = new BufferedImage[10];
-		sink_destra = new BufferedImage[10];
+		sink_sotto = new BufferedImage[24];
+		sink_sopra = new BufferedImage[24];
+		sink_sinistra = new BufferedImage[24];
+		sink_destra = new BufferedImage[24];
 		sink_sotto_fermo = new BufferedImage[3];
 		sink_sinistra_fermo = new BufferedImage[3];
 		sink_destra_fermo = new BufferedImage[3];
+		strada = t.prendiSprite(0, 0, altezza, altezza);
+		muro = t.prendiSprite(altezza, 0, altezza, altezza);
 		
-		for(int i = 0; i < 10; i++){
-			sink_sotto[i] = s.prendiSprite(3+i * 37, 166, size, size);
-		}
-		for(int i = 0; i < 10; i++){
-			sink_sopra[i] = s.prendiSprite(3+i * 37, 246, size, size);
-		}
-		for(int i = 0; i < 10; i++){
-			int x = 0;
-			if(i == 9 || i == 8)
-				x = 3;
-			if(i == 6) x = 4;
-			if(i == 1) x = 1;
-			sink_sinistra[i] = s.prendiSprite(x+i * 37, 206, size, size);
-		}
-		for(int i = 0; i < 10; i++){
-			int x = 0;
-			if(i == 9 || i == 8)
-				x = 3;
-			if(i == 7) x = 4;
-			if(i == 5) x = 5;
-			sink_destra[i] = s.prendiSprite(x+i * 37, 287, size, size);
-		}
+		sink_sopra_fermo = s.prendiSprite(0, 0, larghezza, altezza);
+		
 		for(int i = 0; i < 3; i++){
-			int x = 0;
-			if(i == 2) x -= 1;
-			sink_sotto_fermo[i] = s.prendiSprite(x+i * size, 4, size, size);
-		}
-		for(int i = 0; i < 3; i++){
-			int x = 3;
-			if(i == 2) x -= 1;
-			sink_sinistra_fermo[i] = s.prendiSprite(x+i*size, 46, size, size);
-		}
-		for(int i = 0; i < 3; i++){
-			int x = 0;
-			if(i == 1) x -= 2;
-			if(i == 2) x -= 1;
-			sink_destra_fermo[i] = s.prendiSprite(x+i*size, 128, size-1, size-1);
+			sink_sinistra_fermo[i] = s.prendiSprite(i*larghezza, altezza, larghezza, altezza);
 		}
 		
-		sink_sopra_fermo = s.prendiSprite(3, 246, size, size);
+		for(int i = 0; i < 3; i++){
+			sink_destra_fermo[i] = s.prendiSprite(i*larghezza, altezza*2, larghezza, altezza);
+		}
+		
+		for(int i = 0; i < 3; i++){
+			sink_sotto_fermo[i] = s.prendiSprite(i*larghezza, altezza*3, larghezza, altezza);
+		}
+		
+		for(int i = 0; i < 12; i++){
+			sink_sopra[i] = s.prendiSprite(i * larghezza, altezza*4, larghezza, altezza);
+		}
+		for(int i = 12, p = 0; i < 24 && p < 12; i++, p++){
+			sink_sopra[i] = s.prendiSprite(p * larghezza, altezza*8, larghezza, altezza);
+		}
+		
+		for(int i = 0; i < 12; i++){
+			sink_destra[i] = s.prendiSprite(i * larghezza, altezza*5, larghezza, altezza);
+		}
+		
+		for(int i = 12, p = 0; i < 24 && p < 12; i++, p++){
+			sink_destra[i] = s.prendiSprite(p * larghezza, altezza*9, larghezza, altezza);
+		}
+		
+		for(int i = 0; i < 12; i++){
+			sink_sotto[i] = s.prendiSprite(i*larghezza, altezza*6, larghezza, altezza);
+		}
+		
+		for(int i = 12, p = 0; i < 24 && p < 12; i++, p++){
+			sink_sotto[i] = s.prendiSprite(p * larghezza, altezza*10, larghezza, altezza);
+		}
+		
+		for(int i = 0; i < 12; i++){
+			sink_sinistra[i] = s.prendiSprite(i*larghezza, altezza*7, larghezza, altezza);
+		}
+		
+		for(int i = 12, p = 0; i < 24 && p < 12; i++, p++){
+			sink_sinistra[i] = s.prendiSprite(p * larghezza, altezza*11, larghezza, altezza);
+		}
 		
 		voci_pausa = new BufferedImage[4];
 		voci_pausa_off = new BufferedImage[4];
@@ -148,9 +157,6 @@ public class Risorse {
 		lingue[2] = s1.prendiSprite(0, 91, 245, 40);
 		
 		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.png");
-		
-		strada = s.prendiSprite(116, 7, 32, 32);
-		muro = s.prendiSprite(116+32, 7, 32, 32);
 		
 		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/caramella.png"));
 		caramella = c.prendiSprite(0, 0, 40, 29);

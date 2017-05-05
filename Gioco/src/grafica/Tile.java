@@ -2,6 +2,7 @@ package grafica;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
 /**
  * Crea l'oggetto Tile.
  */
@@ -10,7 +11,7 @@ public class Tile {
 	//STATIC STUFF QUA
 	
 	public static Tile[] tiles = new Tile [256];
-	public static Tile strada = new TilePrato(0);
+	public static Tile strada = new TileStrada(0);
 	public static Tile muro = new TileMuro(1);
 	
 	//CLASS
