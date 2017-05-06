@@ -56,7 +56,9 @@ public class StatoGioco extends Stato {
 		}
 		
 		if(h.getLivello().getSink().getSconfitta()){
-			h.getSuono().getClipGioco().close();
+			if(!h.getSuono().getMuto()){
+				h.getSuono().getClipGioco().close();
+			}
 			h.getGioco().setStato(new StatoSconfitta(h, this.getUltimoScreen()));
 		}
 		
