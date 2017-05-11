@@ -40,7 +40,7 @@ public class StatoPausa extends Stato{
 	public StatoPausa(Handler h, StatoGioco precedente) {
 		super(h);
 		this.precedente = precedente;
-				
+		
 		s = new Sfondo("res/img/sfondi/pausa.png", h);
 		
 		s.setVector(-0.3, 0);
@@ -56,14 +56,14 @@ public class StatoPausa extends Stato{
 		sinkDestra.aggiorna();
 		precedente.getSink().aggiorna();
 		s.aggiorna();
-		ora = System.nanoTime();
+		/*ora = System.nanoTime();
 		delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 		timer += ora - ultimoTempo;
 		ultimoTempo = ora;
-		if(delta >= 6){
+		if(delta >= 6){*/
 			getInput();
-			delta -= 6;
-		}
+			/*delta -= 6;
+		}*/
 	}
 
 	@Override

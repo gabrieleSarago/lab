@@ -73,14 +73,14 @@ public class StatoMenu extends Stato{
 			 riproduzione = false;
 		}
 		//ottimizzazione
-		ora = System.nanoTime();
+		/*ora = System.nanoTime();
 		delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
 		timer += ora - ultimoTempo;
 		ultimoTempo = ora;
-		if(delta >= 6){
+		if(delta >= 6){*/
 			getInput();
-			delta -= 6;
-		}
+			/*delta -= 6;
+		}*/
 	}
 
 	@Override
