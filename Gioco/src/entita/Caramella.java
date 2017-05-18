@@ -18,7 +18,10 @@ import grafica.Tile;
 public class Caramella  extends EntitaStatica{
 
 	private static final long serialVersionUID = 1L;
-	
+	private static final int X = 19;
+	private static final int Y = 16;
+	private static final int LARGHEZZA = Tile.TILE_LARGHEZZA/2-7;
+	private static final int ALTEZZA = Tile.TILE_ALTEZZA/2-2;
 	public Caramella(){}// per esternalizzazione
 	/**
 	 * Costruttore di Caramella.
@@ -28,7 +31,7 @@ public class Caramella  extends EntitaStatica{
 	 */
 	public Caramella(Handler h, float x, float y) {
 		super(h, x, y,Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA);
-		bounds = new Rectangle(0, 14, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA/2+2);
+		bounds = new Rectangle(X, Y, LARGHEZZA, ALTEZZA);
 	}
 
 	@Override
@@ -42,9 +45,10 @@ public class Caramella  extends EntitaStatica{
 	@Override
 	public void disegna(Graphics g) {
 		
-		//g.fillRect((int)(x + bounds.x+5 - h.getCameraGioco().getxOffset()),
-								//(int)(y + bounds.y+10 - h.getCameraGioco().getyOffset()),
-				 				//bounds.width-10, bounds.height-20);
+		/*g.setColor(Color.red);
+		g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()),
+								(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
+				 				bounds.width, bounds.height);*/
 		
 		g.drawImage(Risorse.caramella, (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
@@ -67,7 +71,7 @@ public class Caramella  extends EntitaStatica{
 	public void readExternal(ObjectInput in) throws IOException,
 	ClassNotFoundException {
 		super.readExternal(in);
-		bounds = new Rectangle(0, 14, Tile.TILE_LARGHEZZA, Tile.TILE_ALTEZZA/2+2);
+		bounds = new Rectangle(X, Y, LARGHEZZA, ALTEZZA);
 	}
 	
 	

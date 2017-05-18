@@ -1,10 +1,4 @@
-/res/
-/classifica/
 /entita/
-/finestra/
-/gioco/
-/grafica/
 /livelli/
-/stati/
-/strumenti/
-/suoni/
+/grafica/
+/res/

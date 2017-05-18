@@ -3,7 +3,6 @@ package entita;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -18,19 +17,14 @@ import grafica.Risorse;
 public class Sink extends Personaggio {
 	private static final long serialVersionUID = 11L;
 	
-	public enum Movimento{SOPRA, SOTTO, DESTRA, SINISTRA}
+	private static final int X = 12;
+	private static final int Y = 40;
+	private static final int LARGHEZZA = 36;
+	private static final int ALTEZZA = 20;
 	
 	private int tempo;
 	private int maxTempo;
 	private boolean sconfitta = false;
-	
-	//Animazione
-	private Animazione SinkSotto, SinkSopra, SinkSinistra, SinkDestra;
-	
-	//AnimazioneFermo
-	private Animazione SinkSottoFermo, SinkSinistraFermo, SinkDestraFermo;
-	private BufferedImage SinkSopraFermo;
-	private Movimento ultimoMovimento = Movimento.SOTTO;
 	
 	//per regolarizzare i movmenti
 	int fps = 60;
@@ -54,22 +48,22 @@ public class Sink extends Personaggio {
 		
 		maxTempo = tempo;
 		
-		bounds.x = 12; // = 8
-		bounds.y = 30;
-		bounds.width = 34; //= 44
-		bounds.height = 30; // = 32
+		bounds.x = X; // = 8
+		bounds.y = Y;
+		bounds.width = LARGHEZZA; //= 44
+		bounds.height = ALTEZZA; // = 32
 		
 		//Animazioni
-		SinkSotto = new Animazione(45, Risorse.sink_sotto);
-		SinkSopra = new Animazione(45, Risorse.sink_sopra);
-		SinkSinistra = new Animazione(45, Risorse.sink_sinistra);
-		SinkDestra = new Animazione(45, Risorse.sink_destra);
+		personaggioSotto = new Animazione(45, Risorse.sink_sotto);
+		personaggioSopra = new Animazione(45, Risorse.sink_sopra);
+		personaggioSinistra = new Animazione(45, Risorse.sink_sinistra);
+		personaggioDestra = new Animazione(45, Risorse.sink_destra);
 		
 		//AnimazioniFermo
-		SinkSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
-		SinkSopraFermo = Risorse.sink_sopra_fermo;
-		SinkSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
-		SinkDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
+		personaggioSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
+		personaggioSopraFermo = Risorse.sink_sopra_fermo;
+		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
+		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
 		
 	}
 
@@ -78,39 +72,24 @@ public class Sink extends Personaggio {
 	 */
 	@Override
 	public void aggiorna() {
-		
+		super.aggiorna();
 		//gestione pausa
 		if(!h.getGioco().getPausa()){
 			
-			//Miglioramenti aggiornamenti animazioni.
-			 if(dx < 0)
-				 SinkSinistra.aggiorna();
-			 else if(dx > 0)
-				 SinkDestra.aggiorna();
-			 else if(dy < 0)
-				 SinkSopra.aggiorna();
-			 else if(dy > 0)
-				 SinkSotto.aggiorna();
-			 else{
-				 switch(ultimoMovimento){
-				 case SOTTO: SinkSottoFermo.aggiorna();break;
-				 case SINISTRA: SinkSinistraFermo.aggiorna(); break;
-				 case DESTRA: SinkDestraFermo.aggiorna();break;
-				 case SOPRA: break;
-				 }
-			}
 			//se si prende una caramella e il tempo e' > 95 supera i 100 secondi.
 			if(tempo > maxTempo){
 				tempo = maxTempo;
 			}
 			
 			if(tempo <= 0){
+				h.aggiornaStat(Handler.Statistiche.SCONFITTE);
 				sconfitta = true;
 			}
 			
 			//Movimento
 			getInput();
 			muovi();
+			
 			h.getCameraGioco().centra(this);
 			ora = System.nanoTime();
 			delta +=(ora - ultimoTempo) / tempoDiAggiornamento;
@@ -144,8 +123,13 @@ public class Sink extends Personaggio {
 
 	@Override
 	public void disegna(Graphics g) {
+		
+		//Rettangolo collisioni
+		
+				
 		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
+		
 		//Disegna la barra del tempo.
 		g.setColor(Color.black);
 		g.setFont(new Font ("Arial", Font.BOLD,15));
@@ -159,40 +143,13 @@ public class Sink extends Personaggio {
 		else
 			g.fillRect(70, 40, (int)((float)tempo/(float)maxTempo*100), 10);
 		
-		//Rettangolo collisioni
-		/*
-		g.setColor(Color.RED);
+		/*g.setColor(Color.RED);
 		g.fillRect((int)(x + bounds.x - h.getCameraGioco().getxOffset()), //+5
   				(int)(y + bounds.y - h.getCameraGioco().getyOffset()),
 				bounds.width, bounds.height); //-15*/
-	}
-	private BufferedImage getFrameAnimazioneCorrente(){
-		if (dx < 0){
-			ultimoMovimento = Movimento.SINISTRA;
-			return SinkSinistra.getFrameCorrente();
-		}else if(dx > 0){
-			ultimoMovimento = Movimento.DESTRA;
-			return SinkDestra.getFrameCorrente();
-		}else if (dy < 0){
-			ultimoMovimento = Movimento.SOPRA;
-			return SinkSopra.getFrameCorrente();
-		}else if(dy >0){
-			ultimoMovimento = Movimento.SOTTO;
-			return SinkSotto.getFrameCorrente();
-		}else{
-			if(ultimoMovimento == Movimento.SINISTRA){
-				return SinkSinistraFermo.getFrameCorrente();
-			}else if(ultimoMovimento == Movimento.DESTRA){
-				return SinkDestraFermo.getFrameCorrente();
-			}else if(ultimoMovimento == Movimento.SOTTO){
-				return SinkSottoFermo.getFrameCorrente();
-			}else{
-				return SinkSopraFermo;
-			}
-			
-		}
-	}
 
+	}
+	
 	public int getTempo() {
 		return tempo;
 	}
@@ -215,21 +172,22 @@ public class Sink extends Personaggio {
 		tempo=in.readInt(); 
 		maxTempo = in.readInt();
 		
-		bounds.x = 12; // = 8
-		bounds.y = 30;
-		bounds.width = 34; // = 44
-		bounds.height = 30; // = 32
+		bounds.x = X; // = 8
+		bounds.y = Y;
+		bounds.width = LARGHEZZA; //= 44
+		bounds.height = ALTEZZA; // = 32
+		
 		//Animazioni
-		SinkSotto = new Animazione(30, Risorse.sink_sotto);
-		SinkSopra = new Animazione(30, Risorse.sink_sopra);
-		SinkSinistra = new Animazione(30, Risorse.sink_sinistra);
-		SinkDestra = new Animazione(30, Risorse.sink_destra);
+		personaggioSotto = new Animazione(30, Risorse.sink_sotto);
+		personaggioSopra = new Animazione(30, Risorse.sink_sopra);
+		personaggioSinistra = new Animazione(30, Risorse.sink_sinistra);
+		personaggioDestra = new Animazione(30, Risorse.sink_destra);
 				
 		//AnimazioniFermo
-		SinkSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
-		SinkSopraFermo = Risorse.sink_sopra_fermo;
-		SinkSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
-		SinkDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
+		personaggioSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
+		personaggioSopraFermo = Risorse.sink_sopra_fermo;
+		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
+		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
 	}
 
 	/**

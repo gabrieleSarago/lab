@@ -1,10 +1,12 @@
 package entita;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import gioco.Handler;
+import grafica.Animazione;
 import grafica.Tile;
 /**
  * Crea l'oggetto Personaggio.
@@ -21,6 +23,18 @@ public abstract class Personaggio extends Entita {
 	protected float velocita;
 	protected float dx, dy;
 	protected Entita ultimaEntita;
+	
+	protected enum Movimento{SOPRA, SOTTO, DESTRA, SINISTRA}
+	
+	protected boolean muoviX = false, muoviY = false;
+	
+	//Animazione
+	protected Animazione personaggioSotto, personaggioSopra, personaggioSinistra, personaggioDestra;
+		
+	//AnimazioneFermo
+	protected Animazione personaggioSottoFermo, personaggioSinistraFermo, personaggioDestraFermo;
+	protected BufferedImage personaggioSopraFermo;
+	protected Movimento ultimoMovimento = Movimento.SOTTO;
 	
 	public Personaggio(){} // necessario per esternzalizzazione
 	/**
@@ -44,6 +58,8 @@ public abstract class Personaggio extends Entita {
 	 * Muove il personaggio.
 	 */
 	public void muovi(){
+		muoviX = false;
+		muoviY = false;
 		Entita temp; // entita solo temporanea
 		// se temp e' null significa che non c e' nessuna collisione
 		temp = controllaCollisioni(dx, 0f);
@@ -71,8 +87,10 @@ public abstract class Personaggio extends Entita {
 			if(!collisioneConTile(tx, (int) (y + bounds.y) / Tile.TILE_ALTEZZA) &&
 				!collisioneConTile(tx, ((int) y + bounds.y + bounds.height) / Tile.TILE_ALTEZZA)){
 				x += dx;
+				muoviX = true;
 			}else{
 				x = tx * Tile.TILE_LARGHEZZA - bounds.x - bounds.width - 1;//il -1 serve altrimenti non si puo' andare ne sopra e ne sotto
+				muoviX = false;
 			}
 				
 		}else if(dx < 0){
@@ -81,8 +99,10 @@ public abstract class Personaggio extends Entita {
 			if(!collisioneConTile(tx, (int) (y + bounds.y) / Tile.TILE_ALTEZZA) &&
 				!collisioneConTile(tx, ((int) y + bounds.y + bounds.height) / Tile.TILE_ALTEZZA)){
 				x += dx;
+				muoviX = true;
 			}else{
 				x = tx * Tile.TILE_LARGHEZZA + Tile.TILE_LARGHEZZA - bounds.x;
+				muoviX = false;
 			}
 		}
 	}
@@ -94,8 +114,10 @@ public abstract class Personaggio extends Entita {
 			if(!collisioneConTile((int) (x + bounds.x ) / Tile.TILE_LARGHEZZA, ty) && 
 					!collisioneConTile((int) (x + bounds.x + bounds.width ) / Tile.TILE_LARGHEZZA, ty)){
 				y += dy;
+				muoviY = true;
 			}else{
 				y = ty * Tile.TILE_ALTEZZA + Tile.TILE_ALTEZZA - bounds.y;
+				muoviY = false;
 			}
 			
 		}else if(dy > 0){
@@ -104,9 +126,70 @@ public abstract class Personaggio extends Entita {
 			if(!collisioneConTile((int) (x + bounds.x ) / Tile.TILE_LARGHEZZA, ty) && 
 					!collisioneConTile((int) (x + bounds.x + bounds.width ) / Tile.TILE_LARGHEZZA, ty)){
 				y += dy;
+				muoviY = true;
 			}else{
 				y = ty * Tile.TILE_ALTEZZA - bounds.y - bounds.height - 1;
+				muoviY = false;
 			}
+		}
+	}
+	
+	public void aggiorna(){
+		//Miglioramenti aggiornamenti animazioni.
+		 if(dx < 0)
+			 personaggioSinistra.aggiorna();
+		 else if(dx > 0)
+			 personaggioDestra.aggiorna();
+		 else if(dy < 0)
+			 personaggioSopra.aggiorna();
+		 else if(dy > 0)
+			 personaggioSotto.aggiorna();
+		 else{
+			 switch(ultimoMovimento){
+			 case SOTTO: personaggioSottoFermo.aggiorna();break;
+			 case SINISTRA: personaggioSinistraFermo.aggiorna(); break;
+			 case DESTRA: personaggioDestraFermo.aggiorna();break;
+			 case SOPRA: break;
+			 }
+		}
+	}
+	
+	protected BufferedImage getFrameAnimazioneCorrente(){
+		if (dx < 0){
+			ultimoMovimento = Movimento.SINISTRA;
+			if(!(muoviX || muoviY)){
+				return personaggioSinistraFermo.getFrameCorrente();
+			}
+			return personaggioSinistra.getFrameCorrente();
+		}else if(dx > 0){
+			ultimoMovimento = Movimento.DESTRA;
+			if(!(muoviX || muoviY)){
+				return personaggioDestraFermo.getFrameCorrente();
+			}
+			return personaggioDestra.getFrameCorrente();
+		}else if (dy < 0){
+			ultimoMovimento = Movimento.SOPRA;
+			if(!(muoviX || muoviY)){
+				return personaggioSopraFermo;
+			}
+			return personaggioSopra.getFrameCorrente();
+		}else if(dy >0){
+			ultimoMovimento = Movimento.SOTTO;
+			if(!(muoviX || muoviY)){
+				return personaggioSottoFermo.getFrameCorrente();
+			}
+			return personaggioSotto.getFrameCorrente();
+		}else{
+			if(ultimoMovimento == Movimento.SINISTRA){
+				return personaggioSinistraFermo.getFrameCorrente();
+			}else if(ultimoMovimento == Movimento.DESTRA){
+				return personaggioDestraFermo.getFrameCorrente();
+			}else if(ultimoMovimento == Movimento.SOTTO){
+				return personaggioSottoFermo.getFrameCorrente();
+			}else{
+				return personaggioSopraFermo;
+			}
+			
 		}
 	}
 	

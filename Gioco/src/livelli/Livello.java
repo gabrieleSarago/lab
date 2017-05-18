@@ -46,6 +46,7 @@ public class Livello{
 	private int larghezza, altezza;
 	private int [][] tiles;
 	private ArrayList<Entita> array_entita;
+	
 	private Comparator<Entita> ordineDisegno = new Comparator<Entita>(){
 		@Override
 		public int compare(Entita a, Entita b) {
@@ -54,6 +55,9 @@ public class Livello{
 		}
 		
 	};
+	
+	
+	
 	private Entita ultimaCollisione_sink;
 	
 	
@@ -250,25 +254,35 @@ public class Livello{
 			s.setTempo(s.getTempo()+5);
 			array_entita.remove(s.getUltimaEntita());
 			h.getSuono().riproduci(Suono.suoni.CARAMELLA);
+			h.aggiornaStat(Handler.Statistiche.CARAMELLE);
 		}
 		if(s.getUltimaEntita() instanceof Trofeo) {
+			h.aggiornaStat(Handler.Statistiche.LIVELLI_COMPLETATI);
+			//TODO modificare quando si aggiungono più livelli
+			h.aggiornaStat(Handler.Statistiche.END_GAMES);
 			((StatoGioco)h.getGioco().getStato()).setVittoria(true);
 		}
 		
 		if(s.getUltimaEntita() instanceof Teletrasporto && ((Teletrasporto)s.getUltimaEntita()).eAttivo()){
 			s.setX(((Teletrasporto)s.getUltimaEntita()).getDestinazioneX());
 			s.setY(((Teletrasporto)s.getUltimaEntita()).getDestinazioneY());
+			h.aggiornaStat(Handler.Statistiche.TELETRASPORTI);
 		}
 		
 		if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo()){
-			if(s.getTempo() - 1 > 0)
+			if(s.getTempo() - 1 > 0){
 				s.setTempo(s.getTempo()-1);
+				h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
+			}
 		}
 		
-		if(s.getUltimaEntita() instanceof Interruttore)
+		if(s.getUltimaEntita() instanceof Interruttore){
 			if(!(ultimaCollisione_sink instanceof Interruttore) || 
-						!(ultimaCollisione_sink.equals(s.getUltimaEntita())))
+						!(ultimaCollisione_sink.equals(s.getUltimaEntita()))){
 					((Interruttore)s.getUltimaEntita()).funzione(h);
+					h.aggiornaStat(Handler.Statistiche.NUM_INTERRUTORI);
+			}
+		}
 	
 		ultimaCollisione_sink = s.getUltimaEntita();
 	}

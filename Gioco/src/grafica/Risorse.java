@@ -1,7 +1,10 @@
 package grafica;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 
 import strumenti.CaricatoreImmagini;
@@ -20,9 +23,12 @@ public class Risorse {
 	voci_classifica,voci_classifica_off,voci_menu, voci_menu_off, voci_opzioni, voci_opzioni_off, voci_musica, lingue;// tempo;
 	public static BufferedImage[] sink_sotto, sink_sopra, sink_sinistra, sink_destra;
 	public static BufferedImage[] sink_sotto_fermo, sink_sinistra_fermo, sink_destra_fermo;
-	public static BufferedImage sbarra_aperta, sbarra_chiusa;
+	public static BufferedImage porta_chiusa;
+	public static BufferedImage[] porta_media_aperta, porta_media_chiusa;
+	public static BufferedImage porta_aperta;
 	public static BufferedImage interruttore_acceso_destra, interruttore_acceso_sinistra, interruttore_spento;
-	public static BufferedImage teletrasporto_attivo, teletrasporto_inattivo;
+	public static BufferedImage teletrasporto_inattivo;
+	public static BufferedImage[] teletrasporto_attivo;
 	public static BufferedImage nemico;
 	
 	public static BufferedImage sfondo_popup, stato_info;
@@ -38,6 +44,9 @@ public class Risorse {
 	//public static final String USER_DIR = System.getProperty("user.dir");
 	
 	//FIXME i seguenti percorsi dovranno esssere final
+	public static final String UTENTE = PATH_RISORSE + Risorse.SEPARATORE + "utente.txt";
+	public static final String DIR_UTENTE = PATH_RISORSE + Risorse.SEPARATORE + pathUtente();
+	public static final String STATISTICA = DIR_UTENTE + Risorse.SEPARATORE + "statistica.txt";
 	public static final String LINGUA = PATH_RISORSE+ Risorse.SEPARATORE + "lingua.txt";
 	public static final String SUONO = PATH_RISORSE + Risorse.SEPARATORE + "suono.txt";
 	public static final String CLASSIFICA = PATH_RISORSE + Risorse.SEPARATORE + "classificaPunteggio.txt";
@@ -61,6 +70,24 @@ public class Risorse {
 		String percorso = f.getParent() + Risorse.SEPARATORE + "Risorse";
 		
 		return percorso;
+	}
+	
+	private static String pathUtente(){
+		String path = null;
+		try{
+			File f = new File(UTENTE);
+			if(!f.exists()){
+				f.createNewFile();
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+			path = br.readLine();
+			br.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(UTENTE);
+		System.out.println(path);
+		return path;
 	}
 	
 	/**
@@ -158,8 +185,8 @@ public class Risorse {
 		
 		sfondo_popup = CaricatoreImmagini.caricaImmagine("res/img/sfondi/popup.png");
 		
-		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/caramella.png"));
-		caramella = c.prendiSprite(0, 0, 40, 29);
+		Sprite c = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/caramella1.png"));
+		caramella = c.prendiSprite(0, 0, altezza, altezza);
 		
 		Sprite d = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/Trofeo_d'oro.png"));
 		trofeo = d.prendiSprite(0, 0, 40, 40);
@@ -170,13 +197,25 @@ public class Risorse {
 		s1 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_conferma_off.png"));
 		voce_ok_off = s1.prendiSprite(0, 110, 40, 22);
 		
-		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestTeletrasporto.png"));
-		teletrasporto_attivo = teletrasporto.prendiSprite(588, 449, 76, 60);
-		teletrasporto_inattivo = teletrasporto.prendiSprite(588, 259, 76, 60);
+		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/teletrasporto.png"));
+		teletrasporto_attivo = new BufferedImage[3];
+		for(int i = 0; i < teletrasporto_attivo.length; i++){
+			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, altezza, altezza, altezza);
+		}
+		teletrasporto_inattivo = teletrasporto.prendiSprite(0, 96, altezza, altezza);
 		
-		Sprite sbarra = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/TestSbarra.png"));
-		sbarra_aperta = sbarra.prendiSprite(192, 192, 32, 32);
-		sbarra_chiusa = sbarra.prendiSprite(192, 128, 32, 32);
+		Sprite p = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/porta.png"));
+		porta_chiusa = p.prendiSprite(0, 0, altezza, altezza);
+		porta_aperta = p.prendiSprite(0, 3*altezza, altezza, altezza);
+		porta_media_aperta = new BufferedImage[3];
+		porta_media_chiusa = new BufferedImage[3];
+		porta_media_aperta[0] = p.prendiSprite(0, altezza, altezza, altezza);
+		porta_media_aperta[1] = p.prendiSprite(0, 2*altezza, altezza, altezza);
+		porta_media_aperta[2] = porta_aperta;
+		
+		porta_media_chiusa[0] = p.prendiSprite(0, 2*altezza, altezza, altezza);
+		porta_media_chiusa[1] = p.prendiSprite(0, altezza, altezza, altezza);
+		porta_media_chiusa[2] = porta_chiusa;
 		
 		Sprite interruttore = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/lever1.png"));
 		interruttore_acceso_sinistra = interruttore.prendiSprite(99, 10, 26, 20);
@@ -194,6 +233,7 @@ public class Risorse {
 		if(!f1.exists()){
 			f1.mkdirs();
 		}
+		
 	}
 	
 	/**

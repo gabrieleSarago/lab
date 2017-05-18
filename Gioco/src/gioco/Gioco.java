@@ -5,15 +5,16 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import finestra.Finestra;
 import grafica.Risorse;
 import stati.Stato;
+import stati.StatoGioco;
 import stati.StatoMenu;
 import stati.StatoOpzioni;
 import strumenti.CameraGioco;
@@ -293,15 +294,30 @@ public class Gioco{
 	class Pane extends JPanel{
 		
 		private static final long serialVersionUID = 1L;
-
+		
+		long tempoCorrente = System.currentTimeMillis();
 
 		public Pane(){
 			//Game-Loop
 			Timer timer = new Timer(15, new ActionListener() {
+				long tempoFine;
+				
 				@Override
 				public void actionPerformed(ActionEvent e){
 					aggiorna();
 					repaint();
+					tempoFine = System.currentTimeMillis();
+					if(tempoFine-tempoCorrente >= 1000){
+						h.aggiornaStat(Handler.Statistiche.TEMPO_TOTALE);
+						Stato attuale = Stato.getStato();
+						//System.out.println(attuale.getClass().getName());
+						if(attuale instanceof StatoGioco){
+							h.aggiornaStat(Handler.Statistiche.TEMPO_GIOCO);
+						}
+						else
+							h.aggiornaStat(Handler.Statistiche.TEMPO_MENU);
+						tempoCorrente = System.currentTimeMillis();
+					}
 				}
 			});
 			

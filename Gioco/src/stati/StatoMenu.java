@@ -105,6 +105,7 @@ public class StatoMenu extends Stato{
 		
 		if (sceltaCorrente == opzioni.NUOVA_PARTITA.ordinal()){// nuova partita
 			suono.getClipStatoMenu().close();
+			h.aggiornaStat(Handler.Statistiche.PARTITE_INIZIATE);
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == opzioni.CARICA_PARTITA.ordinal()){//qua carichi il livello

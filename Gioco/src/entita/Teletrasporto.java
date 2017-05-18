@@ -1,14 +1,15 @@
 package entita;
 
-import gioco.Handler;
-import grafica.Risorse;
-import grafica.Tile;
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+
+import gioco.Handler;
+import grafica.Animazione;
+import grafica.Risorse;
+import grafica.Tile;
 
 /**
  * Crea l'oggetto Teletrasporto che e' un entita' statica.
@@ -19,6 +20,10 @@ public class Teletrasporto extends EntitaStatica{
 	
 	private float destinazioneX, destinazioneY;
 	private boolean attivo;
+	
+	private final int VELOCITA = 300;
+			
+	private Animazione teletrasporto_attivo;
 	
 	public Teletrasporto(){}
 	/**
@@ -33,7 +38,7 @@ public class Teletrasporto extends EntitaStatica{
 		super(h, x, y, Tile.TILE_LARGHEZZA, Tile.TILE_LARGHEZZA);
 		attivo = true;
 		this.destinazioneX = destinazioneX;
-		this.destinazioneY = destinazioneY;
+		this.destinazioneY = destinazioneY;		
 	}
 	
 	/**
@@ -52,11 +57,17 @@ public class Teletrasporto extends EntitaStatica{
 		this.attraversabile = attivo;
 		this.destinazioneX = destinazioneX;
 		this.destinazioneY = destinazioneY;
+		//animazioni
+		teletrasporto_attivo = new Animazione(VELOCITA, Risorse.teletrasporto_attivo);
 	}
 
 	
 	@Override
-	public void aggiorna() {}
+	public void aggiorna() {
+		if(attivo){
+			teletrasporto_attivo.aggiorna();
+		}
+	}
 	
 	/**
 	 * Disegna l'oggetto Teletrasporto mediante un oggetto Graphics.
@@ -72,10 +83,10 @@ public class Teletrasporto extends EntitaStatica{
 	 * l'attuale animazione dell'oggetto Teletrasporto.
 	 */
 	private BufferedImage getAnimazioneCorrente(){
-		if(attivo)
-			return Risorse.teletrasporto_attivo;
-		else
+		if(!attivo)
 			return Risorse.teletrasporto_inattivo;
+		else
+			return teletrasporto_attivo.getFrameCorrente();
 	}
 	/**
 	 * Ritorna la coordinata X dove viene teletrasportato il giocatore.
@@ -146,5 +157,7 @@ public class Teletrasporto extends EntitaStatica{
 		attivo= in.readBoolean();
 		destinazioneX = in.readFloat();
 		destinazioneY = in.readFloat();
+		//animazioni
+		teletrasporto_attivo = new Animazione(VELOCITA, Risorse.teletrasporto_attivo);
 	}
 }
