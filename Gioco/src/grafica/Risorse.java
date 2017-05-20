@@ -200,9 +200,9 @@ public class Risorse {
 		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/teletrasporto.png"));
 		teletrasporto_attivo = new BufferedImage[3];
 		for(int i = 0; i < teletrasporto_attivo.length; i++){
-			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, altezza, altezza, altezza);
+			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, 0, altezza, altezza);
 		}
-		teletrasporto_inattivo = teletrasporto.prendiSprite(0, 96, altezza, altezza);
+		teletrasporto_inattivo = teletrasporto.prendiSprite(96, 0, altezza, altezza);
 		
 		Sprite p = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/porta.png"));
 		porta_chiusa = p.prendiSprite(0, 0, altezza, altezza);
