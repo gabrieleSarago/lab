@@ -54,14 +54,14 @@ public class Sink extends Personaggio {
 		bounds.height = ALTEZZA; // = 32
 		
 		//Animazioni
-		personaggioSotto = new Animazione(45, Risorse.sink_sotto);
-		personaggioSopra = new Animazione(45, Risorse.sink_sopra);
-		personaggioSinistra = new Animazione(45, Risorse.sink_sinistra);
-		personaggioDestra = new Animazione(45, Risorse.sink_destra);
+		personaggioSotto = new Animazione(30, Risorse.sink_sotto);
+		personaggioSopra = new Animazione(30, Risorse.sink_sopra);
+		personaggioSinistra = new Animazione(30, Risorse.sink_sinistra);
+		personaggioDestra = new Animazione(30, Risorse.sink_destra);
 		
 		//AnimazioniFermo
 		personaggioSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
-		personaggioSopraFermo = Risorse.sink_sopra_fermo;
+		personaggio_sopra_fermo = Risorse.sink_sopra_fermo;
 		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
 		
@@ -185,7 +185,7 @@ public class Sink extends Personaggio {
 				
 		//AnimazioniFermo
 		personaggioSottoFermo = new Animazione(300, Risorse.sink_sotto_fermo);
-		personaggioSopraFermo = Risorse.sink_sopra_fermo;
+		personaggio_sopra_fermo = Risorse.sink_sopra_fermo;
 		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
 	}
