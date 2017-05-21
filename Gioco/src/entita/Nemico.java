@@ -69,7 +69,7 @@ public class Nemico extends Personaggio{
 	
 	@Override
 	public void aggiorna() {
-		if(!sinkAvvistato()) return;
+		if(sinkAvvistato()){
 		elaborazionePercorso();
 		muovi();
 		//Miglioramenti aggiornamenti animazioni.
@@ -81,6 +81,7 @@ public class Nemico extends Personaggio{
 			personaggioSopra.aggiorna();
 		else if(dy > 0)
 			personaggioSotto.aggiorna();
+		}
 	}
 
 	
@@ -178,7 +179,8 @@ public class Nemico extends Personaggio{
 	 */
 	
 	private boolean sinkAvvistato(){	
-		if(sink == null) sink = h.getLivello().getSink();
+		if(sink == null)
+			sink = h.getLivello().getSink();
 		if(getVisionBounds().intersects(sink.getCollisionBounds(0f, 0f)))
 			return true;
 		return false;
@@ -224,6 +226,8 @@ public class Nemico extends Personaggio{
 	 */
 	@Override
 	public void muovi(){
+		muoviX = false;
+		muoviY = false;
 		Entita temp; // entita solo temporanea
 		// se temp e' null significa che non c'e' nessuna collisione
 		temp = controllaCollisioni(dx, 0f);

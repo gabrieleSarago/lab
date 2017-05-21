@@ -46,7 +46,7 @@ public class Gioco{
 	private Lingua lingua;
 	private String linea;
 	
-	//Suonir
+	//Suoni
 	private Suono suono;
 	
 	//Stati
