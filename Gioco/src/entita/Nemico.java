@@ -2,11 +2,13 @@ package entita;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import gioco.Handler;
+import grafica.Animazione;
 import grafica.Risorse;
 import grafica.Tile;
 
@@ -52,13 +54,34 @@ public class Nemico extends Personaggio{
 		this.vivo = vivo;
 		visione = new Rectangle(-raggioVisione, -raggioVisione, raggioVisione*2, raggioVisione*2);
 		velocita = 2.0f;
+		
+		personaggioSotto = new Animazione(30, Risorse.eye_sotto);
+		personaggioSopra = new Animazione(30, Risorse.eye_sopra);
+		personaggioDestra = new Animazione(30, Risorse.eye_destra);
+		personaggioSinistra = new Animazione(30, Risorse.eye_sinistra);
+
+		personaggio_sotto_fermo = Risorse.eye_sotto_fermo;
+		personaggio_sopra_fermo = Risorse.eye_sopra_fermo;
+		personaggio_sinistra_fermo = Risorse.eye_sinistra_fermo;
+		personaggio_destra_fermo = Risorse.eye_destra_fermo;
+
 	}
 	
 	@Override
 	public void aggiorna() {
-		if(!sinkAvvistato()) return;
+		if(sinkAvvistato()){
 		elaborazionePercorso();
 		muovi();
+		//Miglioramenti aggiornamenti animazioni.
+		if(dx < 0)
+			personaggioSinistra.aggiorna();
+		else if(dx > 0)
+			personaggioDestra.aggiorna();
+		else if(dy < 0)
+			personaggioSopra.aggiorna();
+		else if(dy > 0)
+			personaggioSotto.aggiorna();
+		}
 	}
 
 	
@@ -75,10 +98,50 @@ public class Nemico extends Personaggio{
 		/*g.fillRect((int)(x + visione.x - h.getCameraGioco().getxOffset()),
 				(int)(y + visione.y - h.getCameraGioco().getyOffset()),
 				visione.width, visione.height);*/
-		g.drawImage(Risorse.nemico, (int) (x - h.getCameraGioco().getxOffset()), 
+		g.drawImage(getFrameAnimazioneCorrente(), (int) (x - h.getCameraGioco().getxOffset()), 
 				(int) (y - h.getCameraGioco().getyOffset()), larghezza, altezza, null);
 		
 	}
+	
+	protected BufferedImage getFrameAnimazioneCorrente(){
+		if (dx < 0){
+			ultimoMovimento = Movimento.SINISTRA;
+			if(!(muoviX || muoviY)){
+				return personaggio_sinistra_fermo;
+			}
+			return personaggioSinistra.getFrameCorrente();
+		}else if(dx > 0){
+			ultimoMovimento = Movimento.DESTRA;
+			if(!(muoviX || muoviY)){
+				return personaggio_destra_fermo;
+			}
+			return personaggioDestra.getFrameCorrente();
+		}else if (dy < 0){
+			ultimoMovimento = Movimento.SOPRA;
+			if(!(muoviX || muoviY)){
+				return personaggio_sopra_fermo;
+			}
+			return personaggioSopra.getFrameCorrente();
+		}else if(dy >0){
+			ultimoMovimento = Movimento.SOTTO;
+			if(!(muoviX || muoviY)){
+				return personaggio_sotto_fermo;
+			}
+			return personaggioSotto.getFrameCorrente();
+		}else{
+			if(ultimoMovimento == Movimento.SINISTRA){
+				return personaggio_sinistra_fermo;
+			}else if(ultimoMovimento == Movimento.DESTRA){
+				return personaggio_destra_fermo;
+			}else if(ultimoMovimento == Movimento.SOTTO){
+				return personaggio_sotto_fermo;
+			}else{
+				return personaggio_sopra_fermo;
+			}
+		}
+	}
+	
+	
 	/**
 	 * Costruisce il percoso da compiere.
 	 */
@@ -116,7 +179,8 @@ public class Nemico extends Personaggio{
 	 */
 	
 	private boolean sinkAvvistato(){	
-		if(sink == null) sink = h.getLivello().getSink();
+		if(sink == null)
+			sink = h.getLivello().getSink();
 		if(getVisionBounds().intersects(sink.getCollisionBounds(0f, 0f)))
 			return true;
 		return false;
@@ -132,6 +196,16 @@ public class Nemico extends Personaggio{
 		velocita = in.readFloat();
 		bounds = (Rectangle) in.readObject();
 		visione = (Rectangle) in.readObject();
+		
+		personaggioSotto = new Animazione(60, Risorse.eye_sotto);
+		personaggioSopra = new Animazione(60, Risorse.eye_sopra);
+		personaggioDestra = new Animazione(60, Risorse.eye_destra);
+		personaggioSinistra = new Animazione(60, Risorse.eye_sinistra);
+
+		personaggio_sotto_fermo = Risorse.eye_sotto_fermo;
+		personaggio_sopra_fermo = Risorse.eye_sopra_fermo;
+		personaggio_sinistra_fermo = Risorse.eye_sinistra_fermo;
+		personaggio_destra_fermo = Risorse.eye_destra_fermo;
 		
 	}
 	
@@ -152,6 +226,8 @@ public class Nemico extends Personaggio{
 	 */
 	@Override
 	public void muovi(){
+		muoviX = false;
+		muoviY = false;
 		Entita temp; // entita solo temporanea
 		// se temp e' null significa che non c'e' nessuna collisione
 		temp = controllaCollisioni(dx, 0f);
