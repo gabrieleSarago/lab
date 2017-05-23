@@ -64,6 +64,8 @@ public class Sink extends Personaggio {
 		personaggio_sopra_fermo = Risorse.sink_sopra_fermo;
 		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
+		attraversabile = false;
+
 		
 	}
 
@@ -188,6 +190,7 @@ public class Sink extends Personaggio {
 		personaggio_sopra_fermo = Risorse.sink_sopra_fermo;
 		personaggioSinistraFermo = new Animazione(300, Risorse.sink_sinistra_fermo);
 		personaggioDestraFermo = new Animazione(300, Risorse.sink_destra_fermo);
+		attraversabile = false;
 	}
 
 	/**
