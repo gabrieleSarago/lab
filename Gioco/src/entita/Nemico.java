@@ -64,7 +64,7 @@ public class Nemico extends Personaggio{
 		personaggio_sopra_fermo = Risorse.eye_sopra_fermo;
 		personaggio_sinistra_fermo = Risorse.eye_sinistra_fermo;
 		personaggio_destra_fermo = Risorse.eye_destra_fermo;
-
+		attraversabile = false;
 	}
 	
 	@Override
@@ -206,6 +206,7 @@ public class Nemico extends Personaggio{
 		personaggio_sopra_fermo = Risorse.eye_sopra_fermo;
 		personaggio_sinistra_fermo = Risorse.eye_sinistra_fermo;
 		personaggio_destra_fermo = Risorse.eye_destra_fermo;
+		attraversabile = false;
 		
 	}
 	
@@ -237,6 +238,13 @@ public class Nemico extends Personaggio{
 			ultimaEntita = temp;
 			if(temp.eAttraversabile() && !(temp instanceof Nemico))
 				muoviX();
+			if(temp instanceof Sink){
+				Sink s = (Sink) temp;
+				if(s.getTempo() - 1 > 0){
+					s.setTempo(s.getTempo()-1);
+					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
+				}
+			}
 		}
 		temp = controllaCollisioni(0f, dy);
 		if(temp == null)
@@ -245,6 +253,13 @@ public class Nemico extends Personaggio{
 			ultimaEntita = temp;
 			if(temp.eAttraversabile() && !(temp instanceof Nemico))
 				muoviY();
+			if(temp instanceof Sink){
+				Sink s = (Sink) temp;
+				if(s.getTempo() - 1 > 0){
+					s.setTempo(s.getTempo()-1);
+					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
+				}
+			}
 		}
 	}
 		 

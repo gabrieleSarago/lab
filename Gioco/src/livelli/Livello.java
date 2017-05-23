@@ -269,12 +269,12 @@ public class Livello{
 			h.aggiornaStat(Handler.Statistiche.TELETRASPORTI);
 		}
 		
-		if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo()){
+		/*if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo()){
 			if(s.getTempo() - 1 > 0){
 				s.setTempo(s.getTempo()-1);
 				h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
 			}
-		}
+		}*/
 		
 		if(s.getUltimaEntita() instanceof Interruttore){
 			if(!(ultimaCollisione_sink instanceof Interruttore) || 
