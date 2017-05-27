@@ -222,46 +222,6 @@ public class Nemico extends Personaggio{
 		out.writeObject(bounds);
 		out.writeObject(visione);
 	}
-	/**
-	 * Muove il nemico.
-	 */
-	@Override
-	public void muovi(){
-		muoviX = false;
-		muoviY = false;
-		Entita temp; // entita solo temporanea
-		// se temp e' null significa che non c'e' nessuna collisione
-		temp = controllaCollisioni(dx, 0f);
-		if(temp == null)
-			muoviX();
-		else{
-			ultimaEntita = temp;
-			if(temp.eAttraversabile() && !(temp instanceof Nemico))
-				muoviX();
-			if(temp instanceof Sink){
-				Sink s = (Sink) temp;
-				if(s.getTempo() - 1 > 0){
-					s.setTempo(s.getTempo()-1);
-					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
-				}
-			}
-		}
-		temp = controllaCollisioni(0f, dy);
-		if(temp == null)
-			muoviY();
-		else{
-			ultimaEntita = temp;
-			if(temp.eAttraversabile() && !(temp instanceof Nemico))
-				muoviY();
-			if(temp instanceof Sink){
-				Sink s = (Sink) temp;
-				if(s.getTempo() - 1 > 0){
-					s.setTempo(s.getTempo()-1);
-					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
-				}
-			}
-		}
-	}
 		 
 	public boolean eVivo(){
 		return vivo;

@@ -152,6 +152,48 @@ public class Sink extends Personaggio {
 
 	}
 	
+	/**
+	 * muove il personaggio
+	 * controllando che ci sia un nemico o meno
+	 */
+	
+	@Override
+	public void muovi(){
+		muoviX = false;
+		muoviY = false;
+		Entita temp; // entita solo temporanea
+		// se temp e' null significa che non c'e' nessuna collisione
+		temp = controllaCollisioni(dx, 0f);
+		if(temp == null)
+			muoviX();
+		else{
+			ultimaEntita = temp;
+			if(temp.eAttraversabile())
+				muoviX();
+			else if(temp instanceof Nemico){
+				if(getTempo() - 1 > 0){
+					setTempo(getTempo()-1);
+					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
+				}
+			}
+		}
+		temp = controllaCollisioni(0f, dy);
+		if(temp == null)
+			muoviY();
+		else{
+			ultimaEntita = temp;
+			System.out.println(temp.getClass().getName());
+			if(temp.eAttraversabile())
+				muoviY();
+			else if(temp instanceof Nemico){
+				if(getTempo() - 1 > 0){
+					setTempo(getTempo()-1);
+					h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
+				}
+			}
+		}
+	}
+	
 	public int getTempo() {
 		return tempo;
 	}
