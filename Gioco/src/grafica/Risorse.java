@@ -1,12 +1,8 @@
 package grafica;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-
 import strumenti.CaricatoreImmagini;
 
 /**
@@ -29,14 +25,15 @@ public class Risorse {
 	public static BufferedImage interruttore_acceso_destra, interruttore_acceso_sinistra, interruttore_spento;
 	public static BufferedImage teletrasporto_inattivo;
 	public static BufferedImage[] teletrasporto_attivo;
-	public static BufferedImage eye_sopra_fermo, eye_sotto_fermo, eye_destra_fermo, eye_sinistra_fermo;
-	public static BufferedImage[] eye_sopra, eye_sotto, eye_destra, eye_sinistra;
+	public static BufferedImage nemico;
 	
 	public static BufferedImage sfondo_popup, stato_info;
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
 	voce_no_carica, voce_salva, voce_si, voce_no, voce_si_off, voce_no_off, voce_annulla, voce_annulla_off, voce_nome,
 	voce_ok, voce_ok_off, voce_salvataggio, voce_no_salvataggio, voce_no_nominativo, voce_azzera_classifica;
 	
+
+	public static String utenteCorrente;
 	public static String JAR_PATH = System.getProperty("java.class.path"); //TODO
 	public static final String SEPARATORE = System.getProperty("file.separator");
 	public static final String PATH_INTERNO_LIVELLI = "res/livelli"; //il percorso e' interno al .jar
@@ -45,12 +42,14 @@ public class Risorse {
 	//public static final String USER_DIR = System.getProperty("user.dir");
 	
 	//FIXME i seguenti percorsi dovranno esssere final
-	public static final String UTENTE = PATH_RISORSE + Risorse.SEPARATORE + "utente.txt";
-	public static final String DIR_UTENTE = PATH_RISORSE + Risorse.SEPARATORE + pathUtente();
-	public static final String STATISTICA = DIR_UTENTE + Risorse.SEPARATORE + "statistica.txt";
 	public static final String LINGUA = PATH_RISORSE+ Risorse.SEPARATORE + "lingua.txt";
 	public static final String SUONO = PATH_RISORSE + Risorse.SEPARATORE + "suono.txt";
 	public static final String CLASSIFICA = PATH_RISORSE + Risorse.SEPARATORE + "classificaPunteggio.txt";
+	public static String DIR_UTENTI= PATH_RISORSE + Risorse.SEPARATORE + "Utenti";
+	public static String DIR_UTENTE;
+	public static String STATISTICA;
+	
+	
 	//public static String LIVELLO = PATH + "\\livelloS.txt"; eliminato
 	/**
 	 * il metodo restituisce il percorso (esterno al .jar) della cartelle risorse
@@ -73,7 +72,7 @@ public class Risorse {
 		return percorso;
 	}
 	
-	private static String pathUtente(){
+	/*private static String pathUtente(){
 		String path = null;
 		try{
 			File f = new File(UTENTE);
@@ -89,7 +88,7 @@ public class Risorse {
 		System.out.println(UTENTE);
 		System.out.println(path);
 		return path;
-	}
+	}*/
 	
 	/**
 	 * Inizializza le risorse del gameplay.
@@ -162,23 +161,6 @@ public class Risorse {
 			sink_sinistra[i] = s.prendiSprite(p * larghezza, altezza*11, larghezza, altezza);
 		}
 		
-		Sprite e = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/eyegore.png"));
-		eye_sotto_fermo = e.prendiSprite(0, 0, altezza, altezza);
-		eye_sopra_fermo = e.prendiSprite(0, altezza, altezza, altezza);
-		eye_sinistra_fermo = e.prendiSprite(0, altezza*2, altezza, altezza);
-		eye_destra_fermo = e.prendiSprite(0, altezza*3, altezza, altezza);
-		
-		eye_sotto = new BufferedImage[4];
-		eye_sopra = new BufferedImage[4];
-		eye_sinistra = new BufferedImage[4];
-		eye_destra = new BufferedImage[4];
-		for(int i = 0; i < 4; i++){
-			eye_sotto[i] = e.prendiSprite(i*altezza, altezza*4, altezza, altezza);
-			eye_sopra[i] = e.prendiSprite(i*altezza, altezza*5, altezza, altezza);
-			eye_sinistra[i] = e.prendiSprite(i*altezza, altezza*6, altezza, altezza);
-			eye_destra[i] = e.prendiSprite(i*altezza, altezza*7, altezza, altezza);
-		}
-		
 		voci_pausa = new BufferedImage[4];
 		voci_pausa_off = new BufferedImage[4];
 		
@@ -218,9 +200,9 @@ public class Risorse {
 		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/teletrasporto.png"));
 		teletrasporto_attivo = new BufferedImage[3];
 		for(int i = 0; i < teletrasporto_attivo.length; i++){
-			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, 0, altezza, altezza);
+			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, altezza, altezza, altezza);
 		}
-		teletrasporto_inattivo = teletrasporto.prendiSprite(96, 0, altezza, altezza);
+		teletrasporto_inattivo = teletrasporto.prendiSprite(0, 96, altezza, altezza);
 		
 		Sprite p = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/porta.png"));
 		porta_chiusa = p.prendiSprite(0, 0, altezza, altezza);
@@ -239,6 +221,9 @@ public class Risorse {
 		interruttore_acceso_sinistra = interruttore.prendiSprite(99, 10, 26, 20);
 		interruttore_acceso_destra = interruttore.prendiSprite(99, 74, 26, 20);
 		interruttore_spento = interruttore.prendiSprite(99, 106, 26, 20);
+		Sprite enemy = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/nemico.png"));
+		nemico = enemy.prendiSprite(200, 20, 1000, 1100);
+		
 		//se non esistono crea le cartelle Risorse e livelli
 		File f = new File(PATH_RISORSE);
 		if(!f.exists()) {
@@ -247,6 +232,11 @@ public class Risorse {
 		File f1 = new File(PATH_ESTERNO_LIVELLI);
 		if(!f1.exists()){
 			f1.mkdirs();
+		}
+		
+		File f2 = new File(DIR_UTENTI);
+		if(!f2.exists()){
+			f2.mkdirs();
 		}
 		
 	}

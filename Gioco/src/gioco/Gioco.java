@@ -6,10 +6,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 import finestra.Finestra;
 import grafica.Risorse;
@@ -17,6 +21,8 @@ import stati.Stato;
 import stati.StatoGioco;
 import stati.StatoMenu;
 import stati.StatoOpzioni;
+import stati.StatoStatistica;
+import stati.StatoUtente;
 import strumenti.CameraGioco;
 import strumenti.CaricatoreImmagini;
 import strumenti.GestioneInput;
@@ -33,6 +39,7 @@ public class Gioco{
 	private int larghezza,altezza;
 	public String titolo;
 	
+	
 	//gestione stati
 	//private boolean inCorso = false;
 	private boolean inPausa = false;
@@ -46,7 +53,7 @@ public class Gioco{
 	private Lingua lingua;
 	private String linea;
 	
-	//Suoni
+	//Suonir
 	private Suono suono;
 	
 	//Stati
@@ -75,7 +82,7 @@ public class Gioco{
 		inizializza();
 		
 		f.getFrame().setContentPane(new Pane());
-		f.getFrame().setVisible(true);
+		//f.getFrame().setVisible(true);
 	}
 	
 	/**
@@ -88,14 +95,15 @@ public class Gioco{
 		int altezza = (int) schermo.getHeight();
 		if(larghezza < 1200 || altezza < 700)
 			JOptionPane.showMessageDialog(null, "La risoluzione dello schermo non supporta i requisiti minimi.");
-		else
+		else{
 			new Gioco("The Labyrinth of Zelda",1200, 700);
+	    }
 	}
-	
 	/**
 	 * Inizializza le risorse del gameplay e dei menu di scorrimento.
 	 */
 	private void inizializza(){
+		
 		
 		Risorse.inizializza();
 		
@@ -129,7 +137,7 @@ public class Gioco{
 		if(linea == null)
 			stato = new StatoOpzioni(h, suono);
 		else
-			stato = new StatoMenu(h);
+			stato = new StatoUtente(h, suono);
 		
 		Stato.setStato(stato);
 
@@ -307,16 +315,18 @@ public class Gioco{
 					aggiorna();
 					repaint();
 					tempoFine = System.currentTimeMillis();
-					if(tempoFine-tempoCorrente >= 1000){
-						h.aggiornaStat(Handler.Statistiche.TEMPO_TOTALE);
-						Stato attuale = Stato.getStato();
-						//System.out.println(attuale.getClass().getName());
-						if(attuale instanceof StatoGioco){
-							h.aggiornaStat(Handler.Statistiche.TEMPO_GIOCO);
+					if(!(stato instanceof StatoUtente)){
+						if(tempoFine-tempoCorrente >= 1000){
+							h.aggiornaStat(Handler.Statistiche.TEMPO_TOTALE);
+							Stato attuale = Stato.getStato();
+							//System.out.println(attuale.getClass().getName());
+							if(attuale instanceof StatoGioco){
+								h.aggiornaStat(Handler.Statistiche.TEMPO_GIOCO);
+							}
+							else 
+								h.aggiornaStat(Handler.Statistiche.TEMPO_MENU);
+							tempoCorrente = System.currentTimeMillis();
 						}
-						else
-							h.aggiornaStat(Handler.Statistiche.TEMPO_MENU);
-						tempoCorrente = System.currentTimeMillis();
 					}
 				}
 			});
@@ -336,5 +346,5 @@ public class Gioco{
             g.dispose();
         }
 	}
-
+	
 }

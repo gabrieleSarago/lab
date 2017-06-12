@@ -41,9 +41,17 @@ public class StatoVittoria extends Stato {
 				cont++;
 			else break;
 		}
-		if(cont>=3)
+		if(cont>=10)
 			new FinestraHaiVinto(h);
-		else new FinestraSalvataggio(h,tempo);
+		else {
+			classifica.add(new Nominativo(String.valueOf(tempo), Risorse.utenteCorrente));
+			try {
+				classifica.salva(Risorse.CLASSIFICA);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			new FinestraHaiVinto(h);
+		}
 	}
 
 	@Override

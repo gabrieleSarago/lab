@@ -109,7 +109,8 @@ public class StatoMenu extends Stato{
 			h.getGioco().setStato(new StatoGioco(h));
 		}
 		if (sceltaCorrente == opzioni.CARICA_PARTITA.ordinal()){//qua carichi il livello
-			String pathLivelloEntita = Risorse.PATH_ESTERNO_LIVELLI + Risorse.SEPARATORE + "livello1.salvataggio";
+			@SuppressWarnings("static-access")
+			String pathLivelloEntita = Risorse.DIR_UTENTE + Risorse.SEPARATORE + "livello1.salvataggio";
 			File f = new File(pathLivelloEntita);
 			if(!f.exists()){
 				suono.getClipStatoMenu().stop();
