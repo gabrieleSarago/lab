@@ -48,7 +48,6 @@ public class Handler {
 	public Handler(Gioco gioco){
 		this.gioco = gioco;
 		stat = new int[Statistiche.values().length];
-		caricaStatistiche();
 	}
 	
 	public CameraGioco getCameraGioco(){
@@ -103,6 +102,7 @@ public class Handler {
 		int scelta= statistica.ordinal();
 		stat[scelta]++;
 		System.out.println(statistica.toString() + " " + stat[scelta]);
+		System.out.println(Risorse.utenteCorrente);
 	}
 	
 	public void salvaStatistiche(){
@@ -120,16 +120,10 @@ public class Handler {
 		}
 	}
 	
-	private void caricaStatistiche(){
-		File f = new File(Risorse.DIR_UTENTE);
-		if(!f.exists()){
-			f.mkdirs();
-		}
-		
-		f = new File(Risorse.STATISTICA);
+	public void caricaStatistiche(){		
+		File f = new File(Risorse.STATISTICA);
+		System.out.println(Risorse.STATISTICA);
 		try {
-			if(!f.exists())
-				f.createNewFile();
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 			String statisticaCorrente = br.readLine();
@@ -143,5 +137,6 @@ public class Handler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 }

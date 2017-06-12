@@ -76,7 +76,6 @@ public class StatoGioco extends Stato {
 			}
 		}
 	}
-
 	@Override
 	public void disegna(Graphics g) {
 		l.disegna(g);

@@ -153,7 +153,7 @@ public class Livello{
 			else{
 				String nextToken = st.nextToken();
 				pathLivelloTile = Risorse.PATH_INTERNO_LIVELLI + "/" + nextToken + ".txt";
-				pathLivelloEntita = Risorse.PATH_ESTERNO_LIVELLI + Risorse.SEPARATORE + nextToken + ".salvataggio";
+				pathLivelloEntita = Risorse.DIR_UTENTE + Risorse.SEPARATORE + nextToken + ".salvataggio";
 				in = new ObjectInputStream(new FileInputStream(pathLivelloEntita));
 			}
 			supportoCarica(in);
@@ -205,7 +205,7 @@ public class Livello{
 	 */
 	public void salva(String livello){
 		
-		String pathLivello = Risorse.PATH_ESTERNO_LIVELLI + Risorse.SEPARATORE + livello;
+		String pathLivello = Risorse.DIR_UTENTE + Risorse.SEPARATORE + livello;
 		File f = new File(pathLivello);
 		f.delete();
 
@@ -269,12 +269,12 @@ public class Livello{
 			h.aggiornaStat(Handler.Statistiche.TELETRASPORTI);
 		}
 		
-		/*if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo()){
+		if(s.getUltimaEntita() instanceof Nemico && ((Nemico)s.getUltimaEntita()).eVivo()){
 			if(s.getTempo() - 1 > 0){
 				s.setTempo(s.getTempo()-1);
 				h.aggiornaStat(Handler.Statistiche.VITA_SOTTRATTA);
 			}
-		}*/
+		}
 		
 		if(s.getUltimaEntita() instanceof Interruttore){
 			if(!(ultimaCollisione_sink instanceof Interruttore) || 
