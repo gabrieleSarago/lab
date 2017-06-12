@@ -25,7 +25,8 @@ public class Risorse {
 	public static BufferedImage interruttore_acceso_destra, interruttore_acceso_sinistra, interruttore_spento;
 	public static BufferedImage teletrasporto_inattivo;
 	public static BufferedImage[] teletrasporto_attivo;
-	public static BufferedImage nemico;
+	public static BufferedImage eye_sopra_fermo, eye_sotto_fermo, eye_destra_fermo, eye_sinistra_fermo; 
+	public static BufferedImage[] eye_sopra, eye_sotto, eye_destra, eye_sinistra; 
 	
 	public static BufferedImage sfondo_popup, stato_info;
 	public static BufferedImage voce_uscita, voce_azzera, voce_vittoria, voce_sconfitta, voce_no_punteggio,
@@ -161,6 +162,25 @@ public class Risorse {
 			sink_sinistra[i] = s.prendiSprite(p * larghezza, altezza*11, larghezza, altezza);
 		}
 		
+		Sprite e = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/eyegore.png")); 
+
+
+		 
+		eye_sotto_fermo = e.prendiSprite(0, 0, altezza, altezza); 
+		eye_sopra_fermo = e.prendiSprite(0, altezza, altezza, altezza); 
+		eye_sinistra_fermo = e.prendiSprite(0, altezza*2, altezza, altezza); 
+		eye_destra_fermo = e.prendiSprite(0, altezza*3, altezza, altezza); 
+		eye_sotto = new BufferedImage[4]; 
+		eye_sopra = new BufferedImage[4]; 
+		eye_sinistra = new BufferedImage[4]; 
+		eye_destra = new BufferedImage[4]; 
+		for(int i = 0; i < 4; i++){ 
+			eye_sotto[i] = e.prendiSprite(i*altezza, altezza*4, altezza, altezza); 
+			eye_sopra[i] = e.prendiSprite(i*altezza, altezza*5, altezza, altezza); 
+			eye_sinistra[i] = e.prendiSprite(i*altezza, altezza*6, altezza, altezza); 
+			eye_destra[i] = e.prendiSprite(i*altezza, altezza*7, altezza, altezza); 
+		} 
+		
 		voci_pausa = new BufferedImage[4];
 		voci_pausa_off = new BufferedImage[4];
 		
@@ -200,10 +220,8 @@ public class Risorse {
 		Sprite teletrasporto = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/teletrasporto.png"));
 		teletrasporto_attivo = new BufferedImage[3];
 		for(int i = 0; i < teletrasporto_attivo.length; i++){
-			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, altezza, altezza, altezza);
-		}
-		teletrasporto_inattivo = teletrasporto.prendiSprite(0, 96, altezza, altezza);
-		
+			teletrasporto_attivo[i] = teletrasporto.prendiSprite(i*altezza, 0, altezza, altezza); 		}
+		teletrasporto_inattivo = teletrasporto.prendiSprite(96, 0, altezza, altezza); 		
 		Sprite p = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/porta.png"));
 		porta_chiusa = p.prendiSprite(0, 0, altezza, altezza);
 		porta_aperta = p.prendiSprite(0, 3*altezza, altezza, altezza);
@@ -221,8 +239,6 @@ public class Risorse {
 		interruttore_acceso_sinistra = interruttore.prendiSprite(99, 10, 26, 20);
 		interruttore_acceso_destra = interruttore.prendiSprite(99, 74, 26, 20);
 		interruttore_spento = interruttore.prendiSprite(99, 106, 26, 20);
-		Sprite enemy = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/sprite/nemico.png"));
-		nemico = enemy.prendiSprite(200, 20, 1000, 1100);
 		
 		//se non esistono crea le cartelle Risorse e livelli
 		File f = new File(PATH_RISORSE);

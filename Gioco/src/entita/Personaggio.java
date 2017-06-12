@@ -33,8 +33,7 @@ public abstract class Personaggio extends Entita {
 		
 	//AnimazioneFermo
 	protected Animazione personaggioSottoFermo, personaggioSinistraFermo, personaggioDestraFermo;
-	protected BufferedImage personaggioSopraFermo;
-	protected Movimento ultimoMovimento = Movimento.SOTTO;
+	protected BufferedImage personaggio_sopra_fermo, personaggio_sotto_fermo, personaggio_destra_fermo, personaggio_sinistra_fermo; 	protected Movimento ultimoMovimento = Movimento.SOTTO;
 	
 	public Personaggio(){} // necessario per esternzalizzazione
 	/**
@@ -170,7 +169,7 @@ public abstract class Personaggio extends Entita {
 		}else if (dy < 0){
 			ultimoMovimento = Movimento.SOPRA;
 			if(!(muoviX || muoviY)){
-				return personaggioSopraFermo;
+				return personaggio_sopra_fermo;
 			}
 			return personaggioSopra.getFrameCorrente();
 		}else if(dy >0){
@@ -187,7 +186,7 @@ public abstract class Personaggio extends Entita {
 			}else if(ultimoMovimento == Movimento.SOTTO){
 				return personaggioSottoFermo.getFrameCorrente();
 			}else{
-				return personaggioSopraFermo;
+				return personaggio_sopra_fermo;
 			}
 			
 		}
