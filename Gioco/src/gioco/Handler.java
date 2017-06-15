@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 
 import grafica.Risorse;
 import livelli.Livello;
-import stati.Stato;
 import strumenti.CameraGioco;
 import strumenti.GestioneInput;
 import strumenti.Lingua;
@@ -24,7 +23,6 @@ public class Handler {
 	
 	private Gioco gioco;
 	private Livello l;
-	private Stato s;
 	private static int[] stat; //
 	
 	public static enum Statistiche{
@@ -87,15 +85,6 @@ public class Handler {
 
 	public void setLivello(Livello l) {
 		this.l = l;
-	}
-	
-	public Stato getStato(){
-		return s;
-	}
-	
-	public void setStato(Stato s){
-		this.s = s;
-		gioco.setStato(s);
 	}
 	
 	public void aggiornaStat(Statistiche statistica){

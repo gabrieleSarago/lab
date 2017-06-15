@@ -19,7 +19,7 @@ public class StatoMenu extends Stato{
 	private Handler h;
 	
 	private int sceltaCorrente = 0;
-	private enum opzioni{NUOVA_PARTITA,CARICA_PARTITA,CLASSIFICA,OPZIONI, INFO, ESCI};
+	private enum opzioni{NUOVA_PARTITA,CARICA_PARTITA,CLASSIFICA, STATISTICHE, OPZIONI, INFO, ESCI};
 	
 	//Suono
 	private Suono suono;
@@ -122,10 +122,16 @@ public class StatoMenu extends Stato{
 			}
 			
 		}
+		
 		if (sceltaCorrente == opzioni.CLASSIFICA.ordinal()){
 			h.getGioco().setStato(new StatoClassifica(h, suono));
 
 		}
+		
+		if(sceltaCorrente == opzioni.STATISTICHE.ordinal()){
+			h.getGioco().setStato(new StatoStatistica(h, suono));
+		}
+		
 		if(sceltaCorrente == opzioni.OPZIONI.ordinal()){
 			h.getGioco().setStato(new StatoOpzioni(h, suono));
 		}

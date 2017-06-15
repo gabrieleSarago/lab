@@ -82,7 +82,7 @@ public class Gioco{
 		inizializza();
 		
 		f.getFrame().setContentPane(new Pane());
-		//f.getFrame().setVisible(true);
+		f.getFrame().setVisible(true);
 	}
 	
 	/**
@@ -135,7 +135,7 @@ public class Gioco{
 		suono.carica();
 		
 		if(linea == null)
-			stato = new StatoOpzioni(h, suono);
+			stato = new StatoOpzioni(h, suono, true);
 		else
 			stato = new StatoUtente(h, suono);
 		
