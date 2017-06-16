@@ -32,6 +32,8 @@ public class Classifica implements Iterable<Nominativo>{
 	 * @param n l'oggetto Nominativo da aggiungere.
 	 */
 	public void add(Nominativo n){
+		if(classifica.size() > 10)
+			return;
 		ListIterator<Nominativo> lit = classifica.listIterator();
 		boolean flag = false;
 		while(lit.hasNext() && ! flag){
@@ -41,9 +43,6 @@ public class Classifica implements Iterable<Nominativo>{
 				lit.add(n);
 				flag=true;
 			}
-		}
-		if(classifica.size() > 10){
-			classifica.removeLast();
 		}
 		if(!flag)lit.add(n);
 	}//add
@@ -81,17 +80,24 @@ public class Classifica implements Iterable<Nominativo>{
 			f.createNewFile();
 		}
 		BufferedReader br = new BufferedReader(new FileReader(nomeFile));
+		StringBuilder sb = new StringBuilder();
 		String linea = null;
 		StringTokenizer st = null;
 		for(;;){
 			linea = br.readLine();
 			if(linea==null) break;
-			st = new StringTokenizer(linea," ");
-			String punt = st.nextToken();
-			String nome = st.nextToken();
-			classifica.add(new Nominativo(punt,nome));
+			sb.append(linea);
+			sb.append(" ");
 		}//for
 		br.close();
+		st = new StringTokenizer(sb.toString(), " ");
+		String punt = "";
+		String nome = "";
+		while(st.hasMoreTokens()){
+			punt = st.nextToken();
+			nome = st.nextToken();
+			classifica.add(new Nominativo(punt, nome));
+		}
 	}//carica
 	
 	
