@@ -31,14 +31,6 @@ public class StatoUtente extends Stato{
 	
 	private boolean primoAvvio = true;
 	
-	//per regolarizzare gli aggiornamenti
-	private int fps = 55;
-	double tempoDiAggiornamento=1000000000/fps;
-	double delta=0;
-	long ora;
-	long ultimoTempo = System.nanoTime();
-	long timer=0;
-	
 	/**
 	 * Crea l'oggetto StatoClassifica.
 	 * @param h oggetto Handler utile per la gestione con le altre classi.
@@ -71,10 +63,14 @@ public class StatoUtente extends Stato{
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(Risorse.sfondo_popup, -15,-15, null);
+		/*Si fa in modo che la classifica venga caricata dopo
+		 * in quanto potrebbe richiedere piu tempo del previsto.
+		 */
 		if(primoAvvio){
 			caricaClassifica();
 			primoAvvio = false;
 		}
+		
 		g.setColor(Color.white);
 		Font customFont = null;
 		Font customFontWlc = null;
@@ -155,12 +151,7 @@ public class StatoUtente extends Stato{
 		g.drawString(wlc, h.getLarghezza()/2 - 28*(wlc.length()/2), 50);
 		g.drawString(str, h.getLarghezza()/2 - 28*(str.length()/2), 650);
 	}
-	/**
-	 * Aziona le scelte a dispozione dell'utente.
-	 */
-	private void seleziona(){
-		new FinestraUtente(h,suono).setVisible(true);
-	}
+	
 	/**
 	 * Gestisce gli ascoltatori da tastiera.
 	 */
@@ -168,8 +159,8 @@ public class StatoUtente extends Stato{
 		
 			if(h.getGestioneInput().enter){
 				h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
-				seleziona();
 				suono.riproduci(Suono.suoni.CONFERMA);
+				new FinestraUtente(h,suono).setVisible(true);
 			}
 			if(h.getGestioneInput().esc){
 				h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());

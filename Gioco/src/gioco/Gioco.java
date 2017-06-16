@@ -319,7 +319,6 @@ public class Gioco{
 						if(tempoFine-tempoCorrente >= 1000){
 							h.aggiornaStat(Handler.Statistiche.TEMPO_TOTALE);
 							Stato attuale = Stato.getStato();
-							//System.out.println(attuale.getClass().getName());
 							if(attuale instanceof StatoGioco){
 								h.aggiornaStat(Handler.Statistiche.TEMPO_GIOCO);
 							}

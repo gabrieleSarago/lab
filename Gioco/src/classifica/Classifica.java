@@ -42,7 +42,7 @@ public class Classifica implements Iterable<Nominativo>{
 				flag=true;
 			}
 		}
-		if(classifica.size() > 3){
+		if(classifica.size() > 10){
 			classifica.removeLast();
 		}
 		if(!flag)lit.add(n);
