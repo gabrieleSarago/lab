@@ -112,6 +112,7 @@ public class FinestraAzzeraClassifica implements KeyListener,ActionListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			h.getGioco().setClassifica(classifica);
 			new FinestraMessaggioOk(h);
 		}
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner()){

@@ -155,8 +155,8 @@ public class Sink extends Personaggio {
 	 */ 
 	@Override
 	public void muovi(){ 
-		muoviX = false; 
-		muoviY = false; 
+		muoviX = false;
+		muoviY = false;
 		Entita temp; // entita solo temporanea 
 		// se temp e' null significa che non c'e' nessuna collisione 
 		temp = controllaCollisioni(dx, 0f);
@@ -183,7 +183,7 @@ public class Sink extends Personaggio {
 		else{ 
 			ultimaEntita = temp; 
 			if(temp.eAttraversabile()) 
-				muoviY(); 
+				muoviY();
 			else if(temp instanceof Nemico){ 
 				Nemico n = (Nemico) temp;
 				Entita temp1 = n.controllaCollisioni(0f, dy);

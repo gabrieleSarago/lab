@@ -183,6 +183,10 @@ public class Gioco{
 		return c;
 	}
 	
+	public void setClassifica(Classifica c){
+		this.c = c;
+	}
+	
 	/**
 	 * Aggiorna i listener e gli stati associati.
 	 */

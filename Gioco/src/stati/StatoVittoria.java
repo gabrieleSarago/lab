@@ -7,7 +7,6 @@ import java.io.IOException;
 import classifica.Classifica;
 import classifica.Nominativo;
 import finestra.FinestraHaiVinto;
-import finestra.FinestraSalvataggio;
 import gioco.Handler;
 import grafica.Risorse;
 /**
@@ -18,7 +17,7 @@ public class StatoVittoria extends Stato {
 	private BufferedImage img;
 	
 	private int tempo;
-	private Classifica classifica = new Classifica();
+	private Classifica classifica;
 
 	/**
 	 * Costruisce l'oggetto StatoVittoria.
@@ -30,11 +29,7 @@ public class StatoVittoria extends Stato {
 		super(h);
 		this.img = img;
 		this.tempo = tempo;
-		try {
-			classifica.carica(Risorse.CLASSIFICA);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		classifica = h.getGioco().getClassifica();
 		int cont=0;
 		for(Nominativo n:classifica){
 			if(Integer.parseInt(n.getPunteggio())>this.tempo)
@@ -50,6 +45,7 @@ public class StatoVittoria extends Stato {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			h.getGioco().setClassifica(classifica);
 			new FinestraHaiVinto(h);
 		}
 	}
