@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import gioco.Handler;
 import grafica.Risorse;
+import stati.StatoUtente;
 
 /**
  * Crea l'oggetto FinestraUscita necessaria per chiedere all'utende
@@ -97,7 +98,8 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	public void keyPressed(KeyEvent k) {
 		//Gestione del focus dei pulsanti
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner()){
-			h.salvaStatistiche();
+			if(!(h.getGioco().getStato() instanceof StatoUtente))
+				h.salvaStatistiche();
 			System.exit(0);
 		}
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner()){
@@ -127,7 +129,7 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	public void keyReleased(KeyEvent e) {
 		//gestione dell'input del gioco nel momento in cui compare la finestra.
 		//Con questo comando si evita il bug di aggiornamento continuo dell'input.
-		h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
+		//h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 	}
 
 	@Override
@@ -135,10 +137,17 @@ public class FinestraUscita implements KeyListener, ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == si)
+		if(evt.getSource() == si){
+			if(!(h.getGioco().getStato() instanceof StatoUtente))
+				h.salvaStatistiche();
 			System.exit(0);
-		if(evt.getSource() == no)
+		}
+		if(evt.getSource() == no){
+			if(!h.getSuono().getMuto()){
+				h.getSuono().getClipStatoMenu().start();
+			}
 			f.dispose();
+		}
 	}
 
 }

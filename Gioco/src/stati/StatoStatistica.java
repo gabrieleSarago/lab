@@ -5,13 +5,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import gioco.Handler;
 import gioco.Handler.Statistiche;
@@ -24,18 +19,18 @@ public class StatoStatistica extends Stato{
 	
 	private Suono suono;
 	
-	private Statistiche [] stat = Handler.Statistiche.values();
-	private File f = new File(Risorse.STATISTICA);
+	private String [] stat;
+	private int [] statistiche;
 	
 	public StatoStatistica(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
+		String lingua = h.getLingua().getLingua();
+		stat = Handler.Statistiche.getNomi(lingua);
 		
 		this.suono = suono;
 	}
 	
-	
-
 	@Override
 	public void aggiorna() {
 		getInput();
@@ -44,18 +39,50 @@ public class StatoStatistica extends Stato{
 
 	@Override
 	public void disegna(Graphics g) {
-		//sfondo nero
-		g.setColor(Color.black);
-		g.fillRect(0, 0, h.getLarghezza(), h.getAltezza());
+		//Sfondo
+		g.drawImage(Risorse.sfondo_popup, -15,-15, null);
+
+		Font customFont = null;
+		try {
+		    //Crea un font da file
+			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/old_game.ttf");
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(200f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    
+		    
+		    //registra il font
+		    ge.registerFont(customFont);
+		    g.setFont(customFont);
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
 		
-		BufferedImage voce = Risorse.voci_classifica[1];
-			
-		//Per impostare le voci centrate
-		g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 550, null);
+
+		Font num = null;
+		
+		try {
+		    //Crea un font da file
+			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/ka1.ttf");
+		    num = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(20f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    
+		    //registra il font
+		    ge.registerFont(num);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+		
+		//nome utente
+		g.setColor(Color.blue);
+		g.drawString(Risorse.utenteCorrente, 200, 115);
 		
 		//scritte bianche
 		g.setColor(Color.white);
-		Font customFont;
 		try {
 		    //Crea un font da file
 			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/old_game.ttf");
@@ -71,17 +98,15 @@ public class StatoStatistica extends Stato{
 		    e.printStackTrace();
 		}
 		
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-			String statisticaCorrente = br.readLine();
-			int i = 0;
-			while(statisticaCorrente != null){
-				g.drawString(stat[i].toString() + "\t" + statisticaCorrente, 200, 200 + 30*i);
-				i++;
-			}
-			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		statistiche = h.getStatistiche();
+		
+		for(int i = 0; i < stat.length; i++){
+			g.drawString(stat[i], 200, 200 + 30*i);
+			g.setColor(Color.BLUE);
+			g.setFont(num);
+			g.drawString(""+statistiche[i], 800, 200+30*i);
+			g.setColor(Color.white);
+			g.setFont(customFont);
 		}
 	}
 	

@@ -51,7 +51,7 @@ public class StatoInfo extends Stato{
 		if(h.getGestioneInput().esc || h.getGestioneInput().enter){
 			h.getGestioneInput().keyReleased(h.getGestioneInput().getKeyEvent());
 			
-			h.setStato(new StatoMenu(h));
+			h.getGioco().setStato(new StatoMenu(h));
 			
 			if(suono.getClipStatoInfo() != null)
 				suono.getClipStatoInfo().stop();

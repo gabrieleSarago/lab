@@ -80,8 +80,8 @@ public class StatoClassifica extends Stato{
 
 	@Override
 	public void disegna(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect(0, 0, h.getLarghezza(), h.getAltezza());
+		
+		g.drawImage(Risorse.sfondo_popup,-15,-15, null);
 		BufferedImage voce;
 		for(int i=0;i<opzioni.length;i++){
 			if(i==sceltaCorrente)
@@ -93,11 +93,11 @@ public class StatoClassifica extends Stato{
 			g.drawImage(voce, h.getLarghezza()/2 - voce.getWidth()/2, 500+i*50, null);
 		}
 		g.setColor(Color.white);
-		Font customFont;
+		Font customFont = null;
 		try {
 		    //Crea un font da file
 			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/old_game.ttf");
-		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(60f);
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		    
 		    //registra il font
@@ -108,18 +108,39 @@ public class StatoClassifica extends Stato{
 		} catch(FontFormatException e) {
 		    e.printStackTrace();
 		}
+		
+		Font num = null;
+		
+		try {
+		    //Crea un font da file
+			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/ka1.ttf");
+		    num = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(20f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    
+		    //registra il font
+		    ge.registerFont(num);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+		
+		g.setFont(num);
+		for(int i = 1; i <= 10; i++ ){
+			g.drawString(i+".", 400, 50+40*i);
+		}
 
-		g.drawString("1.", 200, 250);
-		g.drawString("2.", 200,350);
-		g.drawString("3.", 200, 450);
-		int j = 250,cont=0; //cont serve per non stampare pi� di 3 nominativi
+		int j = 90,cont=0; //cont serve per non stampare pi� di 3 nominativi
 		for(Nominativo n: c){
-			g.setColor(Color.RED);
-			g.drawString(n.getPunteggio(), 1000, j);
+			g.setFont(num);
+			g.setColor(Color.BLUE);
+			g.drawString(n.getPunteggio(), 800, j);
+			g.setFont(customFont);
 			g.setColor(Color.white);
-			g.drawString(n.getNome(),300,j);
-			j+=100;cont++;
-			if(cont>=3)break;
+			g.drawString(n.getNome(),500,j);
+			j+=40;
+			cont++;
+			if(cont>=10)break;
 		}
 	}
 	/**
