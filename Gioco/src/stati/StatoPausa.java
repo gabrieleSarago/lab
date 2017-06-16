@@ -118,8 +118,6 @@ public class StatoPausa extends Stato{
 		}
 		if(sceltaCorrente == 3){
 			h.getGioco().setPausa(false);
-			if(!suono.getMuto())
-				h.getSuono().getClipGioco().close();
 			h.getGioco().setStato(new StatoMenu(h));
 		}
 	}

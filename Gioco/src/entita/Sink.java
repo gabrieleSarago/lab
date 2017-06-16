@@ -182,7 +182,6 @@ public class Sink extends Personaggio {
 			muoviY(); 
 		else{ 
 			ultimaEntita = temp; 
-			System.out.println(temp.getClass().getName()); 
 			if(temp.eAttraversabile()) 
 				muoviY(); 
 			else if(temp instanceof Nemico){ 

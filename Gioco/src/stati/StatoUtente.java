@@ -29,6 +29,8 @@ public class StatoUtente extends Stato{
 	
 	private File f = new File(Risorse.CLASSIFICA);
 	
+	private boolean primoAvvio = true;
+	
 	//per regolarizzare gli aggiornamenti
 	private int fps = 55;
 	double tempoDiAggiornamento=1000000000/fps;
@@ -45,9 +47,17 @@ public class StatoUtente extends Stato{
 	public StatoUtente(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
-		
 		this.suono = suono;
-		
+	}
+	/**
+	 * Aggiorna gli ascoltatori da tastiera in StatoClassifica.
+	 */
+	@Override
+	public void aggiorna(){
+		getInput();
+	}
+	
+	private void caricaClassifica(){
 		try {
 			if(!f.exists()){
 				f.createNewFile();
@@ -57,17 +67,14 @@ public class StatoUtente extends Stato{
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * Aggiorna gli ascoltatori da tastiera in StatoClassifica.
-	 */
-	@Override
-	public void aggiorna(){
-		getInput();
-	}
 
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(Risorse.sfondo_popup, -15,-15, null);
+		if(primoAvvio){
+			caricaClassifica();
+			primoAvvio = false;
+		}
 		g.setColor(Color.white);
 		Font customFont = null;
 		Font customFontWlc = null;
@@ -81,7 +88,6 @@ public class StatoUtente extends Stato{
 		    
 		    //registra il font
 		    ge.registerFont(customFont);
-		    //ge.registerFont(customFontWlc);
 		    g.setFont(customFont);
 		} catch (IOException e) {
 		    e.printStackTrace();
