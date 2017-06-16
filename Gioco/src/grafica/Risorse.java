@@ -542,6 +542,11 @@ public class Risorse {
 		voci_opzioni_off[1] = s4.prendiSprite(0, 47, 160, 40);
 		voci_opzioni_off[2] = s4.prendiSprite(0, 91, 250, 40);
 		
+		s3 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_musica.png"));
+		
+		voci_musica[0] = s3.prendiSprite(0, 3, 74, 40);
+		voci_musica[1] = s3.prendiSprite(0, 47, 109, 40);
+		
 		Sprite s = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_deu.png"));
 		Sprite s0 = new Sprite(CaricatoreImmagini.caricaImmagine("res/img/voci_menu/voci_menu_deu_off.png"));
 		

@@ -82,6 +82,7 @@ public class Sink extends Personaggio {
 
 			if(tempo <= 0){
 				h.aggiornaStat(Handler.Statistiche.SCONFITTE);
+				h.aggiornaStat(Handler.Statistiche.END_GAMES);
 				sconfitta = true;
 			}
 

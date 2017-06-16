@@ -67,15 +67,15 @@ public class StatoUtente extends Stato{
 
 	@Override
 	public void disegna(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect(0, 0, h.getLarghezza(), h.getAltezza());
+		g.drawImage(Risorse.sfondo_popup, -15,-15, null);
 		g.setColor(Color.white);
 		Font customFont = null;
 		Font customFontWlc = null;
+		Font num = null;
 		try {
 		    //Crea un font da file
 			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/old_game.ttf");
-		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(40f);
 		    //customFontWlc = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(50f);
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		    
@@ -102,17 +102,33 @@ public class StatoUtente extends Stato{
 		} catch(FontFormatException e) {
 		    e.printStackTrace();
 		}
-
 		
+		try {
+		    //Crea un font da file
+			InputStream is = this.getClass().getResourceAsStream("/res/classifiche/ka1.ttf");
+		    num = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(20f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    
+		    //registra il font
+		    ge.registerFont(num);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+
+		g.setFont(num);
 		for(int i = 1; i <= 10; i++ ){
-			g.drawString(i+".", 400, 100+40*i);
+			g.drawString(i+".", 400, 97+40*i);
 		}
 
 		int j = 140,cont=0; //cont serve per non stampare pi� di 3 nominativi
 		for(Nominativo n: c){
-			g.setColor(Color.RED);
+			g.setColor(Color.BLUE);
+			g.setFont(num);
 			g.drawString(n.getPunteggio(), 800, j);
 			g.setColor(Color.white);
+			g.setFont(customFont);
 			g.drawString(n.getNome(),500,j);
 			j+=40;
 			cont++;

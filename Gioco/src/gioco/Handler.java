@@ -27,20 +27,29 @@ public class Handler {
 	
 	public static enum Statistiche{
 		
-		CARAMELLE("Caramelle"), TEMPO_TOTALE("Tempo Totale"), TEMPO_MENU("Tempo Menu"), TEMPO_GIOCO("Tempo Gioco"),
-		NUM_INTERRUTORI("Interruttori Utilizzati"), LIVELLI_COMPLETATI("Livelli Completati"), END_GAMES("Partite Completate"), SCONFITTE("Sconfitte"),
-		PARTITE_INIZIATE("Partite Iniziate"), TELETRASPORTI("Teletrasporti Utilizzati"), VITA_SOTTRATTA("Vita Sottratta Dai Nemici");
+		CARAMELLE, TEMPO_TOTALE, TEMPO_MENU, TEMPO_GIOCO,
+		NUM_INTERRUTORI, END_GAMES, SCONFITTE, VITTORIE,
+		PARTITE_INIZIATE, TELETRASPORTI, VITA_SOTTRATTA;
 		
-		private String nome;
+		//Italiano
+		static String [] ITA = {"Caramelle" , "Tempo Totale" , "Tempo Menu" , "Tempo Gioco" , "Interruttori", "Partite Completate",
+				"Sconfitte" , "Vittorie" , "Partite Iniziate" , "Teletrasporti" , "Vita Sotratta"};
 		
-		Statistiche(String nome){
-			this.nome = nome;
+		static String [] DEU = {"Bonbons" , "Gesamtzeit" , "Menuezeit" , "Spielzeit" , "Schalter" , "Spiele Vervollstaendigt" , 
+				"Niederlage" , "Siege" , "Begonnene Spiele"	 , "Teletransporte"	, "Abgezogenes Leben"};
+		
+		static String[] ENG = {"Candies" , "Total Time" , "Menu Time" , "Game Time" , "Switches" , "Completed Games" , "Lost" ,
+				"Won", "Started Games" , "Teleports" , "Decreased Life" };
+		
+		public static String[] getNomi (String lingua){
+			String[] stats;
+			switch(lingua){
+			case "ITALIANO" : stats  = ITA; break;
+			case "DEUTSCH" : stats = DEU; break;
+			default : stats = ENG; break;
+			}
+			return stats;
 		}
-		
-		public String toString(){
-			return nome;
-		}
-		
 	}
 	
 	public Handler(Gioco gioco){
@@ -90,8 +99,10 @@ public class Handler {
 	public void aggiornaStat(Statistiche statistica){
 		int scelta= statistica.ordinal();
 		stat[scelta]++;
-		System.out.println(statistica.toString() + " " + stat[scelta]);
-		System.out.println(Risorse.utenteCorrente);
+	}
+	
+	public int [] getStatistiche(){
+		return stat;
 	}
 	
 	public void salvaStatistiche(){
@@ -111,7 +122,6 @@ public class Handler {
 	
 	public void caricaStatistiche(){		
 		File f = new File(Risorse.STATISTICA);
-		System.out.println(Risorse.STATISTICA);
 		try {
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));

@@ -257,9 +257,9 @@ public class Livello{
 			h.aggiornaStat(Handler.Statistiche.CARAMELLE);
 		}
 		if(s.getUltimaEntita() instanceof Trofeo) {
-			h.aggiornaStat(Handler.Statistiche.LIVELLI_COMPLETATI);
 			//TODO modificare quando si aggiungono più livelli
 			h.aggiornaStat(Handler.Statistiche.END_GAMES);
+			h.aggiornaStat(Handler.Statistiche.VITTORIE);
 			((StatoGioco)h.getGioco().getStato()).setVittoria(true);
 		}
 		
