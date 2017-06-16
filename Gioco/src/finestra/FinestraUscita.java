@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 
 import gioco.Handler;
 import grafica.Risorse;
+import stati.Stato;
+import stati.StatoOpzioni;
 import stati.StatoUtente;
 
 /**
@@ -98,8 +100,16 @@ public class FinestraUscita implements KeyListener, ActionListener{
 	public void keyPressed(KeyEvent k) {
 		//Gestione del focus dei pulsanti
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && si.isFocusOwner()){
-			if(!(h.getGioco().getStato() instanceof StatoUtente))
-				h.salvaStatistiche();
+			Stato temp = h.getGioco().getStato();
+			if(!(temp instanceof StatoUtente)){
+				if(temp instanceof StatoOpzioni){
+					StatoOpzioni s = (StatoOpzioni) temp;
+					if(!s.primoAvvio()){
+						h.salvaStatistiche();
+					}
+				}
+				else h.salvaStatistiche();
+			}
 			System.exit(0);
 		}
 		if(k.getKeyCode() == KeyEvent.VK_ENTER && no.isFocusOwner()){

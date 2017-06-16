@@ -89,6 +89,10 @@ public class StatoOpzioni extends Stato{
 			musicaCorrente = 0;
 		
 	}
+	
+	public boolean primoAvvio(){
+		return primoAvvio;
+	}
 
 	/**
 	 * Aggiorna lo StatoOpzioni.
