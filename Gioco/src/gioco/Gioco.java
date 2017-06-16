@@ -5,23 +5,20 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
 
+import classifica.Classifica;
 import finestra.Finestra;
 import grafica.Risorse;
 import stati.Stato;
 import stati.StatoGioco;
-import stati.StatoMenu;
 import stati.StatoOpzioni;
-import stati.StatoStatistica;
 import stati.StatoUtente;
 import strumenti.CameraGioco;
 import strumenti.CaricatoreImmagini;
@@ -39,6 +36,7 @@ public class Gioco{
 	private int larghezza,altezza;
 	public String titolo;
 	
+	private Classifica c;
 	
 	//gestione stati
 	//private boolean inCorso = false;
@@ -130,6 +128,18 @@ public class Gioco{
 			}
 		}
 		
+		this.c = new Classifica();
+		File f = new File(Risorse.CLASSIFICA);
+		
+		try {
+			if(!f.exists()){
+				f.createNewFile();
+			}
+			c.carica(Risorse.CLASSIFICA);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		cg = new CameraGioco(h, 0, 0);
 		
 		suono.carica();
@@ -168,6 +178,10 @@ public class Gioco{
 	 * @return boolean.
 	 */
 	public boolean getPausa(){return inPausa;}
+	
+	public Classifica getClassifica(){
+		return c;
+	}
 	
 	/**
 	 * Aggiorna i listener e gli stati associati.

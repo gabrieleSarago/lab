@@ -6,7 +6,6 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,20 +25,11 @@ public class StatoClassifica extends Stato{
 	
 	private Suono suono;
 	
-	private Classifica c = new Classifica();
+	private Classifica c;
 	
 	private int sceltaCorrente=0;
 	
 	private String [] opzioni = {"AZZERA CLASSIFICA","TORNA AL MENU"};
-	private File f = new File(Risorse.CLASSIFICA);
-	
-	//per regolarizzare gli aggiornamenti
-	private int fps = 55;
-	double tempoDiAggiornamento=1000000000/fps;
-	double delta=0;
-	long ora;
-	long ultimoTempo = System.nanoTime();
-	long timer=0;
 	
 	/**
 	 * Crea l'oggetto StatoClassifica.
@@ -49,18 +39,8 @@ public class StatoClassifica extends Stato{
 	public StatoClassifica(Handler h, Suono suono) {
 		super(h);
 		this.h=h;
-		
 		this.suono = suono;
-		
-		try {
-			if(!f.exists()){
-				f.createNewFile();
-			}
-			c.carica(Risorse.CLASSIFICA);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		c = h.getGioco().getClassifica();
 	}
 	/**
 	 * Aggiorna gli ascoltatori da tastiera in StatoClassifica.

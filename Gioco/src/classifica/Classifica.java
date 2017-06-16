@@ -80,24 +80,19 @@ public class Classifica implements Iterable<Nominativo>{
 			f.createNewFile();
 		}
 		BufferedReader br = new BufferedReader(new FileReader(nomeFile));
-		StringBuilder sb = new StringBuilder();
 		String linea = null;
 		StringTokenizer st = null;
+		String punt = "";
+		String nome = "";
 		for(;;){
 			linea = br.readLine();
 			if(linea==null) break;
-			sb.append(linea);
-			sb.append(" ");
-		}//for
-		br.close();
-		st = new StringTokenizer(sb.toString(), " ");
-		String punt = "";
-		String nome = "";
-		while(st.hasMoreTokens()){
+			st = new StringTokenizer(linea," ");
 			punt = st.nextToken();
 			nome = st.nextToken();
 			classifica.add(new Nominativo(punt, nome));
-		}
+		}//for
+		br.close();
 	}//carica
 	
 	

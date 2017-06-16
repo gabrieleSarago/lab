@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,12 +24,8 @@ public class StatoUtente extends Stato{
 	
 	private Suono suono;
 	
-	private Classifica c = new Classifica();
-	
-	private File f = new File(Risorse.CLASSIFICA);
-	
-	private boolean primoAvvio = true;
-	
+	private Classifica c;
+			
 	/**
 	 * Crea l'oggetto StatoClassifica.
 	 * @param h oggetto Handler utile per la gestione con le altre classi.
@@ -40,6 +35,7 @@ public class StatoUtente extends Stato{
 		super(h);
 		this.h=h;
 		this.suono = suono;
+		c = h.getGioco().getClassifica();
 	}
 	/**
 	 * Aggiorna gli ascoltatori da tastiera in StatoClassifica.
@@ -48,29 +44,10 @@ public class StatoUtente extends Stato{
 	public void aggiorna(){
 		getInput();
 	}
-	
-	private void caricaClassifica(){
-		try {
-			if(!f.exists()){
-				f.createNewFile();
-			}
-			c.carica(Risorse.CLASSIFICA);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void disegna(Graphics g) {
 		g.drawImage(Risorse.sfondo_popup, -15,-15, null);
-		/*Si fa in modo che la classifica venga caricata dopo
-		 * in quanto potrebbe richiedere piu tempo del previsto.
-		 */
-		if(primoAvvio){
-			caricaClassifica();
-			primoAvvio = false;
-		}
-		
 		g.setColor(Color.white);
 		Font customFont = null;
 		Font customFontWlc = null;
